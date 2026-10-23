@@ -21,7 +21,7 @@
   <text x="36" y="162">dataviz skill</text>
 
   <rect x="360" y="60" width="240" height="60" rx="6" fill="#ffffff" stroke="#0b0b0b" stroke-width="1.5"/>
-  <text x="480" y="84" text-anchor="middle" font-size="13" font-weight="bold">Taeyang (team)</text>
+  <text x="480" y="84" text-anchor="middle" font-size="13" font-weight="bold">Taeyang</text>
   <text x="480" y="104" text-anchor="middle">goals, standing rules, approvals</text>
   <path d="M480,120 L480,198" stroke="#52514e" stroke-width="1.3" fill="none" marker-end="url(#arr)"/>
 

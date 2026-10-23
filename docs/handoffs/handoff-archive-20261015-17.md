@@ -166,24 +166,24 @@
 - Other executor: none
 - New plan items: none - requested gate repair complete; submission consumer compatibility remains with B
 
-### Event — 2026-10-15 01:56 KST — B — private team repo created
+### Event — 2026-10-15 01:56 KST — B — private GitHub repo created
 - Agent: B
 - Host: Claude Code
 - User: Taeyang
 - Heading: none
-- Action: Taeyang asked for a private git repo with the essentials so a new teammate can follow current and past work. Created https://github.com/TaeyanG4/rsna-knee-team-notes (PRIVATE; gh account TaeyanG4) from a separate copy .local/team-repo (project dir itself not turned into a git repo): README.md onboarding (status, best formula, running items, how to read the notes, costly lessons, tool entry points), agents.md, plan.md, discoveries.md, handoff.md, CLAUDE.md, docs/ (minus 100 MB docs/handoffs and two MCL report-audit docs), tools/*.py|*.md (≈ 11 MB), ledgers (readings.csv, measurements.csv, submit_ledger.jsonl). Secret scan clean (no tokens/keys/private keys; 64-hex strings are sha256 pins); no data/caches/labels/report text/weights. Refresh script .local/run-scripts/team-repo-sync-v1.sh (secret scan + 20 MB guard); rule in agents.md; memory team-repo.
+- Action: Taeyang asked for a private git repo with the essentials so a new teammate can follow current and past work. Created https://github.com/TaeyanG4/rsna-knee-abnormality-detection (PRIVATE; gh account TaeyanG4) from a separate copy .local/team-repo (project dir itself not turned into a git repo): README.md onboarding (status, best formula, running items, how to read the notes, costly lessons, tool entry points), agents.md, plan.md, discoveries.md, handoff.md, CLAUDE.md, docs/ (minus 100 MB docs/handoffs and two MCL report-audit docs), tools/*.py|*.md (≈ 11 MB), ledgers (readings.csv, measurements.csv, submit_ledger.jsonl). Secret scan clean (no tokens/keys/private keys; 64-hex strings are sha256 pins); no data/caches/labels/report text/weights. Refresh script .local/run-scripts/team-repo-sync-v1.sh (secret scan + 20 MB guard); rule in agents.md; memory file team-repo.md.
 - Discovery updates: none
 - Review verdict: none
 - Resource: none
 - Other executor: none
 - New plan items: none
 
-### Event — 2026-10-15 02:00 KST — B — team repo: owner remarks stripped; history reset to one commit
+### Event — 2026-10-15 02:00 KST — B — GitHub repo: owner remarks stripped; history reset to one commit
 - Agent: B
 - Host: Claude Code
 - User: Taeyang
 - Heading: none
-- Action: Taeyang asked to remove all quoted owner remarks (e.g. 'Taeyang 2026-10-11 16:41 KST: "…"') from the shared notes and to make that version the first version (no earlier history visible). team-repo-sanitize-v1.py v1.0.2 (line-wise; .md/.txt any line, .py comment lines only, JSON/CSV untouched; v1.0.0/1.0.1 had broken Python in the copy by whole-file tidying — caught by py_compile before any push, copy rebuilt from originals): 242 lines in 16 files, 0 remaining; 561 .py compile (1 pre-existing failure identical to the original), all JSON parse. Orphan single commit de27a5b force-pushed to github.com/TaeyanG4/rsna-knee-team-notes (remote commit count 1, PRIVATE); local reflog expired + gc. Local original files keep their provenance quotes. team-repo-sync-v1.sh v1.0.1 now sanitizes before every commit.
+- Action: Taeyang asked to remove all quoted owner remarks (e.g. 'Taeyang 2026-10-11 16:41 KST: "…"') from the shared notes and to make that version the first version (no earlier history visible). team-repo-sanitize-v1.py v1.0.2 (line-wise; .md/.txt any line, .py comment lines only, JSON/CSV untouched; v1.0.0/1.0.1 had broken Python in the copy by whole-file tidying — caught by py_compile before any push, copy rebuilt from originals): 242 lines in 16 files, 0 remaining; 561 .py compile (1 pre-existing failure identical to the original), all JSON parse. Orphan single commit de27a5b force-pushed to github.com/TaeyanG4/rsna-knee-abnormality-detection (remote commit count 1, PRIVATE); local reflog expired + gc. Local original files keep their provenance quotes. team-repo-sync-v1.sh v1.0.1 now sanitizes before every commit.
 - Discovery updates: none
 - Review verdict: none
 - Resource: none
@@ -223,7 +223,7 @@
 - Host: Claude Code
 - User: Taeyang
 - Heading: H-B-151, H-B-152, H-B-153, H-B-154, H-B-155
-- Action: Taeyang approved the docs optimisation: handoff archive (astra-b1), agents.md consolidation with mapping (astra-b2; NOTE: rules added to agents.md after its snapshot — resource schedule/refill, team repo, Vast scaling — must be merged when applying), discoveries index (astra-b3); outputs in .local/scratch/slot-b/docs-opt/, applied by B only after independent review. Earlier builds read: submit_once v1.3.1 (prediction-only fallbacks; cannot read gate v1.1.0 receipts) → v1.3.2 to astra-b5; strict_variant_gate v1.1.0 (FAST cell pinned, 491 tests); kill-test v1.0.1 (review PASS) → v1.0.2 seed43/seed42 source to astra-b4; seed-44 package ready (LF pin) → Claude opus review; H-B-155 cache QA HOLD (13 geometry failures, padding/empty limits). Taeyang: plan per device ahead + refill via astra; asked about the 6 per-type sessions → they produced almost no new items (over-filtered) → idea round 2 with four personas (astra-1 GM, astra-2 MSK radiologist, astra-3 SSL/distillation, astra-6 inference/ensembling) + fable, each must return 3 new non-duplicate candidates (.local/scratch/slot-b/idea-r2/). H-B-154 scout dispatched to astra-5 (was missed earlier). plan.md resource schedule table; agents.md refill rule.
+- Action: Taeyang approved the docs optimisation: handoff archive (astra-b1), agents.md consolidation with mapping (astra-b2; NOTE: rules added to agents.md after its snapshot — resource schedule/refill, GitHub repo, Vast scaling — must be merged when applying), discoveries index (astra-b3); outputs in .local/scratch/slot-b/docs-opt/, applied by B only after independent review. Earlier builds read: submit_once v1.3.1 (prediction-only fallbacks; cannot read gate v1.1.0 receipts) → v1.3.2 to astra-b5; strict_variant_gate v1.1.0 (FAST cell pinned, 491 tests); kill-test v1.0.1 (review PASS) → v1.0.2 seed43/seed42 source to astra-b4; seed-44 package ready (LF pin) → Claude opus review; H-B-155 cache QA HOLD (13 geometry failures, padding/empty limits). Taeyang: plan per device ahead + refill via astra; asked about the 6 per-type sessions → they produced almost no new items (over-filtered) → idea round 2 with four personas (astra-1 GM, astra-2 MSK radiologist, astra-3 SSL/distillation, astra-6 inference/ensembling) + fable, each must return 3 new non-duplicate candidates (.local/scratch/slot-b/idea-r2/). H-B-154 scout dispatched to astra-5 (was missed earlier). plan.md resource schedule table; agents.md refill rule.
 - Discovery updates: none
 - Review verdict: none
 - Resource: 4070 seed 42; 4090 seed 43
@@ -244,12 +244,12 @@
 - Other executor: none
 - New plan items: none - B's existing H-B-151 covers producer qualification and eventual kill-test submission
 
-### Event — 2026-10-15 02:21 KST — B — GitGuardian alert on the team repo: false positive
+### Event — 2026-10-15 02:21 KST — B — GitGuardian alert on the GitHub repo: false positive
 - Agent: B
 - Host: Claude Code
 - User: Taeyang
 - Heading: none
-- Action: GitGuardian emailed 3 "Google Gemini API Key" incidents on TaeyanG4/rsna-knee-team-notes commit de27a5b. B found no AIza/gemini/Google-credential string in any pushed file, git object or decoded base64 blob; Taeyang's GitGuardian detail screenshot shows the flagged "apikey" is a SHA-256 checksum glued to text in discoveries.md ("SHA256db61c93c…556b9", Validity: No checker) → false positive; no key to revoke; Taeyang can mark the incidents as false positive. Hardening kept: team-repo-sync-v1.sh v1.0.2 broad secret patterns; mistake 21 recorded as a scan-coverage gap (alert itself false).
+- Action: GitGuardian emailed 3 "Google Gemini API Key" incidents on TaeyanG4/rsna-knee-abnormality-detection commit de27a5b. B found no AIza/gemini/Google-credential string in any pushed file, git object or decoded base64 blob; Taeyang's GitGuardian detail screenshot shows the flagged "apikey" is a SHA-256 checksum glued to text in discoveries.md ("SHA256db61c93c…556b9", Validity: No checker) → false positive; no key to revoke; Taeyang can mark the incidents as false positive. Hardening kept: team-repo-sync-v1.sh v1.0.2 broad secret patterns; mistake 21 recorded as a scan-coverage gap (alert itself false).
 - Discovery updates: none
 - Review verdict: none
 - Resource: none
@@ -321,7 +321,7 @@
 - Host: Claude Code
 - User: Taeyang
 - Heading: none
-- Action: agents.md 142,174 → 63,737 bytes: astra-b2 consolidation (current-rules summary + latest binding rules; mistake log 1–21 and Project settings byte-identical) merged with post-snapshot rules and independently verified by astra-4 (VERDICT: PASS, safe to replace; .local/scratch/slot-b/docs-opt/agents-merge-review.md); B content-checked key rules (team repo, one candidate per build, binding FAIL, Vast 2 h stop, plan=candidate, refill, fast path, quota re-read, KneeCoT, temp_data, api-keys, relabel). Superseded passages: docs/legacy/agents-superseded-20261015.md; mapping: docs/legacy/agents-map-20261015.md; backup .local/backups/agents-before-consolidation-20261015-0313.md. All three coordination-file optimisations are now applied.
+- Action: agents.md 142,174 → 63,737 bytes: astra-b2 consolidation (current-rules summary + latest binding rules; mistake log 1–21 and Project settings byte-identical) merged with post-snapshot rules and independently verified by astra-4 (VERDICT: PASS, safe to replace; .local/scratch/slot-b/docs-opt/agents-merge-review.md); B content-checked key rules (GitHub repo, one candidate per build, binding FAIL, Vast 2 h stop, plan=candidate, refill, fast path, quota re-read, KneeCoT, temp_data, api-keys, relabel). Superseded passages: docs/legacy/agents-superseded-20261015.md; mapping: docs/legacy/agents-map-20261015.md; backup .local/backups/agents-before-consolidation-20261015-0313.md. All three coordination-file optimisations are now applied.
 - Discovery updates: none
 - Review verdict: astra-4 (B): PASS (agents merge)
 - Resource: none
@@ -1809,7 +1809,7 @@
 - Host: Claude Code
 - User: Taeyang
 - Heading: H-B-180, H-B-35
-- Action: astra-3 (debate-astra-REPORT.md; CPU replay PASS, independent same-host review): C1 reproduced; 24-comparison family (15 routing, 3 own-removal, 6 cross-target), target+parent re-selection procedure held-out mean +0.00222 (78 % of splits positive; Lateral OA chosen 84 %, PF OA 49 %); C2 Fracture unresolved; Antigravity R2 duplicate (D-B-139), R3/R4 and fable C2/C3 not built for 10-17; Antigravity R1 corrected (admitted O_A = probability mean, hb116_vnext_release.py:136–158) → conditional reserve on H-B-174. fable agreed on C1 (selection-adjusted +0.0017…+0.0035) but proposed blanket queue drops — not adopted (keep the held review's 15/0/5). Decision: H-B-180 = C1 on the FROZEN parent H-B-167 (keep rule displayed >= 0.957, tie = unresolved reserve); build dispatched to astra-b2 (.local/scratch/slot-b/hb180/build-out.md). Record hygiene: discovery index fixed (D-B-193–195 CHALLENGED, D-B-200/201 corrected, D-B-202/203/204 rows), D-B-197/198 decision updates, D-B-204 (H-B-178 own-side stack, HOLD) recorded from handoff, H-B-136 remaining closed, team repo pushed 09f8757.
+- Action: astra-3 (debate-astra-REPORT.md; CPU replay PASS, independent same-host review): C1 reproduced; 24-comparison family (15 routing, 3 own-removal, 6 cross-target), target+parent re-selection procedure held-out mean +0.00222 (78 % of splits positive; Lateral OA chosen 84 %, PF OA 49 %); C2 Fracture unresolved; Antigravity R2 duplicate (D-B-139), R3/R4 and fable C2/C3 not built for 10-17; Antigravity R1 corrected (admitted O_A = probability mean, hb116_vnext_release.py:136–158) → conditional reserve on H-B-174. fable agreed on C1 (selection-adjusted +0.0017…+0.0035) but proposed blanket queue drops — not adopted (keep the held review's 15/0/5). Decision: H-B-180 = C1 on the FROZEN parent H-B-167 (keep rule displayed >= 0.957, tie = unresolved reserve); build dispatched to astra-b2 (.local/scratch/slot-b/hb180/build-out.md). Record hygiene: discovery index fixed (D-B-193–195 CHALLENGED, D-B-200/201 corrected, D-B-202/203/204 rows), D-B-197/198 decision updates, D-B-204 (H-B-178 own-side stack, HOLD) recorded from handoff, H-B-136 remaining closed, GitHub repo pushed 09f8757.
 - Discovery updates: D-B-204 (new); index rows
 - Review verdict: astra-3 debate PASS (same-host independent)
 - Resource: 4070 idle by plan (Q1); Codex astra-b1 (OAI tool), astra-b2 (H-B-180), astra-4 (Gold58 review), astra-5 + fable (routing audits)

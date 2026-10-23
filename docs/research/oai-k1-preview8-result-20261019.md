@@ -42,7 +42,7 @@ Result SHA256:
 `64e451a436810af965350c8e93de3e8eec54d21c5c6b68045b104de531ea14ee`.
 Private registration, selection, native metadata, arrays, receipts and images
 are excluded from publication. Only aggregate documentation and source/tests
-may enter the private team-notes snapshot.
+may enter the GitHub snapshot (rsna-knee-abnormality-detection).
 
 ## Limit and next decision
 

@@ -109,7 +109,7 @@ were empty. Broad Temp cleanup and shared Hugging Face token/config paths are ex
 - Scoped internal link survey: 182 links, no normalized target outside the
   project found; 35 inaccessible old workspace directories limit that survey.
   This does not replace the explicit G:/F: paths in old launch cards.
-- The GitHub team-notes snapshot intentionally excludes weights and data. Its
+- The GitHub snapshot (rsna-knee-abnormality-detection) intentionally excludes weights and data. Its
   successful publication is **not a backup of these binaries**.
 
 Source records: `docs/handoffs/handoff-archive-to-20261012.md` lines 5360/5420;

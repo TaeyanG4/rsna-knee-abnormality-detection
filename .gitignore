@@ -26,7 +26,7 @@ artifacts/
 .env
 kaggle.json
 
-# kept from the previous team-notes .gitignore
+# kept from the earlier .gitignore of this repository
 *.bin
 *.tar
 *.csv.gz

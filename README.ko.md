@@ -1,6 +1,6 @@
-![RSNA Knee Abnormality Detection — team Taeyang](docs/figures/banner.png)
+![RSNA Knee Abnormality Detection](docs/figures/banner.png)
 
-# RSNA Knee Abnormality Detection — 팀 Taeyang
+# RSNA Knee Abnormality Detection
 
 <p align="center"><a href="README.md">English</a> · <b>한국어</b></p>
 
