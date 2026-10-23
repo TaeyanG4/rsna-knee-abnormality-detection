@@ -1,0 +1,214 @@
+{
+  "schema_version": 1,
+  "prepared_at_kst": "2026-10-22T19:48:36+09:00",
+  "baseline_cutoff_kst": "2026-10-22T18:15:00+09:00",
+  "expected_result_date_user_supplied": "2026-10-23",
+  "updated_at_kst": "2026-10-23T10:59:57+09:00",
+  "competition_outcome": {
+    "state": "final",
+    "private_score": "0.943",
+    "rank": 312,
+    "total_teams": 6425,
+    "award": "Silver medal (top 5 %; silver cut-off rank 321)",
+    "observed_at_kst": "2026-10-23T10:59:57+09:00",
+    "evidence": "Kaggle private leaderboard via kaggle CLI (312 / 6,425) and Taeyang's screenshot of the leaderboard row"
+  },
+  "final_selection": {
+    "state": "confirmed",
+    "candidate_ids": [
+      "X",
+      "F"
+    ],
+    "observed_at_kst": "2026-10-23T00:30:00+09:00",
+    "evidence": "Taeyang's screenshot of My Submissions with both entries checked (received about 00:30 KST); plan.md Update 12"
+  },
+  "candidates": [
+    {
+      "id": "X",
+      "kernel": "taeyangg4/knee-lb-r6w958k1x3sr20-v2",
+      "remote_version": 1,
+      "submission_ref": "57415972",
+      "submitted_at_kst": "2026-10-20T10:04:32+09:00",
+      "acceptance": "accepted",
+      "acceptance_evidence": "ledger/submit_ledger.jsonl ref 57415972",
+      "baseline_public": "0.958",
+      "baseline_evidence": "D-B-249/260/276",
+      "result": {
+        "inference_status": "complete",
+        "public_score": "0.958",
+        "private_score": "0.943",
+        "observed_at_kst": "2026-10-23T10:59:57+09:00",
+        "evidence": "kaggle competitions submissions (team account), checked by B 2026-10-23 10:59 KST"
+      }
+    },
+    {
+      "id": "p25",
+      "kernel": "taeyangg4/knee-lb-r6w958k1n3s2p25-v1",
+      "remote_version": 1,
+      "submission_ref": "57427331",
+      "submitted_at_kst": "2026-10-20T16:12:20+09:00",
+      "acceptance": "accepted",
+      "acceptance_evidence": "ledger/submit_ledger.jsonl ref 57427331",
+      "baseline_public": "0.958",
+      "baseline_evidence": "D-B-260/276",
+      "result": {
+        "inference_status": "complete",
+        "public_score": "0.958",
+        "private_score": "0.943",
+        "observed_at_kst": "2026-10-23T10:59:57+09:00",
+        "evidence": "kaggle competitions submissions (team account), checked by B 2026-10-23 10:59 KST"
+      }
+    },
+    {
+      "id": "F",
+      "kernel": "taeyangg4/knee-lb-r6w958k1n3s2p25flatpv10-v1",
+      "remote_version": 1,
+      "submission_ref": "57475409",
+      "submitted_at_kst": "2026-10-21T18:23:00+09:00",
+      "acceptance": "accepted",
+      "acceptance_evidence": "ledger/submit_ledger.jsonl ref 57475409",
+      "baseline_public": "0.957",
+      "baseline_evidence": "D-B-274",
+      "result": {
+        "inference_status": "complete",
+        "public_score": "0.957",
+        "private_score": "0.943",
+        "observed_at_kst": "2026-10-23T10:59:57+09:00",
+        "evidence": "kaggle competitions submissions (team account), checked by B 2026-10-23 10:59 KST"
+      }
+    },
+    {
+      "id": "A5",
+      "kernel": "taeyangg4/knee-lb-r6w958k1n3s2p25a5v10-v1",
+      "remote_version": 1,
+      "submission_ref": "57484279",
+      "submitted_at_kst": "2026-10-21T22:40:30+09:00",
+      "acceptance": "accepted",
+      "acceptance_evidence": "ledger/submit_ledger.jsonl ref 57484279",
+      "baseline_public": "0.956",
+      "baseline_evidence": "D-B-275/276",
+      "result": {
+        "inference_status": "complete",
+        "public_score": "0.956",
+        "private_score": "0.941",
+        "observed_at_kst": "2026-10-23T10:59:57+09:00",
+        "evidence": "kaggle competitions submissions (team account), checked by B 2026-10-23 10:59 KST"
+      }
+    },
+    {
+      "id": "DF",
+      "kernel": "taeyangg4/knee-lb-r6w958k1n3s2p25a5flatpv10b-v1",
+      "remote_version": 1,
+      "submission_ref": "57500332",
+      "submitted_at_kst": "2026-10-22T08:40:49+09:00",
+      "acceptance": "accepted",
+      "acceptance_evidence": "ledger/submit_ledger.jsonl ref 57500332",
+      "baseline_public": "0.955",
+      "baseline_evidence": "D-B-280/281",
+      "result": {
+        "inference_status": "complete",
+        "public_score": "0.955",
+        "private_score": "0.940",
+        "observed_at_kst": "2026-10-23T10:59:57+09:00",
+        "evidence": "kaggle competitions submissions (team account), checked by B 2026-10-23 10:59 KST"
+      }
+    },
+    {
+      "id": "U",
+      "kernel": "taeyangg4/knee-lb-r6w958k1uxpv10-v1",
+      "remote_version": 1,
+      "submission_ref": "57510427",
+      "submitted_at_kst": "2026-10-22T13:58:57+09:00",
+      "acceptance": "accepted",
+      "acceptance_evidence": "ledger/submit_ledger.jsonl ref 57510427",
+      "baseline_public": null,
+      "baseline_evidence": "handoff 2026-10-22 13:59; acceptance ledger",
+      "result": {
+        "inference_status": "error",
+        "public_score": null,
+        "private_score": null,
+        "observed_at_kst": "2026-10-23T10:59:57+09:00",
+        "evidence": "kaggle competitions submissions (team account), checked by B 2026-10-23 10:59 KST; COMPLETE without a score after <= 9.18 h (hidden run failed, D-B-282)"
+      }
+    },
+    {
+      "id": "P4",
+      "kernel": "taeyangg4/knee-lb-r6w958k1n4fbp25v10-v1",
+      "remote_version": 1,
+      "submission_ref": "57512878",
+      "submitted_at_kst": "2026-10-22T15:20:09+09:00",
+      "acceptance": "accepted",
+      "acceptance_evidence": "ledger/submit_ledger.jsonl ref 57512878",
+      "baseline_public": null,
+      "baseline_evidence": "D-B-278; acceptance ledger",
+      "result": {
+        "inference_status": "complete",
+        "public_score": "0.958",
+        "private_score": "0.943",
+        "observed_at_kst": "2026-10-23T10:59:57+09:00",
+        "evidence": "kaggle competitions submissions (team account), checked by B 2026-10-23 10:59 KST"
+      }
+    },
+    {
+      "id": "U4",
+      "kernel": "taeyangg4/knee-lb-r6w958k1u4fbv10-v1",
+      "remote_version": 1,
+      "submission_ref": "57514281",
+      "submitted_at_kst": "2026-10-22T15:59:21+09:00",
+      "acceptance": "accepted",
+      "acceptance_evidence": "ledger/submit_ledger.jsonl ref 57514281",
+      "baseline_public": null,
+      "baseline_evidence": "handoff 2026-10-22 15:59; acceptance ledger",
+      "result": {
+        "inference_status": "error",
+        "public_score": null,
+        "private_score": null,
+        "observed_at_kst": "2026-10-23T10:59:57+09:00",
+        "evidence": "kaggle competitions submissions (team account), checked by B 2026-10-23 10:59 KST; COMPLETE without a score after <= 9.18 h (hidden run failed, D-B-282)"
+      }
+    },
+    {
+      "id": "F4",
+      "kernel": "taeyangg4/knee-lb-r6w958k1n4fbp25flatpv10-v1",
+      "remote_version": 1,
+      "submission_ref": "57526613",
+      "submitted_at_kst": "2026-10-22T22:39:20+09:00",
+      "acceptance": "accepted",
+      "acceptance_evidence": "kaggle_submit_once SUBMITTED ref 57526613 (handoff.md 2026-10-22 22:4x; plan.md Update 11b)",
+      "baseline_public": null,
+      "baseline_evidence": "plan.md Update 10; preparation only at baseline cutoff",
+      "result": {
+        "inference_status": "error",
+        "public_score": null,
+        "private_score": null,
+        "observed_at_kst": "2026-10-23T10:59:57+09:00",
+        "evidence": "kaggle competitions submissions (team account), checked by B 2026-10-23 10:59 KST; COMPLETE without a score after <= 9.21 h (hidden run failed, D-B-282)"
+      }
+    }
+  ],
+  "interpretation": [
+    {
+      "text_en": "Both finals scored private 0.943; we were the first of the 304 teams displaying 0.943, one display step above the bronze cut-off (0.942).",
+      "text_ko": "최종 두 제출 모두 private 0.943이었고, 0.943으로 표시된 304팀 중 첫 번째였으며 동메달 기준선(0.942)보다 한 표시 단위 위였습니다.",
+      "evidence": "private leaderboard (kaggle CLI); D-B-282"
+    },
+    {
+      "text_en": "No submission of ours scored above private 0.943; 21 of the 87 scored pipeline submissions reached it.",
+      "text_ko": "우리 제출 중 private 0.943을 넘은 것은 없었고, 점수가 난 파이프라인 제출 87개 중 21개가 0.943이었습니다.",
+      "evidence": "docs/data/submissions.csv"
+    },
+    {
+      "text_en": "Three of the four Oct 22 afternoon/evening submissions (U, U4, F4) failed on hidden data after about 9.2 h; P4 completed in <= 8.24 h.",
+      "text_ko": "10월 22일 오후·저녁 제출 4개 중 3개(U, U4, F4)가 약 9.2시간 만에 hidden 실행에 실패했고, P4는 8.24시간 이내에 완료됐습니다.",
+      "evidence": "D-B-280, D-B-282"
+    }
+  ],
+  "change_log": [
+    {
+      "at_kst": "2026-10-23T10:59:57+09:00",
+      "source": "B (Claude Code) from the Kaggle CLI and Taeyang screenshots",
+      "change_en": "Recorded the final private result (0.943, rank 312 / 6,425, silver), the confirmed final pair X + F, all late submission outcomes and F4.",
+      "change_ko": "최종 private 결과(0.943, 312 / 6,425위, 은메달), 확정된 최종 쌍 X + F, 마지막 날 제출 결과와 F4를 기록했습니다."
+    }
+  ]
+}

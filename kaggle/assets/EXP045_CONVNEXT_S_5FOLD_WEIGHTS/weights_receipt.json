@@ -1,0 +1,32 @@
+[
+    {
+        "fold":  0,
+        "file":  "fold0_best.pt",
+        "bytes":  198793163,
+        "sha256":  "00148d96394a7d91afaa7113e64090611a41a4ec8832eae0709c01bd3b4a7984"
+    },
+    {
+        "fold":  1,
+        "file":  "fold1_best.pt",
+        "bytes":  198793163,
+        "sha256":  "f14de2d45d648c25f40220a109211adcc529167cedc38f55dcbaf31b40c1bba2"
+    },
+    {
+        "fold":  2,
+        "file":  "fold2_best.pt",
+        "bytes":  198793163,
+        "sha256":  "5e45dcb6291b17e7cca1147c6eb0f93db258c573e0d62402781fe86c208a1cbe"
+    },
+    {
+        "fold":  3,
+        "file":  "fold3_best.pt",
+        "bytes":  198793163,
+        "sha256":  "29b89a243ec992c7fd8227bafd251e86be3006d53d78080341f4c1b5987e4b1f"
+    },
+    {
+        "fold":  4,
+        "file":  "fold4_best.pt",
+        "bytes":  198793163,
+        "sha256":  "d383819d304633c4d904cbb26b0b001554170bb9ff0e1aad6fedf179ab873b68"
+    }
+]

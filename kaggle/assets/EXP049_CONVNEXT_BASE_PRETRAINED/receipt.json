@@ -1,0 +1,7 @@
+{
+  "model": "convnext_base",
+  "timm_version": "1.0.19",
+  "bytes": 350402910,
+  "sha256": "255492417be452ed8866a553affd1bd67557bec11999b4a5e5433cb594f71db1",
+  "num_features": 1024
+}

@@ -1,0 +1,92 @@
+{
+  "schema": 1,
+  "by_manifest_sha256": {
+    "7b74403d1696eb3e1376ace935903b72f962128d07b987f86afadec95c952c71": {
+      "kind": "project_generated",
+      "official_cache": false,
+      "creator_account": "taeyangg4",
+      "notebook_id": "taeyangg4/rsna-knee-exp034-adjacent-cache-4x9x288",
+      "notebook_title": "RSNA Knee EXP034 Adjacent Cache 4x9x288",
+      "notebook_url": "https://www.kaggle.com/code/taeyangg4/rsna-knee-exp034-adjacent-cache-4x9x288",
+      "visibility": "private_in_local_metadata",
+      "notebook_version": null,
+      "raw_data_url": "https://www.kaggle.com/competitions/rsna-knee-abnormality-detection/data",
+      "summary": "공식 대회 DICOM을 이 프로젝트의 전처리 코드로 변환한 캐시입니다.",
+      "observed_at": "2026-10-01",
+      "evidence_scope": "로컬 생성 코드·Kaggle 패키지 메타데이터·실행 로그·캐시 명세 대조. 사람/AI 코드 작성자와 Kaggle 실행 버전 번호는 확인되지 않았습니다. 원격 노트북의 현재 접근 권한과 전체 영상 해시는 재검증하지 않았습니다.",
+      "evidence": [
+        {
+          "path": "workspace://kaggle/packages/EXP034_ADJACENT_CACHE_4X9X288/kernel-metadata.json",
+          "sha256": "ceacf89762d0656d0d01a437e2ae9a159691c5b84feb4a51d842185646c7f2d8"
+        },
+        {
+          "path": "workspace://kaggle/packages/EXP034_ADJACENT_CACHE_4X9X288/exp034_adjacent_cache.py",
+          "sha256": "91dcb3ace3bcbdb5224687e26526e08346f3860823cf3cc4c878d916f6e34a75"
+        },
+        {
+          "path": "workspace://storage/cache/derived/EXP034_ADJACENT_4X9X288_TEST/rsna-knee-exp034-adjacent-cache-4x9x288.log",
+          "sha256": "538500eb37513c876fec42268a845e4ed088a221ad629d19f235270c30d820d6"
+        }
+      ]
+    },
+    "6ec26d6b5295133ad9f77cf5a543641b901bccbd4f22427a9c014e00cf0f8020": {
+      "kind": "project_generated",
+      "official_cache": false,
+      "creator_account": "taeyangg4",
+      "notebook_id": "taeyangg4/rsna-knee-exp032-orthodiffusion-cache-3x16x256",
+      "notebook_title": "RSNA Knee EXP032 OrthoDiffusion Cache 3x16x256",
+      "notebook_url": "https://www.kaggle.com/code/taeyangg4/rsna-knee-exp032-orthodiffusion-cache-3x16x256",
+      "visibility": "private_in_local_metadata",
+      "notebook_version": null,
+      "raw_data_url": "https://www.kaggle.com/competitions/rsna-knee-abnormality-detection/data",
+      "summary": "공식 대회 DICOM을 이 프로젝트의 전처리 코드로 변환한 캐시입니다.",
+      "observed_at": "2026-10-01",
+      "evidence_scope": "로컬 생성 코드·Kaggle 패키지 메타데이터·실행 로그·캐시 명세 대조. 사람/AI 코드 작성자와 Kaggle 실행 버전 번호는 확인되지 않았습니다. 원격 노트북의 현재 접근 권한과 전체 영상 해시는 재검증하지 않았습니다.",
+      "evidence": [
+        {
+          "path": "workspace://kaggle/packages/EXP032_ORTHODIFFUSION_CACHE_3X16X256/kernel-metadata.json",
+          "sha256": "147f8e0eac227a08dff795824231b898773fa4985bed86eb1d955053864fcbb1"
+        },
+        {
+          "path": "workspace://kaggle/packages/EXP032_ORTHODIFFUSION_CACHE_3X16X256/exp032_orthodiffusion_cache.py",
+          "sha256": "37f547b85745784ccd0daad94be240302341e12ddf08398d143fd2864b353480"
+        },
+        {
+          "path": "workspace://storage/cache/derived/EXP032_orthodiff/rsna-knee-exp032-orthodiffusion-cache-3x16x256.log",
+          "sha256": "96640a3bb20974744abe5167ba62d6f5561e776e4cbcb543582cebd6bdc4c04e"
+        }
+      ],
+      "reference": {
+        "label": "OrthoDiffusion 참고 연구 코드",
+        "owner": "lt-0123",
+        "url": "https://github.com/lt-0123/OrthoDiffusion/tree/99d15186bb8face1728263023d8414d9405c8f7e",
+        "revision": "99d15186bb8face1728263023d8414d9405c8f7e",
+        "role": "모델·전처리 참고 프로젝트이며 이 캐시 파일의 제작 계정과는 구분됩니다."
+      }
+    },
+    "f3afc9ab81fe068fe3ef3ac31f3f7a64d5bffb821594d8cb30e60329624b838e": {
+      "kind": "project_generated",
+      "official_cache": false,
+      "creator_account": "local",
+      "notebook_id": null,
+      "notebook_title": null,
+      "notebook_url": null,
+      "visibility": "local_only",
+      "notebook_version": null,
+      "raw_data_url": "https://www.kaggle.com/competitions/rsna-knee-abnormality-detection/data",
+      "summary": "공식 대회 ZIP에서 training/src/raptor_corpus.py로 직접 생성한 Raptor 계약(64×336, 140 mm, 2~98%) 학습 corpus입니다. 공개 maxspan-v5 체크포인트로 Gold58 0.9198을 재현해 계약 일치를 확인했습니다.",
+      "observed_at": "2026-10-02",
+      "evidence_scope": "로컬 생성 코드·manifest·shard SHA256·picks.jsonl 대조. 공개 레시피의 corpus 파일과 byte 비교는 하지 않았습니다(공개 corpus 미보유).",
+      "evidence": [
+        {
+          "path": "workspace://training/src/raptor_corpus.py",
+          "sha256": "4a958d2a60b12d31b85e521a4d8f73b3d5830e8d487739478d1587d10ee21e8e"
+        },
+        {
+          "path": "workspace://docs/handoffs/2026-10-02-1310-raptor-baseline.md",
+          "sha256": null
+        }
+      ]
+    }
+  }
+}

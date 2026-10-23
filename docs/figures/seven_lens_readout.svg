@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 530" width="960" height="530" font-family="system-ui, sans-serif" font-size="12" fill="#0b0b0b" role="img" aria-labelledby="title desc">
+  <title id="title">The seven-lens readout</title>
+  <desc id="desc">Seven lenses L1 to L7, each with its threshold, pass an eligibility check (every lens run, or a written reason) and feed one holistic judgement with four labels: ADVANCE, PER-TARGET, HOLD and DROP. A lens missing without a written reason forces HOLD.</desc>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#52514e"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="960" height="530" fill="#fcfcfb"/>
+
+  <text x="24" y="30" font-size="14" font-weight="bold">The seven-lens readout (L1-L7), used from Oct 11</text>
+  <text x="24" y="48" fill="#52514e">Each lens is run, or excused with a written reason; then one weighed judgement gives the label. Rulers: JEV, Consensus, Aquila, Dread.</text>
+
+  <!-- lens rows -->
+  <g>
+    <rect x="24" y="68" width="496" height="46" rx="6" fill="#f3f2ef" stroke="#c9c7c1"/>
+    <rect x="24" y="68" width="44" height="46" rx="6" fill="#52514e"/>
+    <text x="46" y="96" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffffff">L1</text>
+    <text x="80" y="87" font-size="13" font-weight="bold">Weak four</text>
+    <text x="80" y="104">mean change over the weak four ≥ +0.001 on mean(JEV, Consensus)</text>
+
+    <rect x="24" y="122" width="496" height="46" rx="6" fill="#f3f2ef" stroke="#c9c7c1"/>
+    <rect x="24" y="122" width="44" height="46" rx="6" fill="#52514e"/>
+    <text x="46" y="150" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffffff">L2</text>
+    <text x="80" y="141" font-size="13" font-weight="bold">Macro-12</text>
+    <text x="80" y="158">macro-12 change ≥ +0.001 on mean(JEV, Consensus)</text>
+
+    <rect x="24" y="176" width="496" height="46" rx="6" fill="#f3f2ef" stroke="#c9c7c1"/>
+    <rect x="24" y="176" width="44" height="46" rx="6" fill="#52514e"/>
+    <text x="46" y="204" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffffff">L3</text>
+    <text x="80" y="195" font-size="13" font-weight="bold">Single ruler</text>
+    <text x="80" y="212">one ruler ≥ +0.002 macro, every other ruler ≥ −0.001</text>
+
+    <rect x="24" y="230" width="496" height="46" rx="6" fill="#f3f2ef" stroke="#c9c7c1"/>
+    <rect x="24" y="230" width="44" height="46" rx="6" fill="#52514e"/>
+    <text x="46" y="258" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffffff">L4</text>
+    <text x="80" y="249" font-size="13" font-weight="bold">Per target</text>
+    <text x="80" y="266">a target ≥ +0.003 on ≥ 3 of 4 rulers; no mean gate (D-B-158)</text>
+
+    <rect x="24" y="284" width="496" height="46" rx="6" fill="#f3f2ef" stroke="#c9c7c1"/>
+    <rect x="24" y="284" width="44" height="46" rx="6" fill="#52514e"/>
+    <text x="46" y="312" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffffff">L5</text>
+    <text x="80" y="303" font-size="13" font-weight="bold">Seeds</text>
+    <text x="80" y="320">seed average and sign agreement over every same-recipe seed pair</text>
+
+    <rect x="24" y="338" width="496" height="46" rx="6" fill="#f3f2ef" stroke="#c9c7c1"/>
+    <rect x="24" y="338" width="44" height="46" rx="6" fill="#52514e"/>
+    <text x="46" y="366" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffffff">L6</text>
+    <text x="80" y="357" font-size="13" font-weight="bold">Bundle</text>
+    <text x="80" y="374">replacing the partner-bundle counterpart moves the bundle ≥ +0.0005</text>
+
+    <rect x="24" y="392" width="496" height="46" rx="6" fill="#f3f2ef" stroke="#c9c7c1"/>
+    <rect x="24" y="392" width="44" height="46" rx="6" fill="#52514e"/>
+    <text x="46" y="420" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffffff">L7</text>
+    <text x="80" y="411" font-size="13" font-weight="bold">Image evidence</text>
+    <text x="80" y="428">Gold58 and/or the OAI MOAKS image-read panel (557 OAI knees)</text>
+  </g>
+
+  <!-- bus into eligibility -->
+  <g stroke="#52514e" stroke-width="1.3" fill="none">
+    <path d="M520,91 L538,91"/>
+    <path d="M520,145 L538,145"/>
+    <path d="M520,199 L538,199"/>
+    <path d="M520,253 L538,253"/>
+    <path d="M520,307 L538,307"/>
+    <path d="M520,361 L538,361"/>
+    <path d="M520,415 L538,415"/>
+    <path d="M538,91 L538,415"/>
+    <path d="M538,143 L554,143" marker-end="url(#arr)"/>
+  </g>
+
+  <!-- eligibility -->
+  <rect x="556" y="68" width="180" height="150" rx="6" fill="#ffffff" stroke="#0b0b0b" stroke-width="1.5"/>
+  <text x="568" y="90" font-size="13" font-weight="bold">Eligibility check</text>
+  <text x="568" y="110">every lens run on the</text>
+  <text x="568" y="126">same rows (L6 partner</text>
+  <text x="568" y="142">predictions, L7 panel</text>
+  <text x="568" y="158">predictions), or a</text>
+  <text x="568" y="174">written reason</text>
+  <text x="568" y="198" fill="#52514e">from Oct 12 23:2x KST</text>
+
+  <path d="M736,116 L748,116" stroke="#52514e" stroke-width="1.3" fill="none" marker-end="url(#arr)"/>
+  <path d="M646,218 L646,298" stroke="#52514e" stroke-width="1.3" fill="none" stroke-dasharray="5 3" marker-end="url(#arr)"/>
+  <text x="654" y="254" fill="#52514e">a lens is missing</text>
+  <text x="654" y="270" fill="#52514e">with no reason</text>
+
+  <!-- unexplained gap -->
+  <rect x="556" y="300" width="180" height="70" rx="6" fill="#f3f2ef" stroke="#52514e" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="568" y="322" font-size="13" font-weight="bold">Unexplained gap</text>
+  <text x="568" y="340">forces HOLD, never</text>
+  <text x="568" y="356">ADVANCE or DROP</text>
+  <path d="M736,337 L758,337" stroke="#52514e" stroke-width="1.3" fill="none" marker-end="url(#arr)"/>
+
+  <!-- judgement -->
+  <rect x="750" y="68" width="190" height="96" rx="6" fill="#e6f6ef" stroke="#1baf7a" stroke-width="1.8"/>
+  <text x="762" y="90" font-size="13" font-weight="bold">Holistic judgement</text>
+  <text x="762" y="110">agreement count and size,</text>
+  <text x="762" y="126">seed and ruler consistency</text>
+  <text x="762" y="148" fill="#52514e">not a vote, no lens veto</text>
+  <path d="M845,164 L845,180" stroke="#52514e" stroke-width="1.3" fill="none" marker-end="url(#arr)"/>
+
+  <!-- labels -->
+  <rect x="750" y="182" width="190" height="250" rx="8" fill="#ffffff" stroke="#c9c7c1"/>
+  <rect x="760" y="192" width="170" height="52" rx="6" fill="#e6f6ef" stroke="#1baf7a" stroke-width="1.8"/>
+  <text x="772" y="213" font-size="13" font-weight="bold">ADVANCE</text>
+  <text x="772" y="232">whole-model next step</text>
+
+  <rect x="760" y="252" width="170" height="52" rx="6" fill="#e6f6ef" stroke="#1baf7a" stroke-width="1.3" stroke-dasharray="6 3"/>
+  <text x="772" y="273" font-size="13" font-weight="bold">PER-TARGET</text>
+  <text x="772" y="292">only targets L4 supports</text>
+
+  <rect x="760" y="312" width="170" height="52" rx="6" fill="#f3f2ef" stroke="#52514e" stroke-width="1.5"/>
+  <text x="772" y="333" font-size="13" font-weight="bold">HOLD</text>
+  <text x="772" y="352">unclear or incomplete</text>
+
+  <rect x="760" y="372" width="170" height="52" rx="6" fill="#fbeaea" stroke="#d03b3b" stroke-width="1.5"/>
+  <text x="772" y="393" font-size="13" font-weight="bold">DROP</text>
+  <text x="772" y="412">lenses agree on harm</text>
+
+  <!-- notes -->
+  <g fill="#52514e">
+    <text x="24" y="464">Weak four = Lateral Meniscus, PF OA, Lateral OA, Synovitis. Where the lenses disagree on added false positives, the public reading arbitrates.</text>
+    <text x="24" y="482">The registered gate was recorded beside the label, and a failed gate was never relabelled a pass. Retro scan (D-B-129): 16 of 74 past verdicts changed.</text>
+    <text x="24" y="500">Example (D-B-156): only L4 passed (ACL on all 4 rulers, both seeds) and L7 was positive but uncertain, so the label was PER-TARGET (ACL).</text>
+  </g>
+</svg>

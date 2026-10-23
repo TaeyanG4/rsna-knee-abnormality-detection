@@ -1,0 +1,1066 @@
+{
+ "note": "Aggregate numbers only. Dates are UTC (Kaggle submission time). Scores are Kaggle displays rounded to 0.001.",
+ "leaderboard": {
+  "private_score": 0.943,
+  "private_rank": 312,
+  "teams_private": 6425,
+  "medal": "silver",
+  "cutoffs_private": {
+   "gold": {
+    "rank": 22,
+    "score": 0.954
+   },
+   "silver": {
+    "rank": 321,
+    "score": 0.943
+   },
+   "bronze": {
+    "rank": 642,
+    "score": 0.942
+   }
+  },
+  "teams_above": 311,
+  "teams_at_0943": 304,
+  "position_within_0943": 1,
+  "winner_private": 0.96,
+  "top3_private": [
+   [
+    "Team Kangaroo",
+    0.96
+   ],
+   [
+    "MURAD",
+    0.96
+   ],
+   [
+    "DataTech Club",
+    0.959
+   ]
+  ],
+  "public_best": 0.958,
+  "public_rank_approx": 638,
+  "teams_public": 6390,
+  "teams_public_at_0958": 1611,
+  "public_top_approx": 0.97
+ },
+ "submissions": {
+  "total": 134,
+  "scored": 119,
+  "complete_no_score": 13,
+  "error": 2,
+  "first_utc": "2026-09-11",
+  "last_utc": "2026-10-22",
+  "private_0943_count": 21,
+  "final_pair": [
+   {
+    "slot": "A",
+    "kernel": "knee-lb-r6w958k1x3sr20-v2",
+    "public": 0.958,
+    "private": 0.943
+   },
+   {
+    "slot": "B",
+    "kernel": "knee-lb-r6w958k1n3s2p25flatpv10-v1",
+    "public": 0.957,
+    "private": 0.943
+   }
+  ]
+ },
+ "public_vs_private": {
+  "logged_scored_n": 87,
+  "pearson_all": 0.996,
+  "spearman_all": 0.972,
+  "mean_gap_public_minus_private": 0.0149,
+  "public_ge_0955_n": 40,
+  "pearson_ge_0955": 0.768,
+  "spearman_ge_0955": 0.688,
+  "private_given_public": {
+   "0.958": {
+    "0.943": 13,
+    "0.942": 1
+   },
+   "0.957": {
+    "0.943": 7,
+    "0.942": 6,
+    "0.941": 5
+   },
+   "0.956": {
+    "0.943": 1,
+    "0.942": 2,
+    "0.941": 1
+   },
+   "0.955": {
+    "0.940": 3,
+    "0.939": 1
+   }
+  }
+ },
+ "milestones": [
+  {
+   "date_utc": "2026-09-11",
+   "label": "Public 0.941 stack copy (probe22)",
+   "public": 0.941,
+   "private": 0.923
+  },
+  {
+   "date_utc": "2026-09-13",
+   "label": "First own model, ConvNeXt-S standalone",
+   "public": 0.909,
+   "private": 0.891
+  },
+  {
+   "date_utc": "2026-10-02",
+   "label": "Public 0.943 stack copy (jiweiliu)",
+   "public": 0.943,
+   "private": 0.927
+  },
+  {
+   "date_utc": "2026-10-08",
+   "label": "Own CoAtNet + RadImageNet R50, standalone",
+   "public": 0.926,
+   "private": 0.912
+  },
+  {
+   "date_utc": "2026-10-09",
+   "label": "Public OAI CoAtNet 0.949 + own (B3-AUG1)",
+   "public": 0.95,
+   "private": 0.933
+  },
+  {
+   "date_utc": "2026-10-11",
+   "label": "A5q: public R + S6 + own CoAtNets",
+   "public": 0.954,
+   "private": 0.94
+  },
+  {
+   "date_utc": "2026-10-12",
+   "label": "C85: P956 + 15 % own",
+   "public": 0.955,
+   "private": 0.939
+  },
+  {
+   "date_utc": "2026-10-13",
+   "label": "C85-R7: heliosli R7 bundle",
+   "public": 0.957,
+   "private": 0.941
+  },
+  {
+   "date_utc": "2026-10-16",
+   "label": "R6 + OA route (first private 0.943)",
+   "public": 0.957,
+   "private": 0.943
+  },
+  {
+   "date_utc": "2026-10-17",
+   "label": "H-B-189: public per-target weights (first 0.958)",
+   "public": 0.958,
+   "private": 0.943
+  },
+  {
+   "date_utc": "2026-10-19",
+   "label": "K2: own K1 standalone",
+   "public": 0.944,
+   "private": 0.931
+  },
+  {
+   "date_utc": "2026-10-20",
+   "label": "x3-v2: INF3 + K1 trio (final A)",
+   "public": 0.958,
+   "private": 0.943
+  },
+  {
+   "date_utc": "2026-10-20",
+   "label": "p25: P + K1 at .25, no O",
+   "public": 0.958,
+   "private": 0.943
+  },
+  {
+   "date_utc": "2026-10-21",
+   "label": "P25F: flat-P hedge (final B)",
+   "public": 0.957,
+   "private": 0.943
+  },
+  {
+   "date_utc": "2026-10-21",
+   "label": "A5: + DINOv3-S member",
+   "public": 0.956,
+   "private": 0.941
+  },
+  {
+   "date_utc": "2026-10-22",
+   "label": "P4: + full-bag 4th K1 member",
+   "public": 0.958,
+   "private": 0.943
+  }
+ ],
+ "families": {
+  "sep-probes": {
+   "label": "Public 0.941 stack probes (Sep)",
+   "n_total": 6,
+   "points": [
+    {
+     "date_utc": "2026-09-11 19:47",
+     "name": "Anchor probe22 (public 0.941 copy)",
+     "public": 0.941,
+     "private": 0.923
+    },
+    {
+     "date_utc": "2026-09-12 13:50",
+     "name": "EXP018 probe22",
+     "public": 0.941,
+     "private": 0.923
+    },
+    {
+     "date_utc": "2026-09-12 21:20",
+     "name": "EXP031 probe22",
+     "public": 0.94,
+     "private": 0.923
+    },
+    {
+     "date_utc": "2026-09-12 21:26",
+     "name": "EXP034 probe22",
+     "public": 0.941,
+     "private": 0.923
+    },
+    {
+     "date_utc": "2026-09-12 21:32",
+     "name": "EXP035 probe22",
+     "public": 0.94,
+     "private": 0.922
+    },
+    {
+     "date_utc": "2026-09-12 21:39",
+     "name": "EXP036 probe22",
+     "public": 0.941,
+     "private": 0.923
+    }
+   ],
+   "no_score": 0,
+   "error": 0
+  },
+  "own-only": {
+   "label": "Own models only",
+   "n_total": 31,
+   "points": [
+    {
+     "date_utc": "2026-09-13 17:50",
+     "name": "EXP045 ConvNeXt-S",
+     "public": 0.909,
+     "private": 0.891
+    },
+    {
+     "date_utc": "2026-10-04 00:09",
+     "name": "B_RN3F",
+     "public": 0.913,
+     "private": 0.895
+    },
+    {
+     "date_utc": "2026-10-04 11:06",
+     "name": "R2 EXP072",
+     "public": 0.902,
+     "private": 0.89
+    },
+    {
+     "date_utc": "2026-10-04 11:07",
+     "name": "R1 EXP061",
+     "public": 0.904,
+     "private": 0.889
+    },
+    {
+     "date_utc": "2026-10-06 14:24",
+     "name": "H-B-13 B224 single",
+     "public": 0.91,
+     "private": 0.897
+    },
+    {
+     "date_utc": "2026-10-06 14:41",
+     "name": "H-B-12 E1",
+     "public": 0.917,
+     "private": 0.904
+    },
+    {
+     "date_utc": "2026-10-06 14:41",
+     "name": "H-B-13 R384 single",
+     "public": 0.913,
+     "private": 0.898
+    },
+    {
+     "date_utc": "2026-10-06 17:22",
+     "name": "H-B-18 student",
+     "public": 0.893,
+     "private": 0.881
+    },
+    {
+     "date_utc": "2026-10-07 00:01",
+     "name": "H-B-19 B",
+     "public": 0.914,
+     "private": 0.899
+    },
+    {
+     "date_utc": "2026-10-07 00:01",
+     "name": "H-B-19 A",
+     "public": 0.914,
+     "private": 0.897
+    },
+    {
+     "date_utc": "2026-10-07 00:29",
+     "name": "H-B-20 distilled student",
+     "public": 0.912,
+     "private": 0.898
+    },
+    {
+     "date_utc": "2026-10-07 09:37",
+     "name": "H-B-28 relabel_v1",
+     "public": 0.913,
+     "private": 0.9
+    },
+    {
+     "date_utc": "2026-10-08 00:02",
+     "name": "H-B-31 B",
+     "public": 0.925,
+     "private": 0.912
+    },
+    {
+     "date_utc": "2026-10-08 00:03",
+     "name": "H-B-31 B",
+     "public": 0.925,
+     "private": 0.912
+    },
+    {
+     "date_utc": "2026-10-08 00:05",
+     "name": "H-B-31 B",
+     "public": 0.925,
+     "private": 0.912
+    },
+    {
+     "date_utc": "2026-10-08 00:07",
+     "name": "H-B-31 A",
+     "public": 0.926,
+     "private": 0.912
+    },
+    {
+     "date_utc": "2026-10-08 00:08",
+     "name": "H-B-31 A",
+     "public": 0.926,
+     "private": 0.912
+    },
+    {
+     "date_utc": "2026-10-09 00:03",
+     "name": "H-B-34-exp140-aug1",
+     "public": 0.931,
+     "private": 0.916
+    },
+    {
+     "date_utc": "2026-10-09 10:09",
+     "name": "H-B-63-exp152-own",
+     "public": 0.946,
+     "private": 0.934
+    },
+    {
+     "date_utc": "2026-10-10 01:41",
+     "name": "H-B-63-exp155-own",
+     "public": 0.946,
+     "private": 0.933
+    },
+    {
+     "date_utc": "2026-10-10 14:20",
+     "name": "H-B-35-exp169-b172-v202",
+     "public": 0.948,
+     "private": 0.935
+    },
+    {
+     "date_utc": "2026-10-11 07:35",
+     "name": "H-B-35-exp169-b4-v413",
+     "public": 0.946,
+     "private": 0.933
+    },
+    {
+     "date_utc": "2026-10-14 19:47",
+     "name": "H-B-151-killtest-v102",
+     "public": 0.944,
+     "private": 0.927
+    },
+    {
+     "date_utc": "2026-10-15 00:02",
+     "name": "H-B-156-cnxs-l2-v1",
+     "public": 0.926,
+     "private": 0.911
+    },
+    {
+     "date_utc": "2026-10-15 00:02",
+     "name": "H-B-157-rkd-standalone-v1",
+     "public": 0.948,
+     "private": 0.932
+    },
+    {
+     "date_utc": "2026-10-16 03:51",
+     "name": "H-B-177-s42-v1",
+     "public": 0.934,
+     "private": 0.924
+    },
+    {
+     "date_utc": "2026-10-19 04:07",
+     "name": "K2-RCOF0-V1",
+     "public": 0.944,
+     "private": 0.931
+    }
+   ],
+   "no_score": 2,
+   "error": 2
+  },
+  "no-description": {
+   "label": "No description (not in research log)",
+   "n_total": 37,
+   "points": [
+    {
+     "date_utc": "2026-09-30 05:15",
+     "name": "(no description)",
+     "public": 0.943,
+     "private": 0.927
+    },
+    {
+     "date_utc": "2026-09-30 07:15",
+     "name": "(no description)",
+     "public": 0.942,
+     "private": 0.926
+    },
+    {
+     "date_utc": "2026-10-01 01:53",
+     "name": "(no description)",
+     "public": 0.942,
+     "private": 0.928
+    },
+    {
+     "date_utc": "2026-10-01 01:53",
+     "name": "(no description)",
+     "public": 0.899,
+     "private": 0.878
+    },
+    {
+     "date_utc": "2026-10-01 01:53",
+     "name": "(no description)",
+     "public": 0.922,
+     "private": 0.899
+    },
+    {
+     "date_utc": "2026-10-08 06:34",
+     "name": "(no description)",
+     "public": 0.9,
+     "private": 0.879
+    },
+    {
+     "date_utc": "2026-10-08 06:34",
+     "name": "(no description)",
+     "public": 0.9,
+     "private": 0.879
+    },
+    {
+     "date_utc": "2026-10-08 06:34",
+     "name": "(no description)",
+     "public": 0.899,
+     "private": 0.878
+    },
+    {
+     "date_utc": "2026-10-08 06:35",
+     "name": "(no description)",
+     "public": 0.9,
+     "private": 0.879
+    },
+    {
+     "date_utc": "2026-10-08 06:35",
+     "name": "(no description)",
+     "public": 0.899,
+     "private": 0.878
+    },
+    {
+     "date_utc": "2026-10-09 11:03",
+     "name": "(no description)",
+     "public": 0.901,
+     "private": 0.879
+    },
+    {
+     "date_utc": "2026-10-09 11:03",
+     "name": "(no description)",
+     "public": 0.901,
+     "private": 0.879
+    },
+    {
+     "date_utc": "2026-10-09 11:03",
+     "name": "(no description)",
+     "public": 0.898,
+     "private": 0.877
+    },
+    {
+     "date_utc": "2026-10-09 11:03",
+     "name": "(no description)",
+     "public": 0.898,
+     "private": 0.877
+    },
+    {
+     "date_utc": "2026-10-10 10:04",
+     "name": "(no description)",
+     "public": 0.89,
+     "private": 0.869
+    },
+    {
+     "date_utc": "2026-10-10 11:48",
+     "name": "(no description)",
+     "public": 0.549,
+     "private": 0.53
+    },
+    {
+     "date_utc": "2026-10-10 12:00",
+     "name": "(no description)",
+     "public": 0.537,
+     "private": 0.527
+    },
+    {
+     "date_utc": "2026-10-10 12:02",
+     "name": "(no description)",
+     "public": 0.532,
+     "private": 0.524
+    },
+    {
+     "date_utc": "2026-10-10 12:12",
+     "name": "(no description)",
+     "public": 0.522,
+     "private": 0.534
+    },
+    {
+     "date_utc": "2026-10-11 05:56",
+     "name": "(no description)",
+     "public": 0.899,
+     "private": 0.878
+    },
+    {
+     "date_utc": "2026-10-11 05:56",
+     "name": "(no description)",
+     "public": 0.899,
+     "private": 0.878
+    },
+    {
+     "date_utc": "2026-10-11 05:56",
+     "name": "(no description)",
+     "public": 0.899,
+     "private": 0.878
+    },
+    {
+     "date_utc": "2026-10-11 05:56",
+     "name": "(no description)",
+     "public": 0.899,
+     "private": 0.878
+    },
+    {
+     "date_utc": "2026-10-11 05:56",
+     "name": "(no description)",
+     "public": 0.899,
+     "private": 0.878
+    },
+    {
+     "date_utc": "2026-10-12 04:48",
+     "name": "(no description)",
+     "public": 0.514,
+     "private": 0.509
+    },
+    {
+     "date_utc": "2026-10-12 05:11",
+     "name": "(no description)",
+     "public": 0.507,
+     "private": 0.499
+    },
+    {
+     "date_utc": "2026-10-12 05:11",
+     "name": "(no description)",
+     "public": 0.566,
+     "private": 0.539
+    },
+    {
+     "date_utc": "2026-10-12 05:32",
+     "name": "(no description)",
+     "public": 0.521,
+     "private": 0.503
+    },
+    {
+     "date_utc": "2026-10-12 05:32",
+     "name": "(no description)",
+     "public": 0.577,
+     "private": 0.554
+    },
+    {
+     "date_utc": "2026-10-13 02:12",
+     "name": "(no description)",
+     "public": 0.882,
+     "private": 0.856
+    },
+    {
+     "date_utc": "2026-10-14 01:18",
+     "name": "(no description)",
+     "public": 0.899,
+     "private": 0.878
+    },
+    {
+     "date_utc": "2026-10-14 15:16",
+     "name": "(no description)",
+     "public": 0.589,
+     "private": 0.561
+    }
+   ],
+   "no_score": 5,
+   "error": 0
+  },
+  "anchor-0943": {
+   "label": "Public 0.943 stack + own legs",
+   "n_total": 3,
+   "points": [
+    {
+     "date_utc": "2026-10-02 12:00",
+     "name": "Anchor swap (jiweiliu 0.943 copy)",
+     "public": 0.943,
+     "private": 0.927
+    },
+    {
+     "date_utc": "2026-10-07 00:01",
+     "name": "H-B-15 combined",
+     "public": 0.942,
+     "private": 0.926
+    }
+   ],
+   "no_score": 1,
+   "error": 0
+  },
+  "public-oai-blends": {
+   "label": "Public OAI CoAtNet + own blends",
+   "n_total": 10,
+   "points": [
+    {
+     "date_utc": "2026-10-09 00:05",
+     "name": "H-B-58-b3-aug1",
+     "public": 0.95,
+     "private": 0.933
+    },
+    {
+     "date_utc": "2026-10-09 10:10",
+     "name": "H-B-58-exp154-b3-h1",
+     "public": 0.95,
+     "private": 0.933
+    },
+    {
+     "date_utc": "2026-10-09 10:10",
+     "name": "H-B-63-exp152-blend",
+     "public": 0.951,
+     "private": 0.936
+    },
+    {
+     "date_utc": "2026-10-10 01:35",
+     "name": "H-B-63-exp155-blend3",
+     "public": 0.951,
+     "private": 0.937
+    },
+    {
+     "date_utc": "2026-10-10 03:12",
+     "name": "H-B-78-exp169-v102",
+     "public": 0.951,
+     "private": 0.936
+    },
+    {
+     "date_utc": "2026-10-10 13:19",
+     "name": "H-B-78-exp169-a172-v202",
+     "public": 0.951,
+     "private": 0.937
+    },
+    {
+     "date_utc": "2026-10-11 07:34",
+     "name": "H-B-35-exp169-a4-v413",
+     "public": 0.951,
+     "private": 0.937
+    },
+    {
+     "date_utc": "2026-10-11 11:18",
+     "name": "EXP169-A5-172-v5q-1.2.0",
+     "public": 0.952,
+     "private": 0.938
+    },
+    {
+     "date_utc": "2026-10-11 11:19",
+     "name": "EXP169-A5q-172-v5q-1.2.0",
+     "public": 0.954,
+     "private": 0.94
+    }
+   ],
+   "no_score": 1,
+   "error": 0
+  },
+  "p956-c85": {
+   "label": "P956 / C85",
+   "n_total": 7,
+   "points": [
+    {
+     "date_utc": "2026-10-12 02:07",
+     "name": "EXP169-P956-1.0.1",
+     "public": 0.954,
+     "private": 0.938
+    },
+    {
+     "date_utc": "2026-10-12 09:45",
+     "name": "EXP169-P956RPLUS-1.0.0",
+     "public": 0.954,
+     "private": 0.939
+    },
+    {
+     "date_utc": "2026-10-12 15:15",
+     "name": "EXP169-C85-1.0.4",
+     "public": 0.955,
+     "private": 0.939
+    },
+    {
+     "date_utc": "2026-10-12 17:18",
+     "name": "EXP169-P956RPLUS2-1.1.0",
+     "public": 0.954,
+     "private": 0.939
+    },
+    {
+     "date_utc": "2026-10-13 00:02",
+     "name": "HB116-VNEXT-B-1.1.2",
+     "public": 0.955,
+     "private": 0.94
+    },
+    {
+     "date_utc": "2026-10-13 00:02",
+     "name": "HB116-VNEXT-A-1.1.2",
+     "public": 0.955,
+     "private": 0.94
+    }
+   ],
+   "no_score": 1,
+   "error": 0
+  },
+  "c85-r7": {
+   "label": "C85-R7 (heliosli R7)",
+   "n_total": 10,
+   "points": [
+    {
+     "date_utc": "2026-10-13 03:36",
+     "name": "EXP169-C85R7-1.0.0",
+     "public": 0.957,
+     "private": 0.941
+    },
+    {
+     "date_utc": "2026-10-13 06:19",
+     "name": "EXP169-C85R7CODEC-1.1.0",
+     "public": 0.957,
+     "private": 0.941
+    },
+    {
+     "date_utc": "2026-10-13 08:22",
+     "name": "HB127-VNEXTR7-A-1.2.0",
+     "public": 0.956,
+     "private": 0.942
+    },
+    {
+     "date_utc": "2026-10-14 12:34",
+     "name": "HB116-COMPO15-1.3.0",
+     "public": 0.957,
+     "private": 0.942
+    },
+    {
+     "date_utc": "2026-10-14 14:53",
+     "name": "EXP169-C85R7-FLUIDR-1.1.9",
+     "public": 0.957,
+     "private": 0.941
+    },
+    {
+     "date_utc": "2026-10-14 15:29",
+     "name": "EXP169-C85R7-OWN25Q3-1.1.18",
+     "public": 0.957,
+     "private": 0.942
+    },
+    {
+     "date_utc": "2026-10-14 15:33",
+     "name": "EXP169-C85R7-P65Q2-1.1.19",
+     "public": 0.956,
+     "private": 0.942
+    },
+    {
+     "date_utc": "2026-10-15 00:01",
+     "name": "EXP169-C85R7-FLIPALLQ-1.1.22",
+     "public": 0.957,
+     "private": 0.941
+    },
+    {
+     "date_utc": "2026-10-15 01:05",
+     "name": "H-B-164-r224q-1.1.23",
+     "public": 0.957,
+     "private": 0.942
+    },
+    {
+     "date_utc": "2026-10-15 09:17",
+     "name": "H-B-167-r224flipq-1.1.24",
+     "public": 0.957,
+     "private": 0.942
+    }
+   ],
+   "no_score": 0,
+   "error": 0
+  },
+  "r6-line": {
+   "label": "R6 line + public per-target weights",
+   "n_total": 9,
+   "points": [
+    {
+     "date_utc": "2026-10-16 02:17",
+     "name": "H-B-174-r224r6fq-1.1.30",
+     "public": 0.957,
+     "private": 0.942
+    },
+    {
+     "date_utc": "2026-10-16 02:18",
+     "name": "H-B-170-r224mirq-1.1.26",
+     "public": 0.957,
+     "private": 0.942
+    },
+    {
+     "date_utc": "2026-10-16 02:19",
+     "name": "H-B-168-stackq-1.1.25",
+     "public": 0.957,
+     "private": 0.941
+    },
+    {
+     "date_utc": "2026-10-16 09:26",
+     "name": "H-B-181-r224r6oaq-1.1.34",
+     "public": 0.957,
+     "private": 0.943
+    },
+    {
+     "date_utc": "2026-10-17 00:01",
+     "name": "H-B-189-r6w958q-1.1.39",
+     "public": 0.958,
+     "private": 0.943
+    },
+    {
+     "date_utc": "2026-10-17 00:02",
+     "name": "H-B-185-r6stackoaq-1.1.36",
+     "public": 0.957,
+     "private": 0.943
+    },
+    {
+     "date_utc": "2026-10-17 00:03",
+     "name": "H-B-193-r6oafxq-1.1.42",
+     "public": 0.956,
+     "private": 0.943
+    },
+    {
+     "date_utc": "2026-10-17 08:54",
+     "name": "H-B-195-r6w958mirq-1.1.43",
+     "public": 0.957,
+     "private": 0.943
+    },
+    {
+     "date_utc": "2026-10-17 09:42",
+     "name": "H-B-190-r6w958rdq-1.1.40",
+     "public": 0.958,
+     "private": 0.943
+    }
+   ],
+   "no_score": 0,
+   "error": 0
+  },
+  "inf3-rco": {
+   "label": "INF2/INF3 and K1-RCO overlays",
+   "n_total": 7,
+   "points": [
+    {
+     "date_utc": "2026-10-18 08:29",
+     "name": "R6W958-C4-V1",
+     "public": 0.958,
+     "private": 0.943
+    },
+    {
+     "date_utc": "2026-10-18 08:56",
+     "name": "R6W958-INF3-V1",
+     "public": 0.958,
+     "private": 0.943
+    },
+    {
+     "date_utc": "2026-10-18 09:35",
+     "name": "H-B-182-K3-RCO10-V1",
+     "public": 0.958,
+     "private": 0.943
+    },
+    {
+     "date_utc": "2026-10-18 10:05",
+     "name": "R6W958-INF2-V1",
+     "public": 0.958,
+     "private": 0.943
+    },
+    {
+     "date_utc": "2026-10-19 00:09",
+     "name": "R6W958-INF3RCO-V1",
+     "public": 0.958,
+     "private": 0.943
+    },
+    {
+     "date_utc": "2026-10-19 18:59",
+     "name": "R6W958-N224-V1",
+     "public": 0.958,
+     "private": 0.942
+    },
+    {
+     "date_utc": "2026-10-19 19:01",
+     "name": "R6W958-N224O25-V1",
+     "public": 0.957,
+     "private": 0.943
+    }
+   ],
+   "no_score": 0,
+   "error": 0
+  },
+  "k1-blends": {
+   "label": "In-pass K1 blends (final families)",
+   "n_total": 14,
+   "points": [
+    {
+     "date_utc": "2026-10-20 00:02",
+     "name": "R6W958-K1SR20-V1",
+     "public": 0.958,
+     "private": 0.943
+    },
+    {
+     "date_utc": "2026-10-20 00:03",
+     "name": "R6W958-K1X2SR20-V1",
+     "public": 0.958,
+     "private": 0.943
+    },
+    {
+     "date_utc": "2026-10-20 01:03",
+     "name": "x3-v2 (final A)",
+     "public": 0.958,
+     "private": 0.943
+    },
+    {
+     "date_utc": "2026-10-20 07:11",
+     "name": "p25",
+     "public": 0.958,
+     "private": 0.943
+    },
+    {
+     "date_utc": "2026-10-20 08:28",
+     "name": "av2",
+     "public": 0.957,
+     "private": 0.943
+    },
+    {
+     "date_utc": "2026-10-21 00:00",
+     "name": "S1",
+     "public": 0.958,
+     "private": 0.943
+    },
+    {
+     "date_utc": "2026-10-21 00:16",
+     "name": "C",
+     "public": 0.957,
+     "private": 0.943
+    },
+    {
+     "date_utc": "2026-10-21 09:22",
+     "name": "P25F (final B)",
+     "public": 0.957,
+     "private": 0.943
+    },
+    {
+     "date_utc": "2026-10-21 13:39",
+     "name": "A5",
+     "public": 0.956,
+     "private": 0.941
+    },
+    {
+     "date_utc": "2026-10-21 23:40",
+     "name": "DF",
+     "public": 0.955,
+     "private": 0.94
+    },
+    {
+     "date_utc": "2026-10-22 06:19",
+     "name": "P4",
+     "public": 0.958,
+     "private": 0.943
+    }
+   ],
+   "no_score": 3,
+   "error": 0
+  }
+ },
+ "hidden_runtime_hours_upper_incl_queue": {
+  "INF3 parent family": "6.7-6.9",
+  "k1sr20": 7.03,
+  "k1x2sr20": 7.04,
+  "x3-v2": "7.90-7.98",
+  "av2": "7.27-7.35",
+  "p25": "6.12-6.20",
+  "S1": 7.2,
+  "C": 7.53,
+  "P25F": 6.87,
+  "A5": 6.77,
+  "DF": 8.29,
+  "P4": 8.24,
+  "U": "failed at <=9.18",
+  "U4": "failed at <=9.18",
+  "F4": "failed at <=9.21",
+  "kaggle_limit": 9.0,
+  "k1_guard": 8.8
+ },
+ "holdout_977_k1_only_macro_deltas": {
+  "full_bag_replacement": {
+   "mean": -0.0045,
+   "rulers": {
+    "jev": -0.008,
+    "aquila": -0.0037,
+    "dread": -0.0036,
+    "consensus": -0.0026
+   }
+  },
+  "full_bag_4th_member": {
+   "mean": 0.00145,
+   "rulers": {
+    "jev": 0.000848,
+    "aquila": 0.001585,
+    "dread": 0.002005,
+    "consensus": 0.001358
+   }
+  },
+  "stride1_vs_2": {
+   "rulers": {
+    "jev": -0.00011,
+    "aquila": 0.00013,
+    "dread": 4e-05,
+    "consensus": 3e-05
+   }
+  },
+  "target_type_pooling": {
+   "mean": -0.003
+  },
+  "failure_weighted_retrain": {
+   "mean": -0.0018,
+   "rulers": {
+    "jev": -0.00235,
+    "aquila": 0.00109,
+    "dread": -0.00363,
+    "consensus": -0.00226
+   }
+  },
+  "latoa_crop_expert_latoa_only": {
+   "mean": 0.0022,
+   "rulers": {
+    "jev": 0.00307,
+    "aquila": 0.00194,
+    "dread": 0.00541,
+    "consensus": -0.00152
+   }
+  },
+  "synovitis_head_refit_syn_only": {
+   "mean": -0.0107
+  },
+  "crop_shift_tta": {
+   "mean": -8.5e-05
+  }
+ }
+}

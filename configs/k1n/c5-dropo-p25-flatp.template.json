@@ -1,0 +1,61 @@
+{
+  "alpha": 0.25,
+  "drop_o": true,
+  "encoder_chunk": 32,
+  "k1_eval_stride": 2,
+  "k1_failure_policy": "study_fallback_fail_loud",
+  "k1_guard_hours": 8.8,
+  "k1_max_failed_fraction": 0.05,
+  "k1_runtime_version": 9,
+  "kernel_id": "taeyangg4/knee-lb-r6w958k1c5dop25flp-v1",
+  "models": [
+    {
+      "checkpoint": "weights/E_prior_s0_f0.pt",
+      "checkpoint_sha256": "2c3c033e25605b5fb8bcc08e0030bed081c726e10fc56d8da62524ac08d9638c",
+      "dataset_slug": "taeyangg4/knee-l1-rcof0-v1-assets",
+      "id": "k1_v2",
+      "manifest_sha256": "a529559ad7efac3e88111b0007338ca931bde3e3a35b8e88b1d09ca3f44e68f3",
+      "trainer_sha256": "14767c7a8f0daa986477511fe9a83aefe032a208ae978fabf15a5f896992ac80",
+      "trainer_source": "source/compact_train.py"
+    },
+    {
+      "checkpoint": "weights/E_prior_s0_f1.pt",
+      "checkpoint_sha256": "REPLACE_WITH_VERIFIED_CHECKPOINT_SHA256",
+      "dataset_slug": "taeyangg4/knee-k1-v3gf1-v1-assets",
+      "id": "k1_v3g_f1",
+      "manifest_sha256": "REPLACE_WITH_VERIFIED_ASSET_MANIFEST_SHA256",
+      "trainer_sha256": "14767c7a8f0daa986477511fe9a83aefe032a208ae978fabf15a5f896992ac80",
+      "trainer_source": "source/compact_train.py"
+    },
+    {
+      "checkpoint": "weights/E_prior_s0_f2.pt",
+      "checkpoint_sha256": "REPLACE_WITH_VERIFIED_CHECKPOINT_SHA256",
+      "dataset_slug": "taeyangg4/knee-k1-v3gf2-v1-assets",
+      "id": "k1_v3g_f2",
+      "manifest_sha256": "REPLACE_WITH_VERIFIED_ASSET_MANIFEST_SHA256",
+      "trainer_sha256": "14767c7a8f0daa986477511fe9a83aefe032a208ae978fabf15a5f896992ac80",
+      "trainer_source": "source/compact_train.py"
+    },
+    {
+      "checkpoint": "weights/E_prior_s0_f3.pt",
+      "checkpoint_sha256": "REPLACE_WITH_VERIFIED_CHECKPOINT_SHA256",
+      "dataset_slug": "taeyangg4/knee-k1-v3gf3-v1-assets",
+      "id": "k1_v3g_f3",
+      "manifest_sha256": "REPLACE_WITH_VERIFIED_ASSET_MANIFEST_SHA256",
+      "trainer_sha256": "14767c7a8f0daa986477511fe9a83aefe032a208ae978fabf15a5f896992ac80",
+      "trainer_source": "source/compact_train.py"
+    },
+    {
+      "checkpoint": "weights/E_prior_s0_fall.pt",
+      "checkpoint_sha256": "REPLACE_WITH_VERIFIED_CHECKPOINT_SHA256",
+      "dataset_slug": "taeyangg4/knee-k1-v3gall-v1-assets",
+      "id": "k1_v3g_all",
+      "manifest_sha256": "REPLACE_WITH_VERIFIED_ASSET_MANIFEST_SHA256",
+      "trainer_sha256": "14767c7a8f0daa986477511fe9a83aefe032a208ae978fabf15a5f896992ac80",
+      "trainer_source": "source/compact_train.py"
+    }
+  ],
+  "p_weight_mode": "flat",
+  "release_version": "1.1.77-r6w958k1c5dop25flp",
+  "schema": "k1n-config/v1"
+}

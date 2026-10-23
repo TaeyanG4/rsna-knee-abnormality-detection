@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 384" width="960" height="384" font-family="system-ui, sans-serif" font-size="12" fill="#0b0b0b" role="img" aria-labelledby="title desc">
+  <title id="title">The 8-step submission gate</title>
+  <desc id="desc">From Oct 21 every submission passed eight steps in order: independent review, visible run, N32 stress run for new members, SHA256 check of every dataset, projected runtime at most 8.3 h, admission tool PASS with a check-only replay, a 7-item final check by a separate Opus agent, and a chat notice. Then kaggle_submit_once.py made exactly one attempt. Any FAIL went back to the builder.</desc>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#52514e"/>
+    </marker>
+    <marker id="arrRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#d03b3b"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="960" height="384" fill="#fcfcfb"/>
+
+  <text x="16" y="30" font-size="14" font-weight="bold">The 8-step submission gate (from Oct 21, plan Update 3)</text>
+  <text x="16" y="48" fill="#52514e">Every step had to pass, in order, before the single submission attempt.</text>
+
+  <!-- step boxes: x = 16 + i*115, w = 103 -->
+  <g>
+    <rect x="16" y="70" width="103" height="164" rx="6" fill="#ffffff" stroke="#c9c7c1" stroke-width="1.2"/>
+    <circle cx="36" cy="92" r="11" fill="#1baf7a"/>
+    <text x="36" y="96" text-anchor="middle" font-weight="bold" fill="#ffffff">1</text>
+    <text x="26" y="124" font-size="13" font-weight="bold">Review</text>
+    <text x="26" y="144">independent</text>
+    <text x="26" y="160">code review</text>
+    <text x="26" y="176">by a different</text>
+    <text x="26" y="192">agent</text>
+
+    <rect x="131" y="70" width="103" height="164" rx="6" fill="#ffffff" stroke="#c9c7c1" stroke-width="1.2"/>
+    <circle cx="151" cy="92" r="11" fill="#1baf7a"/>
+    <text x="151" y="96" text-anchor="middle" font-weight="bold" fill="#ffffff">2</text>
+    <text x="141" y="124" font-size="13" font-weight="bold">Visible run</text>
+    <text x="141" y="144">as submitted,</text>
+    <text x="141" y="160">3 public test</text>
+    <text x="141" y="176">studies, 12</text>
+    <text x="141" y="192">finite outputs,</text>
+    <text x="141" y="208">0 K1 fallbacks</text>
+
+    <rect x="246" y="70" width="103" height="164" rx="6" fill="#ffffff" stroke="#c9c7c1" stroke-width="1.2"/>
+    <circle cx="266" cy="92" r="11" fill="#1baf7a"/>
+    <text x="266" y="96" text-anchor="middle" font-weight="bold" fill="#ffffff">3</text>
+    <text x="256" y="124" font-size="13" font-weight="bold">N32</text>
+    <text x="256" y="144">32/32 real</text>
+    <text x="256" y="160">training</text>
+    <text x="256" y="176">studies for</text>
+    <text x="256" y="192">any new</text>
+    <text x="256" y="208">member</text>
+
+    <rect x="361" y="70" width="103" height="164" rx="6" fill="#ffffff" stroke="#c9c7c1" stroke-width="1.2"/>
+    <circle cx="381" cy="92" r="11" fill="#1baf7a"/>
+    <text x="381" y="96" text-anchor="middle" font-weight="bold" fill="#ffffff">4</text>
+    <text x="371" y="124" font-size="13" font-weight="bold">Dataset SHA</text>
+    <text x="371" y="144">SHA256 of</text>
+    <text x="371" y="160">every attached</text>
+    <text x="371" y="176">dataset</text>
+
+    <rect x="476" y="70" width="103" height="164" rx="6" fill="#ffffff" stroke="#c9c7c1" stroke-width="1.2"/>
+    <circle cx="496" cy="92" r="11" fill="#1baf7a"/>
+    <text x="496" y="96" text-anchor="middle" font-weight="bold" fill="#ffffff">5</text>
+    <text x="486" y="124" font-size="13" font-weight="bold">Runtime</text>
+    <text x="486" y="144">projected</text>
+    <text x="486" y="160">hidden runtime</text>
+    <text x="486" y="176" font-weight="bold">≤ 8.3 h</text>
+    <text x="486" y="196" fill="#52514e">(Kaggle limit</text>
+    <text x="486" y="212" fill="#52514e">is 9 h)</text>
+
+    <rect x="591" y="70" width="103" height="164" rx="6" fill="#ffffff" stroke="#c9c7c1" stroke-width="1.2"/>
+    <circle cx="611" cy="92" r="11" fill="#1baf7a"/>
+    <text x="611" y="96" text-anchor="middle" font-weight="bold" fill="#ffffff">6</text>
+    <text x="601" y="124" font-size="13" font-weight="bold">Admission</text>
+    <text x="601" y="144">admission tool</text>
+    <text x="601" y="160">PASS + check-</text>
+    <text x="601" y="176">only replay</text>
+
+    <rect x="706" y="70" width="103" height="164" rx="6" fill="#ffffff" stroke="#c9c7c1" stroke-width="1.2"/>
+    <circle cx="726" cy="92" r="11" fill="#1baf7a"/>
+    <text x="726" y="96" text-anchor="middle" font-weight="bold" fill="#ffffff">7</text>
+    <text x="716" y="124" font-size="13" font-weight="bold">Final check</text>
+    <text x="716" y="144">7-item check</text>
+    <text x="716" y="160">by a separate</text>
+    <text x="716" y="176">Opus agent</text>
+
+    <rect x="821" y="70" width="103" height="164" rx="6" fill="#ffffff" stroke="#c9c7c1" stroke-width="1.2"/>
+    <circle cx="841" cy="92" r="11" fill="#1baf7a"/>
+    <text x="841" y="96" text-anchor="middle" font-weight="bold" fill="#ffffff">8</text>
+    <text x="831" y="124" font-size="13" font-weight="bold">Chat notice</text>
+    <text x="831" y="144">announced in</text>
+    <text x="831" y="160">chat just</text>
+    <text x="831" y="176">before</text>
+    <text x="831" y="192">submitting</text>
+  </g>
+
+  <!-- arrows between steps -->
+  <g stroke="#52514e" stroke-width="1.4" fill="none" marker-end="url(#arr)">
+    <path d="M120,152 L130,152"/>
+    <path d="M235,152 L245,152"/>
+    <path d="M350,152 L360,152"/>
+    <path d="M465,152 L475,152"/>
+    <path d="M580,152 L590,152"/>
+    <path d="M695,152 L705,152"/>
+    <path d="M810,152 L820,152"/>
+  </g>
+
+  <!-- fail path -->
+  <path d="M67,234 L67,252 L812,252" stroke="#d03b3b" stroke-width="1.4" fill="none" stroke-dasharray="5 3"/>
+  <g stroke="#d03b3b" stroke-width="1.4" fill="none" stroke-dasharray="5 3">
+    <path d="M182,234 L182,252"/><path d="M297,234 L297,252"/><path d="M412,234 L412,252"/>
+    <path d="M527,234 L527,252"/><path d="M642,234 L642,252"/><path d="M757,234 L757,252"/><path d="M812,252 L872,252 L872,234"/>
+  </g>
+  <path d="M228,252 L228,276" stroke="#d03b3b" stroke-width="1.4" fill="none" marker-end="url(#arrRed)"/>
+  <rect x="16" y="278" width="424" height="70" rx="6" fill="#fbeaea" stroke="#d03b3b" stroke-width="1.5"/>
+  <text x="28" y="298" font-size="13" font-weight="bold">FAIL at any step</text>
+  <text x="28" y="318">back to the builder; a reviewer's FAIL is binding and</text>
+  <text x="28" y="334">nothing is submitted until the fixed build passes again</text>
+
+  <!-- submit -->
+  <path d="M900,234 L900,276" stroke="#1baf7a" stroke-width="1.6" fill="none" marker-end="url(#arr)"/>
+  <rect x="470" y="278" width="454" height="70" rx="6" fill="#e6f6ef" stroke="#1baf7a" stroke-width="1.8"/>
+  <text x="482" y="298" font-size="13" font-weight="bold">Submit with tools/kaggle_submit_once.py</text>
+  <text x="482" y="318">durable ledger entry before the call; exactly one attempt;</text>
+  <text x="482" y="334">never retries automatically</text>
+
+  <text x="16" y="370" fill="#52514e">Visible and N32 runs are described in section 7.7; hidden runtimes were calibrated from earlier hidden runs, not from N32 alone.</text>
+</svg>

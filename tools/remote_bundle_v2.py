@@ -1,0 +1,117 @@
+"""Remote GPU bundle v2 (Colab L4 / Kaggle T4): ship the EXP094/EXP095 runners + frozen protocol inputs, run one job remotely.
+
+  python tools/remote_bundle_v2.py build            # -> kaggle/packages/KNEE_RUNNERS_V2 (private dataset knee-runners-v2)
+  python tools/remote_bundle_v2.py publish          # create / version the private dataset
+  python tools/remote_bundle_v2.py kernel --job exp094:seed43 [--push]   # private Kaggle T4 notebook (fp16 not possible: these runners are bf16 → use Colab L4/A100 for them)
+  python tools/remote_bundle_v2.py colab-script --job exp094:seed43      # prints the command for `colab run` (WSL) with the remote entry script
+
+The remote entry (remote_run_v2.py) stages the workspace (tools bundle over the corpus dataset), builds the runner argv from the
+registered protocol with ROOT = workspace, sets the registered thread/offline env plus KNEE_REMOTE_RELAX_ENV=1, runs it, and
+packs artifacts/experiments/<tag> into <results>/<tag> (uploaded as private dataset knee-raptor-res-<tag> on Colab).
+Only labels, folds, group metadata and code leave this PC; no report text, no Gold, no competition DICOM.
+"""
+from __future__ import annotations
+import argparse
+import json
+import os
+import shutil
+import subprocess
+import sys
+import time
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from tools import remote_bundle as rb  # noqa: E402
+
+PACKAGE = ROOT / 'kaggle' / 'packages' / 'KNEE_RUNNERS_V2'
+DATASET = 'knee-runners-v2'
+FILES = [
+    'training/src/raptor_common.py', 'training/src/raptor_data.py', 'training/src/raptor_runtime.py', 'training/src/raptor_train.py',
+    'training/runners/exp094_b8_variant.py', 'training/runners/exp095_teacher.py', 'training/runners/exp095_student.py',
+    'tools/__init__.py', 'tools/exp084_group_loss.py', 'tools/exp087_training.py', 'tools/exp094_b8_variant.py', 'tools/exp095_teacher_mix.py',
+    'tools/colab/run_remote.py', 'tools/remote_run_v2.py', 'tools/parity_b8_probe.py', 'tools/parity_runtime.py', 'tools/parity_compare_arrays.py',
+    'artifacts/experiments/PARITY_T4_LOCAL_V1/tol.json',
+    'artifacts/experiments/EXP084_GROUP_R34_LOSS_PROTOCOL/manifest.json', 'artifacts/experiments/EXP084_GROUP_R34_LOSS_PROTOCOL/group-metadata.csv',
+    'artifacts/experiments/EXP084_GROUP_R34_LOSS_PROTOCOL/ordered-ids.json', 'artifacts/experiments/EXP084_GROUP_R34_LOSS_PROTOCOL/initial-assets.json',
+    'artifacts/experiments/EXP078_INPUT_AB_PROTOCOL/excluded.csv',
+    'storage/labels/dreaddevelopment__rsna-knee-labels/labels_llm_soft.csv',
+]
+DIRS = ['artifacts/experiments/EXP094_B8_VARIANT_PROTOCOL_V3', 'artifacts/experiments/EXP095_TEACHER_MIX_PROTOCOL_V2']
+JOBS = {'exp094:seed43': ('exp094', 'seed43'), 'exp094:geoaug': ('exp094', 'geoaug'), 'exp094:strat': ('exp094', 'strat'), 'exp094:slotdrop': ('exp094', 'slotdrop'),
+        'exp095:teacher0': ('exp095', 'teacher0'), 'exp095:teacher1': ('exp095', 'teacher1'), 'exp095:teacher2': ('exp095', 'teacher2'), 'exp095:student': ('exp095', 'student')}
+
+
+def build():
+    if PACKAGE.exists():
+        shutil.rmtree(PACKAGE)
+    (ROOT / 'tools' / '__init__.py').touch(exist_ok=True)
+    for rel in FILES:
+        src = ROOT / rel; dst = PACKAGE / rel; dst.parent.mkdir(parents=True, exist_ok=True); shutil.copy2(src, dst)
+    for d in DIRS:
+        for p in (ROOT / d).rglob('*'):
+            if p.is_file() and p.suffix in ('.json', '.csv', '.txt'):
+                dst = PACKAGE / p.relative_to(ROOT); dst.parent.mkdir(parents=True, exist_ok=True); shutil.copy2(p, dst)
+    (PACKAGE / 'config').mkdir(exist_ok=True)
+    (PACKAGE / 'config' / 'workspace.toml').write_text('schema_version = 1\nlayout_version = 2\ncompetition = "rsna-knee-abnormality-detection"\n[paths]\ncache = "storage/cache/derived"\nexperiments = "artifacts/experiments"\n', encoding='utf-8')
+    user = rb.username()
+    meta = {'title': DATASET, 'id': f'{user}/{DATASET}', 'licenses': [{'name': 'other'}], 'isPrivate': True,
+            'description': 'Private: EXP094/EXP095 runners, frozen protocol inputs and labels for remote GPU runs (no report text, no Gold).'}
+    (PACKAGE / 'dataset-metadata.json').write_text(json.dumps(meta, indent=1), encoding='utf-8')
+    files = sorted(str(p.relative_to(PACKAGE)).replace(os.sep, '/') for p in PACKAGE.rglob('*') if p.is_file())
+    (PACKAGE / 'bundle_manifest.json').write_text(json.dumps({'built_at': time.strftime('%Y-%m-%dT%H:%M:%S'), 'files': files, 'sha256': {f: rb_sha(PACKAGE / f) for f in files if f != 'bundle_manifest.json'}}, indent=1), encoding='utf-8')
+    print(json.dumps({'package': str(PACKAGE), 'files': len(files), 'bytes': sum((PACKAGE / f).stat().st_size for f in files)}))
+
+
+def rb_sha(p):
+    import hashlib
+    return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+
+
+def publish():
+    return rb.publish(PACKAGE, 'runners v2 ' + time.strftime('%Y-%m-%d %H:%M'))
+
+
+KERNEL_TEMPLATE = '''"""KneeOps remote run {job} (private). Generated by tools/remote_bundle_v2.py."""
+import glob, os, subprocess, sys, time
+t0 = time.time()
+print(subprocess.run(["nvidia-smi", "--query-gpu=name,memory.total", "--format=csv,noheader"], capture_output=True, text=True).stdout)
+hits = glob.glob("/kaggle/input/**/remote_run_v2.py", recursive=True); assert hits, "knee-runners-v2 dataset not attached"
+tools = os.path.dirname(os.path.dirname(hits[0]))
+corpus = os.path.dirname(glob.glob("/kaggle/input/**/vols_shard00.npy", recursive=True)[0])
+cmd = [sys.executable, hits[0], "--job", {job!r}, "--tools", tools, "--corpus", corpus, "--no-upload"]
+code = subprocess.run(cmd).returncode
+print(f"exit {{code}} after {{time.time() - t0:.0f}}s", flush=True); sys.exit(code)
+'''
+
+
+def kernel(job, push):
+    user = rb.username(); slug = rb.slugify('knee-run-v2-', job.replace(':', '-'))
+    out = ROOT / 'kaggle' / 'packages' / f'KNEE_RUN_V2_{job.replace(":", "_").upper()}'; out.mkdir(parents=True, exist_ok=True)
+    (out / 'run.py').write_text(KERNEL_TEMPLATE.format(job=job), encoding='utf-8')
+    meta = {'id': f'{user}/{slug}', 'title': slug, 'code_file': 'run.py', 'language': 'python', 'kernel_type': 'script', 'is_private': True, 'enable_gpu': True, 'enable_internet': True,
+            'dataset_sources': [f'{user}/{DATASET}', f'{user}/knee-raptor-corpus-336'], 'competition_sources': [], 'kernel_sources': [], 'machine_shape': 'NvidiaTeslaT4', 'enable_tpu': False, 'keywords': ['gpu']}
+    (out / 'kernel-metadata.json').write_text(json.dumps(meta, indent=2), encoding='utf-8')
+    print(json.dumps(meta, indent=1))
+    if push:
+        r = rb.kaggle('kernels', 'push', '-p', str(out), '--accelerator', 'NvidiaTeslaT4', '--timeout', '43200'); print(r.stdout[-800:], r.stderr[-400:])
+
+
+def colab_script(job):
+    user = rb.username()
+    print(f"# in WSL (after `colab auth`):\n# colab run --gpu L4 --output-dir ./colab-results/{job.replace(':','-')} -- python tools/remote_run_v2.py --job {job} --kaggle-user {user}\n"
+          f"# the entry script downloads {user}/{DATASET} and {user}/knee-raptor-corpus-336 with KAGGLE_API_TOKEN from the environment")
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    sub = ap.add_subparsers(dest='command', required=True)
+    sub.add_parser('build'); sub.add_parser('publish')
+    k = sub.add_parser('kernel'); k.add_argument('--job', choices=list(JOBS), required=True); k.add_argument('--push', action='store_true')
+    c = sub.add_parser('colab-script'); c.add_argument('--job', choices=list(JOBS), required=True)
+    a = ap.parse_args()
+    {'build': build, 'publish': publish, 'kernel': lambda: kernel(a.job, a.push), 'colab-script': lambda: colab_script(a.job)}[a.command]()
+
+
+if __name__ == '__main__':
+    main()

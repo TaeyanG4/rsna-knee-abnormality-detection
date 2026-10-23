@@ -1,0 +1,55 @@
+{
+  "schema": "knee-release-assets-v5",
+  "dataset": "taeyangg4/knee-release-assets-v10",
+  "checkpoints": {
+    "swa_full": {
+      "path": "checkpoints/swa_full.pt",
+      "sha256": "cc73757acb69a84d9d5c480c154af1ae367960d0024eae454d0bc8315f266f48",
+      "bytes": 292828644,
+      "meta": {
+        "arch": "coatnet_rmlp_2_rw_224.sw_in12k_ft_in1k",
+        "res": 224,
+        "lab": [
+          "ACL",
+          "MCL",
+          "Medial Meniscus",
+          "Lateral Meniscus",
+          "Medial OA",
+          "Lateral OA",
+          "PF OA",
+          "Effusion",
+          "Synovitis",
+          "Baker's",
+          "Contusion",
+          "Fracture"
+        ],
+        "contract": "raptor64_336_c140_s02",
+        "k_eval": 24,
+        "norm": "imagenet",
+        "window_policy": "within-slot-valid",
+        "epoch": 15,
+        "tag": "EXP112_B8_FULL_SWA_V2",
+        "amp_train": "fp16",
+        "amp_eval": "fp16"
+      },
+      "training_code_sha256": {
+        "raptor_train.py": "484abfd364163a330241a0aedb332f64287700b50d38438d2efb773777d8afd8",
+        "raptor_common.py": "bc6db5b3e8cd13b52fbff8c039d3674cdf573f86c1959e22fe9b2fd94255d7dc",
+        "raptor_data.py": "0b922ea0359962a2bb6531d5630639f2c9002abdb80fe1353991087d6bcdea01",
+        "raptor_runtime.py": "afe394b631c681e3826ad976e71c793214dee81c49c0d9cd76046590cc4513ad"
+      },
+      "source": "artifacts/experiments/EXP112_B8_FULL_SWA_V2/model_best.pt",
+      "source_sidecars_sha256": {
+        "summary.json": "77f513f10dbdd8bd40e94f333b4b4617ca18bd6201ca40686dea064cb466d921",
+        "provenance.json": "ef1e78afa2d25d6817fb500ca649a3236982ba1528c4342e7ca05322e78c2389",
+        "history.json": "c017f6f8c90906199a24592662781c3a0e6d6685a13af38b5199ebadffeede39"
+      },
+      "link_mode": "copy"
+    }
+  },
+  "files": {
+    "checkpoints/swa_full.pt": "cc73757acb69a84d9d5c480c154af1ae367960d0024eae454d0bc8315f266f48"
+  },
+  "dataset_metadata_sha256": "bcb8c7958ebe8ca8c8a42465a76db0dcf133c041c0f4d546a9d5523e92a59975",
+  "staged_at": "2026-10-07T13:49:31.846778+00:00"
+}

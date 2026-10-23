@@ -1,0 +1,16 @@
+{
+  "schema": "exp154-checkpoint-list-v1",
+  "heads": ["dread", "relabel_v1", "steven_v4", "pilkwang_v2", "aquila_v1"],
+  "entries": [
+    {"seed": 42, "fold": 0, "tag": "EXP149_H1_S42_F0"},
+    {"seed": 42, "fold": 1, "tag": "EXP149_H1_S42_F1"},
+    {"seed": 42, "fold": 2, "tag": "EXP153_H1_S42_F2"},
+    {"seed": 42, "fold": 3, "tag": "EXP153_H1_S42_F3"},
+    {"seed": 42, "fold": 4, "tag": "EXP153_H1_S42_F4"},
+    {"seed": 43, "fold": 0, "tag": "EXP153_H1_S43_F0"},
+    {"seed": 43, "fold": 1, "tag": "EXP153_H1_S43_F1"},
+    {"seed": 43, "fold": 2, "tag": "EXP153_H1_S43_F2"},
+    {"seed": 43, "fold": 3, "tag": "EXP153_H1_S43_F3"},
+    {"seed": 43, "fold": 4, "tag": "EXP153_H1_S43_F4"}
+  ]
+}

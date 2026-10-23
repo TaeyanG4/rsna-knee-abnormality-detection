@@ -1,0 +1,20 @@
+{
+  "ready_to_execute": false,
+  "ready_to_submit": false,
+  "blocking": [
+    "NC-SA RadImageNet input/winner-license compatibility unresolved",
+    "Current numeric source version and LB identity unresolved",
+    "Complete input hashes not acquired",
+    "1300study runtime not measured"
+  ],
+  "not_blocked": [
+    "Kaggle authentication",
+    "official data access",
+    "local disk"
+  ],
+  "do_not": [
+    "silently drop an arm",
+    "call a title score observed LB",
+    "treat gold-selected scores as independent validation"
+  ]
+}

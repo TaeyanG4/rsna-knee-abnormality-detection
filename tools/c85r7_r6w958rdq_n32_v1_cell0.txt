@@ -1,0 +1,169 @@
+# H-B-190 N32 diagnostic v1.0.1: NEVER SUBMIT (taeyangg4/knee-lb-r6w958rdq-n32-v1).
+# Part A: the exact H-B-190 candidate path with FAST disabled on the real public test, i.e. all C85 members,
+#   R224, R6 and the reader overlay on Linux/T4. R224 has a hard-coded /kaggle/input test root, so a full
+#   train-study N32 of the R224 line cannot work.
+# Part B: the same embedded reader phase on 32 label-free train studies (exp169_c85_stress round-robin
+#   selection; test_series.csv rewritten with every train_series.csv column, because the reader needs
+#   Fat_Suppression).
+# Part C: per-stage seconds, assertions and the hidden 1,300-study projection, written to hb190-n32-report.json.
+import json as _n32_json
+import os as _n32_os
+import time as _n32_time
+import traceback as _n32_tb
+from pathlib import Path as _N32Path
+
+FAST = False
+_n32_os.environ.pop("C85_COMPETITION", None)
+_N32_T0 = _n32_time.monotonic()
+_N32_WORK = _N32Path(_n32_os.environ.get("HB190_N32_WORKING", "/kaggle/working"))
+_N32_N = int(_n32_os.environ.get("HB190_N32_N", "32"))
+_N32_H174_HOURS, _N32_HIDDEN, _N32_LIMIT = 7.12, 1300, 9.0
+print("HB190_N32_DIAGNOSTIC_NEVER_SUBMIT", _N32_N, flush=True)
+
+
+def _n32_load(path):
+    try:
+        return _n32_json.loads(_N32Path(path).read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+
+
+def _n32_project(phase_seconds, worker, n, hidden=_N32_HIDDEN, parent_hours=_N32_H174_HOURS):
+    """Measured T4 reader rate -> hidden hours (v1.0.1).
+    gate (used by the check): child start-up once + the whole worker time (model load included) per study
+      x hidden. DataLoader workers prefetch while the models load, so 'loop' alone would under-count decode.
+    central (informational): start-up and model load once + loop per study x hidden.
+    conservative: the whole phase per study x hidden (start-up counted for every study)."""
+    total, models = float(worker["seconds_total"]), float(worker["seconds_models"])
+    loop = total - models
+    startup = float(phase_seconds) - total
+    central_s = startup + models + loop / n * hidden
+    gate_s = startup + total / n * hidden
+    conservative_s = float(phase_seconds) / n * hidden
+    hours = dict(central=central_s / 3600, gate=gate_s / 3600, conservative=conservative_s / 3600)
+    return dict(reader_seconds_per_study=total / n, reader_loop_seconds_per_study=loop / n, reader_startup_seconds=startup,
+                reader_model_seconds=models, studies=n, hidden_studies=hidden, reader_hidden_hours=hours,
+                parent_basis_hours=parent_hours, total_hours={k: parent_hours + v for k, v in hours.items()},
+                limit_hours=_N32_LIMIT)
+
+
+def _n32_checks(report):
+    a, b = report.get("part_a", {}), report.get("part_b", {})
+    ar, br = a.get("reader_receipt") or {}, b.get("reader_receipt") or {}
+    proj = b.get("projection") or {}
+    checks = {
+        "a_c85_complete": a.get("c85_status") == "COMPLETE_C85R7",
+        "a_reader_applied": ar.get("status") == "APPLIED",
+        "a_reader_zero_fallback": ar.get("fallback_studies") == 0 and ar.get("reader_ok") == a.get("rows"),
+        "a_rows_finite": bool(a.get("rows")) and a.get("finite") is True,
+        "a_reader_exit0": (a.get("phases", {}).get("READER") or {}).get("exit_code") == 0,
+        "b_reader_applied": br.get("status") == "APPLIED",
+        "b_reader_all_ok": br.get("reader_ok") == b.get("studies") == _N32_N and br.get("fallback_studies") == 0,
+        "b_journal_ok": b.get("journal_ok") == _N32_N and b.get("journal_failed") == 0,
+        "b_rows_finite": b.get("rows") == _N32_N and b.get("finite") is True,
+        "b_reader_exit0": (b.get("phase") or {}).get("exit_code") == 0,
+        "b_full_series_columns": "Fat_Suppression" in (b.get("series_columns") or []),
+        "projection_under_9h": bool(proj) and proj["total_hours"]["gate"] < _N32_LIMIT,
+    }
+    return checks, "PASS" if all(checks.values()) else "FAIL"
+
+
+def _n32_output(release, path):
+    ids, values = release.v5q._read_csv(_N32Path(path))  # validates IDs, 12 columns, finite, [0, 1]
+    return len(ids), True
+
+
+def _hb190_n32_run(release, runtime):
+    report = dict(version="1.0.1", kind="HB190_N32_NEVER_SUBMIT", candidate_version=release.VERSION,
+                  candidate_release=release.RELEASE, part_a={}, part_b={})
+    keep = ("status", "reason", "error", "studies", "reader_ok", "fallback_studies", "journal_failed",
+            "base_sha256", "submission_sha256")
+    try:
+        # ---------------- Part A: exact candidate path, FAST disabled, real public test
+        a, t = report["part_a"], _n32_time.monotonic()
+        try:
+            a["c85_status"] = (release.run_release(runtime, _N32_WORK) or {}).get("status")
+        except Exception as exc:
+            a["error"] = f"{type(exc).__name__}: {exc}"[:600]
+        a["seconds"] = _n32_time.monotonic() - t
+        run = _N32_WORK / release.RUN
+        a["phases"] = {k: _n32_load(v) for k, v in (("A172", run / "a172" / "child-exit.json"),
+            ("PR7", run / "pr7" / "child-exit.json"), ("R", run / "pr7" / "R-exit.json"),
+            ("R224", run / "pr7" / "R224-exit.json"), ("S_R6", run / "pr7" / "S_R7-exit.json"),
+            ("READER", run / release.READER_DIR / "READER-exit.json"))}
+        receipt = _n32_load(_N32_WORK / release.RECEIPT) or {}
+        a["c85_status"] = a.get("c85_status") or receipt.get("status")
+        a["c85_fallbacks"] = receipt.get("fallbacks")
+        a["reader_receipt"] = {k: v for k, v in (_n32_load(run / release.READER_DIR / "reader-receipt.json") or {}).items() if k in keep}
+        a["worker"] = _n32_load(run / release.READER_DIR / "worker.json")
+        try:
+            a["rows"], a["finite"] = _n32_output(release, _N32_WORK / "submission.csv")
+        except Exception as exc:
+            a["output_error"] = f"{type(exc).__name__}: {exc}"[:300]
+        # ---------------- Part B: the embedded reader phase on N label-free train studies
+        b, t = report["part_b"], _n32_time.monotonic()
+        import csv as _n32_csv
+        import exp169_c85_stress as _n32_stress
+        override = _n32_os.environ.get("HB190_N32_COMPETITION")
+        comp = _N32Path(override) if override else release.v5q._mount(release.p.COMPETITION, "train_series.csv")
+        data = _N32_WORK / "hb190-n32-data"
+        selected = _n32_stress.prepare(comp, data, n=_N32_N)
+        with (comp / "train_series.csv").open(newline="", encoding="utf-8") as stream:
+            reader = _n32_csv.DictReader(stream)
+            header = list(reader.fieldnames or [])
+            wanted, by_uid = set(selected), {}
+            for row in reader:  # train_series.csv only: no labels, no reports
+                if row["StudyInstanceUID"] in wanted:
+                    by_uid.setdefault(row["StudyInstanceUID"], []).append(row)
+        with (data / "test_series.csv").open("w", newline="", encoding="utf-8") as stream:
+            writer = _n32_csv.writer(stream)
+            writer.writerow(header)
+            writer.writerows([r[k] for k in header] for u in selected for r in by_uid.get(u, []))
+        b.update(studies=len(selected), series_columns=header, prepare_seconds=_n32_time.monotonic() - t,
+                 selection=_n32_load(data / "selection.json"))
+        out = _N32_WORK / "hb190-n32-reader"
+        (out / release.RUN).mkdir(parents=True)
+        n = len(selected)
+        import numpy as _n32_np
+        base = _n32_np.asarray([[((i * (2 * j + 1)) % n + 1) / (n + 1) for j in range(12)] for i in range(n)])
+        (out / "submission.csv").write_bytes(release.p.csv_bytes(selected, base))
+        _n32_os.environ["C85_COMPETITION"] = str(data)
+        try:
+            codec = release.codec_receipt(_N32_WORK / release.RUN)
+            env = release.child_base_env(runtime)
+            t = _n32_time.monotonic()
+            record = release.reader_phase(runtime, out, codec, env, out / release.RUN / "codecs" / "telemetry")
+            b["seconds"] = _n32_time.monotonic() - t
+        finally:
+            _n32_os.environ.pop("C85_COMPETITION", None)
+        rdir = out / release.RUN / release.READER_DIR
+        b["codec_status"] = codec.get("status")
+        b["reader_receipt"] = {k: v for k, v in record.items() if k in keep}
+        b["phase"] = _n32_load(rdir / "READER-exit.json")
+        b["worker"] = worker = _n32_load(rdir / "worker.json")
+        rows = [_n32_json.loads(x) for x in (rdir / "journal.jsonl").read_text(encoding="utf-8").splitlines()
+                if x.strip().startswith("{") and '"uid"' in x] if (rdir / "journal.jsonl").is_file() else []
+        b["journal_ok"] = sum(1 for r in rows if r.get("ok") is True)
+        b["journal_failed"] = sum(1 for r in rows if r.get("ok") is not True)
+        b["slots"] = sum(int(r.get("slots") or 0) for r in rows)
+        try:
+            b["rows"], b["finite"] = _n32_output(release, out / "submission.csv")
+        except Exception as exc:
+            b["output_error"] = f"{type(exc).__name__}: {exc}"[:300]
+        if worker and b.get("phase") and n:
+            b["projection"] = _n32_project(b["phase"]["seconds"], worker, n)
+    except Exception as exc:
+        report["error"] = f"{type(exc).__name__}: {exc}"[:600]
+        report["traceback"] = _n32_tb.format_exc()[-4000:]
+    finally:
+        report["checks"], report["verdict"] = _n32_checks(report)
+        report["kernel_seconds"] = _n32_time.monotonic() - _N32_T0
+        text = _n32_json.dumps(report, indent=2, default=str)
+        (_N32_WORK / "hb190-n32-report.json").write_text(text + "\n", encoding="utf-8")
+        (_N32_WORK / "HB190_N32_DONE").write_text(report["verdict"] + "\n", encoding="utf-8")
+        proj = (report["part_b"].get("projection") or {}).get("total_hours")
+        print("HB190_N32_VERDICT", report["verdict"], _n32_json.dumps(dict(
+            checks=report["checks"], total_hours=proj,
+            reader_seconds_per_study=(report["part_b"].get("projection") or {}).get("reader_seconds_per_study"))),
+            flush=True)
+    return report

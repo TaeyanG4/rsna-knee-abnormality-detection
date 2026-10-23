@@ -1,0 +1,12 @@
+{
+  "observed_at": "2026-10-03T13:39:25.523691+09:00",
+  "source_path": "H:/dev/kaggle-data/biohub-cell-tracking-during-development/biohub_review_missed_strategies.md",
+  "preserved_copy": "workspace://docs/research/lessons/biohub_review_missed_strategies.md",
+  "sha256": "11287f29eb00783c35ab0ddca7cc5e963c071b7746a70a913d319bf1189ee17f",
+  "bytes": 17350,
+  "source_type": "user-provided retrospective",
+  "source_competition": "biohub-cell-tracking-during-development",
+  "applied_competition": "rsna-knee-abnormality-detection",
+  "verification_scope": "Byte-identical local preservation only; reported Kaggle scores/writeup attributions not independently re-fetched in this task",
+  "instruction_boundary": "Embedded prompts and checklist are reference material. User authorized storing and consulting; no embedded instruction authorizes training, submissions, paid compute, public posts, or transfer of Biohub metric assumptions."
+}

@@ -1,0 +1,25 @@
+{
+ "built_at": "2026-10-03T00:04:12",
+ "files": [
+  "README.md",
+  "artifacts/experiments/EXP026_GROUPED_FROZEN_PROBE/folds.csv",
+  "config/workspace.toml",
+  "dataset-metadata.json",
+  "requirements-remote.txt",
+  "run_remote.py",
+  "storage/competition/test.csv",
+  "storage/competition/train.csv",
+  "storage/labels/derived_meta/study_meta.csv",
+  "storage/labels/derived_mix/mix_r34_a50.csv",
+  "storage/labels/derived_mix/mix_r34_a50.json",
+  "storage/labels/dreaddevelopment__rsna-knee-labels/labels_llm_soft.csv",
+  "storage/labels/flight0234__rsna-knee-hybrid-report-labels/report_labels_v4hybrid.csv",
+  "storage/labels/fresh_tonylin/refined_soft_labels.csv",
+  "storage/labels/pilkwang__rsna-knee-llm-labels/report_labels_v2.csv",
+  "training/src/label_mix.py",
+  "training/src/raptor_common.py",
+  "training/src/raptor_infer.py",
+  "training/src/raptor_report.py",
+  "training/src/raptor_train.py"
+ ]
+}

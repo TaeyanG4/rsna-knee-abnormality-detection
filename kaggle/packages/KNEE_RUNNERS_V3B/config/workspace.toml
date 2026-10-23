@@ -1,0 +1,6 @@
+schema_version = 1
+layout_version = 2
+competition = "rsna-knee-abnormality-detection"
+[paths]
+cache = "storage/cache/derived"
+experiments = "artifacts/experiments"

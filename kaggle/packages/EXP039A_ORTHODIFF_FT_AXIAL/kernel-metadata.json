@@ -1,0 +1,26 @@
+{
+  "id": "taeyangg4/rsna-knee-exp039a-orthodiff-ft-axial",
+  "title": "RSNA Knee EXP039A OrthoDiff FT Axial",
+  "code_file": "exp039_axial_partial_ft.ipynb",
+  "language": "python",
+  "kernel_type": "notebook",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": [
+    "gpu"
+  ],
+  "dataset_sources": [
+    "prvsiyan/orthodiffusion-official-knee-mri-foundation",
+    "flight0234/rsna-knee-hybrid-report-labels"
+  ],
+  "kernel_sources": [
+    "taeyangg4/rsna-knee-exp032-orthodiffusion-cache-3x16x256"
+  ],
+  "competition_sources": [
+    "rsna-knee-abnormality-detection"
+  ],
+  "model_sources": [],
+  "machine_shape": "NvidiaTeslaT4"
+}

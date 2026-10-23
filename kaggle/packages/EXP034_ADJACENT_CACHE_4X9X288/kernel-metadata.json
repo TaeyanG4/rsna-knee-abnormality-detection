@@ -1,0 +1,23 @@
+{
+    "model_sources":  [
+
+                      ],
+    "id":  "taeyangg4/rsna-knee-exp034-adjacent-cache-4x9x288",
+    "dataset_sources":  [
+
+                        ],
+    "enable_internet":  false,
+    "title":  "RSNA Knee EXP034 Adjacent Cache 4x9x288",
+    "kernel_type":  "script",
+    "is_private":  true,
+    "competition_sources":  [
+                                "rsna-knee-abnormality-detection"
+                            ],
+    "language":  "python",
+    "enable_gpu":  false,
+    "enable_tpu":  false,
+    "code_file":  "exp034_adjacent_cache.py",
+    "kernel_sources":  [
+
+                       ]
+}

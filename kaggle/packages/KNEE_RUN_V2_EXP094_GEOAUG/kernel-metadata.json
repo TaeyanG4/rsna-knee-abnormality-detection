@@ -1,0 +1,21 @@
+{
+  "id": "taeyangg4/knee-run-v2-exp094-geoaug",
+  "title": "knee-run-v2-exp094-geoaug",
+  "code_file": "run.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "dataset_sources": [
+    "taeyangg4/knee-runners-v2",
+    "taeyangg4/knee-raptor-corpus-336"
+  ],
+  "competition_sources": [],
+  "kernel_sources": [],
+  "machine_shape": "NvidiaTeslaT4",
+  "enable_tpu": false,
+  "keywords": [
+    "gpu"
+  ]
+}

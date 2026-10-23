@@ -1,0 +1,57 @@
+{
+  "alpha": 0.2,
+  "drop_o": false,
+  "encoder_chunk": 32,
+  "kernel_id": "taeyangg4/knee-lb-r6s2k1x3avfl-v1",
+  "models": [
+    {
+      "checkpoint": "weights/E_prior_s0_f0.pt",
+      "checkpoint_sha256": "2c3c033e25605b5fb8bcc08e0030bed081c726e10fc56d8da62524ac08d9638c",
+      "dataset_slug": "taeyangg4/knee-l1-rcof0-v1-assets",
+      "id": "k1_v2",
+      "manifest_sha256": "a529559ad7efac3e88111b0007338ca931bde3e3a35b8e88b1d09ca3f44e68f3",
+      "trainer_sha256": "14767c7a8f0daa986477511fe9a83aefe032a208ae978fabf15a5f896992ac80",
+      "trainer_source": "source/compact_train.py"
+    },
+    {
+      "checkpoint": "weights/E_prior_s0_f0.pt",
+      "checkpoint_sha256": "6c03830df077c34d712f7764d43f6f9a828f50666e7c42ed1e19665fc5063bd5",
+      "dataset_slug": "taeyangg4/knee-k1-v3gs0-v1-assets",
+      "id": "k1_v3g_seed0",
+      "manifest_sha256": "b09620471faa361f55e187a5ef188a9768be6c7e238afb69c87436309c140d77",
+      "trainer_sha256": "14767c7a8f0daa986477511fe9a83aefe032a208ae978fabf15a5f896992ac80",
+      "trainer_source": "source/compact_train.py"
+    },
+    {
+      "checkpoint": "weights/E_prior_s0_f0.pt",
+      "checkpoint_sha256": "29fc2b2bbaa4e4e8ad341bba17e47c5110388db697458a8cbb9ff8d83fa9399b",
+      "dataset_slug": "taeyangg4/knee-k1-v3gs1-v1-assets",
+      "id": "k1_v3g_seed1",
+      "manifest_sha256": "154d5c9ae21e69e1b22ec59bed8fb31dbabe5319c36ed38ecb142498156fd6e6",
+      "trainer_sha256": "14767c7a8f0daa986477511fe9a83aefe032a208ae978fabf15a5f896992ac80",
+      "trainer_source": "source/compact_train.py"
+    }
+  ],
+  "release_version": "1.1.73-r6s2k1x3avfl",
+  "schema": "k1n-config/v1",
+  "r6_eval_stride": 2,
+  "k1_runtime_version": 9,
+  "k1_failure_policy": "study_fallback_fail_loud",
+  "k1_guard_hours": 8.6,
+  "alpha_vector": [
+    0.1,
+    0.2,
+    0.2,
+    0.5,
+    0.35,
+    0.5,
+    0.35,
+    0.35,
+    0.5,
+    0.2,
+    0.15,
+    0.35
+  ],
+  "k1_max_failed_fraction": 0.05,
+  "k1_eval_stride": 3
+}

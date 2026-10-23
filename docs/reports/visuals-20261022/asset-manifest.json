@@ -1,0 +1,65 @@
+{
+  "version": "1.0.0",
+  "cutoff_kst": "2026-10-22 18:15",
+  "generator": "tools/render_research_explainer_20261022.py",
+  "method": "Original deterministic Matplotlib diagrams and aggregate-data charts; no image-generation API or patient imagery.",
+  "assets": [
+    {
+      "file": "study-to-prediction.png",
+      "sha256": "a9132882defc5b45842bc69f03ee8f037c9af5db1bb81c55c451a24af9ddfa75",
+      "bytes": 188640,
+      "width": 2000,
+      "height": 1125,
+      "description": "Conceptual slice-stack and model-serving overview.",
+      "sources": [
+        "project-summary-20261022.md \u00a73",
+        "project-summary-20261022.md \u00a75"
+      ],
+      "patient_data": false
+    },
+    {
+      "file": "candidate-family-map.png",
+      "sha256": "56d38594d0aa277878bdf12033cd7d2fedd6adcf88a64beec89ba4c4e54fe03c",
+      "bytes": 182630,
+      "width": 2000,
+      "height": 1250,
+      "description": "Registered model components and candidate-family contrasts.",
+      "sources": [
+        "project-summary-20261022.md \u00a73",
+        "D-B-278"
+      ],
+      "patient_data": false
+    },
+    {
+      "file": "public-score-snapshot.png",
+      "sha256": "fba32b25784b93fe623de60ab9a16d1573057c1820b596dff7d4269d3543fec8",
+      "bytes": 140553,
+      "width": 2000,
+      "height": 1125,
+      "description": "Five recorded public displays and separate unrecorded candidate states.",
+      "sources": [
+        "D-B-260",
+        "D-B-274",
+        "D-B-276",
+        "D-B-280",
+        "D-B-281",
+        "submit_ledger.jsonl"
+      ],
+      "patient_data": false
+    },
+    {
+      "file": "fullbag-local-evidence.png",
+      "sha256": "0194e9578e25e28b821d21dc9e2f2e50747658fb4ebe976e9a89bf007af7de61",
+      "bytes": 138402,
+      "width": 2000,
+      "height": 1125,
+      "description": "Local full-bag replacement and addition contrasts with their distinct controls.",
+      "sources": [
+        "D-A-052",
+        "D-B-264",
+        "D-B-278"
+      ],
+      "patient_data": false
+    }
+  ]
+}

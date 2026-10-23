@@ -1,0 +1,34 @@
+# Python and build caches
+__pycache__/
+*.pyc
+*.egg-info/
+.venv/
+node_modules/
+.pytest_cache/
+
+# Local state, data and model files are never published
+.local/
+storage/
+artifacts/
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+*.dcm
+*.npy
+*.npz
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.zip
+
+# Secrets
+.env
+kaggle.json
+
+# kept from the previous team-notes .gitignore
+*.bin
+*.tar
+*.csv.gz
+*api-key*
+*api_key*

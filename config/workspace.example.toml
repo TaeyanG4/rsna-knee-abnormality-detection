@@ -1,0 +1,14 @@
+# Copy only needed overrides to config/local.toml. Common layout: workspace.toml.
+# Relative paths are relative to the workspace root, never the shell cwd.
+[paths]
+# Optional external storage on this PC:
+# weights = "D:/knee-models"
+# data = "D:/knee-data"
+
+[dashboard]
+state_dir = ".local/kneeops"
+language = "ko"
+timezone = "Asia/Seoul"
+
+# To relocate the whole project, set KNEE_WORKSPACE_ROOT to its new location.
+# Keep credentials in the user's Kaggle config, not in this file.

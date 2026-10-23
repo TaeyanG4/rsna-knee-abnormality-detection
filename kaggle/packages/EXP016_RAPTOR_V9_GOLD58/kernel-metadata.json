@@ -1,0 +1,25 @@
+{
+    "machine_shape":  "NvidiaTeslaT4",
+    "id":  "taeyangg4/rsna-knee-exp016-raptor-v9-gold58",
+    "enable_internet":  false,
+    "title":  "RSNA Knee EXP016 Raptor V9 Gold58",
+    "kernel_type":  "script",
+    "model_sources":  [
+
+                      ],
+    "is_private":  true,
+    "dataset_sources":  [
+                            "dreaddevelopment/raptor-knee-finespacing",
+                            "mattiaangeli/rsna-knee-coat-resgated-ep10-top3"
+                        ],
+    "language":  "python",
+    "competition_sources":  [
+                                "rsna-knee-abnormality-detection"
+                            ],
+    "enable_gpu":  true,
+    "enable_tpu":  false,
+    "code_file":  "exp016_raptor_v9_gold58.py",
+    "kernel_sources":  [
+
+                       ]
+}

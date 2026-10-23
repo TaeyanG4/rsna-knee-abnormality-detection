@@ -1,0 +1,53 @@
+key,submission_id,public,read_at,note
+bench-V888-relabel5,56907117,0.913,historical,imported from ruler bench
+bench-V888-coat5rn5,56893812,0.914,historical,imported from ruler bench
+bench-V888-coat5,56893801,0.914,historical,imported from ruler bench
+bench-V888-student,56886996,0.893,historical,imported from ruler bench
+bench-V888-E1,56883481,0.917,historical,imported from ruler bench
+bench-V888-R384,56883480,0.913,historical,imported from ruler bench
+bench-V888-B224,56883086,0.91,historical,imported from ruler bench
+bench-V888-R1,56822115,0.904,historical,imported from ruler bench
+bench-V888-CNX5,56212481,0.909,historical,imported from ruler bench
+bench-C529-relabel5,56907117,0.913,historical,imported from ruler bench
+bench-C529-coat5rn5,56893812,0.914,historical,imported from ruler bench
+bench-C529-coat5,56893801,0.914,historical,imported from ruler bench
+bench-C529-student,56886996,0.893,historical,imported from ruler bench
+bench-C529-E1,56883481,0.917,historical,imported from ruler bench
+bench-C529-R384,56883480,0.913,historical,imported from ruler bench
+bench-C529-B224,56883086,0.91,historical,imported from ruler bench
+bench-C529-R1,56822115,0.904,historical,imported from ruler bench
+bench-C529-B_RN3F,56809595,0.913,historical,imported from ruler bench
+bench-C529-CNX5,56212481,0.909,historical,imported from ruler bench
+bench-G4343-relabel5,56907117,0.913,historical,imported from ruler bench
+bench-G4343-coat5rn5,56893812,0.914,historical,imported from ruler bench
+bench-G4343-coat5,56893801,0.914,historical,imported from ruler bench
+bench-G4343-R1,56822115,0.904,historical,imported from ruler bench
+bench-G4343-CNX5,56212481,0.909,historical,imported from ruler bench
+H-B-34-exp140-aug1,56979603,0.931,2026-10-09 11:48:11,registered forecast 0.938-0.941; <=0.932 = AUG1 gain did not transfer; prior RadR50x5 s42 non-AUG1 public 0.925 (D-B-049)
+H-B-58-b3-aug1,56979856,0.95,2026-10-09 11:48:11,"forecast 0.950-0.955; OAI-derived, user-approved; public 0.949 single-checkpoint notebooks score 0.949"
+bench-V888-rad5,56924947,0.925,2026-10-09 13:10:19,"H-B-31 B RadR50x5 seed 42 (copies 56925075/56925301 same score), D-B-049"
+bench-V888-coat5rad5,56925392,0.926,2026-10-09 13:10:19,"H-B-31 A CoAtNet5 + RadR50x5 rank mean (copy 56925454 same score), D-B-057"
+bench-C529-rad5,56924947,0.925,2026-10-09 13:10:19,"H-B-31 B RadR50x5 seed 42 (copies 56925075/56925301 same score), D-B-049"
+bench-C529-coat5rad5,56925392,0.926,2026-10-09 13:10:19,"H-B-31 A CoAtNet5 + RadR50x5 rank mean (copy 56925454 same score), D-B-057"
+bench-G4343-rad5,56924947,0.925,2026-10-09 13:10:19,"H-B-31 B RadR50x5 seed 42 (copies 56925075/56925301 same score), D-B-049"
+bench-G4343-coat5rad5,56925392,0.926,2026-10-09 13:10:19,"H-B-31 A CoAtNet5 + RadR50x5 rank mean (copy 56925454 same score), D-B-057"
+H-B-63-exp152-own,57005140,0.946,2026-10-09 19:42:00,"EXP143 v2 standalone, OAI-free; Gold58 0.935 (public 0.949 checkpoint 0.923)"
+H-B-63-exp152-blend,57005163,0.951,2026-10-09 20:02:24,0.5/0.5 rank blend EXP143 v2 own + public OAI 0.949; Gold58 0.935
+H-B-58-exp154-b3-h1,57005184,0.95,2026-10-09 21:24:10,"B3 with H1 partner: 0.8 public OAI 0.949 + 0.1 ConvNeXt reader + 0.1 H1 (5x2, flip TTA, K36); same as B3-AUG1 0.950"
+H-B-63-exp155-own,57027378,0.946,2026-10-10 11:12:26,"EXP155 own CoAtNet (EXP143 v2 recipe + OAI masked PF OA/Lateral OA/Synovitis), standalone; forecast 0.949 (0.947-0.950) missed; equals EXP143 v2 0.946"
+H-B-63-exp155-blend3,57027225,0.951,2026-10-10 11:57:58,1/3 rank each: public OAI 0.949 + EXP143 v2 + EXP155; forecast 0.952 (registered 02:17); ties A0 0.951
+H-B-78-exp169-v102,57029300,0.951,2026-10-10 15:20:14,"EXP169 v1.0.2: 0.85 rank blend3 + 0.15 rank three-family L2 partner bundle; forecast 0.952 (0.950-0.953); ties blend3 and A0; hidden run completed (submitted 12:13, COMPLETE by 15:19)"
+H-B-78-exp169-a172-v202,57043290,0.951,2026-10-10 22:20:29,"A172 v2.0.2 (Final A exact): 0.85 r(blend3) + 0.15 r(Q with L2 DINO-base); forecast 0.951 (0.950-0.952) — hit; hidden run complete"
+H-B-35-exp169-b172-v202,57044556,0.948,2026-10-10 23:21:11,"B172 v2.0.2 (Final B, no public/OAI): 0.70 r(EXP143 v2 own) + 0.30 r(Q); forecast 0.948 (0.947-0.949) — hit; hidden run complete"
+H-B-35-exp169-a4-v413,57066639,0.951,2026-10-11 19:59:46,"A4 v4.1.3: 0.85 r(public 0.949 + OWN S42+S43 + EXP155) + 0.15 r(Q4 mixed-scale C4); forecast 0.951 (0.950-0.953) — hit; ties A172 (OWN seed avg + C4 gave no visible public gain)"
+H-B-35-exp169-b4-v413,57066656,0.946,2026-10-11 19:59:46,"B4 v4.1.3 (no public/OAI): 0.35 r(OWN) + 0.35 r(EXP174) + 0.30 r(Q4); forecast 0.949 (0.947-0.950) — MISS -0.003; below B172 0.948, EXP174 share likely hurts"
+EXP169-A5-172-v5q-1.2.0,57072195,0.952,2026-10-12 03:03:17,"A5 v5q 1.2.0: 0.85 r(P954 + EXP143 v2 + EXP155) + 0.15 r(Q_A172), S6 eff. 0.085; forecast 0.954 (0.952-0.957) — low end; hidden run ≈ 6.5-6.7 h (submitted 20:18 KST, COMPLETE by ≈ 02:5x-03:02)"
+EXP169-A5q-172-v5q-1.2.0,57072216,0.954,2026-10-12 03:03:17,"A5q v5q 1.2.0: 0.85 r(quad R + S6 + EXP143 v2 + EXP155 equal) + 0.15 r(Q_A172), S6 eff. 0.2125; forecast 0.954 — hit; +0.002 over A5 and +0.003 over A172; hidden run ≈ 6.5-6.7 h"
+EXP169-A6q-v6-1.2.1,57078140,ERROR,2026-10-12 03:03:17,"A6q v6 1.2.1 hidden rerun FAILED within ≤ 2 h (unhandled error) — no score; see D-B-136"
+EXP169-P956RPLUS-1.0.0,57103231,0.954,2026-10-13 02:19:00,"P956-R+ v1.0.0: 0.5 r(R+ seed43) + 0.5 r(S6); forecast 0.954 (0.952-0.956) — hit; equals P956 (0.954); hidden run COMPLETE (submitted 2026-10-12 18:45 KST); read once by B at the slot-2 decision"
+EXP169-C85-1.0.4,57111261,0.955,2026-10-13 06:48:00,"C85 v1.0.4: 0.85 r(P956) + 0.15 r(O = 17 EXP143v2 + 17 EXP155 + 12 Q_A5q), survivor/branch fallback; forecast 0.954 (0.953-0.955) — top of range; NEW BEST +0.001 over P956/A5q; hidden COMPLETE within <= 6.5 h (submitted 00:16, COMPLETE seen at 06:47; earlier check 03:47 PENDING); read once by B for the vNext veto"
+HB116-VNEXT-A-1.1.2,57122974,0.955,2026-10-13 17:11:00,"vNext-A v1.1.2: 0.70 r(P = 0.5 R2 + 0.5 S6) + 0.30 r(O_A = 17 OWN2 + 17 EXP155 + 12 Q7S)/46; forecast 0.954-0.955 — top of range; = C85 v1.0.4 (0.955); hidden COMPLETE between 17:00 and 17:10 (submitted 09:02) ≈ 8.0-8.1 h; read once by B for the H-B-127 decision"
+HB116-VNEXT-B-1.1.2,57123084,0.955,2026-10-13 17:11:00,"vNext-B v1.1.2: same with O_B = 11/11/18 over 40 (Q7S 0.45 inside O); forecast 0.954 (0.952-0.956); = vNext-A → registered rule picks A (|delta| < 0.001); hidden ≈ 8.0-8.1 h"
+EXP169-C85R7-1.0.0,57129135,0.957,2026-10-13 17:23:00,"C85-R7 v1.0.0: 0.85 r(P_R7 = 0.5 R + 0.5 heliosli R7 bundle 8c7b666e) + 0.15 r(O = 17 EXP143v2 + 17 EXP155 + 12 Q_A5q)/46; forecast 0.956-0.957 — top of range; NEW BEST +0.002 over C85 v1.0.4/vNext 0.955; P branch = heliosli R7 notebook (public 0.956) exactly; hidden COMPLETE ≈ 4.7 h (submitted 12:37, COMPLETE by 17:21; N32 projection 6.3 h); read once by B for the H-B-127 gate"
+EXP169-C85R7CODEC-1.1.0,57133175,0.957,2026-10-13 20:01:00,"C85-R7+codecs v1.1.0 (offline python-gdcm 3.2.6 in every branch; identical on uncompressed input): = C85-R7 v1.0.0 0.957; consistent with D-B-177 (train/visible have zero compressed files) — no public decoder effect; submitted 15:19, COMPLETE ≈ 20:00 (≈ 4.7 h); read once by B for H-B-126 closure"
+HB127-VNEXTR7-A-1.2.0,57136544,0.956,2026-10-14 00:46:00,"vNext-R7-A v1.2.0: 0.70 r(P = 0.5 R2 + 0.5 R7) + 0.30 r(O_A = 17 OWN2 + 17 EXP155 + 12 Q7S)/46 + codecs; forecast 0.956-0.957 → 0.956, −0.001 vs C85-R7 0.957; submitted 17:22, COMPLETE by ≤ 00:46 (≤ 7.4 h hidden); read once by B for H-B-127 closure"

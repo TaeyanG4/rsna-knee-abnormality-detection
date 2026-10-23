@@ -1,0 +1,16 @@
+{
+  "id": "taeyangg4/knee-raptor-run-exp072-r2mix-r34-f2",
+  "title": "knee-raptor-run-exp072-r2mix-r34-f2",
+  "code_file": "run.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_internet": true,
+  "dataset_sources": [
+    "taeyangg4/knee-raptor-tools",
+    "taeyangg4/knee-raptor-corpus-336"
+  ],
+  "competition_sources": [],
+  "kernel_sources": []
+}

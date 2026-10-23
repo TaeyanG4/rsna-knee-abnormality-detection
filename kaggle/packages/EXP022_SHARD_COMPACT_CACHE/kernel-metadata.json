@@ -1,0 +1,15 @@
+{
+  "id": "taeyangg4/rsna-knee-exp022-shard-compact-cache",
+  "title": "RSNA Knee EXP022 Shard Compact Cache",
+  "code_file": "exp022_shard_cache.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "dataset_sources": [],
+  "competition_sources": [],
+  "kernel_sources": ["taeyangg4/rsna-knee-exp019-compact-cache-6x9x224"],
+  "model_sources": []
+}

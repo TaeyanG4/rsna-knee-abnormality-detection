@@ -1,0 +1,87 @@
+{
+  "version": "1.0.1",
+  "inputs": {
+    "split": "artifacts/experiments/EXP099_KFOLD_PROTOCOL_V1/fold0/ordered-ids.json",
+    "groups": "artifacts/experiments/EXP099_KFOLD_PROTOCOL_V1/fold0/group-metadata.csv",
+    "dread": "storage/labels/dreaddevelopment__rsna-knee-labels/labels_llm_soft.csv",
+    "l2": "storage/labels/derived_constellation/l2_dread75_aquila25_v1.csv",
+    "aquila": "storage/labels/derived_constellation/aquila_v1.csv",
+    "l2_provenance": "artifacts/experiments/EXP143_OWN0949/protocol-v2/manifest.json",
+    "init": "storage/weights/exp171/convnext_small_fb_in22k_ft_in1k.safetensors",
+    "anatomy": "storage/weights/external/heliosli_rsna-orthofoundation-fold0-epoch7-20261004/anatomy.pt",
+    "bundle": "storage/weights/external/heliosli_rsna-knee-compact-v1_v10-equivalent",
+    "mainline": ".local/exp189-cpu-v120/input/cloud_code",
+    "source": "tools/exp189_s6_src",
+    "raw": "storage/downloads/rsna-knee-abnormality-detection/rsna-knee-abnormality-detection.zip"
+  },
+  "recipe": {
+    "backbone": "convnext_small",
+    "spatial": true,
+    "extent": true,
+    "size": 384,
+    "crop": 352,
+    "slices": 3,
+    "phys_mm": 3.5,
+    "views": "v4",
+    "side_threshold": 2.0,
+    "side_position_mm": 20.0,
+    "side_max_x": 0.0,
+    "epochs": 16,
+    "batch": 2,
+    "train_windows": 176,
+    "eval_stride": 1,
+    "lr": 0.0001,
+    "head_lr": 0.001,
+    "weight_decay": 0.05,
+    "ema": 0.0,
+    "train_sampling": "uniform",
+    "cover_stride": 3,
+    "slice_jitter": 0.0,
+    "hidden": 384,
+    "dropout": 0.1,
+    "seed": 0,
+    "init_seed": 1000,
+    "data_seed": 9000,
+    "aug_seed": 5000,
+    "sampler_seed": 7000,
+    "grad_clip": 5.0,
+    "warmup_fraction": 0.05,
+    "encoder_chunk": 8,
+    "checkpoint_every_updates": 50
+  },
+  "distillation": {
+    "temperature": 2.0,
+    "weight": 0.25,
+    "folds": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "combine": "mean_probabilities",
+    "loss": "0.25 * T^2 * mean(categorical_KL, auxiliary_binary_BCE)"
+  },
+  "arms": {
+    "S-B": {
+      "labels": "dread",
+      "distill": false
+    },
+    "S-L": {
+      "labels": "l2",
+      "distill": false
+    },
+    "S-LD": {
+      "labels": "l2",
+      "distill": true
+    }
+  },
+  "disclosures": [
+    "S6 recipe experiment, not original report-supervision reproduction.",
+    "EMA/sampling absent from public manifest: source defaults 0/uniform frozen prospectively.",
+    "Original categorical supervision unavailable: B/L use soft 12-target BCE only.",
+    "Shared bias and constant per-category neutral prior use Dread TRAIN patients only; state gate frozen zero.",
+    "LD uses actual categorical/binary teacher probabilities; public teacher saw fold0: production diagnostic.",
+    "Public side classifier ancestry not proven fold-clean; anatomy/side provenance accompanies every arm.",
+    "Same full-study MIL objective with checkpointed encoder chunks; final epoch only, no holdout selection."
+  ]
+}

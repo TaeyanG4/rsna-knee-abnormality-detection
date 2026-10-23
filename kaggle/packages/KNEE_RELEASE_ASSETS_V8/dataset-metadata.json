@@ -1,0 +1,11 @@
+{
+  "title": "knee-release-assets-v8",
+  "id": "taeyangg4/knee-release-assets-v8",
+  "licenses": [
+    {
+      "name": "other"
+    }
+  ],
+  "isPrivate": true,
+  "description": "Own fixed checkpoints and centre-plane input code for the EXP111 v6 two-family release; private research only."
+}

@@ -1,0 +1,173 @@
+"""CPU tests v1.2.0 for H-B-155 progress, recipe and full-state resume.
+
+Changelog: real-pixel tests use the registered full side-v2 crop cache.
+"""
+import json
+from pathlib import Path
+
+import pytest
+
+from tools import hb155_fit_v1 as f
+
+
+@pytest.mark.parametrize('passed,code', [(True,0),(False,1)])
+def test_cli_export_failure_stops_pair(monkeypatch,passed,code):
+    value=dict(passed=passed,arm='global',seed=42,device='cpu',engineering_only=True,steps=1,seconds=.1)
+    monkeypatch.setattr(f,'fit',lambda *args,**kwargs:value)
+    assert f.main(['smoke','--config','synthetic.json','--out','synthetic'])==code
+
+
+def test_progress_phase_switch_no_fake_commit(tmp_path):
+    p=f.Progress(tmp_path/"heartbeat.json","test")
+    p.completed("training_step",{"update":1})
+    first=json.loads(p.path.read_text())
+    p.phase_start("validation")
+    entered=json.loads(p.path.read_text())
+    assert entered["sequence"] == first["sequence"]
+    assert entered["completed_at"] == first["completed_at"]
+    assert entered["detail"]["cumulative_units"] == 0
+    p.completed("validation",{"batch":1})
+    p.completed("validation",{"batch":2})
+    p.completed("training_step",{"update":2})
+    assert json.loads(p.path.read_text())["detail"]["cumulative_units"] == 2
+
+
+def test_heartbeat_failure_is_nonfatal(tmp_path,monkeypatch):
+    seen=[]
+    monkeypatch.setattr(f,"atomic_json",lambda *a,**kw: seen.append(kw))
+    f.Progress(tmp_path/"beat","token").completed("validation")
+    assert seen == [{"critical":False}]
+
+
+def test_full_state_checkpoint_restores_optimizer_scheduler_rng_and_counters(tmp_path):
+    h=f.h
+    h.seed_all(42)
+    model=f.TinyModel()
+    opt,sched,scaler=h.optimizer_stack(model,4,"cpu","none")
+    gen=h.torch.Generator().manual_seed(42)
+    identity={"config":"test","device":"cpu","engineering_only":True}
+    x=h.torch.ones(2,12,3,8,8)
+    y=h.torch.full((2,12),.5)
+    loader=[(x,y,["one","two"])]
+    old=h.PROGRESS
+    h.PROGRESS=f.Progress()
+    counters={"updates":0,"skips":0}
+    try:
+        result=h.train_epoch_accum(f.native.NativeArm(),model,loader,opt,sched,scaler,
+            h.torch.ones(12),"cpu","none",0,counters)
+        path=tmp_path/"epoch.pt"
+        f.save_epoch(path,epoch=0,model=model,opt=opt,sched=sched,scaler=scaler,generator=gen,
+            history=[result],counters=counters,identity=identity,device="cpu",progress=h.PROGRESS)
+        expected={key:value.clone() for key,value in model.state_dict().items()}
+        target=f.TinyModel()
+        opt2,sched2,scaler2=h.optimizer_stack(target,4,"cpu","none")
+        epoch,history,count=h.restore_epoch(path,model=target,opt=opt2,sched=sched2,scaler=scaler2,
+            generator=gen,identity=identity,device="cpu")
+        assert epoch == 1 and count == counters and history == [result]
+        assert sched2.state_dict() == sched.state_dict()
+        assert len(opt2.state) == len(opt.state)
+        for key,value in target.state_dict().items():
+            h.torch.testing.assert_close(value,expected[key])
+        with pytest.raises(Exception,match="resume receipt differs"):
+            h.restore_epoch(path,model=target,opt=opt2,sched=sched2,scaler=scaler2,
+                generator=gen,identity={**identity,"config":"other"},device="cpu")
+    finally:
+        h.PROGRESS=old
+
+
+def test_prediction_export_failure_is_nonfatal(tmp_path,monkeypatch):
+    monkeypatch.setattr(f,"safe_replace",lambda *a,**kw:False)
+    assert not f.export_prediction(tmp_path/"val.csv",["test"],f.h.np.full((1,12),.5),
+        tmp_path/"absent.pt",{},k=24,tta=False,engineering=True)
+
+
+def test_scientific_targets_semantics_and_coverage(monkeypatch):
+    monkeypatch.setattr(f.h, 'load_labels', lambda path: ({'synthetic': f.h.np.full(12,.5)}, 'sealed'))
+    c={'label_path':'synthetic.csv','train':['synthetic'],'label_semantic_sha256':'sealed'}
+    assert len(f.scientific_targets(c)) == 1
+    with pytest.raises(Exception):
+        f.scientific_targets({**c,'train':['missing']})
+    with pytest.raises(Exception):
+        f.scientific_targets({**c,'label_semantic_sha256':'wrong'})
+
+
+def test_no_scientific_cpu_or_gpu_admission_bypass(tmp_path,monkeypatch):
+    monkeypatch.setattr(f,"read_config",lambda path:{})
+    with pytest.raises(Exception,match="CUDA"):
+        f.fit(tmp_path/"c.json",tmp_path/"out",device="cpu",smoke=False)
+    from tools import hb155_build_v1 as build
+    def blocked(*args):
+        raise ValueError("independent review artifact required")
+    monkeypatch.setattr(build,"require_fit",blocked)
+    with pytest.raises(ValueError,match="independent review"):
+        f.fit(tmp_path/"c.json",tmp_path/"out",device="cuda",smoke=False)
+    assert not (tmp_path/"out").exists()
+
+
+
+def test_fork_scope_preserves_training_io_and_exports():
+    import ast
+    parent = ast.parse((f.ROOT/'tools/hb147_confirm_fit_v1.py').read_text(encoding='utf-8'))
+    current = ast.parse((f.ROOT/'tools/hb155_fit_v1.py').read_text(encoding='utf-8'))
+    names = ('TinyModel', 'save_epoch', 'export_prediction', 'scientific_targets')
+    for name in names:
+        a = next(n for n in parent.body if getattr(n, 'name', None) == name)
+        b = next(n for n in current.body if getattr(n, 'name', None) == name)
+        # Explicit metadata-only delta authorized by B; all executable geometry/fit logic identical.
+        if name == 'export_prediction':
+            for node in ast.walk(a):
+                if isinstance(node, ast.keyword) and node.arg == 'exposure':
+                    assert node.value.value == 'L2_REPORT_DERIVED'
+                    node.value.value = 'EXPOSED'
+        assert ast.dump(a, include_attributes=False) == ast.dump(b, include_attributes=False)
+    source = (f.ROOT/'tools/hb155_fit_v1.py').read_text(encoding='utf-8')
+    for fragment in ('batch = 2 if device == "cpu" else 8', 'epochs = 1 if smoke else 20',
+                     'batch=batch, microbatch=2, accumulation=4', 'fold=c["fold"]',
+                     'crops.Windows(', 'runtime_snapshot_sha256=runtime_snapshot_hash'):
+        assert fragment in source
+    assert source.index('require_runtime(config_path, snapshot, review)') < source.index('h.seed_all(c["seed"])')
+    assert source.index('require_runtime(config_path, snapshot, review)') < source.index('scientific_targets(c)', source.index('def fit('))
+    assert 'HB147_HEARTBEAT' not in source and 'HB147_TOKEN' not in source
+
+
+def test_runtime_failure_prevents_model_and_label_access(tmp_path, monkeypatch):
+    from tools import hb155_build_v1 as b
+    monkeypatch.setattr(f, 'read_config', lambda path: {'seed':42})
+    monkeypatch.setattr(b, 'require_fit', lambda *args: None)
+    monkeypatch.setattr(f.h, 'configure_runtime', lambda *args, **kwargs: {})
+    monkeypatch.setattr(f, 'runtime_info', lambda: {'gpu':'wrong'})
+    monkeypatch.setenv('HB155_TOKEN','test')
+    monkeypatch.setenv('HB155_HEARTBEAT',str(tmp_path/'progress.json'))
+    def blocked(*args):
+        raise ValueError('runtime parity admission refused')
+    monkeypatch.setattr(b, 'require_runtime', blocked)
+    monkeypatch.setattr(f, 'scientific_targets', lambda c: pytest.fail('label access before runtime gate'))
+    monkeypatch.setattr(f.h, 'build_model', lambda *args: pytest.fail('model before runtime gate'))
+    with pytest.raises(ValueError, match='runtime parity'):
+        f.fit(tmp_path/'config.json',tmp_path/'out',device='cuda',smoke=False,review=tmp_path/'review.json')
+    assert json.loads((tmp_path/'out/runtime.json').read_text()) == {'gpu':'wrong'}
+    assert not f.h.torch.cuda.is_initialized()
+
+
+@pytest.mark.parametrize('corpus_dir', [f.native.CORPUS, '.local/scratch/slot-b/hb155/crop-cache-v220'])
+def test_real_control_and_crop_cpu_pixels(tmp_path, monkeypatch, corpus_dir):
+    """CPU tiny model: real images, all registered inference windows, no label reads."""
+    h=f.h
+    h.torch.set_num_threads(2)
+    corpus=h.common.Corpus(f.ROOT/corpus_dir)
+    ids=corpus.ids.tolist()[:2]
+    labels={uid:h.np.full(12,.5,h.np.float32) for uid in ids}
+    arm=f.native.NativeArm(); model=f.TinyModel()
+    ds=f.crops.Windows(h.MILWindows(f.ROOT/corpus_dir,ids,labels,12,True,42),224)
+    loader=h.DataLoader(ds,batch_size=2,collate_fn=arm.collate_fn)
+    opt,sched,scaler=h.optimizer_stack(model,1,'cpu','none')
+    monkeypatch.setattr(h,'PROGRESS',f.Progress(tmp_path/'hb.json','test'))
+    counters={'updates':0,'skips':0}
+    result=h.train_epoch_accum(arm,model,loader,opt,sched,scaler,h.torch.ones(12),'cpu','none',0,counters)
+    assert result['batches'] == counters['updates'] == 1
+    for k,tta in ((24,False),(36,False),(36,True)):
+        ds=f.crops.Windows(h.MILWindows(f.ROOT/corpus_dir,ids[:1],labels,k,False,42),224)
+        loader=h.DataLoader(ds,batch_size=1,collate_fn=arm.collate_fn)
+        values,ordered,batches=h.evaluate_with(arm,model,loader,'cpu','none',corpus,tta=tta)
+        assert ordered == ids[:1] and values.shape == (1,12) and h.np.isfinite(values).all() and batches == 1
+    assert not h.torch.cuda.is_initialized()

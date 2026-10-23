@@ -1,0 +1,27 @@
+services:
+  kneeops:
+    build:
+      context: .
+      dockerfile: monitoring/Dockerfile
+    ports:
+      - "127.0.0.1:8766:8765"
+    environment:
+      KNEE_WORKSPACE_ROOT: /workspace
+      KNEEOPS_STATE_DIR: /state
+      KNEEOPS_DOWNLOAD_DIR: /downloads
+      KAGGLE_CONFIG_DIR: /home/kneeops/.kaggle
+    volumes:
+      - kneeops-state:/state
+      - kneeops-downloads:/downloads
+      - type: bind
+        source: .
+        target: /workspace
+        read_only: true
+      - type: bind
+        source: ${KNEEOPS_KAGGLE_DIR:-~/.kaggle}
+        target: /home/kneeops/.kaggle
+        read_only: true
+    restart: "no"
+volumes:
+  kneeops-state:
+  kneeops-downloads:

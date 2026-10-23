@@ -1,0 +1,17 @@
+{
+  "id": "taeyangg4/rsna-knee-exp032-orthodiff-cache",
+  "title": "RSNA Knee EXP032 OrthoDiff Cache",
+  "code_file": "exp032_orthodiff_cache.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": [],
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": [
+    "rsna-knee-abnormality-detection"
+  ]
+}

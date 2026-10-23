@@ -1,0 +1,235 @@
+{
+  "schema": "knee-release-assets-v5",
+  "dataset": "taeyangg4/knee-release-assets-v6",
+  "checkpoints": {
+    "dist_f0": {
+      "path": "checkpoints/dist_f0.pt",
+      "sha256": "ec49e6ce655dde385b53c1b352b6ef14f4b1c1b42edc95f51d0a5cd88876a46a",
+      "bytes": 292825764,
+      "meta": {
+        "arch": "coatnet_rmlp_2_rw_224.sw_in12k_ft_in1k",
+        "res": 224,
+        "lab": [
+          "ACL",
+          "MCL",
+          "Medial Meniscus",
+          "Lateral Meniscus",
+          "Medial OA",
+          "Lateral OA",
+          "PF OA",
+          "Effusion",
+          "Synovitis",
+          "Baker's",
+          "Contusion",
+          "Fracture"
+        ],
+        "contract": "raptor64_336_c140_s02",
+        "k_eval": 24,
+        "norm": "imagenet",
+        "window_policy": "within-slot-valid",
+        "epoch": 7,
+        "tag": "EXP099_B8_DISTILL_V1_F0",
+        "amp_train": "fp16",
+        "amp_eval": "fp16"
+      },
+      "training_code_sha256": {
+        "raptor_train.py": "484abfd364163a330241a0aedb332f64287700b50d38438d2efb773777d8afd8",
+        "raptor_common.py": "bc6db5b3e8cd13b52fbff8c039d3674cdf573f86c1959e22fe9b2fd94255d7dc",
+        "raptor_data.py": "0b922ea0359962a2bb6531d5630639f2c9002abdb80fe1353991087d6bcdea01",
+        "raptor_runtime.py": "afe394b631c681e3826ad976e71c793214dee81c49c0d9cd76046590cc4513ad"
+      },
+      "source": "artifacts/experiments/EXP099_B8_DISTILL_V1_F0/model_best.pt",
+      "source_sidecars_sha256": {
+        "summary.json": "42ef0473994a423d2e763fecbdab7d0265b629795a8afc00e41ed9720551846b",
+        "provenance.json": "eb7044506aa5e13c5e3331ef438655ef3ea23c2278cb89473c8d465b1c850abf",
+        "history.json": "664b81685f1e4ebc064c2595d9d8808502316204f182f530e4510f0411e6532c"
+      },
+      "link_mode": "copy"
+    },
+    "dist_f1": {
+      "path": "checkpoints/dist_f1.pt",
+      "sha256": "41e52e1eced065e6f76a0b3d6dc20b0d58a94be64656f1bb4cd23c2928928f1c",
+      "bytes": 292825764,
+      "meta": {
+        "arch": "coatnet_rmlp_2_rw_224.sw_in12k_ft_in1k",
+        "res": 224,
+        "lab": [
+          "ACL",
+          "MCL",
+          "Medial Meniscus",
+          "Lateral Meniscus",
+          "Medial OA",
+          "Lateral OA",
+          "PF OA",
+          "Effusion",
+          "Synovitis",
+          "Baker's",
+          "Contusion",
+          "Fracture"
+        ],
+        "contract": "raptor64_336_c140_s02",
+        "k_eval": 24,
+        "norm": "imagenet",
+        "window_policy": "within-slot-valid",
+        "epoch": 7,
+        "tag": "EXP099_B8_DISTILL_V1_F1",
+        "amp_train": "fp16",
+        "amp_eval": "fp16"
+      },
+      "training_code_sha256": {
+        "raptor_train.py": "484abfd364163a330241a0aedb332f64287700b50d38438d2efb773777d8afd8",
+        "raptor_common.py": "bc6db5b3e8cd13b52fbff8c039d3674cdf573f86c1959e22fe9b2fd94255d7dc",
+        "raptor_data.py": "0b922ea0359962a2bb6531d5630639f2c9002abdb80fe1353991087d6bcdea01",
+        "raptor_runtime.py": "afe394b631c681e3826ad976e71c793214dee81c49c0d9cd76046590cc4513ad"
+      },
+      "source": "artifacts/experiments/EXP099_B8_DISTILL_V1_F1/model_best.pt",
+      "source_sidecars_sha256": {
+        "summary.json": "b47ae1c16cf9ec0e6ea2885c690f68deec472a812ffe6e1b9d6a29c44d97a674",
+        "provenance.json": "0b7c353e4bc04e0233b08e6b239bb1eb3356fb73df00691afa8afd19df111f97",
+        "history.json": "65e491dc80f387f81de5b1724beffb3275abcec0b92830226eb43d2a147a30b5"
+      },
+      "link_mode": "copy"
+    },
+    "dist_f2": {
+      "path": "checkpoints/dist_f2.pt",
+      "sha256": "7a87228e6ff5130bde059405aa894afdbf203e5d332dc2196c1347f0c051863f",
+      "bytes": 292825764,
+      "meta": {
+        "arch": "coatnet_rmlp_2_rw_224.sw_in12k_ft_in1k",
+        "res": 224,
+        "lab": [
+          "ACL",
+          "MCL",
+          "Medial Meniscus",
+          "Lateral Meniscus",
+          "Medial OA",
+          "Lateral OA",
+          "PF OA",
+          "Effusion",
+          "Synovitis",
+          "Baker's",
+          "Contusion",
+          "Fracture"
+        ],
+        "contract": "raptor64_336_c140_s02",
+        "k_eval": 24,
+        "norm": "imagenet",
+        "window_policy": "within-slot-valid",
+        "epoch": 7,
+        "tag": "EXP099_B8_DISTILL_V1_F2",
+        "amp_train": "fp16",
+        "amp_eval": "fp16"
+      },
+      "training_code_sha256": {
+        "raptor_train.py": "484abfd364163a330241a0aedb332f64287700b50d38438d2efb773777d8afd8",
+        "raptor_common.py": "bc6db5b3e8cd13b52fbff8c039d3674cdf573f86c1959e22fe9b2fd94255d7dc",
+        "raptor_data.py": "0b922ea0359962a2bb6531d5630639f2c9002abdb80fe1353991087d6bcdea01",
+        "raptor_runtime.py": "afe394b631c681e3826ad976e71c793214dee81c49c0d9cd76046590cc4513ad"
+      },
+      "source": "artifacts/experiments/EXP099_B8_DISTILL_V1_F2/model_best.pt",
+      "source_sidecars_sha256": {
+        "summary.json": "309a1fd4904498d87cfb2687954c269fb8748b80e75dd7c9698656faddda54fb",
+        "provenance.json": "ca427a6427aa6b7e767d463a21af204d7bfb600cb780f61d61d4fcba059dfbfa",
+        "history.json": "6e014497b4fba0e66255a9e1085f3a0da9ee0d17483116974aab3b39a410fcfd"
+      },
+      "link_mode": "copy"
+    },
+    "dist_f3": {
+      "path": "checkpoints/dist_f3.pt",
+      "sha256": "85375feefd2b4e97d185e6eb3c823766cde0b67da5a17db7c0f34b2fa87ec997",
+      "bytes": 292825764,
+      "meta": {
+        "arch": "coatnet_rmlp_2_rw_224.sw_in12k_ft_in1k",
+        "res": 224,
+        "lab": [
+          "ACL",
+          "MCL",
+          "Medial Meniscus",
+          "Lateral Meniscus",
+          "Medial OA",
+          "Lateral OA",
+          "PF OA",
+          "Effusion",
+          "Synovitis",
+          "Baker's",
+          "Contusion",
+          "Fracture"
+        ],
+        "contract": "raptor64_336_c140_s02",
+        "k_eval": 24,
+        "norm": "imagenet",
+        "window_policy": "within-slot-valid",
+        "epoch": 7,
+        "tag": "EXP099_B8_DISTILL_V1_F3",
+        "amp_train": "fp16",
+        "amp_eval": "fp16"
+      },
+      "training_code_sha256": {
+        "raptor_train.py": "484abfd364163a330241a0aedb332f64287700b50d38438d2efb773777d8afd8",
+        "raptor_common.py": "bc6db5b3e8cd13b52fbff8c039d3674cdf573f86c1959e22fe9b2fd94255d7dc",
+        "raptor_data.py": "0b922ea0359962a2bb6531d5630639f2c9002abdb80fe1353991087d6bcdea01",
+        "raptor_runtime.py": "afe394b631c681e3826ad976e71c793214dee81c49c0d9cd76046590cc4513ad"
+      },
+      "source": "artifacts/experiments/EXP099_B8_DISTILL_V1_F3/model_best.pt",
+      "source_sidecars_sha256": {
+        "summary.json": "cacccd330c48f1fde6d9fb726aa1cefb4ac75effbb009976d48f3b01799898be",
+        "provenance.json": "4323f48590727941c3a2f6b4db7fb2acb676f65ca7b1200bad9d2c9ef194c975",
+        "history.json": "a9604e789bed789f38eb8a032cec8bbb9b8b562e509433ddb775b16e2cbf4b7c"
+      },
+      "link_mode": "copy"
+    },
+    "dist_f4": {
+      "path": "checkpoints/dist_f4.pt",
+      "sha256": "0faa441feca3954ec18fc8908f2886004c25be0de0874d8919f5b96cbb93e570",
+      "bytes": 292825764,
+      "meta": {
+        "arch": "coatnet_rmlp_2_rw_224.sw_in12k_ft_in1k",
+        "res": 224,
+        "lab": [
+          "ACL",
+          "MCL",
+          "Medial Meniscus",
+          "Lateral Meniscus",
+          "Medial OA",
+          "Lateral OA",
+          "PF OA",
+          "Effusion",
+          "Synovitis",
+          "Baker's",
+          "Contusion",
+          "Fracture"
+        ],
+        "contract": "raptor64_336_c140_s02",
+        "k_eval": 24,
+        "norm": "imagenet",
+        "window_policy": "within-slot-valid",
+        "epoch": 7,
+        "tag": "EXP099_B8_DISTILL_V1_F4",
+        "amp_train": "fp16",
+        "amp_eval": "fp16"
+      },
+      "training_code_sha256": {
+        "raptor_train.py": "484abfd364163a330241a0aedb332f64287700b50d38438d2efb773777d8afd8",
+        "raptor_common.py": "bc6db5b3e8cd13b52fbff8c039d3674cdf573f86c1959e22fe9b2fd94255d7dc",
+        "raptor_data.py": "0b922ea0359962a2bb6531d5630639f2c9002abdb80fe1353991087d6bcdea01",
+        "raptor_runtime.py": "afe394b631c681e3826ad976e71c793214dee81c49c0d9cd76046590cc4513ad"
+      },
+      "source": "artifacts/experiments/EXP099_B8_DISTILL_V1_F4/model_best.pt",
+      "source_sidecars_sha256": {
+        "summary.json": "6adebbc5895aa7d17a5f49b4a777a8f4030e80f0cfae8d0093ac134954961443",
+        "provenance.json": "3b6089b680b2d1e5a65a8aa19303f88a5a222b392b202135f87a0c1aa0859c63",
+        "history.json": "2c39be35adf0645215d62055ba136490074f60c910e850a26176bf36696c090f"
+      },
+      "link_mode": "copy"
+    }
+  },
+  "files": {
+    "checkpoints/dist_f0.pt": "ec49e6ce655dde385b53c1b352b6ef14f4b1c1b42edc95f51d0a5cd88876a46a",
+    "checkpoints/dist_f1.pt": "41e52e1eced065e6f76a0b3d6dc20b0d58a94be64656f1bb4cd23c2928928f1c",
+    "checkpoints/dist_f2.pt": "7a87228e6ff5130bde059405aa894afdbf203e5d332dc2196c1347f0c051863f",
+    "checkpoints/dist_f3.pt": "85375feefd2b4e97d185e6eb3c823766cde0b67da5a17db7c0f34b2fa87ec997",
+    "checkpoints/dist_f4.pt": "0faa441feca3954ec18fc8908f2886004c25be0de0874d8919f5b96cbb93e570"
+  },
+  "dataset_metadata_sha256": "021a966aa13912eb3d0408e7ef5f69e564738d1632e57c19e7ddedce66ce17a9",
+  "staged_at": "2026-10-07T00:06:29.467173+00:00"
+}

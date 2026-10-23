@@ -1,0 +1,27 @@
+{
+  "code_file": "release.ipynb",
+  "competition_sources": [
+    "rsna-knee-abnormality-detection"
+  ],
+  "dataset_sources": [
+    "nartaa/rsna-knee-publication-swa-weights-20261007",
+    "taeyangg4/knee-r6-fe055406-v1",
+    "heliosli/rsna-orthofoundation-fold0-epoch7-20261004",
+    "taeyangg4/knee-hb126-codecs-cp313-v1",
+    "taeyangg4/knee-l1-rcof0-v1-assets",
+    "taeyangg4/knee-k1-v3gs0-v1-assets",
+    "taeyangg4/knee-k1-v3gs1-v1-assets"
+  ],
+  "docker_image": "gcr.io/kaggle-private-byod/python@sha256:2757e0c7d1e0a9cb43da657b97e223c321a98f5014bdf64f44f2f6b083ad2b2f",
+  "enable_gpu": true,
+  "enable_internet": false,
+  "enable_tpu": false,
+  "id": "taeyangg4/knee-lb-r6w958k1n3s2p25flatpv10-v1",
+  "is_private": true,
+  "kernel_sources": [],
+  "kernel_type": "notebook",
+  "language": "python",
+  "machine_shape": "NvidiaTeslaT4",
+  "model_sources": [],
+  "title": "knee-lb-r6w958k1n3s2p25flatpv10-v1"
+}

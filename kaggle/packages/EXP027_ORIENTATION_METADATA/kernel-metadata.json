@@ -1,0 +1,15 @@
+{
+  "id": "taeyangg4/rsna-knee-exp027-orientation-metadata",
+  "title": "RSNA Knee EXP027 Orientation Metadata",
+  "code_file": "exp027_orientation_metadata.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "dataset_sources": [],
+  "competition_sources": ["rsna-knee-abnormality-detection"],
+  "kernel_sources": [],
+  "model_sources": []
+}

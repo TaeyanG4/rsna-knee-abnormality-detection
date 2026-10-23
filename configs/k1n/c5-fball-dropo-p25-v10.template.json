@@ -1,0 +1,60 @@
+{
+  "alpha": 0.25,
+  "drop_o": true,
+  "encoder_chunk": 32,
+  "kernel_id": "taeyangg4/replace-c5fballdop25-v1",
+  "release_version": "1.1.91-c5fballdop25",
+  "schema": "k1n-config/v1",
+  "k1_runtime_version": 10,
+  "k1_failure_policy": "study_fallback_fail_loud",
+  "k1_guard_hours": 8.8,
+  "k1_max_failed_fraction": 0.05,
+  "k1_eval_stride": 2,
+  "models": [
+    {
+      "checkpoint": "weights/E_prior_s0_fall.pt",
+      "checkpoint_sha256": "REPLACE_CHECKPOINT_SHA256",
+      "dataset_slug": "taeyangg4/knee-k1-v3gfball-v1-assets",
+      "id": "k1_v3g_fullbag_all",
+      "manifest_sha256": "REPLACE_MANIFEST_SHA256",
+      "trainer_sha256": "14767c7a8f0daa986477511fe9a83aefe032a208ae978fabf15a5f896992ac80",
+      "trainer_source": "source/compact_train.py"
+    },
+    {
+      "id": "k1_v3g_f1",
+      "dataset_slug": "taeyangg4/knee-k1-v3gf1-v1-assets",
+      "checkpoint": "weights/E_prior_s0_f1.pt",
+      "checkpoint_sha256": "943cf02bfe6512ce4051c5dd7ed7afc9d6c1a8fe7ac6b8bf8533d2cda1719582",
+      "trainer_source": "source/compact_train.py",
+      "trainer_sha256": "14767c7a8f0daa986477511fe9a83aefe032a208ae978fabf15a5f896992ac80",
+      "manifest_sha256": "b6ec4117ff609d2d9637447bd848c077e106ed056090460ba8a19efb8f46fc30"
+    },
+    {
+      "id": "k1_v3g_f2",
+      "dataset_slug": "taeyangg4/knee-k1-v3gf2-v1-assets",
+      "checkpoint": "weights/E_prior_s0_f2.pt",
+      "checkpoint_sha256": "fa60207c370979e53b865895b8225d8fe805a90881a2ddf866355254d7e0fca3",
+      "trainer_source": "source/compact_train.py",
+      "trainer_sha256": "14767c7a8f0daa986477511fe9a83aefe032a208ae978fabf15a5f896992ac80",
+      "manifest_sha256": "dc45aef2464c3d7e278f94e052e0d2d0c1d4c3d75ffd34be268f260e34f19b3f"
+    },
+    {
+      "id": "k1_v3g_f3",
+      "dataset_slug": "taeyangg4/knee-k1-v3gf3-v1-assets",
+      "checkpoint": "weights/E_prior_s0_f3.pt",
+      "checkpoint_sha256": "3987e47af56a32dbaed05c7185446600981205a72ca1bbc45d0d0203830f5c7f",
+      "trainer_source": "source/compact_train.py",
+      "trainer_sha256": "14767c7a8f0daa986477511fe9a83aefe032a208ae978fabf15a5f896992ac80",
+      "manifest_sha256": "d459e71757fd237359c9d7e17c05556f65d9fc9466395cd46683509a21c3a76e"
+    },
+    {
+      "id": "k1_v3g_all",
+      "dataset_slug": "taeyangg4/knee-k1-v3gall-v1-assets",
+      "checkpoint": "weights/E_prior_s0_fall.pt",
+      "checkpoint_sha256": "47f47cf14615731de36c53735cafcd0ade9b07a0d48889c7d98ca3088fde66e0",
+      "trainer_source": "source/compact_train.py",
+      "trainer_sha256": "14767c7a8f0daa986477511fe9a83aefe032a208ae978fabf15a5f896992ac80",
+      "manifest_sha256": "4de707f6d0fbda0157c3f25e8ab77166c03a880e2367c438604430a8ae9de061"
+    }
+  ]
+}

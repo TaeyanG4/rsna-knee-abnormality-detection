@@ -1,0 +1,9 @@
+{
+    "title":  "RSNA Knee EXP045 ConvNeXt-S 5Fold Weights",
+    "licenses":  [
+                     {
+                         "name":  "other"
+                     }
+                 ],
+    "id":  "taeyangg4/rsna-knee-exp045-convnext-s-5fold-weights"
+}

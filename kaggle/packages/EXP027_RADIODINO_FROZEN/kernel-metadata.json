@@ -1,0 +1,23 @@
+{
+  "id": "taeyangg4/rsna-knee-exp027-radiodino-frozen",
+  "title": "RSNA Knee EXP027 Radiodino Frozen",
+  "code_file": "exp027_radiodino_frozen.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "dataset_sources": [
+    "flight0234/rsna-knee-hybrid-report-labels"
+  ],
+  "kernel_sources": [
+    "taeyangg4/rsna-knee-exp022-shard-compact-cache"
+  ],
+  "competition_sources": [
+    "rsna-knee-abnormality-detection"
+  ],
+  "model_sources": [],
+  "machine_shape": "NvidiaTeslaT4",
+  "docker_image": "gcr.io/kaggle-private-byod/python@sha256:37c64f7dd9c54116ecd1bcc88817c5469b88387388fade02bfa8bf3fc647d461"
+}

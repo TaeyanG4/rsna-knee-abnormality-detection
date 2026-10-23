@@ -1,0 +1,11 @@
+{
+ "title": "knee-runners-v2",
+ "id": "taeyangg4/knee-runners-v2",
+ "licenses": [
+  {
+   "name": "other"
+  }
+ ],
+ "isPrivate": true,
+ "description": "Private: EXP094/EXP095 runners, frozen protocol inputs and labels for remote GPU runs (no report text, no Gold)."
+}

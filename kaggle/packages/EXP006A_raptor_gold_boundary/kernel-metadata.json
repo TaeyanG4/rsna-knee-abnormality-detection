@@ -1,0 +1,25 @@
+{
+    "id":  "taeyangg4/rsna-knee-exp006a-raptor-gold-boundary",
+    "title":  "RSNA Knee EXP006A Raptor Gold Boundary",
+    "code_file":  "raptor_gold_boundary.py",
+    "language":  "python",
+    "kernel_type":  "script",
+    "is_private":  true,
+    "enable_gpu":  true,
+    "enable_tpu":  false,
+    "enable_internet":  false,
+    "dataset_sources":  [
+                            "dreaddevelopment/raptor-knee-maxspan",
+                            "dreaddevelopment/raptor-knee-native384",
+                            "dreaddevelopment/raptor-knee-native384dense"
+                        ],
+    "competition_sources":  [
+                                "rsna-knee-abnormality-detection"
+                            ],
+    "kernel_sources":  [
+
+                       ],
+    "model_sources":  [
+
+                      ]
+}

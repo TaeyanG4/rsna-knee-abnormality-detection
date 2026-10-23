@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 822" width="960" height="822" font-family="system-ui, sans-serif" font-size="12" fill="#0b0b0b" role="img" aria-labelledby="title desc">
+  <title id="title">How the ensemble was decided</title>
+  <desc id="desc">Seven steps that built the final blends: public P with per-target weights, the own bundle O at 0.15, the R224 share 0.35, K1 at 0.20 with three checkpoints and stride 3, dropping O with K1 at 0.25 and stride 2 (p25), the flat-P hedge, and the final pair X plus F. Each step shows its public result and discovery ID; both finals scored 0.943 privately.</desc>
+  <rect x="0" y="0" width="960" height="822" fill="#fcfcfb"/>
+
+  <text x="24" y="30" font-size="14" font-weight="bold">How the ensemble was decided, layer by layer</text>
+  <text x="24" y="48" fill="#52514e">r(·) = per-target percentile rank over the full test roster; shares were fixed before each submission. Dates show when each layer was fixed.</text>
+
+  <!-- spine -->
+  <path d="M40,127 L40,617" stroke="#c9c7c1" stroke-width="2" fill="none"/>
+
+  <!-- 1 -->
+  <circle cx="40" cy="114" r="13" fill="#2a78d6"/>
+  <text x="40" y="119" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffffff">1</text>
+  <rect x="64" y="76" width="652" height="76" rx="6" fill="#eaf2fc" stroke="#2a78d6" stroke-width="1.5"/>
+  <text x="78" y="98" font-size="13" font-weight="bold">Oct 17 · Public P with per-target weights w_t (H-B-189)</text>
+  <rect x="618" y="84" width="88" height="20" rx="10" fill="#ffffff" stroke="#52514e"/>
+  <text x="662" y="98" text-anchor="middle" font-weight="bold">D-B-213</text>
+  <text x="78" y="120">P_t = r(w_t r(R)_t + (1 − w_t) r(R6)_t), w_t from goodpjw2008's public 0.958 recipe</text>
+  <text x="78" y="138" fill="#52514e">Lateral OA 0.2, PF OA 0.6, Synovitis 0.8, Baker's 0.35, others 0.5; Gold58 effect near 0 (D-B-212)</text>
+  <rect x="728" y="76" width="208" height="76" rx="6" fill="#ffffff" stroke="#2a78d6" stroke-width="1.2"/>
+  <text x="740" y="98" font-size="13" font-weight="bold">Public 0.958</text>
+  <text x="740" y="118">auto-selected first</text>
+  <text x="740" y="136" fill="#52514e">adopt, flagged public-tuned</text>
+
+  <!-- 2 -->
+  <circle cx="40" cy="200" r="13" fill="#eb6834"/>
+  <text x="40" y="205" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffffff">2</text>
+  <rect x="64" y="162" width="652" height="76" rx="6" fill="#fdf0ea" stroke="#eb6834" stroke-width="1.5"/>
+  <text x="78" y="184" font-size="13" font-weight="bold">Oct 11-12 · + O, the own bundle, at 0.15 (INF3)</text>
+  <rect x="618" y="170" width="88" height="20" rx="10" fill="#ffffff" stroke="#52514e"/>
+  <text x="662" y="184" text-anchor="middle" font-weight="bold">D-B-128</text>
+  <text x="78" y="206">INF3 = r(0.85 r(P) + 0.15 r(O)); O = own CoAtNets EXP143v2, EXP155 + Q partners</text>
+  <text x="78" y="224" fill="#52514e">0.15 carried over from the registered partner share; fold 0 preferred 0.45, the nested fallback kept 0.15</text>
+  <rect x="728" y="162" width="208" height="76" rx="6" fill="#ffffff" stroke="#eb6834" stroke-width="1.2"/>
+  <text x="740" y="184" font-size="13" font-weight="bold">Public 0.954-0.955</text>
+  <text x="740" y="204">later INF3: 0.958 / 0.943 private</text>
+  <text x="740" y="222" fill="#52514e">own share fixed at 0.15</text>
+
+  <!-- 3 -->
+  <circle cx="40" cy="286" r="13" fill="#2a78d6"/>
+  <text x="40" y="291" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffffff">3</text>
+  <rect x="64" y="248" width="652" height="76" rx="6" fill="#eaf2fc" stroke="#2a78d6" stroke-width="1.5"/>
+  <text x="78" y="270" font-size="13" font-weight="bold">Oct 14-15 · R224 share 0.35 inside the Raptor slot (H-B-164)</text>
+  <rect x="618" y="256" width="88" height="20" rx="10" fill="#ffffff" stroke="#52514e"/>
+  <text x="662" y="270" text-anchor="middle" font-weight="bold">D-B-195</text>
+  <text x="78" y="292">R = r(0.65 r(R384) + 0.35 r(R224)), share taken from the public recipe</text>
+  <text x="78" y="310" fill="#52514e">dropping R224 later displayed 0.958 but ranked below its parent; private 0.942 (D-B-246)</text>
+  <rect x="728" y="248" width="208" height="76" rx="6" fill="#ffffff" stroke="#2a78d6" stroke-width="1.2"/>
+  <text x="740" y="270" font-size="13" font-weight="bold">Public 0.957</text>
+  <text x="740" y="290">auto-selected above the</text>
+  <text x="740" y="308" fill="#52514e">other 0.957s; adopt</text>
+
+  <!-- 4 -->
+  <circle cx="40" cy="372" r="13" fill="#eb6834"/>
+  <text x="40" y="377" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffffff">4</text>
+  <rect x="64" y="334" width="652" height="76" rx="6" fill="#fdf0ea" stroke="#eb6834" stroke-width="1.5"/>
+  <text x="78" y="356" font-size="13" font-weight="bold">Oct 19-20 · K1 at 0.20: three checkpoints, stride 3 (x3-v2)</text>
+  <rect x="618" y="342" width="88" height="20" rx="10" fill="#ffffff" stroke="#52514e"/>
+  <text x="662" y="356" text-anchor="middle" font-weight="bold">D-B-249</text>
+  <text x="78" y="378">X = r(0.80 r(INF3) + 0.20 r(K1, stride 3)); share 80 : 20 from the Fable + astra consult</text>
+  <text x="78" y="396" fill="#52514e">976 holdout: 2-checkpoint average +0.0015..+0.0029 on all rulers (D-B-245)</text>
+  <rect x="728" y="334" width="208" height="76" rx="6" fill="#ffffff" stroke="#eb6834" stroke-width="1.2"/>
+  <text x="740" y="356" font-size="13" font-weight="bold">Public 0.958</text>
+  <text x="740" y="376">auto-selected</text>
+  <text x="740" y="394" fill="#52514e">final A (X)</text>
+
+  <!-- 5 -->
+  <circle cx="40" cy="458" r="13" fill="#eb6834"/>
+  <text x="40" y="463" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffffff">5</text>
+  <rect x="64" y="420" width="652" height="76" rx="6" fill="#fdf0ea" stroke="#eb6834" stroke-width="1.5"/>
+  <text x="78" y="442" font-size="13" font-weight="bold">Oct 20 · Drop O; K1 at 0.25, stride 2 (p25)</text>
+  <rect x="618" y="428" width="88" height="20" rx="10" fill="#ffffff" stroke="#52514e"/>
+  <text x="662" y="442" text-anchor="middle" font-weight="bold">D-B-260</text>
+  <text x="78" y="464">p25 = r(0.75 r(P) + 0.25 r(K1, stride 2))</text>
+  <text x="78" y="482" fill="#52514e">stride 2 beat stride 3 on 4/4 rulers; trio +0.0007..+0.0017 (D-B-247)</text>
+  <rect x="728" y="420" width="208" height="76" rx="6" fill="#ffffff" stroke="#eb6834" stroke-width="1.2"/>
+  <text x="740" y="442" font-size="13" font-weight="bold">Public 0.958</text>
+  <text x="740" y="462">auto-selected with x3-v2</text>
+  <text x="740" y="480" fill="#52514e">O not needed for 0.958</text>
+
+  <!-- 6 -->
+  <circle cx="40" cy="544" r="13" fill="#2a78d6"/>
+  <text x="40" y="549" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffffff">6</text>
+  <rect x="64" y="506" width="652" height="76" rx="6" fill="#eaf2fc" stroke="#2a78d6" stroke-width="1.5"/>
+  <text x="78" y="528" font-size="13" font-weight="bold">Oct 21 · Flat-P hedge (P25F)</text>
+  <rect x="618" y="514" width="88" height="20" rx="10" fill="#ffffff" stroke="#52514e"/>
+  <text x="662" y="528" text-anchor="middle" font-weight="bold">D-B-274</text>
+  <text x="78" y="550">F = p25 with flat P: all w_t = 0.5, no public-tuned weights</text>
+  <text x="78" y="568" fill="#52514e">consult estimate of the private effect 0 ± 0.0015; pre-committed as final B</text>
+  <rect x="728" y="506" width="208" height="76" rx="6" fill="#ffffff" stroke="#2a78d6" stroke-width="1.2"/>
+  <text x="740" y="528" font-size="13" font-weight="bold">Public 0.957</text>
+  <text x="740" y="548">one display step lower</text>
+  <text x="740" y="566" fill="#52514e">final B (F), pre-committed</text>
+
+  <!-- 7 -->
+  <circle cx="40" cy="630" r="13" fill="#1baf7a"/>
+  <text x="40" y="635" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffffff">7</text>
+  <rect x="64" y="592" width="652" height="76" rx="6" fill="#e6f6ef" stroke="#1baf7a" stroke-width="1.8"/>
+  <text x="78" y="614" font-size="13" font-weight="bold">Oct 23 00:3x KST · Final pair X + F</text>
+  <rect x="618" y="600" width="88" height="20" rx="10" fill="#ffffff" stroke="#52514e"/>
+  <text x="662" y="614" text-anchor="middle" font-weight="bold">D-B-282</text>
+  <text x="78" y="636">X (x3-v2: O + public-tuned w_t) and F (P25F: no O, flat P) differ in two structural ways</text>
+  <text x="78" y="654" fill="#52514e">a switch needed a candidate ≥ 0.959 by Oct 23 08:00 KST; none qualified</text>
+  <rect x="728" y="592" width="208" height="76" rx="6" fill="#ffffff" stroke="#1baf7a" stroke-width="1.5"/>
+  <text x="740" y="614" font-size="13" font-weight="bold">Private X 0.943, F 0.943</text>
+  <text x="740" y="634">p25 also 0.943</text>
+  <text x="740" y="652" fill="#52514e">rank 312 / 6,425, silver</text>
+
+  <!-- not adopted -->
+  <rect x="24" y="688" width="912" height="92" rx="6" fill="#ffffff" stroke="#c9c7c1" stroke-width="1.2"/>
+  <text x="36" y="708" font-size="13" font-weight="bold">Tested and not adopted (public display)</text>
+  <text x="36" y="728">own share 0.25 instead of 0.15: 0.957 (D-B-246)</text>
+  <text x="36" y="746">per-target K1 share vector av2: 0.957 (D-B-251)</text>
+  <text x="36" y="764">fold / all-data K1 members (C): 0.957 (D-B-263)</text>
+  <text x="510" y="728">A5 DINOv3-S inside P: 0.956; with flat P (DF): 0.955 (D-B-276, D-B-281)</text>
+  <text x="510" y="746">P4, full-bag 4th K1 member: 0.958, ranked below p25 (D-B-282)</text>
+  <circle cx="515" cy="760" r="5" fill="#d03b3b"/>
+  <text x="526" y="764">U, U4, F4: no score, 9 h limit (D-B-282)</text>
+
+  <!-- legend -->
+  <g>
+    <circle cx="31" cy="802" r="7" fill="#2a78d6"/>
+    <text x="44" y="806">public layer</text>
+    <circle cx="141" cy="802" r="7" fill="#eb6834"/>
+    <text x="154" y="806">own layer</text>
+    <circle cx="237" cy="802" r="7" fill="#1baf7a"/>
+    <text x="250" y="806">decision</text>
+    <circle cx="325" cy="802" r="5" fill="#d03b3b"/>
+    <text x="336" y="806">failed run</text>
+  </g>
+</svg>

@@ -1,0 +1,507 @@
+key,eval_set,source,value,recorded_at,note
+bench-V888-relabel5,V888,dread,0.8768163488643558,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-relabel5,V888,steven_v4,0.8374234538627929,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-relabel5,V888,pilkwang_v2,0.8179563235559071,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-relabel5,V888,relabel_v1,0.9166598063524832,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-relabel5,V888,flight,0.8372378452672856,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-relabel5,V888,yunus,0.865863078085188,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-relabel5,V888,laymond,0.8098413408075261,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-relabel5,V888,tsuyu,0.9173659331217984,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-relabel5,V888,consensus,0.9505841378995626,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-relabel5,V888,softgold,0.7223886513866784,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-relabel5,V888,softgold_plain,0.786711677288348,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-relabel5,V888,softgold_tsuyu,0.7521478619478904,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-relabel5,V888,never_trained_mean,0.8327710490778536,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-coat5rn5,V888,dread,0.8970159716398624,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-coat5rn5,V888,steven_v4,0.8552750748200645,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-coat5rn5,V888,pilkwang_v2,0.8491504104582074,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-coat5rn5,V888,relabel_v1,0.9149086991946275,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-coat5rn5,V888,flight,0.8551523470170633,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-coat5rn5,V888,yunus,0.8823825163336604,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-coat5rn5,V888,laymond,0.8371721686636248,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-coat5rn5,V888,tsuyu,0.9348209674529927,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-coat5rn5,V888,consensus,0.9544622429976676,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-coat5rn5,V888,softgold,0.7387522770641995,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-coat5rn5,V888,softgold_plain,0.8084534949575902,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-coat5rn5,V888,softgold_tsuyu,0.7682243770575244,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-coat5rn5,V888,never_trained_mean,0.8559950425688893,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-coat5,V888,dread,0.8967668520457317,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-coat5,V888,steven_v4,0.8543915138220708,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-coat5,V888,pilkwang_v2,0.8471176360367273,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-coat5,V888,relabel_v1,0.9131392704051152,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-coat5,V888,flight,0.8543681362542488,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-coat5,V888,yunus,0.8824534498698204,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-coat5,V888,laymond,0.8354608615933934,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-coat5,V888,tsuyu,0.9348104251789554,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-coat5,V888,consensus,0.9531638030510957,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-coat5,V888,softgold,0.7380045138922943,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-coat5,V888,softgold_plain,0.8073232760928227,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-coat5,V888,softgold_tsuyu,0.767549688508444,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-coat5,V888,never_trained_mean,0.854855865330503,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-student,V888,dread,0.8797724308801961,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-student,V888,steven_v4,0.8389588927551451,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-student,V888,pilkwang_v2,0.8348095253297306,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-student,V888,relabel_v1,0.9044110955590354,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-student,V888,flight,0.8386915847823668,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-student,V888,yunus,0.8669511008249856,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-student,V888,laymond,0.822041579386635,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-student,V888,tsuyu,0.9245394785990196,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-student,V888,consensus,0.9463855619198521,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-student,V888,softgold,0.728507137562537,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-student,V888,softgold_plain,0.7955153413727053,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-student,V888,softgold_tsuyu,0.7580998096211516,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-student,V888,never_trained_mean,0.8406902745741242,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-E1,V888,dread,0.899198435922099,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-E1,V888,steven_v4,0.8576932551961084,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-E1,V888,pilkwang_v2,0.8495162950367744,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-E1,V888,relabel_v1,0.9180442529129066,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-E1,V888,flight,0.8575455925237411,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-E1,V888,yunus,0.8852900110026539,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-E1,V888,laymond,0.8375065120905867,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-E1,V888,tsuyu,0.9379335927922648,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-E1,V888,consensus,0.9584971189110029,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-E1,V888,softgold,0.7400251364169413,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-E1,V888,softgold_plain,0.809824708870965,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-E1,V888,softgold_tsuyu,0.7698482294868145,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-E1,V888,never_trained_mean,0.8575015183315309,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-R384,V888,dread,0.8953547410264552,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-R384,V888,steven_v4,0.8536231298199669,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-R384,V888,pilkwang_v2,0.8453717090380893,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-R384,V888,relabel_v1,0.9154192532318715,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-R384,V888,flight,0.8535163146043957,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-R384,V888,yunus,0.8810438710753212,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-R384,V888,laymond,0.8318965316148118,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-R384,V888,tsuyu,0.9315754074555902,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-R384,V888,consensus,0.9562920031483695,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-R384,V888,softgold,0.7369910980590224,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-R384,V888,softgold_plain,0.8059243813590494,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-R384,V888,softgold_tsuyu,0.7665044699383315,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-R384,V888,never_trained_mean,0.8529838103870473,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-B224,V888,dread,0.8933965283111673,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-B224,V888,steven_v4,0.850769823033044,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-B224,V888,pilkwang_v2,0.8423658076295216,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-B224,V888,relabel_v1,0.9114468553147125,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-B224,V888,flight,0.8505961841720375,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-B224,V888,yunus,0.8795364167297491,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-B224,V888,laymond,0.8322394219001342,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-B224,V888,tsuyu,0.9313762326015073,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-B224,V888,consensus,0.9526776621338854,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-B224,V888,softgold,0.7357485397934155,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-B224,V888,softgold_plain,0.8041213729120207,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-B224,V888,softgold_tsuyu,0.765217647908615,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-B224,V888,never_trained_mean,0.8512278673231123,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-R1,V888,dread,0.8794509236845198,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-R1,V888,steven_v4,0.8382988527768377,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-R1,V888,pilkwang_v2,0.8333808770373862,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-R1,V888,relabel_v1,0.9004484524364544,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-R1,V888,flight,0.8382165073058082,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-R1,V888,yunus,0.8649423454482843,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-R1,V888,laymond,0.8203473925693446,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-R1,V888,tsuyu,0.9214300343035259,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-R1,V888,consensus,0.9438844394583931,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-R1,V888,softgold,0.727219215853221,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-R1,V888,softgold_plain,0.7941295092724824,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-R1,V888,softgold_tsuyu,0.7565520566289184,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-R1,V888,never_trained_mean,0.8392423669579632,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-R1,V888,gold58,0.8982032395457163,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-CNX5,V888,dread,0.8495472659871447,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-CNX5,V888,steven_v4,0.8246762821635986,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-CNX5,V888,pilkwang_v2,0.8086812680802119,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-CNX5,V888,relabel_v1,0.8779995135194562,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-CNX5,V888,flight,0.8243911671041554,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-CNX5,V888,yunus,0.8400707232141921,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-CNX5,V888,laymond,0.7939748342722623,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-CNX5,V888,tsuyu,0.9001270487302606,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-CNX5,V888,consensus,0.9173181361115819,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-CNX5,V888,softgold,0.7115214018455088,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-CNX5,V888,softgold_plain,0.7735699637288982,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-CNX5,V888,softgold_tsuyu,0.7402525361640895,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-CNX5,V888,never_trained_mean,0.8168507769325662,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-V888-CNX5,V888,gold58,0.8910441556387138,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-relabel5,C529,dread,0.8809834958909831,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-relabel5,C529,steven_v4,0.8341035720260387,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-relabel5,C529,pilkwang_v2,0.8139786493743899,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-relabel5,C529,relabel_v1,0.917614876929978,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-relabel5,C529,flight,0.8341035720260387,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-relabel5,C529,yunus,0.8664407879838336,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-relabel5,C529,laymond,0.8076401762343669,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-relabel5,C529,tsuyu,0.9164504817186586,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-relabel5,C529,consensus,0.9472348199967855,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-relabel5,C529,softgold,0.7214152482608034,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-relabel5,C529,softgold_plain,0.7846044847305863,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-relabel5,C529,softgold_tsuyu,0.7511368164276807,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-relabel5,C529,never_trained_mean,0.8305407964046573,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-coat5rn5,C529,dread,0.896031402515443,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-coat5rn5,C529,steven_v4,0.8519532744692077,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-coat5rn5,C529,pilkwang_v2,0.8449714134452052,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-coat5rn5,C529,relabel_v1,0.9159843379099439,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-coat5rn5,C529,flight,0.8519532744692077,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-coat5rn5,C529,yunus,0.8813586704639887,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-coat5rn5,C529,laymond,0.8358227320673595,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-coat5rn5,C529,tsuyu,0.9326629801512735,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-coat5rn5,C529,consensus,0.9518538728574136,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-coat5rn5,C529,softgold,0.7373095242957913,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-coat5rn5,C529,softgold_plain,0.8062587874283919,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-coat5rn5,C529,softgold_tsuyu,0.7666860282676499,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-coat5rn5,C529,never_trained_mean,0.8535265226114402,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-coat5,C529,dread,0.8951153868364369,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-coat5,C529,steven_v4,0.8511308131753358,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-coat5,C529,pilkwang_v2,0.8424402152480551,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-coat5,C529,relabel_v1,0.9140604065227667,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-coat5,C529,flight,0.8511308131753358,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-coat5,C529,yunus,0.8802244769406435,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-coat5,C529,laymond,0.8343631116033277,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-coat5,C529,tsuyu,0.9328925956777553,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-coat5,C529,consensus,0.9502402848230712,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-coat5,C529,softgold,0.7365507639210448,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-coat5,C529,softgold_plain,0.8051457363951751,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-coat5,C529,softgold_tsuyu,0.7660410405310322,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-coat5,C529,never_trained_mean,0.8520396542418406,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-student,C529,dread,0.8773513452030688,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-student,C529,steven_v4,0.8341663708704773,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-student,C529,pilkwang_v2,0.8301424609632391,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-student,C529,relabel_v1,0.9026897396715591,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-student,C529,flight,0.8341663708704773,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-student,C529,yunus,0.8633010108191085,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-student,C529,laymond,0.8203969473354952,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-student,C529,tsuyu,0.9217299875754436,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-student,C529,consensus,0.9409079658067143,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-student,C529,softgold,0.7264555789644381,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-student,C529,softgold_plain,0.7925552479197465,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-student,C529,softgold_tsuyu,0.7558336700237244,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-student,C529,never_trained_mean,0.83700169749708,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-E1,C529,dread,0.8991745116624923,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-E1,C529,steven_v4,0.8535660988715043,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-E1,C529,pilkwang_v2,0.8444106219530162,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-E1,C529,relabel_v1,0.919511738984269,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-E1,C529,flight,0.8535660988715043,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-E1,C529,yunus,0.8834373736621157,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-E1,C529,laymond,0.8357619462489264,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-E1,C529,tsuyu,0.9339674144320882,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-E1,C529,consensus,0.9563207115624023,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-E1,C529,softgold,0.7382056818402489,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-E1,C529,softgold_plain,0.8071347026396852,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-E1,C529,softgold_tsuyu,0.7677585689730386,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-E1,C529,never_trained_mean,0.8542940101838906,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-R384,C529,dread,0.8969246382530628,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-R384,C529,steven_v4,0.8490700727817105,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-R384,C529,pilkwang_v2,0.8395820611894744,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-R384,C529,relabel_v1,0.9170447735972681,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-R384,C529,flight,0.8490700727817105,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-R384,C529,yunus,0.8802805219932317,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-R384,C529,laymond,0.8289277234500964,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-R384,C529,tsuyu,0.926180819526801,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-R384,C529,consensus,0.9546541499140972,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-R384,C529,softgold,0.734816313489281,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-R384,C529,softgold_plain,0.8026787540126891,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-R384,C529,softgold_tsuyu,0.7638578867718584,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-R384,C529,never_trained_mean,0.8494650948536283,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-B224,C529,dread,0.891351844964582,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-B224,C529,steven_v4,0.8466327959651254,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-B224,C529,pilkwang_v2,0.8372774295508393,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-B224,C529,relabel_v1,0.9121632731655253,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-B224,C529,flight,0.8466327959651254,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-B224,C529,yunus,0.8762155906868786,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-B224,C529,laymond,0.8308609841336475,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-B224,C529,tsuyu,0.9286707658646983,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-B224,C529,consensus,0.9492466333521877,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-B224,C529,softgold,0.733907245974113,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-B224,C529,softgold_plain,0.8015049951833371,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-B224,C529,softgold_tsuyu,0.7633200775932739,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-B224,C529,never_trained_mean,0.8477467000841227,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-R1,C529,dread,0.881272946647882,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-R1,C529,steven_v4,0.8346856469560944,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-R1,C529,pilkwang_v2,0.8291295353937557,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-R1,C529,relabel_v1,0.9002505081668336,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-R1,C529,flight,0.8346856469560944,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-R1,C529,yunus,0.8653583711322169,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-R1,C529,laymond,0.818825860039714,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-R1,C529,tsuyu,0.9182719026812635,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-R1,C529,consensus,0.9398736042485426,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-R1,C529,softgold,0.7263132825963866,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-R1,C529,softgold_plain,0.7921654456577566,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-R1,C529,softgold_tsuyu,0.7553654388331784,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-R1,C529,never_trained_mean,0.8369998533804452,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-R1,C529,gold58,0.8982032395457163,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-B_RN3F,C529,dread,0.8853004746538797,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-B_RN3F,C529,steven_v4,0.8408936832679629,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-B_RN3F,C529,pilkwang_v2,0.8346736470786508,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-B_RN3F,C529,relabel_v1,0.9089101606024842,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-B_RN3F,C529,flight,0.8408936832679629,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-B_RN3F,C529,yunus,0.8675840792948964,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-B_RN3F,C529,laymond,0.823405510113742,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-B_RN3F,C529,tsuyu,0.9241272141919333,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-B_RN3F,C529,consensus,0.9453275730907432,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-B_RN3F,C529,softgold,0.7305756900868742,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-B_RN3F,C529,softgold_plain,0.7971371900596033,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-B_RN3F,C529,softgold_tsuyu,0.7598608767779736,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-B_RN3F,C529,never_trained_mean,0.841639229938813,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-B_RN3F,C529,gold58,0.9062477621380207,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-CNX5,C529,dread,0.8508711504744553,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-CNX5,C529,steven_v4,0.8212726595646896,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-CNX5,C529,pilkwang_v2,0.8054903028045345,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-CNX5,C529,relabel_v1,0.8796658514994626,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-CNX5,C529,flight,0.8212726595646896,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-CNX5,C529,yunus,0.8393794495307055,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-CNX5,C529,laymond,0.7925657291681567,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-CNX5,C529,tsuyu,0.9017844037748765,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-CNX5,C529,consensus,0.9175524770165219,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-CNX5,C529,softgold,0.7100934975451517,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-CNX5,C529,softgold_plain,0.771636603865502,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-CNX5,C529,softgold_tsuyu,0.7389864057451397,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-CNX5,C529,never_trained_mean,0.8146770352670216,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-C529-CNX5,C529,gold58,0.8910441556387138,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-relabel5,G4343,dread,0.8793039372824055,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-relabel5,G4343,steven_v4,0.8442781708316734,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-relabel5,G4343,pilkwang_v2,0.8233376177473825,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-relabel5,G4343,relabel_v1,0.9161861933546086,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-relabel5,G4343,flight,0.8436473970055188,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-relabel5,G4343,yunus,0.8655158213652957,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-relabel5,G4343,laymond,0.8167474700251652,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-relabel5,G4343,tsuyu,0.9150836724266486,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-relabel5,G4343,consensus,0.9470862012969697,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-relabel5,G4343,softgold,0.7285150894130862,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-relabel5,G4343,softgold_plain,0.7937035361455553,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-relabel5,G4343,softgold_tsuyu,0.7570952820620485,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-relabel5,G4343,never_trained_mean,0.8374697699923792,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-coat5rn5,G4343,dread,0.8904636668288147,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-coat5rn5,G4343,steven_v4,0.8531570939133365,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-coat5rn5,G4343,pilkwang_v2,0.8460836019178526,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-coat5rn5,G4343,relabel_v1,0.9088452621355955,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-coat5rn5,G4343,flight,0.852758910421806,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-coat5rn5,G4343,yunus,0.8740154239860937,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-coat5rn5,G4343,laymond,0.8361723524800236,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-coat5rn5,G4343,tsuyu,0.926636876337202,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-coat5rn5,G4343,consensus,0.9473327111085831,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-coat5rn5,G4343,softgold,0.7394445702063507,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-coat5rn5,G4343,softgold_plain,0.8083374574625749,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-coat5rn5,G4343,softgold_tsuyu,0.767649050708572,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-coat5rn5,G4343,never_trained_mean,0.8523571180743267,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-coat5,G4343,dread,0.8874838276086742,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-coat5,G4343,steven_v4,0.8494558449841874,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-coat5,G4343,pilkwang_v2,0.8417016605408852,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-coat5,G4343,relabel_v1,0.9058821442861223,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-coat5,G4343,flight,0.8490798254428111,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-coat5,G4343,yunus,0.8708943748048208,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-coat5,G4343,laymond,0.8319704113399302,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-coat5,G4343,tsuyu,0.9233621748683197,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-coat5,G4343,consensus,0.9444598819753899,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-coat5,G4343,softgold,0.7368219726925811,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-coat5,G4343,softgold_plain,0.8048569436290064,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-coat5,G4343,softgold_tsuyu,0.7649350207749235,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-coat5,G4343,never_trained_mean,0.8485055729174559,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-R1,G4343,dread,0.8782232631506445,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-R1,G4343,steven_v4,0.8430504893818803,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-R1,G4343,pilkwang_v2,0.8353139579125101,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-R1,G4343,relabel_v1,0.8988000494416953,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-R1,G4343,flight,0.8425596264268806,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-R1,G4343,yunus,0.8631981921882445,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-R1,G4343,laymond,0.8250141495122875,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-R1,G4343,tsuyu,0.9194460584469616,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-R1,G4343,consensus,0.9376912340626201,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-R1,G4343,softgold,0.7320234124511217,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-R1,G4343,softgold_plain,0.7989102637010276,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-R1,G4343,softgold_tsuyu,0.7602212716863547,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-R1,G4343,never_trained_mean,0.8416441972487305,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-R1,G4343,gold58,0.8982032395457163,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-CNX5,G4343,dread,0.847841666406675,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-CNX5,G4343,steven_v4,0.8255741336583116,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-CNX5,G4343,pilkwang_v2,0.8095230168005542,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-CNX5,G4343,relabel_v1,0.8729504770972524,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-CNX5,G4343,flight,0.8251552464948149,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-CNX5,G4343,yunus,0.8354068155376883,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-CNX5,G4343,laymond,0.7985951779007957,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-CNX5,G4343,tsuyu,0.8969457162710325,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-CNX5,G4343,consensus,0.9134901890359414,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-CNX5,G4343,softgold,0.714538712926443,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-CNX5,G4343,softgold_plain,0.776700341870062,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-CNX5,G4343,softgold_tsuyu,0.7423809813890087,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-CNX5,G4343,never_trained_mean,0.8172747859743374,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+bench-G4343-CNX5,G4343,gold58,0.8910441556387138,2026-10-07 22:47:00,"historical ruler bench (D-B-042), pre-registered 22:47"
+H-B-34-exp140-aug1,G4343,dread,0.9001,2026-10-09 01:31:34,"EXP134 AUG1 single head, seed-mean of per-fold-rank OOF, K36, plain (EXP140 serves +flip TTA); from EXP138 screen controls + JEV HYBRID binary"
+H-B-34-exp140-aug1,G4343,consensus,0.9568,2026-10-09 01:31:34,"EXP134 AUG1 single head, seed-mean of per-fold-rank OOF, K36, plain (EXP140 serves +flip TTA); from EXP138 screen controls + JEV HYBRID binary"
+H-B-34-exp140-aug1,G4343,flight,0.8585,2026-10-09 01:31:34,"EXP134 AUG1 single head, seed-mean of per-fold-rank OOF, K36, plain (EXP140 serves +flip TTA); from EXP138 screen controls + JEV HYBRID binary"
+H-B-34-exp140-aug1,G4343,relabel_v1,0.9206,2026-10-09 01:31:34,"EXP134 AUG1 single head, seed-mean of per-fold-rank OOF, K36, plain (EXP140 serves +flip TTA); from EXP138 screen controls + JEV HYBRID binary"
+H-B-34-exp140-aug1,G4343,jev_hybrid,0.888,2026-10-09 01:31:34,"EXP134 AUG1 single head, seed-mean of per-fold-rank OOF, K36, plain (EXP140 serves +flip TTA); from EXP138 screen controls + JEV HYBRID binary"
+H-B-58-b3,GOLD58,gold58,0.9274,2026-10-09 01:31:34,B3 Gold58 macro AUC (exposed: 0.949 author selected epochs on Gold58; best of nine candidates)
+H-B-58-b3-aug1,GOLD58,oof_partner_proxy_delta_vs_b3,0.0004,2026-10-09 01:31:34,partner proxy only; no Gold58 value
+H-B-34-exp140-aug1,GOLD58,gold58,0.9154,2026-10-09 01:34:03,"EXP144 fresh Gold58 inference, AUG1 2 seeds x 5 folds + flip TTA (the served EXP140 recipe); Gold58 in no fold"
+bench-V888-relabel5,V888,jev_hybrid,0.8591117953024251,2026-10-09 13:10:19,jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-V888-coat5rn5,V888,jev_hybrid,0.8783155230149648,2026-10-09 13:10:19,jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-V888-coat5,V888,jev_hybrid,0.8769007112529539,2026-10-09 13:10:19,jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-V888-student,V888,jev_hybrid,0.8579016258568931,2026-10-09 13:10:19,jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-V888-E1,V888,jev_hybrid,0.8791363441161265,2026-10-09 13:10:19,jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-V888-R384,V888,jev_hybrid,0.8749700709729326,2026-10-09 13:10:19,jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-V888-B224,V888,jev_hybrid,0.8729457814032301,2026-10-09 13:10:19,jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-V888-R1,V888,jev_hybrid,0.8579586445450209,2026-10-09 13:10:19,jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-V888-CNX5,V888,jev_hybrid,0.8383768194377456,2026-10-09 13:10:19,jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-V888-rad5,V888,dread,0.8884983177013477,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-V888-rad5,V888,steven_v4,0.846690814196962,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-V888-rad5,V888,pilkwang_v2,0.8415944456713574,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-V888-rad5,V888,relabel_v1,0.91366998127639,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-V888-rad5,V888,flight,0.8468234687941668,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-V888-rad5,V888,yunus,0.8742999414461644,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-V888-rad5,V888,laymond,0.8263295248689643,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-V888-rad5,V888,tsuyu,0.9155909797954663,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-V888-rad5,V888,consensus,0.9533240475510856,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-V888-rad5,V888,softgold,0.7334494524245537,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-V888-rad5,V888,softgold_plain,0.8011622730588849,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-V888-rad5,V888,softgold_tsuyu,0.761381727687655,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-V888-rad5,V888,never_trained_mean,0.847228681545862,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-V888-rad5,V888,jev_hybrid,0.8695418726613403,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-V888-coat5rad5,V888,dread,0.9014639562747665,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-V888-coat5rad5,V888,steven_v4,0.8608011503282967,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-V888-coat5rad5,V888,pilkwang_v2,0.8550711155932671,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-V888-coat5rad5,V888,relabel_v1,0.9217264814881689,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-V888-coat5rad5,V888,flight,0.8608171352368198,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-V888-coat5rad5,V888,yunus,0.8877607770214984,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-V888-coat5rad5,V888,laymond,0.8408801491268161,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-V888-coat5rad5,V888,tsuyu,0.9367269240236246,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-V888-coat5rad5,V888,consensus,0.9604714058147854,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-V888-coat5rad5,V888,softgold,0.7425308538225059,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-V888-coat5rad5,V888,softgold_plain,0.8131971856640758,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-V888-coat5rad5,V888,softgold_tsuyu,0.7717845585685793,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-V888-coat5rad5,V888,never_trained_mean,0.8611282980174696,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-V888-coat5rad5,V888,jev_hybrid,0.882688438520597,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-C529-relabel5,C529,jev_hybrid,0.8603779336963369,2026-10-09 13:10:19,jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-coat5rn5,C529,jev_hybrid,0.8755873155913036,2026-10-09 13:10:19,jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-coat5,C529,jev_hybrid,0.8736568378398784,2026-10-09 13:10:19,jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-student,C529,jev_hybrid,0.853082570093937,2026-10-09 13:10:19,jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-E1,C529,jev_hybrid,0.8771486642599635,2026-10-09 13:10:19,jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-R384,C529,jev_hybrid,0.873992763939011,2026-10-09 13:10:19,jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-B224,C529,jev_hybrid,0.8692763144905641,2026-10-09 13:10:19,jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-R1,C529,jev_hybrid,0.8566360264920162,2026-10-09 13:10:19,jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-B_RN3F,C529,jev_hybrid,0.8597571622176078,2026-10-09 13:10:19,jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-CNX5,C529,jev_hybrid,0.8366436351632981,2026-10-09 13:10:19,jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-rad5,C529,dread,0.8865490664267283,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-C529-rad5,C529,steven_v4,0.8422312367635593,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-C529-rad5,C529,pilkwang_v2,0.8359137294489489,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-C529-rad5,C529,relabel_v1,0.9134495368930119,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-C529-rad5,C529,flight,0.8422312367635593,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-C529-rad5,C529,yunus,0.8697838435297225,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-C529-rad5,C529,laymond,0.8239025389659796,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-C529-rad5,C529,tsuyu,0.9116983830056818,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-C529-rad5,C529,consensus,0.9510428124952265,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-C529-rad5,C529,softgold,0.730753911387672,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-C529-rad5,C529,softgold_plain,0.7976654772288216,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-C529-rad5,C529,softgold_tsuyu,0.7584218210010292,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-C529-rad5,C529,never_trained_mean,0.8429578371770526,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-C529-rad5,C529,jev_hybrid,0.8668440754294034,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-C529-coat5rad5,C529,dread,0.9002500605468337,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-C529-coat5rad5,C529,steven_v4,0.8570453709129134,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-C529-coat5rad5,C529,pilkwang_v2,0.8503482555033101,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-C529-coat5rad5,C529,relabel_v1,0.9223811894995538,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-C529-coat5rad5,C529,flight,0.8570453709129134,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-C529-coat5rad5,C529,yunus,0.884727254110123,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-C529-coat5rad5,C529,laymond,0.8393057331884282,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-C529-coat5rad5,C529,tsuyu,0.9337323076086874,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-C529-coat5rad5,C529,consensus,0.9584302747451336,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-C529-coat5rad5,C529,softgold,0.7406224775539525,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-C529-coat5rad5,C529,softgold_plain,0.8105797490536153,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-C529-coat5rad5,C529,softgold_tsuyu,0.7696774956609093,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-C529-coat5rad5,C529,never_trained_mean,0.8578566534286937,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-C529-coat5rad5,C529,jev_hybrid,0.8796721166751614,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-G4343-relabel5,G4343,jev_hybrid,0.8708257823029525,2026-10-09 13:10:19,jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-G4343-coat5rn5,G4343,jev_hybrid,0.8778381106307581,2026-10-09 13:10:19,jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-G4343-coat5,G4343,jev_hybrid,0.874030661568923,2026-10-09 13:10:19,jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-G4343-R1,G4343,jev_hybrid,0.8649809789728063,2026-10-09 13:10:19,jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-G4343-CNX5,G4343,jev_hybrid,0.8412765789058273,2026-10-09 13:10:19,jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-G4343-rad5,G4343,dread,0.8913623908409485,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-G4343-rad5,G4343,steven_v4,0.8491549139790666,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-G4343-rad5,G4343,pilkwang_v2,0.8425445421060016,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-G4343-rad5,G4343,relabel_v1,0.9143885683159075,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-G4343-rad5,G4343,flight,0.8485133914988988,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-G4343-rad5,G4343,yunus,0.8751941914842933,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-G4343-rad5,G4343,laymond,0.8315973664285975,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-G4343-rad5,G4343,tsuyu,0.9145534605146035,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-G4343-rad5,G4343,consensus,0.9508957391633,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-G4343-rad5,G4343,softgold,0.7376734852981964,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-G4343-rad5,G4343,softgold_plain,0.8057301238054468,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-G4343-rad5,G4343,softgold_tsuyu,0.7646158798708553,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-G4343-rad5,G4343,never_trained_mean,0.8496227534994898,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-G4343-rad5,G4343,jev_hybrid,0.8769773845896304,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-G4343-coat5rad5,G4343,dread,0.8989681471769176,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-G4343-coat5rad5,G4343,steven_v4,0.8602138370001331,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-G4343-coat5rad5,G4343,pilkwang_v2,0.8535352623895033,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-G4343-coat5rad5,G4343,relabel_v1,0.9190329658303442,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-G4343-coat5rad5,G4343,flight,0.8596838480782069,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-G4343-coat5rad5,G4343,yunus,0.8831510030371755,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-G4343-coat5rad5,G4343,laymond,0.8427178221958659,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-G4343-coat5rad5,G4343,tsuyu,0.9314924834061603,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-G4343-coat5rad5,G4343,consensus,0.9559044126813232,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-G4343-coat5rad5,G4343,softgold,0.7446466580854566,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-G4343-coat5rad5,G4343,softgold_plain,0.8149583473995875,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-G4343-coat5rad5,G4343,softgold_tsuyu,0.7728134735405766,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-G4343-coat5rad5,G4343,never_trained_mean,0.8599044811556695,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-G4343-coat5rad5,G4343,jev_hybrid,0.8860437094551177,2026-10-09 13:10:19,pre-registered bench candidate (bench values computed 2026-10-07 22:47 before its public reading); jev_hybrid added 2026-10-09 by ledger_jev_bench v1.0.0
+bench-V888-relabel5,V888,aquila_v1_soft,0.8238085600442826,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-V888-relabel5,V888,aquila_v1_bin,0.9067708410899867,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-V888-coat5rn5,V888,aquila_v1_soft,0.8228635879237903,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-V888-coat5rn5,V888,aquila_v1_bin,0.9051475027447982,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-V888-coat5,V888,aquila_v1_soft,0.8218982414389133,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-V888-coat5,V888,aquila_v1_bin,0.9039303389007629,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-V888-student,V888,aquila_v1_soft,0.8139798062959148,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-V888-student,V888,aquila_v1_bin,0.8951426817292868,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-V888-E1,V888,aquila_v1_soft,0.8248116471522401,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-V888-E1,V888,aquila_v1_bin,0.9079250967572857,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-V888-R384,V888,aquila_v1_soft,0.8216942123138838,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-V888-R384,V888,aquila_v1_bin,0.9047109298127092,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-V888-B224,V888,aquila_v1_soft,0.8198554012574241,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-V888-B224,V888,aquila_v1_bin,0.9016618432859587,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-V888-R1,V888,aquila_v1_soft,0.8125849131014716,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-V888-R1,V888,aquila_v1_bin,0.8938994245899602,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-V888-CNX5,V888,aquila_v1_soft,0.7950151584668346,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-V888-CNX5,V888,aquila_v1_bin,0.8716408873256061,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-V888-rad5,V888,aquila_v1_soft,0.8204224007849784,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-V888-rad5,V888,aquila_v1_bin,0.9043412330836836,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-V888-coat5rad5,V888,aquila_v1_soft,0.828500774016824,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-V888-coat5rad5,V888,aquila_v1_bin,0.9127292256872005,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-relabel5,C529,aquila_v1_soft,0.824557464985823,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-relabel5,C529,aquila_v1_bin,0.9035988666541844,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-coat5rn5,C529,aquila_v1_soft,0.8232264785432899,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-coat5rn5,C529,aquila_v1_bin,0.9031572565687757,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-coat5,C529,aquila_v1_soft,0.8222310771152088,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-coat5,C529,aquila_v1_bin,0.9015630986272293,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-student,C529,aquila_v1_soft,0.8126108583199546,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-student,C529,aquila_v1_bin,0.890606366538144,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-E1,C529,aquila_v1_soft,0.8252939031528959,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-E1,C529,aquila_v1_bin,0.9060800485413539,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-R384,C529,aquila_v1_soft,0.8222421015513608,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-R384,C529,aquila_v1_bin,0.9026805287628873,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-B224,C529,aquila_v1_soft,0.8200221775491064,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-B224,C529,aquila_v1_bin,0.8991014025982609,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-R1,C529,aquila_v1_soft,0.8116760765808103,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-R1,C529,aquila_v1_bin,0.8887977509475129,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-B_RN3F,C529,aquila_v1_soft,0.8166488518811623,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-B_RN3F,C529,aquila_v1_bin,0.8943810413146552,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-CNX5,C529,aquila_v1_soft,0.7978559692045706,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-CNX5,C529,aquila_v1_bin,0.8714291025461504,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-rad5,C529,aquila_v1_soft,0.8198575472648817,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-rad5,C529,aquila_v1_bin,0.9029014854979768,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-coat5rad5,C529,aquila_v1_soft,0.8284293462373286,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-C529-coat5rad5,C529,aquila_v1_bin,0.9109848954022097,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-G4343-relabel5,G4343,aquila_v1_soft,0.8253696021985245,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-G4343-relabel5,G4343,aquila_v1_bin,0.904053299132778,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-G4343-coat5rn5,G4343,aquila_v1_soft,0.8195204675688603,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-G4343-coat5rn5,G4343,aquila_v1_bin,0.8960808024995832,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-G4343-coat5,G4343,aquila_v1_soft,0.8171462648583233,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-G4343-coat5,G4343,aquila_v1_bin,0.8928855920314747,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-G4343-R1,G4343,aquila_v1_soft,0.8112889618129412,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-G4343-R1,G4343,aquila_v1_bin,0.8859544769161941,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-G4343-CNX5,G4343,aquila_v1_soft,0.79296650008731,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-G4343-CNX5,G4343,aquila_v1_bin,0.8628954483307599,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-G4343-rad5,G4343,aquila_v1_soft,0.8208301586130946,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-G4343-rad5,G4343,aquila_v1_bin,0.9005454361250257,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-G4343-coat5rad5,G4343,aquila_v1_soft,0.8268771870174364,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+bench-G4343-coat5rad5,G4343,aquila_v1_bin,0.9060508971497113,2026-10-09 13:15:00,added 2026-10-09 by ledger_jev_bench v1.1.0 (same bench metric; computed after the public reading) | recorded AFTER the public reading
+H-B-63-exp152-own,GOLD58,gold58,0.935,2026-10-09 19:00:58,"EXP143 v2 (own CoAtNet 0.949 recipe, OAI-free, L2 labels, fixed SWA 14/11/12) Gold58 fresh inference; Gold58 excluded from training; public 0.949 checkpoint scores 0.9229 on the same 58"
+H-B-63-exp152-blend,GOLD58,gold58,0.935,2026-10-09 19:00:58,0.5/0.5 percentile-rank blend of EXP143 v2 and the public OAI 0.949 checkpoint (registered weight); Gold58 exposed
+H-B-63-exp152-blend,GOLD58,gold58_public60_own40,0.9333,2026-10-09 19:00:58,0.5/0.5 percentile-rank blend of EXP143 v2 and the public OAI 0.949 checkpoint (registered weight); Gold58 exposed
+H-B-58-exp154-b3-h1,PARTNER_F01,partner_jev,0.8872,2026-10-09 19:07:30,B3 with H1 partner (0.8 public 0.949 + 0.1 ConvNeXt + 0.1 H1); partner-only evidence: H1 pooled folds 0+1 (EXP149) vs the AUG1 single head used in B3-AUG1 (public 0.950); no Gold58 for the blend
+H-B-58-exp154-b3-h1,PARTNER_F01,partner_aquila,0.9219,2026-10-09 19:07:30,B3 with H1 partner (0.8 public 0.949 + 0.1 ConvNeXt + 0.1 H1); partner-only evidence: H1 pooled folds 0+1 (EXP149) vs the AUG1 single head used in B3-AUG1 (public 0.950); no Gold58 for the blend
+H-B-58-exp154-b3-h1,PARTNER_F01,partner_consensus,0.9607,2026-10-09 19:07:30,B3 with H1 partner (0.8 public 0.949 + 0.1 ConvNeXt + 0.1 H1); partner-only evidence: H1 pooled folds 0+1 (EXP149) vs the AUG1 single head used in B3-AUG1 (public 0.950); no Gold58 for the blend
+H-B-58-exp154-b3-h1,PARTNER_F01,partner_dread,0.8942,2026-10-09 19:07:30,B3 with H1 partner (0.8 public 0.949 + 0.1 ConvNeXt + 0.1 H1); partner-only evidence: H1 pooled folds 0+1 (EXP149) vs the AUG1 single head used in B3-AUG1 (public 0.950); no Gold58 for the blend
+H-B-58-exp154-b3-h1,PARTNER_F01,b3aug1_partner_jev,0.8811,2026-10-09 19:07:30,B3 with H1 partner (0.8 public 0.949 + 0.1 ConvNeXt + 0.1 H1); partner-only evidence: H1 pooled folds 0+1 (EXP149) vs the AUG1 single head used in B3-AUG1 (public 0.950); no Gold58 for the blend
+H-B-35-exp151-bundle,G4343,dread,0.8986,2026-10-09 19:07:30,"EXP138 AUG1 four-head bundle 5 folds x 2 seeds (served by EXP151 v4 with flip TTA); D-B-073 deltas vs EXP140: Dread -0.0015, flight +0.011, JEV +0.004"
+H-B-78-exp169-v102,OOF4343-partner-bundle,jev,0.8967,2026-10-10 12:12:53,"partner bundle part only (L2 RadR50 S42+S43, DINO-base, L2 ConvNeXt-T; equal-thirds family ranks; pooled 5-fold OOF, EXP170 screen); the CoAtNet trio (0.85 weight) is all-data and has no clean OOF. Forecast registered before reading: central 0.952, range 0.950-0.953 vs blend3 0.951 (handoff gain review 12:1x)"
+H-B-78-exp169-v102,OOF4343-partner-bundle,aquila,0.9195,2026-10-10 12:12:53,"partner bundle part only (L2 RadR50 S42+S43, DINO-base, L2 ConvNeXt-T; equal-thirds family ranks; pooled 5-fold OOF, EXP170 screen); the CoAtNet trio (0.85 weight) is all-data and has no clean OOF. Forecast registered before reading: central 0.952, range 0.950-0.953 vs blend3 0.951 (handoff gain review 12:1x)"

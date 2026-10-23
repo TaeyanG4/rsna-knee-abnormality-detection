@@ -1,0 +1,16 @@
+{
+  "id": "taeyangg4/rsna-knee-exp048-multicenter-5slot-5x3-256",
+  "title": "RSNA Knee EXP048 Multicenter 5Slot 5x3 256",
+  "code_file": "exp048_multicenter_cache.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "keywords": [],
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": ["rsna-knee-abnormality-detection"],
+  "model_sources": []
+}

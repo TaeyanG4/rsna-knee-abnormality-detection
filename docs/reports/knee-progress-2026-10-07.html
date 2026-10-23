@@ -1,0 +1,162 @@
+<title>무릎 MRI 대회 중간 정리</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one narrow reading column; a to-scale AUC ladder near the top, then two short lists and a schedule table. */
+:root {
+  --bg: #f4f6f8;
+  --surface: #ffffff;
+  --ink: #17212b;
+  --muted: #5a6875;
+  --line: #d9e0e6;
+  --accent: #1f6f8b;
+  --accent-soft: #d6e9f0;
+  --ours: #c2571a;
+  --ours-soft: #f6e0d2;
+  --range: #9aa9b5;
+  --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11171d; --surface: #18212a; --ink: #e4eaef; --muted: #98a6b3; --line: #2a3640;
+    --accent: #6cb6d1; --accent-soft: #1d3a47; --ours: #f0935a; --ours-soft: #4a2b19; --range: #5d6d7a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11171d; --surface: #18212a; --ink: #e4eaef; --muted: #98a6b3; --line: #2a3640;
+  --accent: #6cb6d1; --accent-soft: #1d3a47; --ours: #f0935a; --ours-soft: #4a2b19; --range: #5d6d7a;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15.5px; line-height: 1.65; margin: 0; }
+.page { max-width: 760px; margin: 0 auto; padding-inline: 20px; padding-block: 40px 64px; display: grid; gap: 36px; }
+header { display: grid; gap: 8px; }
+.eyebrow { font-family: var(--font-mono); font-size: 12.5px; letter-spacing: 0.06em; color: var(--muted); text-transform: uppercase; }
+h1 { font-size: 30px; line-height: 1.25; margin: 0; font-weight: 700; text-wrap: balance; }
+h2 { font-size: 18px; margin: 0 0 12px; font-weight: 700; text-wrap: balance; }
+p { margin: 0; }
+.lede { display: grid; gap: 6px; padding: 16px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+.lede p { max-width: 65ch; }
+.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+/* AUC ladder, drawn to one scale: 0.900 → 0.970 */
+.ladder { display: grid; gap: 7px; }
+.row { display: grid; grid-template-columns: minmax(0, 11.5em) minmax(0, 1fr) 4.6em; align-items: center; gap: 10px; font-size: 13.5px; }
+.row .label { color: var(--muted); min-width: 0; }
+.row.ours .label { color: var(--ink); font-weight: 500; }
+.track { position: relative; height: 12px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.bar { position: absolute; top: 0; bottom: 0; left: 0; background: var(--accent); border-radius: 2px; }
+.bar.range { background: var(--range); }
+.row.ours .bar { background: var(--ours); }
+.row .val { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 13px; }
+.axis { display: grid; grid-template-columns: minmax(0, 11.5em) minmax(0, 1fr) 4.6em; gap: 10px; font-family: var(--font-mono); font-size: 11.5px; color: var(--muted); }
+.axis .ticks { display: flex; justify-content: space-between; }
+.note { font-size: 13px; color: var(--muted); max-width: 65ch; }
+
+ol, ul { margin: 0; padding-left: 1.3em; display: grid; gap: 12px; }
+li { max-width: 68ch; }
+li strong { font-weight: 700; }
+li .ev { display: block; color: var(--muted); font-size: 13.5px; }
+
+.tag { display: inline-block; font-size: 11.5px; font-weight: 500; padding: 1px 7px; border-radius: 999px; margin-left: 6px; vertical-align: 1px; }
+.tag.no { background: var(--line); color: var(--muted); }
+.tag.yes { background: var(--accent-soft); color: var(--accent); }
+.tag.now { background: var(--ours-soft); color: var(--ours); }
+
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 12.5px; color: var(--muted); font-weight: 500; }
+td.when { font-family: var(--font-mono); white-space: nowrap; font-variant-numeric: tabular-nums; }
+footer { font-size: 12.5px; color: var(--muted); }
+
+@media (max-width: 560px) {
+  h1 { font-size: 25px; }
+  .row, .axis { grid-template-columns: minmax(0, 8.5em) minmax(0, 1fr) 4.2em; gap: 8px; }
+}
+</style>
+
+<div class="page">
+  <header>
+    <div class="eyebrow">RSNA Knee Abnormality Detection · 2026-10-07 13:10 KST 기준</div>
+    <h1>무릎 MRI 대회 중간 정리</h1>
+  </header>
+
+  <section class="lede">
+    <p>현재 public 점수는 <span class="num">0.943</span>입니다. 공개된 0.943 노트북을 그대로 재현한 제출이고, 동메달선(약 <span class="num">0.944</span>) 바로 아래입니다.</p>
+    <p>우리가 직접 만든 모델은 <span class="num">0.91</span>대에서 정체해 있습니다. 가장 유력한 원인은 모델 구조보다 학습 라벨의 품질입니다.</p>
+    <p>지금은 대회의 공식 판정 기준으로 학습 라벨을 다시 뽑고 있고, 그 효과는 내일 오전 제출로 확인합니다.</p>
+  </section>
+
+  <section>
+    <h2>점수 위치 (public macro AUC)</h2>
+    <div class="ladder" role="img" aria-label="public AUC 비교: 1위 0.964, 금 경계 0.959, 은 경계 0.946, 동 경계 0.944, 우리 현재 0.943, 다른 팀 단일 모델 0.935에서 0.955, 공개 Raptor 0.928, 우리 자체 모델 0.910에서 0.917">
+      <div class="row"><span class="label">1위</span><span class="track"><span class="bar" style="width:91.43%"></span></span><span class="val">0.964</span></div>
+      <div class="row"><span class="label">금 경계 (약 21위)</span><span class="track"><span class="bar" style="width:84.29%"></span></span><span class="val">0.959</span></div>
+      <div class="row"><span class="label">은 경계 (약 268위)</span><span class="track"><span class="bar" style="width:65.71%"></span></span><span class="val">0.946</span></div>
+      <div class="row"><span class="label">동 경계 (약 536위)</span><span class="track"><span class="bar" style="width:62.86%"></span></span><span class="val">0.944</span></div>
+      <div class="row ours"><span class="label">우리 현재 (공개 노트북 재현)</span><span class="track"><span class="bar" style="width:61.43%"></span></span><span class="val">0.943</span></div>
+      <div class="row"><span class="label">다른 팀 단일 모델 (포럼 보고)</span><span class="track"><span class="bar range" style="left:50%;width:28.57%"></span></span><span class="val">.935–.955</span></div>
+      <div class="row"><span class="label">공개 Raptor 모델 (같은 라벨)</span><span class="track"><span class="bar" style="width:40%"></span></span><span class="val">0.928</span></div>
+      <div class="row ours"><span class="label">우리 자체 모델</span><span class="track"><span class="bar range" style="left:14.29%;width:10%"></span></span><span class="val">.910–.917</span></div>
+      <div class="axis"><span></span><span class="ticks"><span>0.900</span><span>0.935</span><span>0.970</span></span><span></span></div>
+    </div>
+    <p class="note" style="margin-top:10px">5,361팀, 03:44 UTC 리더보드 기준. 0.943 동점이 959팀입니다. 최종 순위는 나머지 70%로 매기는 private 점수로 정해집니다.</p>
+  </section>
+
+  <section>
+    <h2>한 일</h2>
+    <ol>
+      <li><strong>공개 0.943 노트북을 재현해 기본 점수를 확보했습니다.</strong>
+        <span class="ev">구성을 분석한 결과, 일부 모델이 공식 라벨 58건으로 선택돼 있어 그 58건으로는 공정하게 검증할 수 없었습니다.</span></li>
+      <li><strong>자체 2.5D 모델을 만들어 여러 방향으로 실험했습니다.</strong>
+        <span class="ev">CoAtNet과 ResNet34, 224/384px, 5-fold, 앙상블, 증류, 슬라이스 밀도, 학습 길이, 입력 방식을 시험했고 public 제출 10여 회로 확인했습니다.</span></li>
+      <li><strong>검증 체계를 다시 세웠습니다.</strong>
+        <span class="ev">같은 환자의 검사가 같은 fold에 들어가게 묶어 5-fold로 나눴습니다. 같은 기계에서 학습이 비트 단위로 재현되는 것을 확인했고, 로컬 GPU와 캐글 T4의 추론 결과가 일치하는 것도 확인했습니다.</span></li>
+      <li><strong>공개 노트북과 자체 모델을 합친 제출을 만들었습니다.</strong>
+        <span class="ev">같은 디코딩 결과를 공유해 9시간 제한 안에 들어가게 했습니다. 현재 채점 중입니다.</span></li>
+      <li><strong>학습 라벨을 공식 기준으로 다시 뽑고 있습니다.</strong>
+        <span class="tag now">진행 중</span>
+        <span class="ev">판독 보고서 4,407건을 LLM(Claude opus)이 대회 공식 판정 기준에 맞춰 다시 라벨링하고 있습니다. 주최 측이 허용한 방법입니다.</span></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>주요 발견</h2>
+    <ul>
+      <li><strong>쉬운 개선 수단은 대부분 효과가 없었습니다.</strong><span class="tag no">효과 없음</span>
+        <span class="ev">5-fold 0.914, 다른 모델 계열 추가 0.914, 증류 0.912였습니다. 384px, 학습 2배, 80 슬라이스, 추가 시리즈 입력도 모두 seed 차이(±0.006) 안이었습니다.</span></li>
+      <li><strong>효과가 있었던 것은 두 가지입니다.</strong><span class="tag yes">효과 있음</span>
+        <span class="ev">추론 때 보는 구간 수를 24개에서 36개로 늘리면 +0.003, 성격이 다른 두 모델을 순위 평균하면 public +0.004였습니다.</span></li>
+      <li><strong>격차의 핵심은 라벨로 보입니다.</strong>
+        <span class="ev">공식 라벨은 영상을 다시 판독해 엄격한 기준으로 붙였습니다. 보고서에서 뽑은 공개 라벨들은 공식 라벨 기준으로 약 0.90에서 정체했고, 포럼에서 확인된 가장 큰 개선(+0.011~0.015)도 라벨 교체에서 나왔습니다.</span></li>
+      <li><strong>공식 기준으로 다시 뽑으면 라벨이 크게 바뀝니다.</strong>
+        <span class="ev">1,745건 중간 집계에서 53%의 검사가 하나 이상의 항목에서 판정이 바뀌었습니다. 기존 라벨 대비 양성 비율은 PF OA 33.5%→15.8%, MCL 5.3%→1.4%로 줄었고, 반월상연골과 골절만 조금 늘었습니다.</span></li>
+      <li><strong>로컬 검증만으로는 라벨 효과를 잴 수 없습니다.</strong>
+        <span class="ev">공식 라벨이 있는 학습 데이터는 58건뿐이고 이미 노출됐습니다. public은 약 390건이라 두 모델의 차이가 ±0.007~0.010 흔들립니다. 그래서 라벨 변경은 기준을 미리 정한 제출 한 번으로 판정합니다.</span></li>
+      <li><strong>0.945·0.946 공개 노트북은 비공개 자산에 의존합니다.</strong>
+        <span class="ev">복사해서 실행하면 0.943으로 떨어집니다. 0.943을 넘으려면 자체 모델 성능을 끌어올려야 합니다.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>다음 일정</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>시각 (KST)</th><th>내용</th></tr></thead>
+        <tbody>
+          <tr><td class="when">오늘 13:30</td><td>라벨 재추출 완료, 학습용 라벨 생성</td></tr>
+          <tr><td class="when">오늘 17:00</td><td>공개 노트북 + 자체 모델 결합 제출 점수 확인</td></tr>
+          <tr><td class="when">오늘 19:00</td><td>다른 공개 라벨(flight)로 학습한 5-fold 모델 제출</td></tr>
+          <tr><td class="when">내일 오전</td><td>새 라벨 모델 제출. 기존 0.914보다 +0.009 이상이면 채택, −0.005 이하면 기각</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note" style="margin-top:10px">최종 제출 2개는 public 최고점이 아니라, 로컬 검증과 public이 함께 개선을 지지한 후보 1개와 서로 다른 모델을 섞은 안정형 1개로 고를 계획입니다.</p>
+  </section>
+
+  <footer>근거는 프로젝트의 discoveries.md(D-A-001~049, D-B-001~029)와 handoff.md에 있습니다.</footer>
+</div>

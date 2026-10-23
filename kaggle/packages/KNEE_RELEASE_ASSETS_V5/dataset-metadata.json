@@ -1,0 +1,11 @@
+{
+  "title": "knee-release-assets-v5",
+  "id": "taeyangg4/knee-release-assets-v5",
+  "licenses": [
+    {
+      "name": "other"
+    }
+  ],
+  "isPrivate": true,
+  "description": "Own fixed checkpoints for the EXP104 v5 weighted ensemble release; private research only."
+}

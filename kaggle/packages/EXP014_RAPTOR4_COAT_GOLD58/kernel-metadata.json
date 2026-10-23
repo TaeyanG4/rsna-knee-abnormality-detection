@@ -1,0 +1,23 @@
+{
+  "id": "taeyangg4/rsna-knee-exp014-raptor4-coat-gold58",
+  "title": "RSNA Knee EXP014 Raptor4 CoAt Gold58",
+  "code_file": "exp014_raptor4_coat_gold58.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": false,
+  "machine_shape": "NvidiaTeslaT4",
+  "dataset_sources": [
+    "dreaddevelopment/raptor-knee-maxspan",
+    "dreaddevelopment/raptor-knee-native384",
+    "dreaddevelopment/raptor-knee-native384dense",
+    "mattiaangeli/rsna-knee-coat-resgated-ep10-top3"
+  ],
+  "competition_sources": [
+    "rsna-knee-abnormality-detection"
+  ],
+  "kernel_sources": [],
+  "model_sources": []
+}

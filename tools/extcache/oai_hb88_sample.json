@@ -1,0 +1,25 @@
+{
+  "schema": "oai-hb88-fixed-sample-v1",
+  "index_sha256": "aff2548b5d7977feeac84aba1c5e020c6daf05bec8d6f17813354cc2f031373e",
+  "selection": "First six lexicographic series_key per AX_MPR/COR_MPR indexed Sagittal, plus first three per SAG_IW_TSE/COR_IW_TSE with regular indexed planes. Frozen before header reads; no replacement based on availability or findings. MPR discordances selected here are left-knee only; not a representative prevalence sample.",
+  "series_keys": [
+    "OAI_9000798_L_V00_10249508",
+    "OAI_9001897_L_V00_10350425",
+    "OAI_9002116_L_V00_10423905",
+    "OAI_9002316_L_V00_10119605",
+    "OAI_9003316_L_V00_10252008",
+    "OAI_9004669_L_V00_10420409",
+    "OAI_9001897_L_V00_10350426",
+    "OAI_9005413_L_V00_10300109",
+    "OAI_9012435_L_V00_10347009",
+    "OAI_9015718_L_V00_10532908",
+    "OAI_9017252_L_V00_10306509",
+    "OAI_9026695_L_V00_10408209",
+    "OAI_9000798_L_V00_10249509",
+    "OAI_9001400_R_V00_10322413",
+    "OAI_9001695_R_V00_10098613",
+    "OAI_9000798_L_V00_10249505",
+    "OAI_9001400_R_V00_10322411",
+    "OAI_9001695_R_V00_10098611"
+  ]
+}

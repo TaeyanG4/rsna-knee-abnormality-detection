@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 590" width="960" height="590" font-family="system-ui, sans-serif" font-size="12" fill="#0b0b0b" role="img" aria-labelledby="title desc">
+  <title id="title">Labels, rulers and gates</title>
+  <desc id="desc">Label sources (Gold58, public report-derived label sets, our LLM relabels including Aquila) feed the L2 training labels and four report-derived rulers (Dread, JEV hybrid, Consensus, Aquila). The rulers score K1 changes on the held-out 977-study fold-0 holdout against preregistered gates. Gold58 is exposed and diagnostic only.</desc>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#52514e"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="960" height="590" fill="#fcfcfb"/>
+
+  <text x="24" y="30" font-size="14" font-weight="bold">Labels, rulers and gates</text>
+  <text x="24" y="48" fill="#52514e">Where the training and evaluation labels came from, and which data stayed held out.</text>
+
+  <g font-size="12" font-weight="bold" fill="#52514e">
+    <text x="24" y="76">LABEL SOURCES</text>
+    <text x="352" y="76">FOUR RULERS (report-derived)</text>
+    <text x="622" y="76">COHORT, GATES, OUTCOME</text>
+  </g>
+
+  <!-- A1 Gold58: exposed -->
+  <rect x="24" y="88" width="300" height="80" rx="6" fill="#f3f2ef" stroke="#52514e" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="36" y="108" font-size="13" font-weight="bold">Exposed: Gold58 official labels</text>
+  <text x="36" y="126">58 studies with official image reads</text>
+  <text x="36" y="142">diagnostic and L7 only; never a training</text>
+  <text x="36" y="158">target or epoch selector</text>
+
+  <!-- A2 public report-derived sets -->
+  <rect x="24" y="180" width="300" height="130" rx="6" fill="#eaf2fc" stroke="#2a78d6" stroke-width="1.5"/>
+  <text x="36" y="200" font-size="13" font-weight="bold">Public report-derived label sets</text>
+  <text x="36" y="220">Dread (dreaddevelopment): 4,349 rows</text>
+  <text x="36" y="238">JEV hybrid (riadmohamed42): Gold58 0.9037,</text>
+  <text x="48" y="254" fill="#52514e">tuned on 74 studies incl. Gold58</text>
+  <text x="36" y="274">flight_v4, steven_v4, pilkwang_v2</text>
+  <text x="36" y="298" fill="#52514e">Gold58 plateau near 0.90 macro AUC (D-B-014)</text>
+
+  <!-- A3 our relabels -->
+  <rect x="24" y="324" width="300" height="112" rx="6" fill="#fdf0ea" stroke="#eb6834" stroke-width="1.5"/>
+  <text x="36" y="344" font-size="13" font-weight="bold">Our LLM relabels</text>
+  <text x="36" y="364">relabel_v1: definition-aligned report labels</text>
+  <text x="36" y="384">Aquila (aquila_v1): Codex astra reader with</text>
+  <text x="48" y="400" fill="#52514e">image montages, report, prior label, rules</text>
+  <text x="36" y="420" fill="#52514e">4,405 studies read; 4,347 rows without Gold58</text>
+
+  <!-- L2 training labels -->
+  <rect x="24" y="456" width="300" height="60" rx="6" fill="#fdf0ea" stroke="#eb6834" stroke-width="1.5"/>
+  <text x="36" y="478" font-size="13" font-weight="bold">L2 labels = 0.75 Dread + 0.25 Aquila</text>
+  <text x="36" y="498">trained every own model from Oct 10, incl. K1</text>
+  <path d="M174,436 L174,454" stroke="#52514e" stroke-width="1.3" fill="none" marker-end="url(#arr)"/>
+  <path d="M24,216 L13,216 L13,486 L22,486" stroke="#52514e" stroke-width="1.3" fill="none" marker-end="url(#arr)"/>
+
+  <!-- Rulers -->
+  <rect x="352" y="184" width="232" height="44" rx="6" fill="#eaf2fc" stroke="#2a78d6" stroke-width="1.5"/>
+  <text x="364" y="202" font-size="13" font-weight="bold">Dread</text>
+  <text x="364" y="219" fill="#52514e">96 of 118 pairs</text>
+
+  <rect x="352" y="236" width="232" height="44" rx="6" fill="#eaf2fc" stroke="#2a78d6" stroke-width="1.5"/>
+  <text x="364" y="254" font-size="13" font-weight="bold">JEV hybrid</text>
+  <text x="364" y="271" fill="#52514e">99 of 118 pairs</text>
+
+  <rect x="352" y="288" width="232" height="58" rx="6" fill="#eaf2fc" stroke="#2a78d6" stroke-width="1.5"/>
+  <text x="364" y="306" font-size="13" font-weight="bold">Consensus</text>
+  <text x="364" y="322">agreement of independent sets</text>
+  <text x="364" y="338" fill="#52514e">102 of 118 pairs</text>
+
+  <rect x="352" y="356" width="232" height="44" rx="6" fill="#fdf0ea" stroke="#eb6834" stroke-width="1.5"/>
+  <text x="364" y="374" font-size="13" font-weight="bold">Aquila (aquila_v1)</text>
+  <text x="364" y="391" fill="#52514e">102 of 118 pairs (binarised)</text>
+
+  <g fill="#52514e">
+    <text x="352" y="424">All four are report-derived and</text>
+    <text x="352" y="440">correlated, so their agreement is</text>
+    <text x="352" y="456">weaker than four independent tests.</text>
+    <text x="352" y="478">n of 118 = submission pairs ordered</text>
+    <text x="352" y="494">as the public board did (D-B-081).</text>
+  </g>
+
+  <!-- source -> ruler arrows -->
+  <g stroke="#52514e" stroke-width="1.3" fill="none" marker-end="url(#arr)">
+    <path d="M324,216 L350,206"/>
+    <path d="M324,234 L350,258"/>
+    <path d="M324,270 L350,310"/>
+    <path d="M324,360 L350,324"/>
+    <path d="M324,380 L350,378"/>
+  </g>
+
+  <!-- rulers -> gates bus -->
+  <g stroke="#52514e" stroke-width="1.3" fill="none">
+    <path d="M584,206 L604,206"/>
+    <path d="M584,258 L604,258"/>
+    <path d="M584,317 L604,317"/>
+    <path d="M584,378 L604,378"/>
+    <path d="M604,206 L604,378"/>
+    <path d="M604,278 L620,278" marker-end="url(#arr)"/>
+  </g>
+
+  <!-- C1 holdout: held out -->
+  <rect x="622" y="88" width="314" height="84" rx="6" fill="#f3f2ef" stroke="#0b0b0b" stroke-width="1.8"/>
+  <text x="634" y="108" font-size="13" font-weight="bold">Held out: 977-study fold-0 holdout</text>
+  <text x="634" y="126">976 primary cohort. K1 trained only on</text>
+  <text x="634" y="142">folds 1-3 (3,190 studies) with L2 labels</text>
+  <text x="634" y="160" fill="#52514e">reused many times: selection risk</text>
+  <path d="M779,172 L779,194" stroke="#52514e" stroke-width="1.3" fill="none" marker-end="url(#arr)"/>
+
+  <!-- C2 gates -->
+  <rect x="622" y="196" width="314" height="164" rx="6" fill="#e6f6ef" stroke="#1baf7a" stroke-width="1.8"/>
+  <text x="634" y="216" font-size="13" font-weight="bold">Preregistered K1 gates (Oct 18-22)</text>
+  <text x="634" y="236">rule written to a file before the run:</text>
+  <text x="634" y="254">candidate ≥ control on at least 3 of 4 rulers</text>
+  <text x="634" y="270">AND mean macro change ≥ +0.002</text>
+  <text x="634" y="286" fill="#52514e">(+0.001 extra member, +0.003 TTA, +0.006</text>
+  <text x="634" y="302" fill="#52514e">on an expert's single target)</text>
+  <text x="634" y="320">no target below −0.005</text>
+  <text x="634" y="344" fill="#52514e">re-computed by a different agent</text>
+
+  <!-- C3 outcome -->
+  <path d="M779,360 L779,374" stroke="#52514e" stroke-width="1.3" fill="none" marker-end="url(#arr)"/>
+  <rect x="622" y="376" width="314" height="70" rx="6" fill="#ffffff" stroke="#c9c7c1" stroke-width="1.2"/>
+  <text x="634" y="396" font-size="13" font-weight="bold">Last 48 hours: 1 of 7 K1 changes passed</text>
+  <circle cx="639" cy="412" r="5" fill="#1baf7a"/>
+  <text x="650" y="416">pass: full-bag 4th member (D-B-278)</text>
+  <circle cx="639" cy="430" r="5" fill="#d03b3b"/>
+  <text x="650" y="434">fail: D-B-264, 268, 269, 271, 272, 273, 279</text>
+
+  <!-- C4 public board -->
+  <rect x="622" y="460" width="314" height="66" rx="6" fill="#eaf2fc" stroke="#2a78d6" stroke-width="1.2"/>
+  <text x="634" y="480" font-size="13" font-weight="bold">Public board: about 390 studies</text>
+  <text x="634" y="498">own-model weights changed only on public</text>
+  <text x="634" y="514">evidence from Oct 21 (section 4.5)</text>
+
+  <!-- legend -->
+  <g font-size="12">
+    <rect x="24" y="548" width="14" height="14" rx="3" fill="#eaf2fc" stroke="#2a78d6" stroke-width="1.5"/>
+    <text x="44" y="559">public</text>
+    <rect x="104" y="548" width="14" height="14" rx="3" fill="#fdf0ea" stroke="#eb6834" stroke-width="1.5"/>
+    <text x="124" y="559">ours</text>
+    <rect x="176" y="548" width="14" height="14" rx="3" fill="#e6f6ef" stroke="#1baf7a" stroke-width="1.5"/>
+    <text x="196" y="559">gate / pass</text>
+    <circle cx="289" cy="555" r="5" fill="#d03b3b"/>
+    <text x="300" y="559">fail</text>
+    <rect x="346" y="548" width="14" height="14" rx="3" fill="#f3f2ef" stroke="#52514e" stroke-width="1.5" stroke-dasharray="3 2"/>
+    <text x="366" y="559">exposed (diagnostic only)</text>
+    <rect x="534" y="548" width="14" height="14" rx="3" fill="#f3f2ef" stroke="#0b0b0b" stroke-width="1.8"/>
+    <text x="554" y="559">held out</text>
+  </g>
+</svg>

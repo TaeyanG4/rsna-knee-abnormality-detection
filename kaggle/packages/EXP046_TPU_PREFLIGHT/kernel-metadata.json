@@ -1,0 +1,27 @@
+{
+    "id":  "taeyangg4/rsna-knee-exp046-tpu-preflight",
+    "title":  "RSNA Knee EXP046 TPU Preflight",
+    "code_file":  "exp046_tpu_preflight.py",
+    "language":  "python",
+    "kernel_type":  "script",
+    "is_private":  true,
+    "enable_gpu":  false,
+    "enable_tpu":  true,
+    "enable_internet":  false,
+    "keywords":  [
+
+                 ],
+    "dataset_sources":  [
+
+                        ],
+    "kernel_sources":  [
+                           "taeyangg4/rsna-knee-exp034-adjacent-cache-4x9x288"
+                       ],
+    "competition_sources":  [
+
+                            ],
+    "model_sources":  [
+
+                      ],
+    "machine_shape":  "TpuV6E8"
+}

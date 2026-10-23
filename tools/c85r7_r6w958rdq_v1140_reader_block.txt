@@ -1,0 +1,578 @@
+# ---------------------------------------------------------------------------------------- reader
+# H-B-190 (v1.1.40-r6w958rdq): the final 2.5D ConvNeXt MIL reader overlay of goodpjw2008's notebook
+# "RSNA Knee | CoatNet R6 + 2.5D MIL | LB 0.958" (reader dataset goodpjw2008/rsna-knee-2-5d-convnext-reader,
+# Apache-2.0). Its own_src preprocess/knee/infer were re-implemented here after a line review (k = 16 windows,
+# fat-sat/non-fat-sat counterpart fill): no network, no subprocess in the reader, writes only in its run dir.
+#   Y_t = r((1 - a_t) * r(F)_t + a_t * r(Q)_t), F = the complete C85 submission.csv, Q = 3-fold mean sigmoid,
+#   r = average-tie percentile rank; a reader-failed study keeps r(F) in the reader slot; any whole failure
+#   keeps F's exact bytes. The phase is telemetry for run_release: it never raises.
+READER_VERSION = "1.0.0"
+READER_SLUG = "goodpjw2008/rsna-knee-2-5d-convnext-reader"
+READER_CHECKPOINTS = (
+    ("cnxt_v0_fold0.pt", "0b64baa9d1c29c8d5c4dffe06d9ab2c941119b37738e5a2346e882ab694e7b80"),
+    ("cnxt_v0_fold1.pt", "61696b6e67474695242fc8049e96e2ea13987db6e20d04410dc2961a689585cb"),
+    ("cnxt_v0_fold2.pt", "f5cf19cf591600c1c1a04f1aa5ff467751ef01513426a4ea3baa789443656cb6"))
+READER_LABELS = ("ACL", "MCL", "Medial Meniscus", "Lateral Meniscus", "Medial OA", "Lateral OA",
+                 "PF OA", "Effusion", "Synovitis", "Baker's", "Contusion", "Fracture")
+# Source OWN_W_PER_TARGET (v11 = v6 weights x 0.1), in READER_LABELS order.
+READER_A = (0.025, 0.02, 0.02, 0.008, 0.025, 0.008, 0.008, 0.004, 0.003, 0.035, 0.03, 0.008)
+READER_K, READER_BATCH, READER_WORKERS = 16, 4, 4
+READER_IDLE_SECONDS = 900
+READER_DIR = "reader"
+READER_FORMULA = ("Y_t=r((1-a_t)*r(F)_t+a_t*r(Q)_t); F=C85 submission.csv; Q=mean_fold sigmoid(KneeNet); "
+                  "r=average-tie percentile rank; reader-failed study: r(Q)_i:=r(F)_i; whole failure keeps F bytes")
+READER_MM_PER_PX, READER_SIZE, READER_MAX_SLICES = 0.4, 384, 64
+# plane -> (slice-order sign, (col axis, sign), (row axis, sign)) in LPS coordinates (source CANON)
+READER_CANON = {
+    0: (+1, (1, +1), (2, -1)),
+    1: (+1, (0, +1), (2, -1)),
+    2: (-1, (0, +1), (1, +1)),
+}
+READER_PLANES = ("Sagittal", "Coronal", "Axial")
+READER_SLOTS = 6  # slot = plane index + 3 * (1 - fat_suppressed)
+READER_MEAN, READER_STD = (0.485, 0.456, 0.406), (0.229, 0.224, 0.225)
+
+
+def _reader_read(path):
+    import numpy as np
+    import pydicom
+    ds = pydicom.dcmread(path)
+    arr = ds.pixel_array.astype(np.float32)
+    if ds.get("PhotometricInterpretation", "MONOCHROME2") == "MONOCHROME1":
+        arr = arr.max() - arr
+    slope, inter = ds.get("RescaleSlope"), ds.get("RescaleIntercept")
+    if slope is not None and inter is not None:
+        arr = arr * float(slope) + float(inter)
+    iop = [float(v) for v in ds.ImageOrientationPatient] if "ImageOrientationPatient" in ds else None
+    ipp = [float(v) for v in ds.ImagePositionPatient] if "ImagePositionPatient" in ds else None
+    ps = [float(v) for v in ds.PixelSpacing] if "PixelSpacing" in ds else None
+    inst = float(ds.get("InstanceNumber") or 0)
+    frames = list(arr) if arr.ndim == 3 else [arr]
+    return [(f, iop, ipp, ps, inst + i * 1e-3) for i, f in enumerate(frames)]
+
+
+def _reader_canon_slice(img, iop, ps, plane):
+    """Reorient one slice to the canonical in-plane orientation; returns (img, (row_mm, col_mm))."""
+    import numpy as np
+    ps = ps or [READER_MM_PER_PX * img.shape[0] / READER_SIZE] * 2
+    if iop is None:
+        return img, ps
+    r, c = np.array(iop[:3]), np.array(iop[3:])
+    _, (cax, csgn), (rax, rsgn) = READER_CANON[plane]
+    if abs(r[cax]) < abs(r[rax]):  # rows and columns are swapped relative to canonical
+        img, r, c, ps = img.T, c, r, ps[::-1]
+    if r[cax] * csgn < 0:
+        img = img[:, ::-1]
+    if c[rax] * rsgn < 0:
+        img = img[::-1]
+    return img, ps
+
+
+def _reader_resample(img, ps):
+    """Centre crop to SIZE*MM_PER_PX mm, resample to MM_PER_PX, zero-pad to SIZE x SIZE."""
+    import cv2
+    import numpy as np
+    out = np.zeros((READER_SIZE, READER_SIZE), np.float32)
+    h, w = img.shape
+    ch = min(h, int(round(READER_SIZE * READER_MM_PER_PX / ps[0])))
+    cw = min(w, int(round(READER_SIZE * READER_MM_PER_PX / ps[1])))
+    y0, x0 = (h - ch) // 2, (w - cw) // 2
+    crop = np.ascontiguousarray(img[y0:y0 + ch, x0:x0 + cw])
+    nh = max(1, min(READER_SIZE, int(round(ch * ps[0] / READER_MM_PER_PX))))
+    nw = max(1, min(READER_SIZE, int(round(cw * ps[1] / READER_MM_PER_PX))))
+    interp = cv2.INTER_AREA if nh < ch else cv2.INTER_LINEAR
+    res = cv2.resize(crop, (nw, nh), interpolation=interp)
+    oy, ox = (READER_SIZE - nh) // 2, (READER_SIZE - nw) // 2
+    out[oy:oy + nh, ox:ox + nw] = res
+    return out
+
+
+def reader_load_series(sdir):
+    """Source load_series(sdir) without plane_name: (uint8 [n, 384, 384], info). Unreadable slices are skipped."""
+    import numpy as np
+    slices, bad = [], 0
+    for fn in os.listdir(sdir):
+        try:
+            slices.extend(_reader_read(os.path.join(sdir, fn)))
+        except Exception:
+            bad += 1
+    info = {"n_raw": len(slices), "n_bad": bad}
+    if not slices:
+        return np.zeros((1, READER_SIZE, READER_SIZE), np.uint8), info
+    iop = next((s[1] for s in slices if s[1] is not None), None)
+    if iop is not None:
+        normal = np.cross(iop[:3], iop[3:])
+        plane = int(np.abs(normal).argmax())
+    else:
+        normal, plane = None, 0
+    info["plane"] = READER_PLANES[plane]
+    if normal is not None and all(s[2] is not None for s in slices):
+        sgn = READER_CANON[plane][0] * np.sign(normal[plane])
+        slices.sort(key=lambda s: float(np.dot(s[2], normal)) * sgn)
+    else:
+        slices.sort(key=lambda s: s[4])
+    if len(slices) > READER_MAX_SLICES:
+        keep = np.linspace(0, len(slices) - 1, READER_MAX_SLICES).round().astype(int)
+        slices = [slices[i] for i in keep]
+    vol = np.stack([_reader_resample(*_reader_canon_slice(s[0], s[1], s[3], plane)) for s in slices])
+    lo, hi = np.percentile(vol[:, ::4, ::4], [1, 99.5])
+    vol = np.clip((vol - lo) / max(hi - lo, 1e-6), 0, 1)
+    info["n"] = len(vol)
+    return (vol * 255).round().astype(np.uint8), info
+
+
+def reader_table(rows, n_slices, counterpart=True):
+    """rows: (study, series, fat_suppression, plane) in series-CSV order -> {study: 6 candidate lists}.
+
+    Source build_study_table plus the notebook's counterpart fill; rows with an unknown plane or a
+    fat-suppression value other than 0/1 are skipped instead of aborting every study.
+    """
+    table, skipped = {}, 0
+    for st, sr, fs, pl in rows:
+        if n_slices.get(sr, 0) < 3:
+            continue
+        try:
+            fat = int(fs)
+            slot = READER_PLANES.index(pl) + 3 * (1 - fat)
+        except (TypeError, ValueError):
+            skipped += 1
+            continue
+        if fat not in (0, 1):
+            skipped += 1
+            continue
+        table.setdefault(st, [[] for _ in range(READER_SLOTS)])[slot].append(sr)
+    for slots in table.values():
+        for cands in slots:
+            cands.sort(key=lambda s: -n_slices[s])
+        if counterpart:  # if fat-sat is missing use non-fat-sat of the same plane, and vice versa
+            for plane in range(3):
+                fs_s, nonfs_s = plane, plane + 3
+                if not slots[fs_s] and slots[nonfs_s]:
+                    slots[fs_s] = list(slots[nonfs_s])
+                elif not slots[nonfs_s] and slots[fs_s]:
+                    slots[nonfs_s] = list(slots[fs_s])
+    return table, skipped
+
+
+def reader_window_centres(n, k, lo=0.04, hi=0.96):
+    """k slice indices (centres of 3-slice windows) spread over the series (evaluation branch)."""
+    import numpy as np
+    a, b = max(1.0, lo * (n - 1)), min(n - 2.0, hi * (n - 1))
+    if b < a:
+        a = b = (n - 1) / 2
+    c = np.linspace(a, b, k)
+    return np.clip(np.round(c).astype(int), 1, max(1, n - 2))
+
+
+def reader_study(study, slots, root, k):
+    """Source DicomStudyDataset item: uint8 [6, k, 3, 384, 384], slot mask, positions; a series used by
+    two slots is decoded once (identical volume)."""
+    import numpy as np
+    x = np.zeros((READER_SLOTS, k, 3, READER_SIZE, READER_SIZE), np.uint8)
+    mask, pos = np.zeros(READER_SLOTS, bool), np.zeros((READER_SLOTS, k), np.float32)
+    volumes = {}
+    for s, cands in enumerate(slots):
+        if not cands:
+            continue
+        series = cands[0]
+        if series not in volumes:
+            try:
+                volumes[series] = reader_load_series(f"{root}/{study}/{series}")[0]
+            except Exception:
+                volumes[series] = None
+        vol = volumes[series]
+        if vol is None:
+            continue
+        n = len(vol)
+        if n < 3:
+            continue
+        c = reader_window_centres(n, k)
+        x[s] = np.stack([vol[np.clip([j - 1, j, j + 1], 0, n - 1)] for j in c])
+        mask[s], pos[s] = True, c / max(n - 1, 1)
+    return x, mask, pos
+
+
+class ReaderStudies:
+    """Map-style dataset without a torch import at module load; one item = one study, errors isolated."""
+
+    def __init__(self, studies, table, root, k):
+        self.studies, self.table, self.root, self.k = list(studies), table, str(root), int(k)
+
+    def __len__(self):
+        return len(self.studies)
+
+    def __getitem__(self, i):
+        import numpy as np
+        study = self.studies[i]
+        try:
+            x, mask, pos = reader_study(study, self.table.get(study, [[] for _ in range(READER_SLOTS)]),
+                                        self.root, self.k)
+            error = ""
+        except Exception as exc:
+            x = np.zeros((READER_SLOTS, self.k, 3, READER_SIZE, READER_SIZE), np.uint8)
+            mask, pos = np.zeros(READER_SLOTS, bool), np.zeros((READER_SLOTS, self.k), np.float32)
+            error = f"{type(exc).__name__}: {exc}"[:200]
+        return {"x": x, "mask": mask, "pos": pos, "index": i, "error": error}
+
+
+def reader_model_class():
+    """Source KneeNet/make_views (evaluation branch), imported lazily."""
+    import timm
+    import torch
+    import torch.nn as nn
+    import torch.nn.functional as F
+
+    def make_views(x, res, group, fov=0.92):
+        n = x.shape[0]
+        ns = n // group
+        dev = x.device
+        x = x.float().div_(255.0)
+        ang = torch.zeros(ns, device=dev)
+        sc = torch.full((ns,), fov, device=dev)
+        tx = ty = torch.zeros(ns, device=dev)
+        cos, sin = torch.cos(ang) * sc, torch.sin(ang) * sc
+        theta = torch.stack([torch.stack([cos, -sin, tx], 1), torch.stack([sin, cos, ty], 1)], 1)
+        theta = theta.repeat_interleave(group, 0)
+        grid = F.affine_grid(theta, (n, 3, res, res), align_corners=False)
+        if x.shape[-1] > 1.5 * res:  # avoid aliasing when shrinking a lot
+            x = (F.avg_pool2d(x, 2) if x.shape[-1] >= 2 * res
+                 else F.interpolate(x, scale_factor=0.75, mode="bilinear", antialias=True))
+        x = F.grid_sample(x, grid, mode="bilinear", padding_mode="zeros", align_corners=False)
+        mean = torch.tensor(READER_MEAN, device=dev).view(1, 3, 1, 1)
+        std = torch.tensor(READER_STD, device=dev).view(1, 3, 1, 1)
+        return (x - mean) / std
+
+    class KneeNet(nn.Module):
+        """2D backbone on 3-slice windows -> slot/position tokens -> small transformer -> per-finding pooling."""
+
+        def __init__(self, backbone="convnext_tiny", pretrained=True, dim=384, depth=2, drop=0.2, drop_path=0.1,
+                     img_size=None):
+            super().__init__()
+            kw = {"drop_path_rate": drop_path} if drop_path else {}
+            if img_size and backbone.startswith(("vit_", "eva", "beit")):
+                kw["img_size"] = img_size
+            self.enc = timm.create_model(backbone, pretrained=pretrained, num_classes=0, **kw)
+            self.proj = nn.Sequential(nn.Dropout(drop), nn.Linear(self.enc.num_features, dim), nn.LayerNorm(dim))
+            self.slot_emb = nn.Embedding(READER_SLOTS, dim)
+            self.pos_emb = nn.Sequential(nn.Linear(1, dim), nn.GELU(), nn.Linear(dim, dim))
+            layer = nn.TransformerEncoderLayer(dim, 8, dim * 2, dropout=0.1, batch_first=True, norm_first=True)
+            self.tf = nn.TransformerEncoder(layer, depth, enable_nested_tensor=False) if depth else None
+            self.att = nn.Sequential(nn.Linear(dim, 256), nn.Tanh(), nn.Dropout(drop), nn.Linear(256, len(READER_LABELS)))
+            self.cls_w = nn.Parameter(torch.randn(len(READER_LABELS), dim) * 0.02)
+            self.cls_b = nn.Parameter(torch.zeros(len(READER_LABELS)))
+
+        def head(self, feat, mask, pos):
+            b, s, k, _ = feat.shape
+            slot = torch.arange(s, device=feat.device).view(1, s, 1).expand(b, s, k)
+            h = self.proj(feat) + self.slot_emb(slot) + self.pos_emb(pos.unsqueeze(-1).to(feat.dtype))
+            h = h.view(b, s * k, -1)
+            pad = ~mask.unsqueeze(-1).expand(b, s, k).reshape(b, s * k)
+            pad = pad & ~pad.all(1, keepdim=True)  # a study with no series at all attends to everything
+            if self.tf is not None:
+                h = self.tf(h, src_key_padding_mask=pad)
+            a = self.att(h).float().masked_fill(pad.unsqueeze(-1), -1e4).softmax(1)
+            pooled = torch.einsum("btc,btd->bcd", a.to(h.dtype), h)
+            return (pooled * self.cls_w).sum(-1) + self.cls_b
+
+        def forward(self, x, mask, pos, res=256):
+            b, s, k = x.shape[:3]
+            keep = mask.view(-1)  # run the backbone only on series that exist
+            xv = x.view(b * s, k, *x.shape[3:])[keep].flatten(0, 1)
+            f = self.enc(make_views(xv, res, k).contiguous(memory_format=torch.channels_last))
+            feat = f.new_zeros(b * s, k, f.shape[-1])
+            feat[keep] = f.view(-1, k, f.shape[-1])
+            return self.head(feat.view(b, s, k, -1), mask, pos)
+
+    return KneeNet
+
+
+def reader_models(paths, device):
+    """Checkpoints load ONLY with weights_only=True (tensors and plain containers; no pickle code)."""
+    import torch
+    knee_net = reader_model_class()
+    models = []
+    for path in paths:
+        ck = torch.load(str(path), map_location="cpu", weights_only=True)
+        m = knee_net(ck["args"]["backbone"].split(".")[0], pretrained=False, img_size=ck["args"]["res"])
+        m.load_state_dict(ck["model"])
+        models.append((m.to(device).to(memory_format=torch.channels_last).eval(), ck["args"]["res"]))
+    return models
+
+
+def reader_forward(models, x, mask, pos, device):
+    import torch
+    with torch.no_grad():
+        x, mask, pos = x.to(device, non_blocking=True), mask.to(device), pos.to(device)
+        if device.type == "cuda":
+            with torch.autocast("cuda", dtype=torch.float16):
+                probs = torch.stack([m(x, mask, pos, res=res).float().sigmoid() for m, res in models]).mean(0)
+        else:
+            probs = torch.stack([m(x, mask, pos, res=res).float().sigmoid() for m, res in models]).mean(0)
+    return probs.cpu().numpy()
+
+
+def _reader_append(stream, rows):
+    for row in rows:
+        stream.write((json.dumps(row, allow_nan=True) + "\n").encode())
+    stream.flush()
+    os.fsync(stream.fileno())
+
+
+def reader_predict(studies, rows, root, checkpoints, journal, *, device=None, k=READER_K, batch=READER_BATCH,
+                   workers=READER_WORKERS, counterpart=True):
+    """Source infer.run semantics; one journal row per study (ok/probabilities/error), fsynced per batch."""
+    import math
+    import time
+    import torch
+    started = time.monotonic()
+    device = torch.device(device or ("cuda" if torch.cuda.is_available() else "cpu"))
+    studies = v5q.validate_ids(studies)
+    wanted = set(studies)
+    rows = [row for row in rows if row[0] in wanted]
+    n_files = {}
+    for st, sr, _, _ in rows:
+        d = f"{root}/{st}/{sr}"
+        n_files[sr] = min(len(os.listdir(d)), READER_MAX_SLICES) if os.path.isdir(d) else 0
+    table, skipped = reader_table(rows, n_files, counterpart)
+    loader = torch.utils.data.DataLoader(ReaderStudies(studies, table, root, k), batch_size=batch,
+                                         num_workers=workers, pin_memory=device.type == "cuda")
+    summary = dict(version=READER_VERSION, studies=len(studies), k=k, batch=batch, workers=workers,
+                   counterpart=bool(counterpart), device=str(device), skipped_series_rows=skipped,
+                   torch=torch.__version__, ok=0, failed=0, forward_retries=0)
+    with Path(journal).open("ab") as stream:
+        _reader_append(stream, [dict(event="start", studies=len(studies), seconds=time.monotonic() - started)])
+        batches = iter(loader)  # DataLoader workers start before any CUDA initialisation
+        models = reader_models(checkpoints, device)
+        import timm
+        summary.update(timm=timm.__version__, checkpoints=len(models),
+                       gpu=torch.cuda.get_device_name(device) if device.type == "cuda" else None,
+                       seconds_models=time.monotonic() - started)
+        _reader_append(stream, [dict(event="models", checkpoints=len(models), seconds=time.monotonic() - started)])
+        for item in batches:
+            idx = [int(v) for v in item["index"]]
+            try:
+                probs = list(reader_forward(models, item["x"], item["mask"], item["pos"], device))
+                causes = [""] * len(idx)
+            except Exception:  # isolate the failing study: retry one at a time
+                summary["forward_retries"] += 1
+                if device.type == "cuda":
+                    torch.cuda.empty_cache()
+                probs, causes = [], []
+                for j in range(len(idx)):
+                    try:
+                        probs.append(reader_forward(models, item["x"][j:j + 1], item["mask"][j:j + 1],
+                                                    item["pos"][j:j + 1], device)[0])
+                        causes.append("")
+                    except Exception as single:
+                        probs.append(None)
+                        causes.append(f"forward: {type(single).__name__}: {single}"[:200])
+            out = []
+            for j, i in enumerate(idx):
+                loaded = int(item["mask"][j].sum())
+                values = None if probs[j] is None else [float(v) for v in probs[j]]
+                error = item["error"][j] or causes[j] or ("no series loaded" if loaded == 0 else "")
+                if not error and not (values is not None and len(values) == len(READER_LABELS)
+                                      and all(math.isfinite(v) and 0.0 <= v <= 1.0 for v in values)):
+                    error = "invalid reader probabilities"
+                ok = not error
+                summary["ok" if ok else "failed"] += 1
+                out.append(dict(i=i, uid=studies[i], ok=ok, slots=loaded, p=values if ok else None,
+                                error=error or None))
+            _reader_append(stream, out)
+            done = summary["ok"] + summary["failed"]
+            if done % 100 < len(idx) or done == len(studies):
+                print("C85R7_READER_PROGRESS", json.dumps(dict(done=done, studies=len(studies), ok=summary["ok"],
+                      seconds=round(time.monotonic() - started, 1))), flush=True)
+        summary["seconds_total"] = time.monotonic() - started
+        _reader_append(stream, [dict(event="end", ok=summary["ok"], failed=summary["failed"],
+                                     seconds=summary["seconds_total"])])
+    return summary
+
+
+def run_reader(runtime, output):
+    """Child: the reader on the competition test cohort; fatal errors exit nonzero (the parent keeps F)."""
+    import csv
+    import pandas as pd
+    import torch
+    runtime_pins(runtime)
+    # A CPU fallback would take hours on the hidden cohort: without CUDA the parent keeps F instead.
+    need(torch.cuda.is_available(), "reader requires CUDA")
+    output = Path(output)
+    comp = competition_root()
+    ids = read_json(output / "ids.json")
+    with (comp / "test.csv").open(newline="", encoding="utf-8") as stream:
+        studies = v5q.validate_ids([row[p.UID] for row in csv.DictReader(stream)])
+    need(set(studies) == set(ids) and len(studies) == len(ids), "reader cohort mismatch")
+    assets = v5q._mount(READER_SLUG, READER_CHECKPOINTS[0][0])
+    paths = []
+    for name, digest in READER_CHECKPOINTS:
+        p.check_pin(assets / name, digest)
+        paths.append(assets / name)
+    se = pd.read_csv(comp / "test_series.csv")
+    rows = list(zip(se.StudyInstanceUID.astype(str), se.SeriesInstanceUID.astype(str), se.Fat_Suppression,
+                    se.Anatomical_Plane))
+    summary = reader_predict(studies, rows, comp / "test_series", paths, output / "journal.jsonl")
+    write_once(output / "worker.json", json_bytes(summary))
+    return summary
+
+
+def reader_wait(args, *, env, journal, idle_seconds=READER_IDLE_SECONDS, poll_seconds=5.0):
+    """run_process_group plus an idle watchdog: no journal growth for idle_seconds kills the process group."""
+    import subprocess
+    import time
+    options = ({"creationflags": subprocess.CREATE_NEW_PROCESS_GROUP} if os.name == "nt"
+               else {"start_new_session": True})
+    process = subprocess.Popen(args, env=env, **options)
+    size, changed = None, time.monotonic()
+    try:
+        while True:
+            try:
+                code = process.wait(timeout=poll_seconds)
+                break
+            except subprocess.TimeoutExpired:
+                pass
+            try:
+                current = Path(journal).stat().st_size
+            except OSError:
+                current = None
+            now = time.monotonic()
+            if current != size:
+                size, changed = current, now
+            elif now - changed >= idle_seconds:
+                v5q._kill_process_group(process)
+                raise RuntimeError(f"reader idle watchdog: no journal progress for {idle_seconds} s")
+    except BaseException:
+        if process.poll() is None:
+            v5q._kill_process_group(process)
+        raise
+    need(code == 0, f"reader child failed with exit code {code}")
+
+
+def reader_journal(path, ids):
+    """Complete journal lines -> {uid: 12 probabilities} for valid successful studies, plus counts."""
+    import math
+    wanted, seen, unreadable = set(ids), {}, 0
+    path = Path(path)
+    lines = path.read_bytes().split(b"\n")[:-1] if path.is_file() else []  # a trailing partial line is ignored
+    for raw in lines:
+        try:
+            row = json.loads(raw)
+        except ValueError:
+            unreadable += 1
+            continue
+        if not isinstance(row, dict) or "uid" not in row:
+            continue
+        uid, values = row["uid"], row.get("p")
+        if not isinstance(uid, str) or uid in seen:
+            if isinstance(uid, str):
+                seen[uid] = None  # duplicate rows make the study ambiguous: reader-failed
+            continue
+        valid = (row.get("ok") is True and uid in wanted and isinstance(values, list)
+                 and len(values) == len(READER_LABELS)
+                 and all(type(v) in (int, float) and math.isfinite(v) and 0.0 <= v <= 1.0 for v in values))
+        seen[uid] = [float(v) for v in values] if valid else None
+    reader = {uid: v for uid, v in seen.items() if v is not None and uid in wanted}
+    return reader, dict(journal_studies=len(seen), journal_failed=sum(v is None for u, v in seen.items() if u in wanted),
+                        unreadable_lines=unreadable, missing=len(wanted - set(seen)),
+                        unknown=len(set(seen) - wanted))
+
+
+def reader_blend(ids, base, reader):
+    """Y = r((1-a) r(F) + a rQ); rQ = r(Q) over reader-successful studies, r(F) for reader-failed ones.
+
+    Returns (None, stats) for a whole fallback: fewer than two successes or a constant reader column."""
+    import numpy as np
+    ids = v5q.validate_ids(ids)
+    base = v5q._probabilities("reader base", base, len(ids))
+    ok = np.asarray([uid in reader for uid in ids], dtype=bool)
+    stats = dict(studies=len(ids), reader_ok=int(ok.sum()), fallback_studies=int((~ok).sum()))
+    if int(ok.sum()) < 2:
+        return None, dict(stats, reason="fewer than two reader-successful studies")
+    q = v5q._probabilities("reader", [reader[uid] for uid, good in zip(ids, ok) if good], int(ok.sum()))
+    if not all(len(set(q[:, j].tolist())) > 1 for j in range(len(READER_LABELS))):
+        return None, dict(stats, reason="constant reader column")
+    rf = c85.rank(base)
+    rq = rf.copy()
+    rq[ok] = c85.rank(q)
+    a = np.asarray(READER_A, dtype=np.float64)
+    y = c85.rank((1.0 - a) * rf + a * rq)
+    return v5q._probabilities("reader overlay", y, len(ids)), stats
+
+
+def _reader_restore(sub, base, work):
+    """Put F's exact bytes back in place (atomic replace) unless they are already there."""
+    if base is None or (sub.is_file() and sub.read_bytes() == base):
+        return
+    staged = (work if work.is_dir() else sub.parent) / "restore-submission.csv"
+    staged.unlink(missing_ok=True)
+    with staged.open("xb") as stream:
+        stream.write(base)
+    os.replace(staged, sub)
+    p.check_pin(sub, hashlib.sha256(base).hexdigest())
+
+
+def reader_apply(sub, work):
+    """Overlay the journal onto the saved base copy; a whole fallback leaves submission.csv untouched."""
+    import numpy as np
+    need(tuple(p.LABELS) == READER_LABELS, "reader label order differs from submission columns")
+    base_path = work / "hb189-submission.csv"
+    ids, base = v5q._read_csv(base_path)
+    reader, counts = reader_journal(work / "journal.jsonl", ids)
+    values, stats = reader_blend(ids, base, reader)
+    stats.update(counts)
+    if values is None:
+        need(sub.read_bytes() == base_path.read_bytes(), "base submission changed during reader phase")
+        return dict(stats, status="FALLBACK_ALL", submission_sha256=sha(sub))
+    payload = p.csv_bytes(ids, values)
+    staged = work / "submission.csv"
+    write_once(staged, payload)
+    saved_ids, saved = v5q._read_csv(staged)
+    v5q.validate_ids(ids, saved_ids)
+    need(bool(np.array_equal(saved.astype(np.float32), values.astype(np.float32))), "reader CSV round trip")
+    need(sub.read_bytes() == base_path.read_bytes(), "base submission changed during reader phase")
+    os.replace(staged, sub)
+    p.check_pin(sub, hashlib.sha256(payload).hexdigest())
+    return dict(stats, status="APPLIED", submission_sha256=hashlib.sha256(payload).hexdigest())
+
+
+def reader_phase(runtime, output, codec, env, tele):
+    """After collect: run the reader child, overlay, and record. Never raises; F's bytes survive failures."""
+    sub, work = output / "submission.csv", output / RUN / READER_DIR
+    record = dict(version=READER_VERSION, release=RELEASE, formula=READER_FORMULA, a=list(READER_A),
+                  labels=list(READER_LABELS), status="NOT_RUN", exposure="EXPOSED", clean_oof=False)
+    base = None
+    try:
+        need(sub.is_file(), "no C85 submission to overlay")
+        base = sub.read_bytes()
+        record["base_sha256"] = hashlib.sha256(base).hexdigest()
+        ids, _ = v5q._read_csv(sub)
+        work.mkdir(parents=True)
+        write_once(work / "hb189-submission.csv", base)
+        write_once(work / "ids.json", json_bytes(ids))
+        child = codecs.child_env(env, codec, branch="READER", telemetry_dir=tele)
+        record["phase"] = c85.phase(work, "READER", lambda: reader_wait(
+            [sys.executable, "-u", str(Path(runtime) / "exp169_release_c85r7codec.py"), "reader-worker",
+             "--runtime", str(runtime), "--output", str(work)], env=child, journal=work / "journal.jsonl"))
+        record["worker"] = optional_json(work / "worker.json")
+        record.update(reader_apply(sub, work))
+    except Exception as exc:
+        record.update(status="FALLBACK_ERROR", error=f"{type(exc).__name__}: {exc}"[:300])
+        try:
+            _reader_restore(sub, base, work)
+        except Exception as restore_error:
+            record["restore_error"] = f"{type(restore_error).__name__}: {restore_error}"[:300]
+    try:
+        record["submission_sha256"] = sha(sub) if sub.is_file() else None
+        record["codecs"] = {k: v for k, v in codec_summary(output).items() if k in ("status", "totals", "branches")}
+        write_once(work / "reader-receipt.json" if work.is_dir() else output / RUN / "reader-receipt.json",
+                   json_bytes(record))
+    except Exception as exc:
+        record["receipt_error"] = f"{type(exc).__name__}: {exc}"[:300]
+    try:
+        print("C85R7_READER", json.dumps({k: record.get(k) for k in ("status", "reason", "studies", "reader_ok",
+              "fallback_studies", "error", "base_sha256", "submission_sha256")}), flush=True)
+    except Exception:
+        pass
+    return record
+
+

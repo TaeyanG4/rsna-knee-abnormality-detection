@@ -1,0 +1,23 @@
+{
+    "id":  "taeyangg4/rsna-knee-exp045-convnext-s-5fold-cpu",
+    "title":  "RSNA Knee EXP045 ConvNeXt-S 5Fold CPU",
+    "code_file":  "exp045_convnext_s_5fold_cpu.py",
+    "language":  "python",
+    "kernel_type":  "script",
+    "is_private":  true,
+    "enable_gpu":  false,
+    "enable_tpu":  false,
+    "enable_internet":  false,
+    "dataset_sources":  [
+                            "taeyangg4/rsna-knee-exp045-convnext-s-5fold-weights"
+                        ],
+    "competition_sources":  [
+                                "rsna-knee-abnormality-detection"
+                            ],
+    "kernel_sources":  [
+
+                       ],
+    "model_sources":  [
+
+                      ]
+}

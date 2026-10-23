@@ -1,0 +1,22 @@
+{
+  "id": "taeyangg4/knee-parity-probe-t4-v1",
+  "title": "knee-parity-probe-t4-v1",
+  "code_file": "run.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "machine_shape": "NvidiaTeslaT4",
+  "keywords": [
+    "gpu"
+  ],
+  "dataset_sources": [
+    "taeyangg4/knee-runners-v2",
+    "taeyangg4/knee-raptor-corpus-336",
+    "taeyangg4/knee-exp089-recipe-transfer-v1"
+  ],
+  "competition_sources": [],
+  "kernel_sources": []
+}

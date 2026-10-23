@@ -1,0 +1,18 @@
+{
+  "schema": "k1-fold-template/v1",
+  "model_count": 6,
+  "folds": [1, 2, 3],
+  "drop_o": true,
+  "alpha": 0.25,
+  "k1_eval_stride": 2,
+  "encoder_chunk": 32,
+  "runtime": {
+    "parent_hours": [6.5, 6.9],
+    "parent_k1_models_stride3": 0,
+    "per_model_stride3_hours": 0.45,
+    "stride2_multiplier": 1.44,
+    "o_hours": 1.1,
+    "limit_hours": 8.0,
+    "basis": "H-B-224 follow-up user estimates. Parent K1 inclusion is unconfirmed; conservatively do not subtract existing K1 costs. Change parent_k1_models_stride3 to 3 only with explicit evidence that the 6.5-6.9h baseline includes those models."
+  }
+}

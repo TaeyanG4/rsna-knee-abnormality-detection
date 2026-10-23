@@ -1,0 +1,126 @@
+[
+  {
+    "page": "Description",
+    "slug": "description",
+    "title_ko": "대회 개요",
+    "competition": "rsna-knee-abnormality-detection",
+    "source_sha": "812ccca01a1b01fdd99eda9be315c06a7f1df8053b532b6d3ae4a2af48339433",
+    "source_observed_at": "2026-10-01T02:53:00+00:00",
+    "translated_at": "2026-10-01",
+    "translator": "Codex AI 번역",
+    "scope": "full_text",
+    "notes": []
+  },
+  {
+    "page": "abstract",
+    "slug": "abstract",
+    "title_ko": "한눈에 보기",
+    "competition": "rsna-knee-abnormality-detection",
+    "source_sha": "9aaa35cd00ffbe88f3d6a0e53481223e8c6b1fca83a4872f02cd6e8c27456247",
+    "source_observed_at": "2026-10-01T04:45:28.933396+00:00",
+    "translated_at": "2026-10-01",
+    "translator": "Codex AI 번역",
+    "scope": "full_text",
+    "notes": []
+  },
+  {
+    "page": "Evaluation",
+    "slug": "evaluation",
+    "title_ko": "평가 방식",
+    "competition": "rsna-knee-abnormality-detection",
+    "source_sha": "2abd98e6882a9493ea19e0582acfe21b8fdeff6a3cb5c04575271245e8d539ba",
+    "source_observed_at": "2026-10-01T02:53:00+00:00",
+    "translated_at": "2026-10-01",
+    "translator": "Codex AI 번역",
+    "scope": "full_text",
+    "notes": []
+  },
+  {
+    "page": "Timeline",
+    "slug": "timeline",
+    "title_ko": "대회 일정",
+    "competition": "rsna-knee-abnormality-detection",
+    "source_sha": "077c171707c413423852a1d7155ac3784aaf3ffa5f3ad20c6b946deb1100d3f3",
+    "source_observed_at": "2026-10-01T02:53:00+00:00",
+    "translated_at": "2026-10-01",
+    "translator": "Codex AI 번역",
+    "scope": "full_text",
+    "notes": []
+  },
+  {
+    "page": "data-description",
+    "slug": "data-description",
+    "title_ko": "데이터 설명",
+    "competition": "rsna-knee-abnormality-detection",
+    "source_sha": "316dcdf5409280e576f3814bee1ce26760aa9825908bf931162d5a126cc7ee83",
+    "source_observed_at": "2026-10-01T02:53:00+00:00",
+    "translated_at": "2026-10-01",
+    "translator": "Codex AI 번역",
+    "scope": "full_text",
+    "notes": []
+  },
+  {
+    "page": "Code Requirements",
+    "slug": "code-requirements",
+    "title_ko": "코드·제출 요건",
+    "competition": "rsna-knee-abnormality-detection",
+    "source_sha": "7717ab86668081aa7813ca9aa3067f8ed20b539515fa23129f65cd40b848cc8e",
+    "source_observed_at": "2026-10-01T02:53:00+00:00",
+    "translated_at": "2026-10-01",
+    "translator": "Codex AI 번역",
+    "scope": "full_text",
+    "notes": []
+  },
+  {
+    "page": "Efficiency Prize Evaluation",
+    "slug": "efficiency-prize-evaluation",
+    "title_ko": "효율성 상 평가",
+    "competition": "rsna-knee-abnormality-detection",
+    "source_sha": "4e18ef1a0b50fb7a9c2a4e7308dde61feaf5746d07f034f9c0ed81cc2018cff0",
+    "source_observed_at": "2026-10-01T02:53:00+00:00",
+    "translated_at": "2026-10-01",
+    "translator": "Codex AI 번역",
+    "scope": "full_text",
+    "notes": []
+  },
+  {
+    "page": "Prizes",
+    "slug": "prizes",
+    "title_ko": "상금·수상 요건",
+    "competition": "rsna-knee-abnormality-detection",
+    "source_sha": "60abb2ea73f93e2ce3312b0f0c09c1b5bd9e3b3ffbcd24a5982edad56ef0040a",
+    "source_observed_at": "2026-10-01T04:45:28.817458+00:00",
+    "translated_at": "2026-10-01",
+    "translator": "Codex AI 번역",
+    "scope": "full_text",
+    "notes": []
+  },
+  {
+    "page": "rules",
+    "slug": "rules",
+    "title_ko": "대회 규칙",
+    "competition": "rsna-knee-abnormality-detection",
+    "source_sha": "9105f8f81f96c02aca988197c175d699052be8c06419b21131dccdd426bc404d",
+    "source_observed_at": "2026-10-01T02:53:00+00:00",
+    "translated_at": "2026-10-01",
+    "translator": "Codex AI 번역",
+    "scope": "full_text",
+    "notes": [
+      "원문 2.5.a.2의 CC-BY-NC 표기와 OSI·상업적 사용에 관한 문장은 서로 일치하지 않는 부분이 있습니다. 조항 번호·링크·라이선스 표기를 임의로 수정하지 않았습니다."
+    ]
+  },
+  {
+    "page": "Acknowledgements",
+    "slug": "acknowledgements",
+    "title_ko": "기여자",
+    "competition": "rsna-knee-abnormality-detection",
+    "source_sha": "b3dd68d6deae3dd0a26e3189ff639c849636e165d3484fc6def6c57c85b66617",
+    "source_observed_at": "2026-10-01T04:45:29.077399+00:00",
+    "translated_at": "2026-10-01",
+    "translator": "Codex AI 번역",
+    "scope": "full_text",
+    "notes": [
+      "인명·기관명은 원문 표기를 유지합니다."
+    ]
+  }
+]

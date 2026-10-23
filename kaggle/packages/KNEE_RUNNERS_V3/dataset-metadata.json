@@ -1,0 +1,11 @@
+{
+ "title": "knee-runners-v3",
+ "id": "taeyangg4/knee-runners-v3",
+ "licenses": [
+  {
+   "name": "other"
+  }
+ ],
+ "isPrivate": true,
+ "description": "Private: EXP101 arch-generic 5-fold runner, frozen protocol inputs (EXP084 split, EXP099 folds) and Dread labels for remote GPU runs (no report text, no Gold)."
+}

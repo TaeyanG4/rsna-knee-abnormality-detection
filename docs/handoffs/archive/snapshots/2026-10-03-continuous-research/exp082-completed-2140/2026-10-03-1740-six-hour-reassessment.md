@@ -1,0 +1,9 @@
+# 2026-10-03 17:40 KST · 6시간 방향·검증 재점검
+
+- 상태:진행,21:26갱신. 사용자승인D01 제출1회·공개/유료0. [방향/판정법](../decisions/0004-validation-protocol.md):개발비교→group/ancestor확인→제한LB. 사전고정도최고public선택편향잔존,일5회는상한.
+- **EXP082_R34_ONES_F2** 21:16시작·wrapper35792/train27744. artifacts/logs/EXP082_R34_ONES_F2/run.log. 20/20epoch·updates8680/skip0·1.95GiB;초기093be508…/train3475+eval868/strictFP16gatePASS. RN20/B입력/seed42/batch8·eval4·ones loss만개입·Gold미접근. ETA21:29~34,**21:32예약**. [실측/명령](evidence/2026-10/2026-10-03-continuous-research/exp082-progress-2126.json).
+- 등록 artifacts/experiments/EXP082_R34_LOSS_F2_PROTOCOL/manifest.json SHA c946090a…a07a30,queue/orderedIDs동결. CPU10/독립16AST/root24bindings검토후시작,원4학습소스불변. 완료SUCCESS/provenance/summary/OOF 확인전새점수읽지않는다.
+- root전용 tools/exp082_loss_report.py 합성8PASS·후보완료전해시고정. [검증/정확명령](evidence/2026-10/2026-10-03-exp082-report-tool/verification.json)을완료후1회실행. primary90:10(B,RNones)−90:10(B,RNclip),RN단독secondary·12P/N/소견/장비/mask/조건부500CI. 기존B/RN hash·8680attempts/skip·Gold없음gate,전체rank고정후재표집. 기존EXP080CLI오용금지. 추가fit/ratio/소견routing없음.
+- [group계약](../../artifacts/experiments/VALIDATION_GROUP_CONTRACT_V1/HANDOFF.md) 완료:4343UID/report4197+확인edge→4196components·oldfold0↔1연결1. CPU8/독립DFS/root출력hashPASS. 현재cache전체/원본7표본중복·환자/전체study미확정. 새split없음·기존fold불변. F2알려진쌍둘다train이나독립holdout아님. [v6계획](evidence/2026-10/2026-10-03-validation-gap-investment/v6-validation-plan/memo.md):새split이면공통B도재학습,양RN포함66~82GPU분추정·자동배정아님.
+- D01 **56796964**,20:46:11 승인1회제출·20:46:32 PENDING관측/점수없음·당일4회잔여. taeyangg4/knee-d01-candidate-v3 v1;중복제출금지. 20:40HOLD→20:42출력9종PASS→20:46제출보존. 정확도미입증·B+RN과별개. 통합133/최종public3 PASS이나1300추정8.594h/9h·memory29.541/30GiB·full보장없음. 원hashFAIL/경로NO_GO보존.[전체상태](evidence/2026-10/2026-10-03-continuous-research/d01-serving-status.json). 채점첫조회10-04 **05:02** 계획(queue미확인);조기반복조회없음.
+- EXP080 RN+.001243보존/B-A골절−.022337반복/B임시. EXP081−.000684 CI0포함·max-span직접교체미채택/coverage전체기각아님. Biohub:실행PASS≠성능,작은이득·손실·검증누출범위보존. 학습/평가후재판정·미완료새ETA예약,사용자중단시정리.

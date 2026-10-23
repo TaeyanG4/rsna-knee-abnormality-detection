@@ -1,0 +1,644 @@
+{
+    "schema":  "oof-error-audit-registry-v2",
+    "version":  "2.0.1",
+    "expected_studies":  4343,
+    "folds":  [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4
+              ],
+    "roster_manifest":  {
+                            "path":  "artifacts/experiments/EXP149_LABEL_SOURCES/students/manifest.json",
+                            "sha256":  "42a78b5e3c48380b4a4bfc733484b19c4fe880f39fbb3c690058d6d3051ee135"
+                        },
+    "bindings":  [
+                     {
+                         "path":  "artifacts/experiments/EXP084_GROUP_R34_LOSS_PROTOCOL/ordered-ids.json",
+                         "sha256":  "0a1b2f3d67ba9588855d671cc7119d168fbfb8d0b4499357ad68249cbcc2f473",
+                         "role":  "roster"
+                     },
+                     {
+                         "path":  "artifacts/experiments/VALIDATION_GROUP_CONTRACT_V1/components.json",
+                         "sha256":  "ede3ffcac6102ff575d9b3c0d4ffe9ea354a54496238d63bee6836b901a8cc52",
+                         "role":  "components"
+                     },
+                     {
+                         "path":  "storage/labels/riadmohamed42__jev-knee-labels/HYBRID_labels_binary.csv",
+                         "sha256":  "aa64723de96d45408588c6fb6c234980d610e996e3f1f4241111213aeefe0316",
+                         "role":  "reference"
+                     },
+                     {
+                         "path":  "storage/labels/derived_constellation/aquila_v1.csv",
+                         "sha256":  "2c709b9a5fa053bc791e5f88f63d980a4eb506b2191c2f7d541c87b9140b4425",
+                         "role":  "reference"
+                     },
+                     {
+                         "path":  "storage/labels/dreaddevelopment__rsna-knee-labels/labels_llm_soft.csv",
+                         "sha256":  "8cec477fb555e88bbb4196197fd3f806cbafed8cc2f6b2d48d26a8d49fbd86a1",
+                         "role":  "reference"
+                     },
+                     {
+                         "path":  "storage/labels/stevenleehans__rsna-knee-llm-report-labels/llm_labels_v4_blend.csv",
+                         "sha256":  "eb4c2b29e7e84adbb4b5ccee825ca20ade6a43dbe295f13be442d549e4f5dca4",
+                         "role":  "reference"
+                     },
+                     {
+                         "path":  "storage/labels/pilkwang__rsna-knee-llm-labels/report_labels_v2.csv",
+                         "sha256":  "6f704a7bdb2f894cc49445b19ba7c4378c3f548d3449e00361e10044bee40920",
+                         "role":  "reference"
+                     },
+                     {
+                         "path":  "storage/labels/derived_relabel/relabel_v1.csv",
+                         "sha256":  "8aeaf4048b10ccb4fd48d229706b366bffdabb89019772d19f5e2bdf29d6ffc8",
+                         "role":  "reference"
+                     },
+                     {
+                         "path":  "artifacts/experiments/EXP099_KFOLD_PROTOCOL_V1/fold0/ordered-ids.json",
+                         "sha256":  "0a1b2f3d67ba9588855d671cc7119d168fbfb8d0b4499357ad68249cbcc2f473",
+                         "role":  "roster"
+                     },
+                     {
+                         "path":  "artifacts/experiments/EXP099_KFOLD_PROTOCOL_V1/fold1/ordered-ids.json",
+                         "sha256":  "8fd27245cf998932b57aa29c787953ca314f2d04ee1550954fec9243e44a21fb",
+                         "role":  "roster"
+                     },
+                     {
+                         "path":  "artifacts/experiments/EXP099_KFOLD_PROTOCOL_V1/fold2/ordered-ids.json",
+                         "sha256":  "b43ddd69a11652d3f44cb8b325d52b185fbdb4db0b03d64037a9dc7ab143aa2e",
+                         "role":  "roster"
+                     },
+                     {
+                         "path":  "artifacts/experiments/EXP099_KFOLD_PROTOCOL_V1/fold3/ordered-ids.json",
+                         "sha256":  "f5dfff1109aeac54dc88d93202ed62bcb00a2339881f0938c747490f02e4df3f",
+                         "role":  "roster"
+                     },
+                     {
+                         "path":  "artifacts/experiments/EXP099_KFOLD_PROTOCOL_V1/fold4/ordered-ids.json",
+                         "sha256":  "c94ef8239cefd8cc90640390962f65ead30c67a98b05238921fee5b4c950a538",
+                         "role":  "roster"
+                     },
+                     {
+                         "path":  "tools/oof_error_audit.py",
+                         "sha256":  "1e300fb6c74ad6853877c625b1e9341f566846b9ad76fea21a0f1b3fb1bbfd99",
+                         "role":  "helper"
+                     },
+                     {
+                         "path":  "tools/exp149_label_sources.py",
+                         "sha256":  "16e27de9c3006f4c9f4737d0afed35b5600ae9f891eeace44d74519c3ce072a1",
+                         "role":  "helper"
+                     },
+                     {
+                         "path":  "tools/exp115_vlm_eval.py",
+                         "sha256":  "ea3825b043743d9b588311df622f7fdb8ec0f9935f9b5ee1132f2809e9748a8e",
+                         "role":  "helper"
+                     },
+                     {
+                         "path":  "tools/exp169_bundle_screen.py",
+                         "sha256":  "90f6203e51ce01e1eeb195e5f1937fb41b8bce4b95563b9f4121b1d34492743d",
+                         "role":  "helper"
+                     },
+                     {
+                         "path":  "tools/exp156_k_sweep.py",
+                         "sha256":  "8c4658ca186e77d25c1da3e2d1704c77b596678726a10f02bf80fff03cc3efe2",
+                         "role":  "helper"
+                     },
+                     {
+                         "path":  "tools/exp177_bundle_aggregation_audit.py",
+                         "sha256":  "d65df611e76d06e8ae2fbd3d6e1c8edf271b7954117c8d3319231e637e4fcf67",
+                         "role":  "helper"
+                     },
+                     {
+                         "path":  "tools/exp175_image_domain_audit.py",
+                         "sha256":  "8f1fee2acbbefdfba9c88651df4d54cf3360032c8cb865e6e042d109ca9e4460",
+                         "role":  "helper"
+                     },
+                     {
+                         "path":  "tools/ext_zeroshot.py",
+                         "sha256":  "77679cb88c6b2411dc79fc3d1feacb6b07edd5b3c18dc42947cbf6bebc7d35c7",
+                         "role":  "helper"
+                     },
+                     {
+                         "path":  "training/src/raptor_common.py",
+                         "sha256":  "bc6db5b3e8cd13b52fbff8c039d3674cdf573f86c1959e22fe9b2fd94255d7dc",
+                         "role":  "helper"
+                     }
+                 ],
+    "variants":  [
+                     {
+                         "id":  "l2_radr50",
+                         "family":  "radr50",
+                         "label_recipe":  "L2",
+                         "prediction_policy":  "plain K36; within-fold percentile rank per seed, then equal seed mean",
+                         "expected_seeds":  [
+                                                42,
+                                                43
+                                            ],
+                         "enabled":  true,
+                         "path_regex":  "artifacts/experiments/(?:EXP149_L2_S42_F[01]|EXP157_L2_S42_F[234]|EXP157_L2_S43_F[0-4])/oof_k36\\.csv",
+                         "members":  [
+                                         {
+                                             "seed":  42,
+                                             "fold":  0,
+                                             "path":  "artifacts/experiments/EXP149_L2_S42_F0/oof_k36.csv",
+                                             "sha256":  "faac47775e62596674f0ff0c3d754bfdb0734ffdcf5902ce087f896b67d5bc61",
+                                             "summary":  {
+                                                             "path":  "artifacts/experiments/EXP149_L2_S42_F0/summary.json",
+                                                             "sha256":  "246acc91d619e79d2b45fae62cfd607481594b582a1bb8fca4c219a05df1b18e"
+                                                         },
+                                             "identity":  {
+                                                              "run":  "EXP149_L2_S42_F0",
+                                                              "fold":  0,
+                                                              "label_set":  "l2",
+                                                              "gold_access":  "disabled"
+                                                          }
+                                         },
+                                         {
+                                             "seed":  42,
+                                             "fold":  1,
+                                             "path":  "artifacts/experiments/EXP149_L2_S42_F1/oof_k36.csv",
+                                             "sha256":  "d1e526b5260fa9303336d45e152a5ec7acc8271ce8b943573163443aa72436e3",
+                                             "summary":  {
+                                                             "path":  "artifacts/experiments/EXP149_L2_S42_F1/summary.json",
+                                                             "sha256":  "31915b74b0c0c0015bb0778ad1c8cf3b4197ee4624aff2ba457e14e9a5e1f04d"
+                                                         },
+                                             "identity":  {
+                                                              "run":  "EXP149_L2_S42_F1",
+                                                              "fold":  1,
+                                                              "label_set":  "l2",
+                                                              "gold_access":  "disabled"
+                                                          }
+                                         },
+                                         {
+                                             "seed":  42,
+                                             "fold":  2,
+                                             "path":  "artifacts/experiments/EXP157_L2_S42_F2/oof_k36.csv",
+                                             "sha256":  "6e23282966737a908ee774e3998a8fc28ae3388ef0f7c277834bfd09675854aa",
+                                             "summary":  {
+                                                             "path":  "artifacts/experiments/EXP157_L2_S42_F2/summary.json",
+                                                             "sha256":  "4df952522b894f1957c29f99c133706341313e1073b84e24d81aaeba9d213f51"
+                                                         },
+                                             "identity":  {
+                                                              "run":  "EXP157_L2_S42_F2",
+                                                              "fold":  2,
+                                                              "label_set":  "l2",
+                                                              "gold_access":  "disabled"
+                                                          }
+                                         },
+                                         {
+                                             "seed":  42,
+                                             "fold":  3,
+                                             "path":  "artifacts/experiments/EXP157_L2_S42_F3/oof_k36.csv",
+                                             "sha256":  "6c39d2c42d453b0918b264af2f5c970a73f10d0a266544c06dec6ec2c6bdbc01",
+                                             "summary":  {
+                                                             "path":  "artifacts/experiments/EXP157_L2_S42_F3/summary.json",
+                                                             "sha256":  "a0b008e3514cdd020cc146eef28006ad09dbfb90a6286c72b30012f971cd7d56"
+                                                         },
+                                             "identity":  {
+                                                              "run":  "EXP157_L2_S42_F3",
+                                                              "fold":  3,
+                                                              "label_set":  "l2",
+                                                              "gold_access":  "disabled"
+                                                          }
+                                         },
+                                         {
+                                             "seed":  42,
+                                             "fold":  4,
+                                             "path":  "artifacts/experiments/EXP157_L2_S42_F4/oof_k36.csv",
+                                             "sha256":  "0f4b4f8d2c4c1b150baeb72d8995656daac191b6d73883ee08ccea37f59531b0",
+                                             "summary":  {
+                                                             "path":  "artifacts/experiments/EXP157_L2_S42_F4/summary.json",
+                                                             "sha256":  "90b65755dcb9394a5a4fb36205138828adca8923c9ef75be65445e7156f0e92d"
+                                                         },
+                                             "identity":  {
+                                                              "run":  "EXP157_L2_S42_F4",
+                                                              "fold":  4,
+                                                              "label_set":  "l2",
+                                                              "gold_access":  "disabled"
+                                                          }
+                                         },
+                                         {
+                                             "seed":  43,
+                                             "fold":  0,
+                                             "path":  "artifacts/experiments/EXP157_L2_S43_F0/oof_k36.csv",
+                                             "sha256":  "bea28a5341968af4f40b911d49d7f31bff151b174aebc2bfe4fa141e8be07aba",
+                                             "summary":  {
+                                                             "path":  "artifacts/experiments/EXP157_L2_S43_F0/summary.json",
+                                                             "sha256":  "8b557a0e4c44d776666a90057d15d280b28ce115252340bb29249ab0476ec315"
+                                                         },
+                                             "identity":  {
+                                                              "run":  "EXP157_L2_S43_F0",
+                                                              "fold":  0,
+                                                              "label_set":  "l2",
+                                                              "gold_access":  "disabled"
+                                                          }
+                                         },
+                                         {
+                                             "seed":  43,
+                                             "fold":  1,
+                                             "path":  "artifacts/experiments/EXP157_L2_S43_F1/oof_k36.csv",
+                                             "sha256":  "42a1d286b929e42a297d378d18fda4542ce8b19e39383474ddbec2deaf5546d8",
+                                             "summary":  {
+                                                             "path":  "artifacts/experiments/EXP157_L2_S43_F1/summary.json",
+                                                             "sha256":  "23f320a32f19e58eefb66b60bf270cfc5083a236e55c7948d33f84640aa20853"
+                                                         },
+                                             "identity":  {
+                                                              "run":  "EXP157_L2_S43_F1",
+                                                              "fold":  1,
+                                                              "label_set":  "l2",
+                                                              "gold_access":  "disabled"
+                                                          }
+                                         },
+                                         {
+                                             "seed":  43,
+                                             "fold":  2,
+                                             "path":  "artifacts/experiments/EXP157_L2_S43_F2/oof_k36.csv",
+                                             "sha256":  "a836601a586294e33337341ff1d762cbc571d6fd1e815ae70a1fad9ba8ba8844",
+                                             "summary":  {
+                                                             "path":  "artifacts/experiments/EXP157_L2_S43_F2/summary.json",
+                                                             "sha256":  "3eb9b9c6ff66a31bcf3f71169dc253c23e888b3d4ef2eff6630039087b2ca254"
+                                                         },
+                                             "identity":  {
+                                                              "run":  "EXP157_L2_S43_F2",
+                                                              "fold":  2,
+                                                              "label_set":  "l2",
+                                                              "gold_access":  "disabled"
+                                                          }
+                                         },
+                                         {
+                                             "seed":  43,
+                                             "fold":  3,
+                                             "path":  "artifacts/experiments/EXP157_L2_S43_F3/oof_k36.csv",
+                                             "sha256":  "0485b02d95ac365e1d98904543176d024c3ce2dfde87680fced82f794243c0ff",
+                                             "summary":  {
+                                                             "path":  "artifacts/experiments/EXP157_L2_S43_F3/summary.json",
+                                                             "sha256":  "9bea4b365ece313fd4913d18baf48dec4a372ab1d411371e337ce193dc615463"
+                                                         },
+                                             "identity":  {
+                                                              "run":  "EXP157_L2_S43_F3",
+                                                              "fold":  3,
+                                                              "label_set":  "l2",
+                                                              "gold_access":  "disabled"
+                                                          }
+                                         },
+                                         {
+                                             "seed":  43,
+                                             "fold":  4,
+                                             "path":  "artifacts/experiments/EXP157_L2_S43_F4/oof_k36.csv",
+                                             "sha256":  "abd243be22eb5f1747cb0884c8d945a79c5ca7caf1b408cde12c3682f35ca2e2",
+                                             "summary":  {
+                                                             "path":  "artifacts/experiments/EXP157_L2_S43_F4/summary.json",
+                                                             "sha256":  "63dc6a393a4c40c9e7eb217ab21754e4992720897c276e09ccf37f45d3fcc422"
+                                                         },
+                                             "identity":  {
+                                                              "run":  "EXP157_L2_S43_F4",
+                                                              "fold":  4,
+                                                              "label_set":  "l2",
+                                                              "gold_access":  "disabled"
+                                                          }
+                                         }
+                                     ]
+                     },
+                     {
+                         "id":  "dino_base_dread",
+                         "family":  "dino_base",
+                         "label_recipe":  "Dread",
+                         "prediction_policy":  "plain K36; within-fold percentile rank",
+                         "expected_seeds":  [
+                                                42
+                                            ],
+                         "enabled":  true,
+                         "path_regex":  "(?:\\.local/exp160-collected-v1/BASE|artifacts/experiments/EXP164_DINO_BASE_FOLDS/outputs/EXP164_DINO_BASE_S42_F[1-4])/oof_best\\.csv",
+                         "members":  [
+                                         {
+                                             "seed":  42,
+                                             "fold":  0,
+                                             "path":  ".local/exp160-collected-v1/BASE/oof_best.csv",
+                                             "sha256":  "3c8ef5adbe8baaab1f5349f9322b1d8089efe6438ecb7f72b89d8e2d2602ba11",
+                                             "summary":  {
+                                                             "path":  ".local/exp160-collected-v1/BASE/summary.json",
+                                                             "sha256":  "a6b4189168b25a49ba2b6881693327e712ae01752a96f1167f96d4505d5042a6"
+                                                         },
+                                             "identity":  {
+                                                              "arm":  "BASE",
+                                                              "backbone":  "vit_base_patch14_dinov2.lvd142m",
+                                                              "gold_access":  "disabled"
+                                                          },
+                                             "identity_note":  "EXP160 BASE summary records historical internal fold=2. Registry fold=0 denotes the canonical EXP099 validation roster, enforced by load_oof; summary arm/backbone/gold_access and exact prediction hash remain bound."
+                                         },
+                                         {
+                                             "seed":  42,
+                                             "fold":  1,
+                                             "path":  "artifacts/experiments/EXP164_DINO_BASE_FOLDS/outputs/EXP164_DINO_BASE_S42_F1/oof_best.csv",
+                                             "sha256":  "7ab3d6a9d29401eaf2ee8c7a446a348566971074a81f68521af4fa37483e2b55",
+                                             "summary":  {
+                                                             "path":  "artifacts/experiments/EXP164_DINO_BASE_FOLDS/outputs/EXP164_DINO_BASE_S42_F1/summary.json",
+                                                             "sha256":  "be14f54716a059f4fbccc70ea858796a0555b58684ab904c409e67df8217307c"
+                                                         },
+                                             "identity":  {
+                                                              "arm":  "BASE",
+                                                              "fold":  1,
+                                                              "backbone":  "vit_base_patch14_dinov2.lvd142m",
+                                                              "gold_access":  "disabled"
+                                                          }
+                                         },
+                                         {
+                                             "seed":  42,
+                                             "fold":  2,
+                                             "path":  "artifacts/experiments/EXP164_DINO_BASE_FOLDS/outputs/EXP164_DINO_BASE_S42_F2/oof_best.csv",
+                                             "sha256":  "2b03ebb7a18f7d376897de35f7670b9d405ce42fc7af9031d80f0dc126e671ec",
+                                             "summary":  {
+                                                             "path":  "artifacts/experiments/EXP164_DINO_BASE_FOLDS/outputs/EXP164_DINO_BASE_S42_F2/summary.json",
+                                                             "sha256":  "218e183b879c6a16d84b2bcc583ab8e72cd913c828aa864fe8dc24432067e6b3"
+                                                         },
+                                             "identity":  {
+                                                              "arm":  "BASE",
+                                                              "fold":  2,
+                                                              "backbone":  "vit_base_patch14_dinov2.lvd142m",
+                                                              "gold_access":  "disabled"
+                                                          }
+                                         },
+                                         {
+                                             "seed":  42,
+                                             "fold":  3,
+                                             "path":  "artifacts/experiments/EXP164_DINO_BASE_FOLDS/outputs/EXP164_DINO_BASE_S42_F3/oof_best.csv",
+                                             "sha256":  "a384679a5ff3b87a20a517b539606a7137e7d800c093dd4fea1585cf8ec8f36a",
+                                             "summary":  {
+                                                             "path":  "artifacts/experiments/EXP164_DINO_BASE_FOLDS/outputs/EXP164_DINO_BASE_S42_F3/summary.json",
+                                                             "sha256":  "d703928f348dd908bdf6832f432792dbec7a617b55c2c3ab600290ad91c7cdaa"
+                                                         },
+                                             "identity":  {
+                                                              "arm":  "BASE",
+                                                              "fold":  3,
+                                                              "backbone":  "vit_base_patch14_dinov2.lvd142m",
+                                                              "gold_access":  "disabled"
+                                                          }
+                                         },
+                                         {
+                                             "seed":  42,
+                                             "fold":  4,
+                                             "path":  "artifacts/experiments/EXP164_DINO_BASE_FOLDS/outputs/EXP164_DINO_BASE_S42_F4/oof_best.csv",
+                                             "sha256":  "d5221040624ef3e08dad145c230f280d99c21ca26e9cff0c98ea0bd4317feafc",
+                                             "summary":  {
+                                                             "path":  "artifacts/experiments/EXP164_DINO_BASE_FOLDS/outputs/EXP164_DINO_BASE_S42_F4/summary.json",
+                                                             "sha256":  "9b121a0172be00226bee953612a11be84d534f8e11e7289fb428fd4980a0c843"
+                                                         },
+                                             "identity":  {
+                                                              "arm":  "BASE",
+                                                              "fold":  4,
+                                                              "backbone":  "vit_base_patch14_dinov2.lvd142m",
+                                                              "gold_access":  "disabled"
+                                                          }
+                                         }
+                                     ]
+                     },
+                     {
+                         "id":  "convnext_t_l2",
+                         "family":  "convnext_t",
+                         "label_recipe":  "L2",
+                         "prediction_policy":  "K36 coronal/axial horizontal flip TTA; within-fold percentile rank",
+                         "expected_seeds":  [
+                                                42
+                                            ],
+                         "enabled":  true,
+                         "path_regex":  "artifacts/experiments/EXP170_CONVNEXT_T_L2/outputs/results/EXP170_CONVNEXT_T_L2_S42_F[0-4]/oof_k36_flip_tta\\.csv",
+                         "members":  [
+                                         {
+                                             "seed":  42,
+                                             "fold":  0,
+                                             "path":  "artifacts/experiments/EXP170_CONVNEXT_T_L2/outputs/results/EXP170_CONVNEXT_T_L2_S42_F0/oof_k36_flip_tta.csv",
+                                             "sha256":  "6eeb3432291701c4f5b7efd58f2ae1f47e64b32df166416964a55c68c479e4ae",
+                                             "summary":  {
+                                                             "path":  "artifacts/experiments/EXP170_CONVNEXT_T_L2/outputs/results/EXP170_CONVNEXT_T_L2_S42_F0/summary.json",
+                                                             "sha256":  "7084d3c98e1e7b40a777c25f6c923e2d5b2b807ff88bb47a0a589f19d04e6ece"
+                                                         },
+                                             "identity":  {
+                                                              "fold":  0,
+                                                              "label_set":  "l2_dread75_aquila25_v1",
+                                                              "backbone":  "convnext_tiny.fb_in22k_ft_in1k",
+                                                              "gold_access":  "disabled"
+                                                          }
+                                         },
+                                         {
+                                             "seed":  42,
+                                             "fold":  1,
+                                             "path":  "artifacts/experiments/EXP170_CONVNEXT_T_L2/outputs/results/EXP170_CONVNEXT_T_L2_S42_F1/oof_k36_flip_tta.csv",
+                                             "sha256":  "d3ad295edeb123a5b7cff0c7a2518f8805ac0091bc83a04f07b6f5096242878c",
+                                             "summary":  {
+                                                             "path":  "artifacts/experiments/EXP170_CONVNEXT_T_L2/outputs/results/EXP170_CONVNEXT_T_L2_S42_F1/summary.json",
+                                                             "sha256":  "409705c62ee0ca638fa44fbdfa8321a3cba4b76252302813f0616a9c891044b4"
+                                                         },
+                                             "identity":  {
+                                                              "fold":  1,
+                                                              "label_set":  "l2_dread75_aquila25_v1",
+                                                              "backbone":  "convnext_tiny.fb_in22k_ft_in1k",
+                                                              "gold_access":  "disabled"
+                                                          }
+                                         },
+                                         {
+                                             "seed":  42,
+                                             "fold":  2,
+                                             "path":  "artifacts/experiments/EXP170_CONVNEXT_T_L2/outputs/results/EXP170_CONVNEXT_T_L2_S42_F2/oof_k36_flip_tta.csv",
+                                             "sha256":  "49220c2a3f20770a4713feeee840727f3588ad0d0bd1a79292ae29238abafa7a",
+                                             "summary":  {
+                                                             "path":  "artifacts/experiments/EXP170_CONVNEXT_T_L2/outputs/results/EXP170_CONVNEXT_T_L2_S42_F2/summary.json",
+                                                             "sha256":  "b0b0bcd657fc52e2bfbc57635082b9d7466d3707e23a4c835b2637104d9d8b2a"
+                                                         },
+                                             "identity":  {
+                                                              "fold":  2,
+                                                              "label_set":  "l2_dread75_aquila25_v1",
+                                                              "backbone":  "convnext_tiny.fb_in22k_ft_in1k",
+                                                              "gold_access":  "disabled"
+                                                          }
+                                         },
+                                         {
+                                             "seed":  42,
+                                             "fold":  3,
+                                             "path":  "artifacts/experiments/EXP170_CONVNEXT_T_L2/outputs/results/EXP170_CONVNEXT_T_L2_S42_F3/oof_k36_flip_tta.csv",
+                                             "sha256":  "49932f13eb1ee2635b94bf3aa9269dcddcbcc6412eb84b150dfff37a713d5807",
+                                             "summary":  {
+                                                             "path":  "artifacts/experiments/EXP170_CONVNEXT_T_L2/outputs/results/EXP170_CONVNEXT_T_L2_S42_F3/summary.json",
+                                                             "sha256":  "c0b1a76a160a99e7e344d865634a0a11e070f757f5f1164f8c58dc1b649e184c"
+                                                         },
+                                             "identity":  {
+                                                              "fold":  3,
+                                                              "label_set":  "l2_dread75_aquila25_v1",
+                                                              "backbone":  "convnext_tiny.fb_in22k_ft_in1k",
+                                                              "gold_access":  "disabled"
+                                                          }
+                                         },
+                                         {
+                                             "seed":  42,
+                                             "fold":  4,
+                                             "path":  "artifacts/experiments/EXP170_CONVNEXT_T_L2/outputs/results/EXP170_CONVNEXT_T_L2_S42_F4/oof_k36_flip_tta.csv",
+                                             "sha256":  "05b68bb3d6f1ae81f8447eed27cd0b05d003a4fb8413b77f157a91e49f50c249",
+                                             "summary":  {
+                                                             "path":  "artifacts/experiments/EXP170_CONVNEXT_T_L2/outputs/results/EXP170_CONVNEXT_T_L2_S42_F4/summary.json",
+                                                             "sha256":  "aa879252a004928167df69fc128757cf52ca9b93a4c1fd082a3e375b2d396bd9"
+                                                         },
+                                             "identity":  {
+                                                              "fold":  4,
+                                                              "label_set":  "l2_dread75_aquila25_v1",
+                                                              "backbone":  "convnext_tiny.fb_in22k_ft_in1k",
+                                                              "gold_access":  "disabled"
+                                                          }
+                                         }
+                                     ]
+                     },
+                     {
+                         "id":  "h1",
+                         "family":  "radr50",
+                         "label_recipe":  "H1",
+                         "prediction_policy":  "plain K36; within-fold percentile rank",
+                         "expected_seeds":  [
+                                                42
+                                            ],
+                         "enabled":  true,
+                         "path_regex":  "artifacts/experiments/(?:EXP149_H1_S42_F[01]|EXP153_H1_S42_F[234])/oof_k36\\.csv",
+                         "members":  [
+                                         {
+                                             "seed":  42,
+                                             "fold":  0,
+                                             "path":  "artifacts/experiments/EXP149_H1_S42_F0/oof_k36.csv",
+                                             "sha256":  "7ee57aca2af1c344dceb11c8ee9c6c396cbf54f8c42d264f6e4c859e970f9f67",
+                                             "summary":  {
+                                                             "path":  "artifacts/experiments/EXP149_H1_S42_F0/summary.json",
+                                                             "sha256":  "16fe4186c502ce3679fb89aaadd1bbf4423bfda42d04ade85e4b909659639e2c"
+                                                         },
+                                             "identity":  {
+                                                              "run":  "EXP149_H1_S42_F0",
+                                                              "fold":  0,
+                                                              "label_set":  "h1",
+                                                              "gold_access":  "disabled"
+                                                          }
+                                         },
+                                         {
+                                             "seed":  42,
+                                             "fold":  1,
+                                             "path":  "artifacts/experiments/EXP149_H1_S42_F1/oof_k36.csv",
+                                             "sha256":  "11276a919cad6a6a36446dac7cec8e2e415f9f505897cf47a5632f58cd2714d2",
+                                             "summary":  {
+                                                             "path":  "artifacts/experiments/EXP149_H1_S42_F1/summary.json",
+                                                             "sha256":  "d25f8f2590bb0225e43029163468edd9ad687113a26ca6d2673c2a3887394db6"
+                                                         },
+                                             "identity":  {
+                                                              "run":  "EXP149_H1_S42_F1",
+                                                              "fold":  1,
+                                                              "label_set":  "h1",
+                                                              "gold_access":  "disabled"
+                                                          }
+                                         },
+                                         {
+                                             "seed":  42,
+                                             "fold":  2,
+                                             "path":  "artifacts/experiments/EXP153_H1_S42_F2/oof_k36.csv",
+                                             "sha256":  "5e2645a4dcac13e53166ede9d17f035fb0dc2a6111a9ed6b0c765033f7134f44",
+                                             "summary":  {
+                                                             "path":  "artifacts/experiments/EXP153_H1_S42_F2/summary.json",
+                                                             "sha256":  "ce3d8cc5f19b26b8e9747ecda93f144abe7e01644c384019089306cbd2f46dd3"
+                                                         },
+                                             "identity":  {
+                                                              "run":  "EXP153_H1_S42_F2",
+                                                              "fold":  2,
+                                                              "label_set":  "h1",
+                                                              "gold_access":  "disabled"
+                                                          }
+                                         },
+                                         {
+                                             "seed":  42,
+                                             "fold":  3,
+                                             "path":  "artifacts/experiments/EXP153_H1_S42_F3/oof_k36.csv",
+                                             "sha256":  "4a1f3110927ff4f8e97440bdb951d5bfedc0bb947fb2b41e04abcb11535bf2f7",
+                                             "summary":  {
+                                                             "path":  "artifacts/experiments/EXP153_H1_S42_F3/summary.json",
+                                                             "sha256":  "f2ff5cec483b2a3fa2bb33c6e7ca350213343cd1e0c6ef7df7201443486425db"
+                                                         },
+                                             "identity":  {
+                                                              "run":  "EXP153_H1_S42_F3",
+                                                              "fold":  3,
+                                                              "label_set":  "h1",
+                                                              "gold_access":  "disabled"
+                                                          }
+                                         },
+                                         {
+                                             "seed":  42,
+                                             "fold":  4,
+                                             "path":  "artifacts/experiments/EXP153_H1_S42_F4/oof_k36.csv",
+                                             "sha256":  "921682e9e3bb2b4a51f1961b7c1a448650abfa776f7f5ca2cc7bbcf3907a8afd",
+                                             "summary":  {
+                                                             "path":  "artifacts/experiments/EXP153_H1_S42_F4/summary.json",
+                                                             "sha256":  "22f9c8b4499bda9151bf5edd313c344e76a8957d9a33a14dfd427ee730208638"
+                                                         },
+                                             "identity":  {
+                                                              "run":  "EXP153_H1_S42_F4",
+                                                              "fold":  4,
+                                                              "label_set":  "h1",
+                                                              "gold_access":  "disabled"
+                                                          }
+                                         }
+                                     ]
+                     },
+                     {
+                         "id":  "dino_base_l2",
+                         "family":  "dino_base",
+                         "label_recipe":  "L2",
+                         "prediction_policy":  "plain K36; within-fold percentile rank",
+                         "expected_seeds":  [
+                                                42
+                                            ],
+                         "enabled":  false,
+                         "path_regex":  "artifacts/experiments/EXP172_DINO_BASE_L2/outputs/artifacts/experiments/EXP172_DINO_BASE_L2_S42_F[0-4]/oof_best\\.csv",
+                         "members":  [
+                                         {
+                                             "seed":  42,
+                                             "fold":  0,
+                                             "path":  "artifacts/experiments/EXP172_DINO_BASE_L2/outputs/artifacts/experiments/EXP172_DINO_BASE_L2_S42_F0/oof_best.csv",
+                                             "sha256":  null
+                                         },
+                                         {
+                                             "seed":  42,
+                                             "fold":  1,
+                                             "path":  "artifacts/experiments/EXP172_DINO_BASE_L2/outputs/artifacts/experiments/EXP172_DINO_BASE_L2_S42_F1/oof_best.csv",
+                                             "sha256":  null
+                                         },
+                                         {
+                                             "seed":  42,
+                                             "fold":  2,
+                                             "path":  "artifacts/experiments/EXP172_DINO_BASE_L2/outputs/artifacts/experiments/EXP172_DINO_BASE_L2_S42_F2/oof_best.csv",
+                                             "sha256":  null
+                                         },
+                                         {
+                                             "seed":  42,
+                                             "fold":  3,
+                                             "path":  "artifacts/experiments/EXP172_DINO_BASE_L2/outputs/artifacts/experiments/EXP172_DINO_BASE_L2_S42_F3/oof_best.csv",
+                                             "sha256":  null
+                                         },
+                                         {
+                                             "seed":  42,
+                                             "fold":  4,
+                                             "path":  "artifacts/experiments/EXP172_DINO_BASE_L2/outputs/artifacts/experiments/EXP172_DINO_BASE_L2_S42_F4/oof_best.csv",
+                                             "sha256":  null
+                                         }
+                                     ],
+                         "disabled_reason":  "EXP172 complete five-fold OOF collection is absent. Bind all five prediction hashes and summaries before enabling; never substitute EXP160/164 Dread files."
+                     }
+                 ],
+    "bundles":  [
+                    {
+                        "id":  "bundle",
+                        "members":  {
+                                        "l2":  "l2_radr50",
+                                        "dino":  "dino_base_dread",
+                                        "convnext":  "convnext_t_l2"
+                                    }
+                    }
+                ],
+    "notes":  [
+                  "Diagnostic admission-policy registry: plain K36 L2 RadR50 and DINO/H1, EXP170 flip-TTA ConvNeXt-T. This is not a serving-policy parity claim.",
+                  "The bundle uses registered bundle_of: globally rank each within-fold-ranked family, equal thirds, then globally re-rank.",
+                  "References are exactly tools.exp156_k_sweep.references with original masks and thresholds; binding label bytes does not confer independent clinical truth.",
+                  "EXP172 is registered as an optional disabled variant until a complete five-fold collection can be hash-bound.",
+                  "No report text, credential files, .local/relabel, image volumes, inference, or real-data error analysis was accessed to author this registry."
+              ]
+}

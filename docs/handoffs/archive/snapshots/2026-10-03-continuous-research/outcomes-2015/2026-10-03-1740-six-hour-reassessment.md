@@ -1,0 +1,9 @@
+# 2026-10-03 17:40 KST · 6시간 방향·검증 재점검
+
+- 상태:후속진행,19:32갱신. 제출/공개0,매회승인·유료별도승인.
+- [F2판정](../research/exp080-f2-result-2026-10-03.md):3fit완료·고정1회평가.B−A+.008220 CI0포함/RN90/10+.001243 CI[+.000339,+.002101]. 골절B−A−.022337/혼합−A−.020464로F1손실반복. 작은효과보존·B임시·추가fold/seed보류. 노출weakF2/환자독립미확인·조건부CI,ImageNet과R2teacher누출구분. D01(anchor+옛R2)·0.943전이근거아님. zero mask≠촬영결측/임상정상.
+- D01 version2 `taeyangg4/knee-d01-integrated133` 18:54push·**19:27RUNNING**.stage`.local/d01-integrated-trial/20261003-v3`. 정확v2 CLIlogs1회exit0/빈출력,phase진척미확인. ETA19:50~20:00·최대5400초2T4계획3GPUh·추가원격시도0·20:40판정. 정확출력`d01-integrated133-v2/results/`를kaggle_output_file.py로회수. COMPLETE≠PASS. [ID/hash/검사/실패](evidence/2026-10/2026-10-03-continuous-research/d01-serving-status.json).
+- 원통합v1은0.4546초nestedCSV부재/phase0 NO_GO보존,flat존재미입증. v2는별도resolver/proxy좁은adapter/Fat_Suppression수정·CPU10/독립17payload검토. 원15payload/helper/anchor30셀/133IDs/gate불변. max(T133×1300/133,30938.468)+300≤32400와필수gate후만탐색후보준비,fullhidden보장아님. 원v1hashFAIL·추가33integer범위·about1300/Rad캐시/자산revision한계보존. dicom_header_io의현v2후속경로리뷰완료(상태JSON참조),PASS후25~40분예산,옛v1명령그대로실행금지·실제PASS전candidate금지.
+- [EXP081 CPU완료](../research/exp081-coronal-span-2026-10-03.md):868중34변경/834원본·46.06MB.129series3305headers4.33초/전체21.68초,원63no-op exact·합성78PASS·독립23source/11artifact검토통과.1건mask/K24중심변화,타slot창변화가능.학습4source/cache/등록불변.
+- 19:28 root가기존허가내GPU대조진행결정.precision_code_review 최소추론/평가기구현·CPU검사중,ETA19:50~20:00/최대45분.원OOFbatch4재사용없이동일868/checkpoint/batch8/strictFP16두pass,labels는둘완료/계약후·Gold없음.완성명령/사전조건검토후gpu_job1회,아직GPU미실행.원CPU등록GPU금지는당시준비범위. [상태/해시](evidence/2026-10/2026-10-03-continuous-research/exp081-status.json)·[하위작업](evidence/2026-10/2026-10-03-continuous-research/active-worker-checkpoint.json).
+- Biohub:실행PASS와성능분리·작은이득/손실보존·최소입력대조/기준재사용.CPU는헤더/검증,GPU는학습/추론임을사용자설명.19:28로컬GPU0%/학습0·앱jobs/downloads0,18:53무료GPU28.81h관측.첫ETA전확인후같은예약**19:55**로갱신,기존agent결과먼저회수·중복금지.

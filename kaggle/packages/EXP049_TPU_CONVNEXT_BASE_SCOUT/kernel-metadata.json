@@ -1,0 +1,29 @@
+{
+    "id":  "taeyangg4/rsna-knee-exp049-tpu-convnext-base-scout",
+    "title":  "RSNA Knee EXP049 TPU ConvNeXt Base Scout",
+    "code_file":  "exp049_tpu_convnext_base_scout.py",
+    "language":  "python",
+    "kernel_type":  "script",
+    "is_private":  true,
+    "enable_gpu":  false,
+    "enable_tpu":  true,
+    "enable_internet":  false,
+    "keywords":  [
+
+                 ],
+    "dataset_sources":  [
+                            "flight0234/rsna-knee-hybrid-report-labels",
+                            "taeyangg4/rsna-knee-exp049-grouped-folds",
+                            "taeyangg4/rsna-knee-exp049-convnext-base-pretrained"
+                        ],
+    "kernel_sources":  [
+                           "taeyangg4/rsna-knee-exp048-multicenter-5slot-5x3-256"
+                       ],
+    "competition_sources":  [
+
+                            ],
+    "model_sources":  [
+
+                      ],
+    "machine_shape":  "TpuV6E8"
+}

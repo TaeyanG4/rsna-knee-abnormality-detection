@@ -1,0 +1,11 @@
+{
+ "title": "knee-runners-v3b",
+ "id": "taeyangg4/knee-runners-v3b",
+ "licenses": [
+  {
+   "name": "other"
+  }
+ ],
+ "isPrivate": true,
+ "description": "Private: EXP101 ResNet34 seed-43 5-fold runner (shared EXP101 runner + seed-43 guard), frozen protocol inputs (EXP084 split, EXP099 folds) and Dread labels for remote GPU runs (no report text, no Gold)."
+}

@@ -1,0 +1,11 @@
+{
+ "title": "knee-runners-v3-exp107",
+ "id": "taeyangg4/knee-runners-v3-exp107",
+ "licenses": [
+  {
+   "name": "other"
+  }
+ ],
+ "isPrivate": true,
+ "description": "Private: EXP107 RadImageNet ResNet50 centre-slice 5-fold runner (EXP101 loop, new guard and input module), frozen protocol inputs (EXP084 split, EXP099 folds) and Dread labels for remote GPU runs (no report text, no Gold, no weights)."
+}

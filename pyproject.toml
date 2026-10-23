@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kneeops-local"
+version = "0.1.0"
+description = "Local competition research dashboard and portable workspace tools"
+requires-python = ">=3.11"
+dependencies = ["fastapi>=0.115,<1", "uvicorn>=0.34,<1", "pydantic>=2.10,<3", "kaggle==2.2.4", "numpy>=2,<3", "Pillow>=11,<13", "pydicom>=3,<4", "pylibjpeg>=2,<3", "pylibjpeg-libjpeg>=2,<3", "pylibjpeg-openjpeg>=2,<3"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "httpx>=0.28,<1"]
+
+[project.scripts]
+kneeops = "monitoring.kneeops.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["knee_workspace*", "monitoring", "monitoring.kneeops*"]
+
+[tool.setuptools.package-data]
+"monitoring.kneeops" = ["static/*", "static/assets/*", "cache_origins.json", "translations/*.json", "translations/en/*.md", "translations/ko/*.md"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "monitoring/tests"]
+addopts = "--tb=short"
