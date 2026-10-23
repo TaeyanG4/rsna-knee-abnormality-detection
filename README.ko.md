@@ -2,7 +2,7 @@
 
 # RSNA Knee Abnormality Detection — 팀 Taeyang
 
-[English README](README.md)
+**[English README](README.md)** · [최종 결과](docs/reports/final-results.ko.md) · 발견 기록: [한국어](discoveries.ko.md) / [영어 원문](discoveries.md) · 종합 보고서: [한국어](docs/reports/project-summary-20261022.ko.md) / [영어](docs/reports/project-summary-20261022.md) · [실험 목록](docs/EXPERIMENTS.md) · [연구 카탈로그](docs/reports/research-catalog-20261022.md) · [대시보드](docs/DASHBOARD.md) · [agents.md](agents.md) · [plan.md](plan.md) · [handoff.md](handoff.md) · [출처·라이선스(NOTICE)](NOTICE.md)
 
 Kaggle 대회 [RSNA Knee Abnormality Detection](https://www.kaggle.com/competitions/rsna-knee-abnormality-detection)(2026년 7월 30일 - 10월 22일)의 작업 기록입니다. 무릎 MRI 검사(study)마다 12개 소견(인대·반월상연골 파열, 세 구획의 골관절염, 관절 삼출, 활막염, 베이커 낭종, 골 타박, 골절)의 확률을 예측하는 대회입니다.
 

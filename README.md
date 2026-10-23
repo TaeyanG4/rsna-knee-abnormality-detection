@@ -2,7 +2,7 @@
 
 # RSNA Knee Abnormality Detection — team Taeyang
 
-[한국어 README](README.ko.md)
+**[한국어 README](README.ko.md)** · [Final results](docs/reports/final-results.md) · Discoveries: [English](discoveries.md) / [한국어](discoveries.ko.md) · Consolidated report: [English](docs/reports/project-summary-20261022.md) / [한국어](docs/reports/project-summary-20261022.ko.md) · [Experiment catalogue](docs/EXPERIMENTS.md) · [Research catalog](docs/reports/research-catalog-20261022.md) · [Dashboard](docs/DASHBOARD.md) · [agents.md](agents.md) · [plan.md](plan.md) · [handoff.md](handoff.md) · [NOTICE](NOTICE.md)
 
 Our working record for the Kaggle competition [RSNA Knee Abnormality Detection](https://www.kaggle.com/competitions/rsna-knee-abnormality-detection) (Jul 30 - Oct 22, 2026): predict, for every knee MRI study, the probability of twelve findings (ligament and meniscus tears, three compartments of osteoarthritis, effusion, synovitis, Baker's cyst, bone contusion, fracture).
 
