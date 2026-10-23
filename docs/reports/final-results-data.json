@@ -3,7 +3,7 @@
   "prepared_at_kst": "2026-10-22T19:48:36+09:00",
   "baseline_cutoff_kst": "2026-10-22T18:15:00+09:00",
   "expected_result_date_user_supplied": "2026-10-23",
-  "updated_at_kst": "2026-10-23T10:59:57+09:00",
+  "updated_at_kst": "2026-10-23T11:22:26+09:00",
   "competition_outcome": {
     "state": "final",
     "private_score": "0.943",
@@ -209,6 +209,12 @@
       "source": "B (Claude Code) from the Kaggle CLI and Taeyang screenshots",
       "change_en": "Recorded the final private result (0.943, rank 312 / 6,425, silver), the confirmed final pair X + F, all late submission outcomes and F4.",
       "change_ko": "최종 private 결과(0.943, 312 / 6,425위, 은메달), 확정된 최종 쌍 X + F, 마지막 날 제출 결과와 F4를 기록했습니다."
+    },
+    {
+      "at_kst": "2026-10-23T11:22:26+09:00",
+      "source": "B (Claude Code), repository maintenance",
+      "change_en": "Snapshot links now point to commit 4172ccf of the renamed repository (TaeyanG4/rsna-knee-abnormality-detection). On 2026-10-23 the history was squashed into one commit, which removed the pre-result commit 9e1509f; Updates 7-10 of plan.md and the report text are unchanged except one redacted owner quote and a two-line pointer to this page.",
+      "change_ko": "고정본 링크를 이름이 바뀐 저장소(TaeyanG4/rsna-knee-abnormality-detection)의 커밋 4172ccf로 바꿨습니다. 2026-10-23에 기록을 커밋 하나로 정리하면서 결과 전 커밋 9e1509f가 사라졌습니다. plan.md의 Updates 7-10과 보고서 본문은 소유자 인용 1곳 삭제와 이 페이지로 가는 두 줄 안내를 빼면 그대로입니다."
     }
   ]
 }

@@ -2,7 +2,18 @@
 
 # RSNA Knee Abnormality Detection — 팀 Taeyang
 
-**[English README](README.md)** · [최종 결과](docs/reports/final-results.ko.md) · 발견 기록: [한국어](discoveries.ko.md) / [영어 원문](discoveries.md) · 종합 보고서: [한국어](docs/reports/project-summary-20261022.ko.md) / [영어](docs/reports/project-summary-20261022.md) · [실험 목록](docs/EXPERIMENTS.md) · [연구 카탈로그](docs/reports/research-catalog-20261022.md) · [대시보드](docs/DASHBOARD.md) · [agents.md](agents.md) · [plan.md](plan.md) · [handoff.md](handoff.md) · [출처·라이선스(NOTICE)](NOTICE.md)
+<p align="center"><a href="README.md">English</a> · <b>한국어</b></p>
+
+| 문서 | 내용 | 읽기 |
+|---|---|---|
+| **최종 결과** | Private 점수와 순위, 최종 쌍, 마지막 날 제출 결과 | [한국어](docs/reports/final-results.ko.md) · [English](docs/reports/final-results.md) |
+| **발견 기록** (discoveries) | 부정적·결론 불가 결과까지 포함한 모든 발견 | [한국어](discoveries.ko.md) · [English](discoveries.md) |
+| **종합 보고서** | 결과 발표 전 기준 시점(10월 22일 18:15 KST)의 연구 상태 전체 | [한국어](docs/reports/project-summary-20261022.ko.md) · [English](docs/reports/project-summary-20261022.md) |
+| **실험 목록** | 계열별 전체 제출, 7-렌즈 스크리닝, K1 holdout 검정 | [English](docs/EXPERIMENTS.md) |
+| **연구 카탈로그** | 발견 ID 390개 전부의 날짜·리뷰 상태 | [English](docs/reports/research-catalog-20261022.md) |
+| **대시보드** | 로컬 연구 대시보드 KneeOps | [English](docs/DASHBOARD.md) |
+| **작업 파일** | 프로젝트 규칙, 계획과 작업 큐, 사건 기록 | [agents.md](agents.md) · [plan.md](plan.md) · [handoff.md](handoff.md) |
+| **출처·라이선스** | 외부 모델·데이터·이미지 출처 | [NOTICE](NOTICE.md) |
 
 Kaggle 대회 [RSNA Knee Abnormality Detection](https://www.kaggle.com/competitions/rsna-knee-abnormality-detection)(2026년 7월 30일 - 10월 22일)의 작업 기록입니다. 무릎 MRI 검사(study)마다 12개 소견(인대·반월상연골 파열, 세 구획의 골관절염, 관절 삼출, 활막염, 베이커 낭종, 골 타박, 골절)의 확률을 예측하는 대회입니다.
 

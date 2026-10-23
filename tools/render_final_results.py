@@ -18,7 +18,7 @@ BASELINE = {
     'P4': ('57512878', 'knee-lb-r6w958k1n4fbp25v10-v1', None),
     'U4': ('57514281', 'knee-lb-r6w958k1u4fbv10-v1', None),
 }
-SNAPSHOT = 'https://github.com/TaeyanG4/rsna-knee-team-notes/blob/9e1509f78d43cba7f1d03d8e7c0bbeecf549b00a/'
+SNAPSHOT = 'https://github.com/TaeyanG4/rsna-knee-abnormality-detection/blob/4172ccf879887e3fa95f00cb714214e17a2805dd/'
 
 def require(condition, message):
     if not condition:

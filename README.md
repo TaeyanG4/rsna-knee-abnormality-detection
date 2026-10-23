@@ -2,7 +2,18 @@
 
 # RSNA Knee Abnormality Detection — team Taeyang
 
-**[한국어 README](README.ko.md)** · [Final results](docs/reports/final-results.md) · Discoveries: [English](discoveries.md) / [한국어](discoveries.ko.md) · Consolidated report: [English](docs/reports/project-summary-20261022.md) / [한국어](docs/reports/project-summary-20261022.ko.md) · [Experiment catalogue](docs/EXPERIMENTS.md) · [Research catalog](docs/reports/research-catalog-20261022.md) · [Dashboard](docs/DASHBOARD.md) · [agents.md](agents.md) · [plan.md](plan.md) · [handoff.md](handoff.md) · [NOTICE](NOTICE.md)
+<p align="center"><b>English</b> · <a href="README.ko.md">한국어</a></p>
+
+| Document | What it holds | Read |
+|---|---|---|
+| **Final results** | Private score and rank, the final pair, every late submission | [English](docs/reports/final-results.md) · [한국어](docs/reports/final-results.ko.md) |
+| **Discoveries** | The findings log: every result, negative and inconclusive ones included | [English](discoveries.md) · [한국어](discoveries.ko.md) |
+| **Consolidated report** | The full research state at the pre-result cutoff (Oct 22, 18:15 KST) | [English](docs/reports/project-summary-20261022.md) · [한국어](docs/reports/project-summary-20261022.ko.md) |
+| **Experiment catalogue** | Every submission by family, the seven-lens screens, the K1 holdout tests | [English](docs/EXPERIMENTS.md) |
+| **Research catalog** | All 390 discovery IDs with dates and review fields | [English](docs/reports/research-catalog-20261022.md) |
+| **Dashboard** | KneeOps, the local research dashboard | [English](docs/DASHBOARD.md) |
+| **Working files** | Project rules, plan and queue, event log | [agents.md](agents.md) · [plan.md](plan.md) · [handoff.md](handoff.md) |
+| **Sources and licences** | External models, data and images | [NOTICE](NOTICE.md) |
 
 Our working record for the Kaggle competition [RSNA Knee Abnormality Detection](https://www.kaggle.com/competitions/rsna-knee-abnormality-detection) (Jul 30 - Oct 22, 2026): predict, for every knee MRI study, the probability of twelve findings (ligament and meniscus tears, three compartments of osteoarthritis, effusion, synovitis, Baker's cyst, bone contusion, fracture).
 
