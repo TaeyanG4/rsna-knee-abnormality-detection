@@ -171,7 +171,7 @@
 - Host: Claude Code
 - User: Taeyang
 - Heading: none
-- Action: Taeyang asked for a private git repo with the essentials so a new teammate can follow current and past work. Created https://github.com/TaeyanG4/rsna-knee-abnormality-detection (PRIVATE; gh account TaeyanG4) from a separate copy .local/team-repo (project dir itself not turned into a git repo): README.md onboarding (status, best formula, running items, how to read the notes, costly lessons, tool entry points), agents.md, plan.md, discoveries.md, handoff.md, CLAUDE.md, docs/ (minus 100 MB docs/handoffs and two MCL report-audit docs), tools/*.py|*.md (≈ 11 MB), ledgers (readings.csv, measurements.csv, submit_ledger.jsonl). Secret scan clean (no tokens/keys/private keys; 64-hex strings are sha256 pins); no data/caches/labels/report text/weights. Refresh script .local/run-scripts/team-repo-sync-v1.sh (secret scan + 20 MB guard); rule in agents.md; memory file team-repo.md.
+- Action: Taeyang asked for a private git repo with the essentials so a new teammate can follow current and past work. Created https://github.com/TaeyanG4/rsna-knee-abnormality-detection (PRIVATE; gh account TaeyanG4) from a separate copy .local/github-repo (project dir itself not turned into a git repo): README.md onboarding (status, best formula, running items, how to read the notes, costly lessons, tool entry points), agents.md, plan.md, discoveries.md, handoff.md, CLAUDE.md, docs/ (minus 100 MB docs/handoffs and two MCL report-audit docs), tools/*.py|*.md (≈ 11 MB), ledgers (readings.csv, measurements.csv, submit_ledger.jsonl). Secret scan clean (no tokens/keys/private keys; 64-hex strings are sha256 pins); no data/caches/labels/report text/weights. Refresh script .local/run-scripts/github-repo-sync-v1.sh (secret scan + 20 MB guard); rule in agents.md; memory file github-repo.md.
 - Discovery updates: none
 - Review verdict: none
 - Resource: none
@@ -183,7 +183,7 @@
 - Host: Claude Code
 - User: Taeyang
 - Heading: none
-- Action: Taeyang asked to remove all quoted owner remarks (e.g. 'Taeyang 2026-10-11 16:41 KST: "…"') from the shared notes and to make that version the first version (no earlier history visible). team-repo-sanitize-v1.py v1.0.2 (line-wise; .md/.txt any line, .py comment lines only, JSON/CSV untouched; v1.0.0/1.0.1 had broken Python in the copy by whole-file tidying — caught by py_compile before any push, copy rebuilt from originals): 242 lines in 16 files, 0 remaining; 561 .py compile (1 pre-existing failure identical to the original), all JSON parse. Orphan single commit de27a5b force-pushed to github.com/TaeyanG4/rsna-knee-abnormality-detection (remote commit count 1, PRIVATE); local reflog expired + gc. Local original files keep their provenance quotes. team-repo-sync-v1.sh v1.0.1 now sanitizes before every commit.
+- Action: Taeyang asked to remove all quoted owner remarks (e.g. 'Taeyang 2026-10-11 16:41 KST: "…"') from the shared notes and to make that version the first version (no earlier history visible). github-repo-sanitize-v1.py v1.0.2 (line-wise; .md/.txt any line, .py comment lines only, JSON/CSV untouched; v1.0.0/1.0.1 had broken Python in the copy by whole-file tidying — caught by py_compile before any push, copy rebuilt from originals): 242 lines in 16 files, 0 remaining; 561 .py compile (1 pre-existing failure identical to the original), all JSON parse. Orphan single commit de27a5b force-pushed to github.com/TaeyanG4/rsna-knee-abnormality-detection (remote commit count 1, PRIVATE); local reflog expired + gc. Local original files keep their provenance quotes. github-repo-sync-v1.sh v1.0.1 now sanitizes before every commit.
 - Discovery updates: none
 - Review verdict: none
 - Resource: none
@@ -249,7 +249,7 @@
 - Host: Claude Code
 - User: Taeyang
 - Heading: none
-- Action: GitGuardian emailed 3 "Google Gemini API Key" incidents on TaeyanG4/rsna-knee-abnormality-detection commit de27a5b. B found no AIza/gemini/Google-credential string in any pushed file, git object or decoded base64 blob; Taeyang's GitGuardian detail screenshot shows the flagged "apikey" is a SHA-256 checksum glued to text in discoveries.md ("SHA256db61c93c…556b9", Validity: No checker) → false positive; no key to revoke; Taeyang can mark the incidents as false positive. Hardening kept: team-repo-sync-v1.sh v1.0.2 broad secret patterns; mistake 21 recorded as a scan-coverage gap (alert itself false).
+- Action: GitGuardian emailed 3 "Google Gemini API Key" incidents on TaeyanG4/rsna-knee-abnormality-detection commit de27a5b. B found no AIza/gemini/Google-credential string in any pushed file, git object or decoded base64 blob; Taeyang's GitGuardian detail screenshot shows the flagged "apikey" is a SHA-256 checksum glued to text in discoveries.md ("SHA256db61c93c…556b9", Validity: No checker) → false positive; no key to revoke; Taeyang can mark the incidents as false positive. Hardening kept: github-repo-sync-v1.sh v1.0.2 broad secret patterns; mistake 21 recorded as a scan-coverage gap (alert itself false).
 - Discovery updates: none
 - Review verdict: none
 - Resource: none

@@ -1,8 +1,10 @@
-"""make_banner v1.0.2 (B, 2026-10-23): README banner for the public RSNA knee repo.
+"""make_banner v1.0.3 (B, 2026-10-23): README banner for the public RSNA knee repo.
 
 Uses the openly licensed Wikimedia Commons image "Knee MRI PD TSE FS Sagittal.jpg" (Ptrump16, CC BY-SA 4.0) as a faded
 background element, so the banner is an adaptation under CC BY-SA 4.0 (credited in NOTICE.md). NOT competition data.
-Output: docs/figures/banner.png (1600 x 420 px).
+Output: docs/figures/banner.png (1600 x 460 px).
+Changelog v1.0.3: larger text for readability at README width (label 19, headline 42, subtitle 21, medal 24, scores 20,
+  credit 11 pt), brighter secondary text, banner 420 -> 460 px tall, MRI panel starts at x = 9.8.
 Changelog v1.0.2: no team name (Taeyang); the competition name is the headline.
 Changelog v1.0.1: MRI blended with a positional alpha (v1.0.0 scaled by intensity, too faint); medal chip without a number.
 """
@@ -20,9 +22,10 @@ OUT = os.path.join(ROOT, 'docs', 'figures', 'banner.png')
 BG = '#0e2a2f'          # deep teal, close to the KneeOps sidebar
 ACCENT = '#1baf7a'      # aqua (validated categorical slot 3)
 SILVER = '#c9ccd1'
+SUB = '#e3ecea'          # secondary text, brighter than v1.0.2's #d7e3e1
 
-print("make_banner v1.0.2")
-W, H, DPI = 16, 4.2, 100
+print("make_banner v1.0.3")
+W, H, DPI = 16, 4.6, 100
 fig = plt.figure(figsize=(W, H), dpi=DPI, facecolor=BG)
 ax = fig.add_axes([0, 0, 1, 1]); ax.set_xlim(0, W); ax.set_ylim(0, H); ax.axis('off')
 ax.add_patch(plt.Rectangle((0, 0), W, H, color=BG, zorder=0))
@@ -33,7 +36,7 @@ if img.ndim == 3:
 img = img / img.max()
 h, w = img.shape
 # right-side MRI panel with a horizontal fade into the background
-x0, x1 = 9.2, W
+x0, x1 = 9.8, W
 y0, y1 = 0, H
 panel_w = x1 - x0
 crop_h = int(w * (H / panel_w))
@@ -46,15 +49,15 @@ tint = np.array([0.80, 0.95, 0.93])[None, None, :]
 rgb = bg_rgb[None, None, :] * (1 - alpha) + (crop[..., None] ** 0.8) * tint * alpha
 ax.imshow(np.clip(rgb, 0, 1), extent=(x0, x1, y0, y1), aspect='auto', zorder=1)
 
-ax.text(0.7, 3.12, 'KAGGLE  ·  RSNA AI CHALLENGE 2026', color=ACCENT, fontsize=15, weight='bold', zorder=3)
-ax.text(0.7, 2.25, 'RSNA Knee Abnormality Detection', color='white', fontsize=36, weight='bold', zorder=3)
-ax.text(0.7, 1.55, '12 knee MRI findings  ·  multi-series DICOM  ·  macro AUC', color='#d7e3e1', fontsize=15, zorder=3)
+ax.text(0.7, 3.72, 'KAGGLE  ·  RSNA AI CHALLENGE 2026', color=ACCENT, fontsize=19, weight='bold', zorder=3)
+ax.text(0.7, 2.78, 'RSNA Knee Abnormality Detection', color='white', fontsize=42, weight='bold', zorder=3)
+ax.text(0.7, 2.06, '12 knee MRI findings  ·  multi-series DICOM  ·  macro AUC', color=SUB, fontsize=21, zorder=3)
 # medal chip
-ax.add_patch(plt.Circle((0.98, 0.78), 0.26, color=SILVER, zorder=3))
-ax.text(1.42, 0.92, 'Silver medal', color='white', fontsize=17, weight='bold', zorder=3)
-ax.text(1.42, 0.45, 'private 0.943  ·  rank 312 / 6,425  ·  public 0.958', color='#d7e3e1', fontsize=14, zorder=3)
-ax.text(W - 0.15, 0.12, 'MRI: Ptrump16, Wikimedia Commons, CC BY-SA 4.0 (not competition data)', color='#9fb5b2',
-        fontsize=8.5, ha='right', zorder=3)
+ax.add_patch(plt.Circle((1.04, 0.98), 0.34, color=SILVER, zorder=3))
+ax.text(1.6, 1.12, 'Silver medal', color='white', fontsize=24, weight='bold', zorder=3)
+ax.text(1.6, 0.55, 'private 0.943  ·  rank 312 / 6,425  ·  public 0.958', color=SUB, fontsize=20, zorder=3)
+ax.text(W - 0.15, 0.14, 'MRI: Ptrump16, Wikimedia Commons, CC BY-SA 4.0 (not competition data)', color='#b4c8c5',
+        fontsize=11, ha='right', zorder=3)
 os.makedirs(os.path.dirname(OUT), exist_ok=True)
 fig.savefig(OUT, dpi=DPI, facecolor=BG)
 print('written', OUT)

@@ -25,7 +25,7 @@ PORT='50985'
 SSH=['ssh','-o','BatchMode=yes','-o','StrictHostKeyChecking=yes','-o','ConnectTimeout=30','-p',PORT,HOST]
 SCP=['scp','-o','BatchMode=yes','-o','StrictHostKeyChecking=yes','-P',PORT]
 PACKAGES=('torch','torchvision','timm','numpy','opencv-python-headless','psutil','pydicom','safetensors','pillow','huggingface-hub','pyyaml')
-# Same broad token/private-key patterns as team-repo-sync v1.0.2. Never print matches.
+# Same broad token/private-key patterns as github-repo-sync v1.0.2. Never print matches.
 SECRET=re.compile(rb'AIza[0-9A-Za-z_-]{35}|KGAT_[A-Za-z0-9]{8,}|gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|sk-(ant-|proj-)?[A-Za-z0-9_-]{20,}|hf_[A-Za-z0-9]{30,}|-----BEGIN [A-Z ]*PRIVATE KEY|"private_' rb'key_id"|AKIA[0-9A-Z]{16}|xox[baprs]-[A-Za-z0-9-]{10,}|sk_live_[A-Za-z0-9]{20,}|GOCSPX-[A-Za-z0-9_-]{20,}|ya29\.[A-Za-z0-9_-]{20,}')
 
 
@@ -161,7 +161,7 @@ def pack():
         need(pth.suffix not in ('.pt','.pth','.bin') or pth==b.INIT,'unapproved checkpoint')
         entries.append(dict(path=rel,bytes=pth.stat().st_size,sha256=sha(pth)))
     manifest=dict(schema='hb177-transfer/v1.0.2',contract='56132574',remote_root=REMOTE,files=entries,
-        secret_scan='team-repo-sync v1.0.2 broad patterns: PASS',cache_included=False)
+        secret_scan='github-repo-sync v1.0.2 broad patterns: PASS',cache_included=False)
     write(STAGE/'transfer-inventory.json',manifest)
     sums=''.join(x['sha256']+'  '+x['path']+'\n' for x in entries)
     (STAGE/'transfer.sha256').write_text(sums,encoding='utf-8',newline='\n')

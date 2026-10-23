@@ -71,38 +71,31 @@ by the existing policy and the user's decision.
 한국어: 영어·한국어 페이지가 함께 생성됩니다. 이어서 표시값·식별자·출처·미확인 항목을
 읽어 확인합니다. 점수 기록 기능이 최종 선택을 대신하지 않습니다.
 
-## 4. Publish through the guarded workflow
+## 4. Publish from a clone
 
-In the shared workspace:
-
-```powershell
-& .local/run-scripts/team-repo-sync-v104.ps1 -Mode Apply -Message 'Record verified final results'
-```
-
-Review the diff and both pages. Then check the sanitized publication copy before
-pushing:
+The repository is published directly from a clone of
+https://github.com/TaeyanG4/rsna-knee-abnormality-detection. The copy-only publisher
+of the original workspace (`github-repo-sync-v104.ps1`) was retired on 2026-10-23,
+when the repository layout changed; it now stops at once if started.
 
 ```powershell
-python tools/render_final_results.py --data .local/team-repo/docs/reports/final-results-data.json --check
+git clone https://github.com/TaeyanG4/rsna-knee-abnormality-detection.git
+cd rsna-knee-abnormality-detection
+# edit docs/reports/final-results-data.json, then:
+python tools/render_final_results.py
+python tools/render_final_results.py --check
+git add docs/reports
+git commit -m "Record verified final results"
+git push
 ```
 
-This also catches text changes introduced during sanitization. If it fails,
-resolve the discrepancy in the source and publication copy before a push.
+The repository is public. Before pushing, read the diff for study or series
+UIDs, report text, labels, credentials and verbatim owner remarks, and keep every
+file under 2 MB. Verify remote main and both results pages after the push. Never
+force-push over another session's commits.
 
-Use the exact reviewed commit returned by Apply:
-
-```powershell
-& .local/run-scripts/team-repo-sync-v104.ps1 -Mode Push -ExpectedCommit '<exact reviewed commit>'
-```
-
-The publisher retains privacy/remote checks, the broad secret scan, 20 MiB guard
-and original PNG hash/metadata checks. Verify remote main and the visible result
-pages after push. If the remote advanced, reconcile with the owner; never force
-push or overwrite another session. The local publisher is not included in the
-notes snapshot; these publication commands apply in the original workspace.
-
-한국어: 정확한 변경 사항을 검수하고 해당 커밋을 게시한 뒤 원격 반영을 확인합니다.
-영어 메인은 계속 유지합니다.
+한국어: 저장소를 clone해서 JSON을 고치고, 페이지를 다시 만든 뒤 `--check`로 확인하고 푸시합니다.
+공개 저장소이므로 푸시 전에 UID·보고서 문장·라벨·인증 정보·소유자 발언 원문이 없는지 diff를 확인합니다.
 
 ## 5. Preserve the baseline
 
