@@ -70,8 +70,8 @@ Winners must also publish a short video, their open-sourced code and weights, an
 9. [Validation](#9-validation)
 10. [Final week, failures and runtime](#10-final-week-failures-and-runtime)
 11. [Key observations](#11-key-observations)
-12. [Top-team strategies (to be written after the top write-ups are published)](#12-top-team-strategies-to-be-written-after-the-top-write-ups-are-published)
-13. [Self-feedback (to be written)](#13-self-feedback-to-be-written)
+12. [Top-team strategies](#12-top-team-strategies)
+13. [Self-feedback](#13-self-feedback)
 14. [How we used AI agents and skills](#14-how-we-used-ai-agents-and-skills)
 15. [KneeOps local dashboard](#15-kneeops-local-dashboard)
 16. [Repository layout](#16-repository-layout)
@@ -486,15 +486,45 @@ Five further submissions without a description (Oct 9 and Oct 13) finished witho
 6. Same-compute hidden runtimes differed by 1.52 h on Oct 21 and reached 9.2 h on Oct 22; three submissions were lost to the 9 h limit.
 7. The seven-lens retro scan changed 16 of 74 past verdicts (D-B-129); the four-ruler and lens readouts consistently favoured own-model weight increases that the public board did not confirm (section 4.5).
 
-The comparison with the top teams and our own retrospective will be added below once the top solution write-ups are published.
+Sections 12 and 13 compare this with the top teams' published write-ups and record our own retrospective (Oct 24-25).
 
-## 12. Top-team strategies (to be written after the top write-ups are published)
+## 12. Top-team strategies
 
-TODO: to be written by the team after the top solution write-ups are published.
+Collected on Oct 24 from the 25 solution write-ups linked on the leaderboard and 8 discussion posts (private ranks 5 to 5,049; ranks 1-4 had not published yet). Full index, patterns and per-write-up summaries: [top-solutions-20261024.md](docs/reports/top-solutions-20261024.md) · [details](docs/reports/top-solutions-20261024-details.md).
 
-## 13. Self-feedback (to be written)
+1. **Labels from the images.** Report-only LLM labels scored about 0.89-0.91 macro AUC on gold-58, image-aware reads about 0.93-0.95 (7th, 8th, 21st, 22nd, 72nd, 77th). The image weight was set per finding: high for fracture, synovitis, Baker's, effusion and contusion, low for ligaments and the OA compartments. Every team in the top 22 that used LLM labels had a model look at the MRI.
+2. **OOF self-distillation re-anchored to the fixed label.** Target = a x label + (1 - a) x OOF prediction, re-mixed with the original fused label every round (7th, 8th, 22nd, 49th, 72nd, 76th).
+3. **Site habits removed in training.** A site x finding bias term in the training loss only, dropped at test: +0.003 to +0.007 private (38th, 63rd, 72nd), +0.014 for the 33rd. Folds grouped by site or scanner.
+4. **A strong own model.** Whole-study reading, mm crops at 336-448 px, anatomy-anchored local views placed by segmentation or detectors, a per-finding readout that keeps medial and lateral apart. The best single models reached 0.957-0.958 private; ensembles added little at the top.
+5. **Rulers that can see the change.** Label and site changes were not judged on report-derived OOF but on image-label OOF, within-site AUC, external panels, sealed folds, LB pairs with outcomes fixed in advance, and per-finding LB probes. Teams that stopped at blends of the public R6/Raptor/S6 recipe, the authors of those public models included, plateaued at private 0.942-0.944.
 
-TODO: to be written by the team.
+## 13. Self-feedback
+
+Checked against discoveries.md and the handoff archives by four read-only investigators, then independently fact-checked: [postmortem-20261025.md](docs/reports/postmortem-20261025.md) · [evidence](docs/reports/postmortem-20261025-evidence/).
+
+No submission of ours scored above private 0.943 (first reached on Oct 16; 21 of the 29 scored entries in the last week sat exactly there), so the final-pair choice cost nothing and the last week's variants could not move the score. Own models alone peaked at 0.935 private; the top single models reached 0.957-0.958.
+
+| # | What we missed | Why (from our records) |
+|---|---|---|
+| M1 | Image-read labels never became the main label: aquila (Oct 9, all 4,405 studies) stayed a 25 % share | Higher shares were judged mainly on report-derived rulers, which cannot see the gain; D-B-166's registered rule read GO but was dropped as a holistic call; a public check of aquila was declined to save submissions; the reader kept our narrowed rules and 15 central slices |
+| M2 | Rulers that could not see label, site or geometry changes (the root cause) | The limit was recorded on Oct 7 (D-B-042), yet gating stayed on report-derived rulers; the only image lens was usually ineligible; per-finding LB probes fell under our own no-diagnostics-kernel rule (Oct 13); folds were never site-grouped |
+| M3 | No training-only site-bias term | One post-hoc offset test scored against Dread (D-B-002), which carries the habit itself; a site-memorisation signal from Oct 2 was recast as "no shortcut" |
+| M4 | Own model stuck at 0.934-0.935 private | Kill tests changed labels, teachers and backbones but never the geometry; anatomy crops (S6+) were held on Oct 12 and valued by their diluted blend share; K1's own kill rule was not applied |
+| M5 | The last week went into +0.001 work on the saturated public-recipe family | The right diagnosis was on record (reviews of Oct 13 and 16) and was withdrawn on report-ruler evidence; a "+0.001 per 1-2 days" target took over |
+| M6 | Process overhead | About 55 % of tagged discoveries were infra or runtime; consume-queue mode and strict byte-diff gates blocked multi-day label -> retrain chains |
+| M7 | Late start | First submission on Sep 11; the main lever was found 13 days before the end |
+| M8 | Forum read for assets, not methods | Threads showing image-aware labels and 0.960 single models were closed as "no usable asset" |
+
+Where we could have finished (estimates on the final board; gains do not add exactly):
+
+| Scenario | Private | Rank |
+|---|---|---|
+| Minimal fix: image-heavy labels on our own model, blended at real weight | 0.945-0.947 | about 101-211 |
+| **Realistic, same timeline from Oct 9**: plus training-only site bias, re-anchored OOF rounds, anchored crops, blend at about 0.5 | **0.948-0.951** | **about 42-100** |
+| Strong execution, same timeline | 0.952-0.954 | about 22-41 |
+| Full window from August | 0.954-0.956 | about 11-26 (gold) |
+
+Lessons we take forward: build a ruler that can see the target first, and never let rulers built from the training labels judge changes to those labels; treat a large gap to the top as structural (supervision and the core model, not blend weights); score own models standalone and apply the kill rules we write; check the labels for site and language habits on day one; keep process rules proportional; read the forum for methods; start the main line in the first two weeks. The system produced the right insights several times (D-B-074, D-B-042, the Oct 13 review); our failure was in acting on them.
 
 ## 14. How we used AI agents and skills
 
