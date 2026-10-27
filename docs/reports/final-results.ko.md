@@ -4,7 +4,7 @@
 
 **최종 결과 기록**
 
-준비 시각: 2026-10-22T19:48:36+09:00. 마지막 결과 확인: 2026-10-23T11:22:26+09:00
+준비 시각: 2026-10-22T19:48:36+09:00. 마지막 결과 확인: 2026-10-28T02:35:08+09:00
 
 결과 예정일 2026-10-23은 Taeyang이 알려 준 날짜이며 발표 시각은 미확인입니다. 실제 결과를 받아 기록할 준비 페이지이며 점수를 자동 조회하지 않습니다.
 
@@ -14,11 +14,11 @@
 | --- | --- |
 | 결과 상태 | 최종 결과 기록 |
 | 비공개 점수 | 0.943 |
-| 순위 | 312 |
-| 전체 팀 수 | 6425 |
-| 수상 / 메달 | Silver medal (top 5 %; silver cut-off rank 321) |
-| 확인 시각 (KST) | 2026-10-23T10:59:57+09:00 |
-| 근거 / 출처 | Kaggle private leaderboard via kaggle CLI (312 / 6,425) and Taeyang's screenshot of the leaderboard row |
+| 순위 | 297 |
+| 전체 팀 수 | 6300 |
+| 수상 / 메달 | Silver medal (top 5 %; silver cut-off rank 315) |
+| 확인 시각 (KST) | 2026-10-28T02:35:08+09:00 |
+| 근거 / 출처 | Kaggle final verified private leaderboard (GetLeaderboard, finalLeaderboardHasBeenVerified = true; 297 / 6,300) and Taeyang's screenshot of the leaderboard row; preliminary standing on 2026-10-23 was 312 / 6,425 |
 
 대시는 미기록을 뜻하며 0점이나 실패를 뜻하지 않습니다. 대회 전체 점수·순위와 개별 제출 점수를 구분합니다. 최종 두 제출물의 평균을 대회 점수로 계산하지 않습니다.
 
@@ -93,6 +93,7 @@ F4는 기준 시점에 준비 단계였습니다. 접수 원장으로 정확한 
 | --- | --- | --- |
 | 2026-10-23T10:59:57+09:00 | B (Claude Code) from the Kaggle CLI and Taeyang screenshots | 최종 private 결과(0.943, 312 / 6,425위, 은메달), 확정된 최종 쌍 X + F, 마지막 날 제출 결과와 F4를 기록했습니다. |
 | 2026-10-23T11:22:26+09:00 | B (Claude Code), repository maintenance | 고정본 링크를 이름이 바뀐 저장소(TaeyanG4/rsna-knee-abnormality-detection)의 커밋 4172ccf로 바꿨습니다. 2026-10-23에 기록을 커밋 하나로 정리하면서 결과 전 커밋 9e1509f가 사라졌습니다. plan.md의 Updates 7-10과 보고서 본문은 소유자 인용 1곳 삭제와 이 페이지로 가는 두 줄 안내를 빼면 그대로입니다. |
+| 2026-10-28T02:35:08+09:00 | B (Claude Code) from the verified Kaggle leaderboard and Taeyang's screenshot | 최종 확정 리더보드: Kaggle이 125팀을 제외했습니다(6,425 → 6,300, 규칙 위반으로 추정). 같은 private 0.943으로 순위가 312위에서 297위로 바뀌었습니다(은메달 기준 321위 → 315위). |
 
 ## 6. 이 페이지 갱신 방법
 

@@ -4,7 +4,7 @@
 
 **Final result recorded**
 
-Prepared: 2026-10-22T19:48:36+09:00. Latest verified result update: 2026-10-23T11:22:26+09:00
+Prepared: 2026-10-22T19:48:36+09:00. Latest verified result update: 2026-10-28T02:35:08+09:00
 
 The expected date, 2026-10-23, was supplied by Taeyang; release time is unconfirmed. This page accepts manually supplied results and does not poll scores.
 
@@ -14,11 +14,11 @@ The expected date, 2026-10-23, was supplied by Taeyang; release time is unconfir
 | --- | --- |
 | Result state | Final result recorded |
 | Private score | 0.943 |
-| Rank | 312 |
-| Total teams | 6425 |
-| Award / medal | Silver medal (top 5 %; silver cut-off rank 321) |
-| Observed at (KST) | 2026-10-23T10:59:57+09:00 |
-| Evidence / source | Kaggle private leaderboard via kaggle CLI (312 / 6,425) and Taeyang's screenshot of the leaderboard row |
+| Rank | 297 |
+| Total teams | 6300 |
+| Award / medal | Silver medal (top 5 %; silver cut-off rank 315) |
+| Observed at (KST) | 2026-10-28T02:35:08+09:00 |
+| Evidence / source | Kaggle final verified private leaderboard (GetLeaderboard, finalLeaderboardHasBeenVerified = true; 297 / 6,300) and Taeyang's screenshot of the leaderboard row; preliminary standing on 2026-10-23 was 312 / 6,425 |
 
 A dash means unrecorded, never zero or failure. Overall competition score/rank is separate from individual submission scores; it is not calculated as an average of the final pair.
 
@@ -93,6 +93,7 @@ These are descriptive comparisons, not controlled causal estimates: runtime/stri
 | --- | --- | --- |
 | 2026-10-23T10:59:57+09:00 | B (Claude Code) from the Kaggle CLI and Taeyang screenshots | Recorded the final private result (0.943, rank 312 / 6,425, silver), the confirmed final pair X + F, all late submission outcomes and F4. |
 | 2026-10-23T11:22:26+09:00 | B (Claude Code), repository maintenance | Snapshot links now point to commit 4172ccf of the renamed repository (TaeyanG4/rsna-knee-abnormality-detection). On 2026-10-23 the history was squashed into one commit, which removed the pre-result commit 9e1509f; Updates 7-10 of plan.md and the report text are unchanged except one redacted owner quote and a two-line pointer to this page. |
+| 2026-10-28T02:35:08+09:00 | B (Claude Code) from the verified Kaggle leaderboard and Taeyang's screenshot | Final verified leaderboard: Kaggle removed 125 teams (6,425 → 6,300), presumably for rule violations; our rank moved 312 → 297 with the same private 0.943 (silver cut-off rank 321 → 315). |
 
 ## 6. Update this page
 

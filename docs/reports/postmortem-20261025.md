@@ -1,15 +1,20 @@
 # Post-mortem — RSNA Knee Abnormality Detection
 
-**Version 1.0.0** · B (Claude Code) for Taeyang, 2026-10-25 KST · Inputs:
+**Version 1.1.0** · B (Claude Code) for Taeyang, 2026-10-25 KST (1.1.0: 2026-10-28, final verified board and the
+second solution collection, [top-solutions-20261028.md](top-solutions-20261028.md)) · Inputs:
 [top-solutions-20261024.md](top-solutions-20261024.md), our Kaggle submission list (134 entries, private scores),
 the preliminary private leaderboard, and four investigator reports that read discoveries.md, the handoff
 archives, plans and memory ([evidence/](postmortem-20261025-evidence/)). An independent fact-check of the
 draft (about 58 claims OK, 21 corrected or softened) was applied in this version.
 
+Team ranks such as "72nd" or "38th" below are the *preliminary* ranks used as labels in the first collection;
+the final ranks are mapped in [top-solutions-20261028.md §1](top-solutions-20261028.md#1-final-verified-standings).
+
 ## 0. Result and what the numbers already say
 
-- **Private 0.943, rank 312 / 6,425, silver** (first team of the 304-team 0.943 band; silver line rank 321).
-  Public 0.958 (rank 653).
+- **Private 0.943, rank 297 / 6,300, silver** on the final verified board (first team of the 287-team 0.943
+  band; silver line rank 315). Public 0.958 (rank 625). Preliminary (10-23): 312 / 6,425, silver line 321; Kaggle
+  then removed 125 teams.
 - **The best private score among all our scored submissions (119 of 134) is 0.943**, first reached on 10-16.
   From 10-16 to 10-22 we made 34 submissions; 29 scored, 21 of them at exactly 0.943 and the rest at
   0.940–0.942 (plus two own-only tests). The final pair choice cost nothing; the last seven days of variants
@@ -21,8 +26,8 @@ draft (about 58 claims OK, 21 corrected or softened) was applied in this version
 - First submission 09-11, five to six weeks after the start (Kaggle enabled the page on 08-05; the overview
   timeline gives Jul 30); no records 09-17 → 09-30.
 
-Score → rank on the final board: 0.944 = 212–311 · 0.946 = 126–163 · 0.948 = 76–100 · 0.949 = 61–75 ·
-0.950 = 51–60 · 0.952 = 32–41 · 0.954 = 22–26 (gold line 22) · 0.956 = 11–15.
+Score → rank on the final verified board: 0.944 = 204–296 · 0.946 = 124–160 · 0.948 = 74–98 · 0.949 = 59–73 ·
+0.950 = 49–58 · 0.952 = 31–40 · 0.954 = 22–25 (gold line 22) · 0.956 = 11–15.
 
 ## 1. What we missed, one by one
 
@@ -208,10 +213,10 @@ Gains do not add exactly and come from other teams' pipelines; ranges are judgem
 
 | Scenario | Changes | Private estimate | Rank on this board |
 |---|---|---|---|
-| A. Minimal fix, same timeline | Submit L1 / per-finding image-heavy labels on EXP143 v2 and blend at real weight | 0.945–0.947 | ≈ 101–211 |
-| **B. Realistic, same timeline (act from 10-09)** | A + training-only site bias + OOF rounds re-anchored to the fused label + anchored crops on our own model; blend with P at ~0.5 | **0.948–0.951** | **≈ 42–100** (silver) |
-| C. Strong execution, same timeline | B done well (full image reads with the best reader, per-finding fusion, 5-fold K1-class model, different-family final pair) | 0.952–0.954 | ≈ 22–41 (gold line at 22) |
-| D. Full window (start in August) | C with 6 more weeks | 0.954–0.956 | ≈ 11–26 (gold) |
+| A. Minimal fix, same timeline | Submit L1 / per-finding image-heavy labels on EXP143 v2 and blend at real weight | 0.945–0.947 | ≈ 99–203 |
+| **B. Realistic, same timeline (act from 10-09)** | A + training-only site bias + OOF rounds re-anchored to the fused label + anchored crops on our own model; blend with P at ~0.5 | **0.948–0.951** | **≈ 41–98** (silver) |
+| C. Strong execution, same timeline | B done well (full image reads with the best reader, per-finding fusion, 5-fold K1-class model, different-family final pair) | 0.952–0.954 | ≈ 22–40 (gold line at 22) |
+| D. Full window (start in August) | C with 6 more weeks | 0.954–0.956 | ≈ 11–25 (gold) |
 
 Anchors for B: the 72nd's single-model ladder went 0.932 → +site bias 0.939 → site-bias teachers 0.942 →
 attention KD 0.943 → +image labels 0.949 — our EXP143 v2 (0.934) sits at their starting point. The 63rd reached 0.948–0.949 when its
@@ -219,7 +224,7 @@ own model was strong enough to take a 0.5 share. 49th: own 0.949, blend 0.951. A
 22nd solo (0.954, 56 networks on rented 4090s), 21st solo (0.955).
 
 **Most likely outcome without the mistakes: roughly rank 40–100 (private ~0.948–0.951), with gold (top 22)
-reachable only with strong execution or an earlier start.** The private board is still preliminary.
+reachable only with strong execution or an earlier start.** Ranks are on the final verified board (10-28).
 
 ## 4. Lessons for the next competition
 
@@ -236,8 +241,22 @@ reachable only with strong execution or an earlier start.** The private board is
 6. Read forum threads for methods and score levels, not only for downloadable assets.
 7. Start the main line in the first two weeks.
 
+Added after the second collection (10-28; evidence in [top-solutions-20261028.md §4](top-solutions-20261028.md#4-feedback-against-our-record)):
+
+8. Before judging an image reader, give it the whole study or slice-picking tools; our 15-slice aquila read
+   probably understated the lever (2nd: a partial-view pilot misled them too; whole exam +0.043 on gold-58).
+9. Judge label sets by log loss and confident errors as well as AUC, and calibrate them.
+10. Use the expert-labelled studies as training data too (normal weight, or a short fine-tune merged back),
+    checked on a split of them, not on report-label OOF.
+11. Validate an external dataset's label mapping per finding before judging the dataset (OAI paid for 13th and
+    10th after re-mapping).
+12. Give the weakest findings (here lateral OA, PF OA, synovitis) their own label and model track early.
+13. Point the agents at the science (labels, ROI boxes, experiments), not mainly at process.
+
 ## 5. Change log
 
+- 1.1.0 (2026-10-28): final verified board (297 / 6,300; silver line 315), score → rank map and scenario ranks
+  recomputed on it; note that team labels are preliminary ranks; lessons 8–13 from the second collection.
 - 1.0.0 (2026-10-25): first version, with the independent fact-check applied (decision ownership for the 10-09
   LB check, S6+ and the 10-16 target; H-B-120 closed under our own rule, not a misreading; 33rd baseline; D-C-002
   vs the 10-09 diagnosis; D-B-002 groups and narrowed verdict; D-B-166 targets; D-B-259 pair result; K1 dates;

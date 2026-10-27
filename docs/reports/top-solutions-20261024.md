@@ -3,6 +3,11 @@
 **Version 1.0.0** · Collected by B (Claude Code) for Taeyang on 2026-10-24 KST, one day after the close.
 Per-write-up details: [top-solutions-20261024-details.md](top-solutions-20261024-details.md).
 
+> **Update 2026-10-28.** Ranks on this page are from the *preliminary* board. Kaggle has since verified the final
+> board and removed 125 teams (6,425 → 6,300): we are 297th, the silver line is rank 315. The rank map for every
+> source here, 16 more write-ups (ranks 1, 2, 3, 6, 10, 13 and others) and the feedback they add are in
+> [top-solutions-20261028.md](top-solutions-20261028.md). Section 3.11's "OAI did not work" is revised there (§3.2).
+
 Purpose: step 1 of the post-mortem (feedback, review, what we did wrong). This page gathers what the
 better-placed teams did; section 5 lists first observations against our own record, to be checked in the
 review step. The short versions are README sections 12 (top-team strategies) and 13 (self-feedback).

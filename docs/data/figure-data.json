@@ -2,8 +2,8 @@
  "note": "Aggregate numbers only. Dates are UTC (Kaggle submission time). Scores are Kaggle displays rounded to 0.001.",
  "leaderboard": {
   "private_score": 0.943,
-  "private_rank": 312,
-  "teams_private": 6425,
+  "private_rank": 297,
+  "teams_private": 6300,
   "medal": "silver",
   "cutoffs_private": {
    "gold": {
@@ -11,16 +11,16 @@
     "score": 0.954
    },
    "silver": {
-    "rank": 321,
+    "rank": 315,
     "score": 0.943
    },
    "bronze": {
-    "rank": 642,
+    "rank": 630,
     "score": 0.942
    }
   },
-  "teams_above": 311,
-  "teams_at_0943": 304,
+  "teams_above": 296,
+  "teams_at_0943": 287,
   "position_within_0943": 1,
   "winner_private": 0.96,
   "top3_private": [
@@ -38,10 +38,11 @@
    ]
   ],
   "public_best": 0.958,
-  "public_rank_approx": 638,
-  "teams_public": 6390,
-  "teams_public_at_0958": 1611,
-  "public_top_approx": 0.97
+  "public_rank_approx": 625,
+  "teams_public": 6300,
+  "teams_public_at_0958": 1591,
+  "public_top_approx": 0.97,
+  "note_final": "Final verified leaderboard 2026-10-28 (125 teams removed). Preliminary 2026-10-23: rank 312 / 6,425, silver line 321, bronze line 642, 304 teams at 0.943, 1,611 at public 0.958."
  },
  "submissions": {
   "total": 134,

@@ -1,8 +1,9 @@
-"""make_banner v1.0.3 (B, 2026-10-23): README banner for the public RSNA knee repo.
+"""make_banner v1.0.4 (B, 2026-10-28): README banner for the public RSNA knee repo.
 
 Uses the openly licensed Wikimedia Commons image "Knee MRI PD TSE FS Sagittal.jpg" (Ptrump16, CC BY-SA 4.0) as a faded
 background element, so the banner is an adaptation under CC BY-SA 4.0 (credited in NOTICE.md). NOT competition data.
 Output: docs/figures/banner.png (1600 x 460 px).
+Changelog v1.0.4: final verified board, rank 297 / 6,300 (was 312 / 6,425 before Kaggle removed 125 teams).
 Changelog v1.0.3: larger text for readability at README width (label 19, headline 42, subtitle 21, medal 24, scores 20,
   credit 11 pt), brighter secondary text, banner 420 -> 460 px tall, MRI panel starts at x = 9.8.
 Changelog v1.0.2: no team name (Taeyang); the competition name is the headline.
@@ -24,7 +25,7 @@ ACCENT = '#1baf7a'      # aqua (validated categorical slot 3)
 SILVER = '#c9ccd1'
 SUB = '#e3ecea'          # secondary text, brighter than v1.0.2's #d7e3e1
 
-print("make_banner v1.0.3")
+print("make_banner v1.0.4")
 W, H, DPI = 16, 4.6, 100
 fig = plt.figure(figsize=(W, H), dpi=DPI, facecolor=BG)
 ax = fig.add_axes([0, 0, 1, 1]); ax.set_xlim(0, W); ax.set_ylim(0, H); ax.axis('off')
@@ -55,7 +56,7 @@ ax.text(0.7, 2.06, '12 knee MRI findings  ·  multi-series DICOM  ·  macro AUC'
 # medal chip
 ax.add_patch(plt.Circle((1.04, 0.98), 0.34, color=SILVER, zorder=3))
 ax.text(1.6, 1.12, 'Silver medal', color='white', fontsize=24, weight='bold', zorder=3)
-ax.text(1.6, 0.55, 'private 0.943  ·  rank 312 / 6,425  ·  public 0.958', color=SUB, fontsize=20, zorder=3)
+ax.text(1.6, 0.55, 'private 0.943  ·  rank 297 / 6,300  ·  public 0.958', color=SUB, fontsize=20, zorder=3)
 ax.text(W - 0.15, 0.14, 'MRI: Ptrump16, Wikimedia Commons, CC BY-SA 4.0 (not competition data)', color='#b4c8c5',
         fontsize=11, ha='right', zorder=3)
 os.makedirs(os.path.dirname(OUT), exist_ok=True)

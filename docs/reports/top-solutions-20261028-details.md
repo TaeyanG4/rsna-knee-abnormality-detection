@@ -1,0 +1,1235 @@
+# Top solutions, second collection — per-write-up details (2026-10-28)
+
+**Version 1.0.0** · Companion to [top-solutions-20261028.md](top-solutions-20261028.md), which has the index,
+what these write-ups add and the feedback against our record. The first collection (25 write-ups, 2026-10-24) is in
+[top-solutions-20261024-details.md](top-solutions-20261024-details.md).
+
+Each section paraphrases one Kaggle write-up that was not yet published, or not yet linked from the leaderboard, on
+2026-10-24. Numbers are as the authors wrote them; they are third-party claims, not verified results. Model names are
+copied as written. Section numbers are **final verified private ranks** (leaderboard of 2026-10-27, 6,300 teams);
+titles keep the rank the authors wrote, which is sometimes the preliminary one.
+
+## 1. sakaku, tascj (team "Team Kangaroo🦘") — 1st Place Solution
+- URL: https://www.kaggle.com/competitions/rsna-knee-abnormality-detection/writeups/1st-place-solution
+- Scores stated:
+  - Leaderboard (from the assigned list): private 0.960 / public 0.969. The write-up gives no score for the final main-LB ensemble.
+  - Efficiency track, single ConvNeXt-T at 256 px: public 0.964, private 0.954.
+  - Main-LB ensemble component (ConvNeXt-T 384, trained-guide labels, 5 folds): public 0.967, private 0.958.
+  - This write-up covers one member's part. The teammate (@liushuzhi) has a separate post, discussion/752474.
+- Training labels / targets:
+  - The authors treat the task mainly as a "labeling competition". Every training study was labelled by frontier LLM agents that read both the report and the images, one non-interactive CLI session per study (`codex exec --json`, `claude -p --json-schema`, `pi --print`).
+  - Each session gets its own workspace. It contains AGENTS.md (task, finding definitions and grades, series table, full report, answer format), overview PNGs of the fluid-sensitive series, per-slice PNGs, geometry.json and roles.json. It also has two tools: view_slices (crop, zoom, window) and compare_location (maps a point across series using DICOM geometry).
+  - The answer format asks for evidence before the probability: report quotes, then image evidence citing views/series/slices, then a summary, then present_probability. The median study took about 2.5 min and 15 images.
+  - Protocol comparison on gold-58 (AUC / log loss / confident errors):
+
+    | Model | Protocol | AUC | Log loss | Confident errors |
+    |---|---|---:|---:|---:|
+    | GPT-6 Luna | tascj's | 0.904 | 0.555 | 92 |
+    | GPT-6 Luna | sakaku's | 0.891 | 0.465 | 61 |
+    | GPT-6.1 Sol | tascj's | 0.928 | 0.492 | 63 |
+    | GPT-6.1 Sol | sakaku's | 0.932 | 0.350 | 44 |
+    | GPT-6 Astra | sakaku's | 0.936 | 0.329 | 35 |
+
+    From this point the author judged labels by log loss and confident errors, not only AUC.
+  - "Trained guide": in one long Codex session the agent labels a gold study, sees its gold labels, reflects and updates a notes file, and after N cases writes a reading guide. The guide is then added to the labelling prompt. Results with gpt-6-astra-medium:
+    - Out of fold over 5 folds: 0.936 / 0.307 / 19.
+    - Learned on and applied to the same 58 studies: 0.943 / 0.300 / 16.
+    - The whole training set was relabelled with this guide.
+  - Temperature-calibrated labels: p' = σ(k·logit p) fitted on gold-58, k ≈ 0.77, to correct over-confidence.
+  - Gold-58 was kept out of the 5-fold split and used only as a reference.
+- External data & pretrained weights:
+  - No external imaging dataset is stated.
+  - Qwen3-Embedding-8B report embeddings (4096-d) are used as an auxiliary training target.
+  - Backbones: ConvNeXt-T, MambaOut-B+, MaxxViT-V2-B. Pretraining source not stated.
+  - The side classifier is a ResNet18-D.
+- Inputs & preprocessing:
+  - Each series is one sample. Slices are resized by pixel spacing to a 140 mm FOV (512 px), windowed at the series' 0.5/99.5 percentiles, with at most 64 native slices.
+  - Coronal and axial series of left knees are mirrored so every knee looks like a right knee.
+    - Side comes from DICOM headers or agent ROIs for 2,853 of 4,407 studies.
+    - For the rest, the side classifier on coronal/axial series is used (99.3% study accuracy on held-out studies).
+  - A 112 mm crop is centred on the box enclosing the ACL, both menisci and the medial/lateral OA ROIs, then resized to 384 px (256 px in the ablations and the efficiency model).
+- Model architecture:
+  - ROI boxes: one 3D box per series and finding, drawn around the relevant anatomy rather than the lesion.
+    - Labelled by a Codex main session that ran 21 parallel sub-sessions: 751 studies, 4,092 series.
+    - A detector (per-slice ConvNeXt-T at 160 px with 3D fusion) predicts the 12 boxes at test time. Mean IoU 0.714 on 551 held-out series.
+  - Classifier: a single-slice 2D ConvNeXt-T. For each finding, feature-map cells are weighted by their overlap with that finding's ROI box (box pooling).
+  - In-box attention: a zero-initialised 1×1 conv adds per-cell, per-finding scores, so the weight becomes overlap × exp(score), normalised inside the box.
+  - One linear layer per finding. The study prediction is the mean over series.
+  - Two auxiliary heads, used in training only:
+    - Lesion head: 1×1 conv, BCE on per-slice lesion-box coverage. Lesion boxes were drawn by gpt-6.1-sol-high with a check_boxes tool on 1,800 studies (3,616 lesions, 111,029 boxes).
+    - Report head: predicts the report embedding, loss 1 − cosine, weight 0.3.
+  - Study-level, 2.5D and 3D modelling gave no improvement. The author guesses the 3D ROI boxes make them unimportant.
+- Training recipe:
+  - AdamW, lr 5e-5 for all parameters, weight decay 0.02.
+  - 0.5-epoch warmup, then constant lr. 8 epochs, EMA 0.999, batch of 8 series.
+  - GPU augmentation: scale 0.9–1.1, shift 8%, rotation 10°.
+  - BCE on soft labels plus the two auxiliary losses. fp16 with GradScaler and torch.compile.
+- Validation & model selection:
+  - 5-fold split by study.
+  - Each experiment was scored against several label sets. After 20–30 public LB scores they checked correlations and chose to trust AUC of OOF predictions against @liushuzhi's Astra soft labels.
+  - Gold-58 was used only as a reference.
+- Ensemble & post-processing:
+  - Main LB ensemble, all at 384 px, all using the same box-pooling recipe:
+
+    | Run | Labels | Models | Weight |
+    |---|---|---|---:|
+    | ConvNeXt-T | trained guide | 5 folds | 2 |
+    | MambaOut-B+ | sakaku's Astra labels, calibrated, plus extra heads for other label sources | full data × 3 seeds | 1 |
+    | MaxxViT-V2-B | same as above | full data × 3 seeds | 1 |
+    | 6-channel ConvNeXt-T | mean of two Astra label versions, calibrated | full data × 3 seeds | 1 |
+    | 6-channel MambaOut-B+ | same as above | full data × 3 seeds | 1 |
+
+  - The 6-channel models have one channel per plane × fat-suppression type. Each channel holds that kind of series, resampled in patient coordinates onto the current series' slices. The author says they add more diversity than switching backbones.
+  - No post-processing stated.
+- Inference / runtime:
+  - Pipeline: knee side → detector ROI boxes → crop (mirror left knees) → box pooling → mean over series.
+  - Efficiency model:
+    - Runs one process per T4 on two T4s, with TensorRT and C++ DICOM reading. Only the fluid-sensitive series are read (41% less data).
+    - About 230 s on 1,200 training studies laid out as a test set.
+  - Kaggle disk read speed varied from about 30 MB/s when the platform was busy to over 500 MB/s when idle. The author therefore submitted just before the deadline, when the platform was likely idle.
+- Ablation / gains:
+  - 256 px, one component added at a time. OOF macro AUC on 4,349 studies against sakaku's Astra labels, soft / hard (thresholded at 0.5) / gold-58:
+
+    | Step | Soft | Hard | Gold-58 |
+    |---|---:|---:|---:|
+    | Baseline | 0.8721 | 0.9586 | 0.9319 |
+    | + ROI box pooling | 0.8746 | 0.9605 | 0.9330 |
+    | + 112 mm crop | 0.8756 | 0.9616 | 0.9386 |
+    | + in-box attention | 0.8769 | 0.9623 | 0.9396 |
+    | + calibrated labels | 0.8777 | 0.9625 | 0.9410 |
+    | + lesion and report heads | 0.8789 | 0.9638 | 0.9432 |
+
+  - Label-side gains are in the protocol and trained-guide results above.
+- What did not work:
+  - Study-level, 2.5D and 3D modelling.
+  - The author's own early labelling protocol (weaker log loss and confident errors than the teammate's).
+- Public → private observations: Efficiency model 0.964 → 0.954. Ensemble component 0.967 → 0.958. No further discussion.
+- Key insights:
+  - Label quality dominates, and the labelling protocol matters as much as the LLM model.
+  - Judge labels by log loss and confident errors, not AUC alone.
+  - A "trained guide" learned from gold feedback improves labels.
+  - Agent-drawn anatomy ROI boxes plus a detector allow per-finding box pooling.
+  - Lesion boxes and report embeddings work as training-only auxiliary targets.
+  - Most pipeline experiments were proposed and run by Claude Opus 5.5. The author says they do not fully understand how the boxes are used in training.
+- Code / links mentioned:
+  - Teammate part: discussion/752474.
+  - Notebooks:
+    - tascj0/rsna-2026-knee-side-classifier
+    - tascj0/rsna-2026-knee-roi-detector
+    - tascj0/rsna-2026-knee-box-pooling-classifier
+    - tascj0/knee-eff-trt-l (efficiency inference)
+    - tascj0/knee-final-20261022 (main inference)
+  - Labels dataset: tascj0/rsna-2026-knee-agent-labels.
+
+## 2. zzzoll, azamat1ch (team "MURAD") — 2nd Place Solution
+- URL: https://www.kaggle.com/competitions/rsna-knee-abnormality-detection/writeups/2nd-place-gold-solution-vision-llm-soft-labels-an
+- Scores stated: private 0.960, public 0.969. Members alone (public / private): mil-reader 0.966 / 0.957, crop-convnext 0.964 / 0.955, window-convnext 0.964 / 0.955, window-effnet 0.965 / 0.954. Specialist single-finding probes: lateral-effnet Lateral OA 0.932 / about 0.944; pf-specialist PF OA 0.944 / about 0.932. The chosen submission was also their best private score of all 101.
+- Training labels / targets:
+  - Framing: on the 58 expert-labelled exams the experts mark 240 positives where the reports state 154 (PF OA 21 vs 2), mostly mild disease. The real task is telling mild from normal.
+  - Step 1, report reader: GPT-6.1 Sol reads each report in its original language, because each language is roughly one hospital and a translation slip would teach the hospital. Per finding it gives a quote, one of six answers (yes / probably yes / unclear / probably no / no / not mentioned) and a 0-100 score; code turns these into a soft label. Scores 0.899 on the 58.
+  - Step 2, image reader: GPT-6 Astra makes one call per training exam with every slice (about 277 images), the report and the reader's answers, and treats the report as a colleague's read with known gaps. Scores 0.942 (+0.043, 95% interval +0.025 to +0.063). Effusion went 0.806→0.975 and Baker's 0.803→0.979. An earlier pilot that showed only 44 of 134 slices had wrongly suggested images would not help.
+  - Step 3, two fixes:
+    - PF OA takes half its value from the report reader (reader 0.960 vs Astra 0.930).
+    - A blind pass over the lateral half of the knee, without the report, lifts Lateral OA from 0.856 to 0.898.
+  - Step 4, second opinion: OOF predictions from five teacher models are mixed back in. The original label keeps 0.7 for ACL, MCL, both menisci, PF OA and Lateral OA, and 0.4 elsewhere.
+  - Step 5, PF OA floor: all 12 exams among the 58 that the reader called "unclear" on PF OA were positive, so every such training exam gets at least 0.8.
+  - Result: final labels reach 0.956 on the 58.
+  - Labels differ by member:
+    - crop-convnext and window-convnext: teacher mix + floor.
+    - lateral-effnet: Astra labels + both fixes.
+    - pf-specialist: lateral-effnet's labels with a gentler floor.
+    - window-effnet: pf-specialist's labels mixed 0.3 with mil-reader OOF.
+    - mil-reader: Astra labels.
+- External data & pretrained weights:
+  - fastMRI knee scans with fastMRI+ boxes: encoder pretraining and the left/right classifier for mil-reader and pf-specialist.
+  - OAI MOAKS cartilage grades: auxiliary kneecap cartilage head in pf-specialist.
+  - Backbones: ConvNeXt-T and EfficientNetV2-S (timm).
+  - Public code (Apache 2.0): goodpjw2008's 2.5D MIL reader and heliosli's window recipe.
+  - LLM APIs were used for training labels only (host ruling, thread 733965). No LLM is used at inference.
+- Inputs & preprocessing:
+  - Every member turns an exam into 2.5D pictures through shared steps, then cuts its own close-ups. The members differ most here, and the blend gets its value from that.
+  - mil-reader and pf-specialist do the first three steps their own way: they split series by fat suppression, read knee side from file tags (a small fastMRI-trained classifier decides unclear knees) and take the knee centre from headers alone. Their close-ups follow heliosli's recipe.
+  - crop-convnext: three joint close-ups (sagittal, coronal, axial) at 384 px around their knee-centre rule.
+  - window members: a full-series view plus local views around the knee.
+  - Pictures are spread over the whole box range. mil-reader samples 8 slice groups per view in training and uses 12 evenly spaced groups at test.
+- Model architecture:
+  - All six encode each 2.5D picture and pool per finding with attention (MIL).
+  - mil-reader and pf-specialist add a two-layer transformer over the pictures.
+  - mil-reader (ConvNeXt-T, fastMRI-pretrained) adds a left-knee mirror, per-finding attention inside each picture, and knee-centred close-ups on top of goodpjw2008's reader (0.955 public on their labels).
+  - window-effnet: EfficientNetV2-S with frozen batch norm.
+  - pf-specialist: mil-reader's encoder plus a second head that predicts kneecap cartilage grades (MOAKS).
+- Training recipe:
+  - Final models train on all 4,403 usable exams, with the 58 included using their expert labels. lateral-effnet is kept off the 58 so it can still be checked there.
+  - Seeds: mil-reader 5, crop-convnext 3, window-convnext 3.
+  - About 100 GPU hours on rented GPUs (about $100) for the final seeds.
+  - Optimiser, epochs and loss: not stated.
+- Validation & model selection:
+  - Every label version is scored on the 58 like a model. Chance variation there is about ±0.02, so they tuned on 24 exams and checked each frozen version on the other 34. Later rules (e.g. the PF OA floor) used all 58 and are treated as clues, not proof.
+  - window-convnext is their best fold model on the 58 (0.9488).
+  - Per-finding public probes: one finding real, the other 11 set to 0.5.
+- Ensemble & post-processing:
+  - Per-finding rank blend with hand-set weights that were never searched: mil-reader 0.35, crop-convnext 0.25, window-convnext 0.20, window-effnet 0.20.
+  - Specialists take a 0.20 share on their own findings (lateral-effnet: Lateral Meniscus + Lateral OA; pf-specialist: PF OA), and the core weights are scaled by 0.8 there. pf-specialist's weight was fixed before its probe.
+  - An unreadable exam gets training-set rates.
+- Inference / runtime:
+  - One Kaggle notebook on T4 ×2, internet off.
+  - The four core members average three slice offsets (0, 1, 2).
+  - The core-four submission is written first; each specialist runs within a time budget and is dropped if it fails.
+- Ablation / gains:
+  - Labels: 0.899 → 0.942 → 0.956 on the 58.
+  - Reading 15 instead of 4 pictures per series: +0.033 on the 58 (an input bug that cost more than most model changes).
+  - Better labels and inputs took their own models to 0.964 public; after that only new members helped.
+  - Specialists vs core: Lateral OA probe 0.932 vs 0.920 (mil-reader); PF OA probe 0.944 vs 0.920 (window-convnext).
+- What did not work:
+  - Showing Astra the expert answers: it copied them, and a rule it wrote from them scored 0.80 used blind.
+  - More blind one-finding passes: +0.066 on the 24 tuning exams, −0.019 on the 34 held back.
+  - Tuned blend weights: lost 0.002 to 0.007 to fixed weights on held-out exams.
+  - A close-up alone: −0.010 on Lateral Meniscus until the whole knee was added back.
+  - Look-alike members: a 0.959-public model added nothing.
+- Public → private observations:
+  - For submissions at ≥0.955 public, the two boards agreed on order (rank correlation 0.977).
+  - lateral-effnet led on the public Lateral OA probe but fell behind on private (about 0.944 vs 0.956). It is still the member least like the others (rank correlation about 0.92).
+  - PF OA probe: 0.944 public vs about 0.932 private.
+- Key insights:
+  - Image-reading LLM labels were the largest label gain.
+  - Each finding takes its label from the source that witnesses it best (report for PF OA and ligaments/menisci, images for effusion and Baker's).
+  - Once the labels outgrew the models, the gains came from inputs and diverse crops.
+- Code / links mentioned:
+  - Discussion 733965 (host LLM ruling).
+  - goodpjw2008 notebook: rsna-knee-coatnet-2-5d-convnext-mil-lb-0-950.
+  - heliosli notebook: 0-9573-latest-public-dataset-score-in-one-click.
+  - Code, notebook and weights via "Project Links"; training settings, prompts and label builders are in their repo (URL not given in text).
+  - Papers: ConvNeXt, EfficientNetV2, attention MIL (Ilse et al.), timm, fastMRI / fastMRI+, OAI / MOAKS.
+
+## 3. Zhengru Li, Zhihong Li, Bufan Li, guoqin gu, Mutian Hong (team "DataTech Club") — 3rd Place Solution: RSNA Knee Abnormality Detection 2026
+- URL: https://www.kaggle.com/competitions/rsna-knee-abnormality-detection/writeups/3rd-place-solution-rsna-knee-abnormality-detectio
+- Scores stated:
+  - G36-Gold (selected, the 3rd-place entry): 0.968 public / 0.959 private. Public rank 9th, private 3rd.
+  - A21GT (second selected): 0.968 / 0.958.
+  - Other late ensembles: A21 0.968/0.959, A28 0.968/0.958, A35 0.967/0.958, F44 0.968/0.959, G36 non-Gold 0.968/0.959, A21G 0.968/0.958.
+- Training labels / targets:
+  - Only 58 of the 4,407 studies had expert labels. The other studies got 12 continuous "multimodal soft labels" from GPT-6 Astra, which reviewed both the MRI and the report.
+  - Finding-specific readers then refined PF OA, Lateral OA and Synovitis. The PF specialist looked at ordered sheets of up to nine 384-px slices, read the images first and reconciled the report afterwards. Other report readers' opinions counted as supporting evidence, not as votes.
+  - Two target versions:
+    - N = PF OA-refined.
+    - R = N plus accepted Lateral OA / Synovitis revisions. Inside each accepted subset, the specialist's ranks pick quantiles of the previous targets, which keeps the new order but limits scale changes.
+    - R is a target transformation, not a ranking loss.
+  - Students trained on frozen target snapshots, with no reports or reader explanations.
+- External data & pretrained weights:
+  - OAI MRI, from a pool of about 9,440 knees.
+  - Main "v3kd50" recipe: on reliably mapped cells, applicable expert targets and ten-model teacher targets are mixed 50:50. The teacher is deweighted first as `t=p/[p+w_c(1-p)]`. Other cells keep fill values or get reduced weights.
+  - Some runs add a training-only, OAI-only prevalence correction to the logits.
+  - G36-Gold has 13 RSNA-only readers and 23 OAI-mixed readers.
+  - Backbones: BiT ResNetV2-50, ConvNeXt-Small, DINOv3 ViT-B/16, CoAtNet (via timm).
+- Inputs & preprocessing:
+  - Slices are sorted by DICOM physical geometry, knee orientation is standardized, and missing views are masked.
+  - Five acquisition groups: sagittal fluid-sensitive, sagittal non-fluid, coronal fluid-sensitive, coronal non-fluid, axial.
+  - About 140 mm field of view, resized to 224, 384 or 512 px.
+  - A representative cache uses 18/14/12/8/12 center positions per group (up to 64 in total).
+  - 2.5D window = three adjacent slices from one series.
+  - "Legacy" and "native" (single-resampling) pipelines stay paired with their own checkpoints.
+- Model architecture:
+  - A per-window encoder, then class-specific spatial pooling, global average pooling and attention MIL, giving 12 study logits.
+  - Depth context (31/36 members): within-series attention using physical position (32-d projections, 2×2 regional pooling, 4 heads, residual).
+  - OA-coupled head (5/36 members): learns regional cartilage grades. Cumulative ordinal outputs become compartment maxima plus learned residuals that adjust the 3 OA logits. OAI grades supervise it in training only, but the head stays active at test time.
+  - U5 variant: adds a training-only auxiliary task with 17 tissue fields.
+- Training recipe:
+  - Positive-weighted soft-target BCE with mass-preserving normalization; targets stay continuous.
+  - Fixed 25-epoch endpoint, not the best Gold58 epoch.
+  - AdamW, backbone LR 3e-5 to 1e-4, head LR 1e-3, effective batch 8, weight decay 0.01.
+  - OneCycle-based schedule with an epoch-18-to-25 annealing tail. For example, RK4C uses a nominal 50-epoch horizon, decays to 2% of peak and stops at epoch 25.
+  - Augmentation: intensity, affine, scale, gamma.
+  - Checkpoints: EMA 0.999 or raw. Training bags keep series blocks, capped at 32 windows.
+  - Members are full-data recipe/seed variants, not a uniform 5-fold ensemble.
+- Validation & model selection:
+  - Gold58 served as a repeatedly used development set (scores come from non-Gold-trained models), explicitly not a blind test.
+  - After G36 was frozen, eligible members were refit including the 58 Gold studies with matched recipe, seed, inputs and readout: 27 refits plus 9 original checkpoints.
+  - Post-refit in-sample Gold58 scores were not used to reselect members or weights; they served only execution/parity checks.
+  - Private scores in the write-up are retrospective.
+- Ensemble & post-processing:
+  - G36-Gold: 36 unique checkpoints (17 BiT, 7 ConvNeXt, 7 DINOv3, 5 CoAtNet; 4/23/9 at 224/384/512 px; 32 EMA, 4 raw).
+  - Three fixed-budget groups:
+    - Mature12 (established recipes).
+    - Matrix20 (5 configurations per backbone family, varying resolution, N/R targets, OAI dose and preprocessing; a curated set, not a full factorial).
+    - Expert8 (RK4/RK4C-family BiT variants for Lateral OA, PF OA and Synovitis).
+  - Formula: B = 0.5·mean(Mature12) + 0.5·mean(Matrix20). The weak three get 0.5·B + 0.5·mean(Expert8). Four checkpoints are shared between groups (12+20+8−4 = 36), and Expert8 carries 58.33% of the expanded weak-finding weight.
+  - Blending uses probabilities, with no percentile-rank conversion.
+  - A21GT: 21 members averaged equally for 9 findings; each weak finding is routed to its own three-expert mean (26 checkpoints: 14 refits, 12 originals).
+- Inference / runtime:
+  - Two T4 workers share DICOM decoding and reusable preprocessing, while keeping checkpoint-specific inputs.
+  - FP16 with chunked window encoding. Inference covers all valid cached windows, not every raw slice.
+  - Member identities, local vs Kaggle visible-test predictions and class-wise fusion were verified. Both packages finished within the limit (no exact hidden-test runtime given).
+- Ablation / gains (BiT-50 depth, seed 2026, epoch-25 EMA; Gold58 / public / private):
+  - E1 baseline (N, no OAI): 0.9400 / 0.962 / 0.951.
+  - J-v3 (OAI 2,000/epoch, 70:30): 0.9446 / 0.963 / 0.953.
+  - J-v3-all (OAI 9,440, 70:30): 0.9408 / 0.962 / 0.951.
+  - J-kd50-all (OAI 9,440, 50:50): 0.9453 / 0.963 / 0.952.
+  - RK4 (R targets, OAI 4,000, 50:50): 0.9505 / 0.963 / 0.953.
+  - N3RK4-o18 (OAI through epoch 18 only): 0.9523 / 0.963 / 0.953.
+  - Cleanest pair: 70:30 → 50:50 mixing raised local AUC 0.9408 → 0.9453 and both leaderboard scores by 0.001.
+- What did not work:
+  - More OAI was not uniformly better: at 70:30 the full pool did worse than the 2,000 draw.
+  - N3RK4-o18's higher local AUC did not raise leaderboard scores.
+  - Seed-expanded flat means (A28, A35) scored 0.958 private, below A21's 0.959; the authors say this does not isolate a seed effect.
+- Public → private observations:
+  - Most ensembles sit at 0.968 public / 0.958–0.959 private.
+  - At three-decimal precision, G36 vs G36-Gold vs A21 vs F44 (all 0.959) shows neither a Gold-refit benefit nor a grouping advantage.
+  - A21GT's hard routing was 0.001 lower privately, but composition differs too, so it is not an isolated comparison.
+- Key insights:
+  - Labels should read the images, not just report terms (reports omit findings or describe sub-threshold changes).
+  - Fixed group budgets stop the number of seeds or experiments for one architecture from deciding its weight.
+  - Finding-specific expert support for the weak three (Lateral OA, PF OA, Synovitis).
+  - Reports and annotation models are used only to build supervision; deployed readers use MRI only.
+- Code / links mentioned:
+  - Inference notebooks: https://www.kaggle.com/code/yeeelzh/g36-gold-final-20261022-score and https://www.kaggle.com/code/leechengju/kneemri-final-ensemble-a21gt-20261022-score.
+  - Training code, prompts, configurations and weights are promised in a follow-up.
+  - Also referenced: OAI (NIAMS), BiT, ConvNeXt, DINOv3, CoAtNet, timm.
+
+## 6. CentralyDS (team "CentralyDS") — 6th Place Solution
+- URL: https://www.kaggle.com/competitions/rsna-knee-abnormality-detection/writeups/6th-place-solution-knee-frame-tiles-pseudo-label
+- Scores stated: public 0.969, private 0.958. The first single tile model scored 0.954 public; their earlier whole-slice models scored 0.941–0.951.
+- Training labels / targets:
+  - Report-derived soft labels from several independent LLM extractions per report (a local Qwen-family 27B model, a hosted reasoning model, keyword rules), combined by consensus. The rubric follows the host definitions, and borderline findings count as negative.
+  - Wording rules, each checked on Gold and on held-out ranking checks. Examples: PF OA with deep cartilage loss is positive, low-grade only is halved, unspecified depth gets a floor of 0.8. Lateral meniscus intrasubstance degeneration without a tear is capped at ≤ 0.2. A strong traumatic bone bruise with no fracture wording gets a fracture floor of 0.45. ACL low-grade partial tear/sprain and MCL low-grade sprain are halved. One German site template phrase gets effusion 0.25.
+  - Per-site audits of synovitis and effusion wording habits.
+  - Image adjudication of 43 confident model–label disagreements, read on the model's own tiles.
+  - "MOAKS second reader": tile models trained only on OAI MOAKS grades were applied zero-shot to RSNA studies and blended in. Weights: effusion 0.5; synovitis, medial OA, medial meniscus and Baker's 0.25. The zero-shot effusion model alone reached 0.968 AUC on Gold-58.
+  - Gold studies keep their expert values and get loss weight 2.
+  - Every label release was scored before use ("LabelLab": Gold-58 plus rank checks against past Kaggle scores).
+- External data & pretrained weights:
+  - OAI (~9,400 baseline knees) and fastMRI (~9,100 clinical knee exams), used for MOAKS models and for pseudo-label pretraining.
+  - ImageNet-12k ConvNeXt-T, CAFormer-S18, ReXNet-R300, and a RadImageNet ResNet50 (OA model).
+  - EfficientNet-B0 keypoint localizer trained on 417 annotated knees.
+- Inputs & preprocessing:
+  - A 5-fold EfficientNet-B0 heatmap localizer predicts 5 landmarks per series (medial/lateral TF joint, intercondylar notch, PF joint, patella).
+  - Landmarks are fused into 3D by robust least squares across series. Series with residual > 6 mm (moved during the exam) are set aside.
+  - Knee frame: origin at the midpoint of the two TF points; axes medial/anterior/superior. Side comes from anatomy, never from DICOM laterality.
+  - Each series is resampled once to 0.3125 mm/px on a 512×512 canvas centred on the joint; left knees are mirrored.
+  - Two-knee studies are split by field-of-view centres; both knees are predicted and averaged.
+  - Tiles: 224 px (70 mm), 3 adjacent slices as channels. Tile centres come from a mixture of anatomical anchors (compartments, condyles, plateaus, notch, PF joint, suprapatellar pouch, posteromedial corner, MCL) plus uniform background.
+  - 12–24 tiles per series in training, 96 at inference.
+- Model architecture:
+  - Per-tile backbone (ConvNeXt-T / CAFormer-S18 / ReXNet-R300) → 256-d token plus plane and fluid-sensitive embeddings.
+  - One transformer layer over all tokens of the knee → per-finding gated attention pooling → 12 logits.
+  - Crop specialists on keypoint-centred crops: meniscus (zoomed horn/body), ACL (notch), OA-family, and a RadImageNet ResNet50 OA model.
+- Training recipe:
+  - AdamW (head 4.2e-4, backbone 6e-5), cosine schedule, backbone frozen for 2–3 epochs, EMA 0.999, bf16, weighted BCE on soft labels, 25 epochs.
+  - Augmentation: study-level left-right mirror, knee-frame jitter (2 mm / 2°), per-plane series dropout, one affine and intensity draw per study.
+  - In the ACL specialist, ACL-negative knees with a bone bruise are weighted ×3.
+  - Two noisy-student rounds on ~18,500 external knees:
+    - Round 1: teacher = four ImageNet-initialised plane cells (5 folds each). Students pretrain 30 epochs on the soft pseudo labels, then fine-tune on RSNA, with all folds starting from the same pretrained checkpoint.
+    - Round 2: teacher = the round-1 ensemble plus specialists; it pretrains a ReXNet-R300.
+  - 7 of the 11 final recipes use this pretraining.
+- Validation & model selection:
+  - Checkpoints are chosen on a proxy AUC that only compares positive/negative pairs from the same scanner model × field strength.
+  - Each pair is weighted by label confidence |2·soft − 1|²; OA is weighted ×1.5, contusion/fracture ×0.5.
+  - Over 61 submissions this proxy tracked public LB with Spearman 0.94, against 0.86 for plain macro AUC.
+- Ensemble & post-processing:
+  - 55 tile models (11 recipes × 5 folds). Logits are averaged within six groups (sagittal, coronal, axial, all-plane ConvNeXt, CAFormer, ReXNet), then across groups.
+  - Specialists are blended per finding in logit space: meniscus 0.3 per side, ACL 0.2, OA-family 0.1, ResNet50 OA (medial OA 0.3, PF OA 0.4).
+- Inference / runtime:
+  - Each member draws its own tiles.
+  - Attention sharpening at inference only: scores multiplied by τ (τ = 1 in training). The final kernel averages τ 12 and τ 32.
+  - Octant TTA for the all-plane cells (head re-run with each knee-frame octant left out).
+  - FP16 weights and autocast. About 6–6.5 h on 2×T4.
+- Ablation / gains (public / private):
+  - Base plane cells: 0.960 / 0.947
+  - Own tile draws + τ 2: 0.963 / 0.949
+  - + OAI-pretrained cells and ResNet50 OA: 0.964 / 0.951
+  - + all-plane ConvNeXt pretrained on OAI: 0.965 / 0.952
+  - + CAFormer and crop specialists: 0.966 / 0.953
+  - τ 8: 0.967 / 0.954
+  - + OAI+fastMRI-pretrained cells: 0.968 / 0.956
+  - τ 32 + ReXNet + octant TTA + cells retrained on refined labels: 0.969 / 0.957
+  - Final: 0.969 / 0.958
+  - Sharpening OOF effect grows with ensemble size: +0.0005 for 15 models, +0.0011 for 55; neutral or worse for a single model.
+  - Pseudo-label pretraining added about +0.003 public over three submissions.
+- What did not work:
+  - Rank blending instead of logit averaging.
+  - 384 px CoAtNet (0.948 vs 0.951); a 640 px canvas made no difference.
+  - fastMRI+ meniscus-box auxiliary loss.
+  - Pairwise ranking loss (+0.0002 macro, not deployed).
+  - An image-reading LLM label pilot on 7 Gold studies improved ranking but worsened calibration, so it was not scaled up.
+- Public → private observations: public and private moved together at every step (+0.009 public, +0.011 private overall). The authors say single steps of 0.001–0.002 are within noise.
+- Key insights:
+  - The authors call labels their weakest area: every published team above them had an LLM read the images.
+  - They name image-LLM labels and box-gated per-finding pooling as the biggest missed opportunities.
+  - Ensemble-only attention sharpening plus independent tile draws was their largest single public step.
+- Code / links mentioned: video https://www.youtube.com/watch?v=9g_U9B1A4uk; code https://github.com/adolic/rsna-knee-solution; weights https://www.kaggle.com/datasets/centralyds/rsna-knee-6th-place-models (CC BY-NC 4.0).
+
+## 10. Evan zhu, minmin andy, LP, Jak ma, madmax0404 (team "MEJAL") — 10th-Place Solution
+- URL: https://www.kaggle.com/competitions/rsna-knee-abnormality-detection/writeups/10th-place-solution
+- Scores stated:
+  - Final selected submission (70/21/9 blend): Public 0.967 / Private 0.957.
+  - Alternative blend (50/30/20): 0.967 / 0.956.
+  - Earlier version of the 50/30/20 blend: 0.966 / 0.955 with or without post-processing.
+  - Model groups (public / private):
+    - ConvNeXt-Tiny 384, 2.5D: 0.964 / 0.954
+    - ConvNeXt-Tiny 384, grayscale replication: 0.965 / 0.954
+    - EfficientNetV2-S 384: 0.963 / 0.950
+    - DINOv2-S at 392: 0.963 / 0.950
+    - TinyViT-21M 384: 0.961 / 0.949
+    - RadImageNet ResNet50 at 224: 0.957 / 0.943
+  - Four full-data CoAtNet-2 seeds before all-window fine-tuning: 0.964 / 0.953.
+- Training labels / targets:
+  - Path 1 (multi-backbone) label stages:
+    - LLM V1 reads reports only. It extracts finding, location, severity, negation scope and evidence, and keeps "not mentioned" separate from explicit negatives.
+    - LLM V2 estimates the probability that an expert would label the finding positive under the competition definition.
+    - A VLM check sees the same study's MRI, the report and the annotation criteria, and favours image evidence when the two conflict.
+    - Report LLMs: Gemma 4B, Opus 5, ChatGPT 6 Astra. VLMs: ChatGPT 6.1 Sol, Opus 5.5.
+    - Example mix: L = 0.7·V1 + 0.3·V2, then Y = 0.7·VLM + 0.3·L. The Conv model used 0.7·Opus VLM + 0.3·L. The DINO model used 0.5/0.5.
+    - Gold58 targets were overwritten with the official expert labels.
+  - Path 2 (CoAtNet, by Max) uses iterative OOF label distillation:
+    - Starts from public Raptor report soft labels plus two other report-reading sources.
+    - Adds GPT-6 Astra readings of the images without reports.
+    - Each round's OOF predictions are mapped back to the label scale and blended into the next round's labels. Each round retrains from ImageNet, with no online teacher and no temperature loss. The fifth round's labels are called v7.
+  - Final consensus labels combine v7, the VLM/LLM labels and OOF predictions.
+    - The OOF part is a class-wise rank blend (multi-backbone 0.45, CoAtNet 0.30, R7 0.25) mapped back to the soft-label range.
+    - Gold58 keeps official targets. OAI uses separate targets and masks.
+- External data & pretrained weights:
+  - OAI, mapped to 7 soft targets (both menisci, three OA findings, effusion, synovitis) with per-target validity masks.
+    - Path 1 mapping used the same visit's MRI, the expert readings and field dictionaries, run with local Gemma 3 4B.
+    - Path 1 candidate pool: 2,399 baseline plus 6,250 follow-up exams. A typical epoch sampled about 3,305 RSNA and 2,393 OAI exams (about 58%/42%).
+    - CoAtNet branch: 2,398 baseline knees only. Rule-based MOAKS mapping, averaged 50/50 with Path 1's OAI labels for the 7 shared findings. ACL and Baker's cyst kept the rule value; MCL, contusion and fracture were left blank.
+  - Public assets: public R7 weights, Raptor labels and training code, and report-label tables by stevenleehans, lixin73 and Pilkwang.
+  - Backbone weights (timm):
+    - convnext_tiny.fb_in22k_ft_in1k_384
+    - tf_efficientnetv2_s.in21k_ft_in1k
+    - vit_small_patch14_dinov2.lvd142m
+    - convnext_tiny.dinov3_lvd1689m
+    - coatnet_rmlp_2_rw_384.sw_in12k_ft_in1k
+    - RadImageNet ResNet50 (early experiments only)
+- Inputs & preprocessing:
+  - Path 1:
+    - Five slots: SAG_FLUID_FS, COR_FLUID_FS, AX_FLUID_FS, COR_T1, SAG_T1.
+    - Slices sorted by physical position, central-depth sampling, physical-size centre crop, intensity normalisation, left/right harmonisation, missing-slot masks.
+    - Mature setting: 24 slices per slot, 130 mm crop, 384 px.
+    - Two input styles: 2.5D (3 adjacent slices, 11 overlapping windows at stride 2) or grayscale replication (24 slice tokens).
+  - CoAtNet:
+    - Slots: sagittal fluid-sensitive/other, coronal fluid-sensitive/other, axial.
+    - Keeps 6%–94% of depth, 140 mm crop, cached at 336 px and resized to 384 px.
+    - Three-slice windows, up to about 134 per study.
+- Model architecture:
+  - Path 1: shared encoder → label-wise spatial attention → per-sequence BiGRU plus label-wise temporal attention → class-wise fusion across the five sequences with global weights renormalised over present slots (no case-dependent gating) → 12 outputs. Missing slots are excluded everywhere.
+  - CoAtNet-2 (about 73M parameters): window-level class scores, then class-wise attention MIL over one bag holding windows from all five sequences, with no plane or position encoding. Adapted from the public Raptor head.
+- Training recipe:
+  - Path 1 ConvNeXt:
+    - AdamW, bf16, EMA, batch 4 with 4-step gradient accumulation, lr 2e-4, 12 epochs.
+    - Geometric augmentation shared within a study; intensity augmentation consistent within a sequence.
+    - Auxiliary expert-head BCE only on present slots; masked BCE per target.
+  - CoAtNet:
+    - Soft-label BCE with fixed class positive weights. AdamW with one-cycle schedule, peak lr 3e-5 (encoder) and 1e-3 (head). Effective batch 8, 24 epochs, 12 random windows per study.
+    - Four full-data seeds (42–45), each trained on all studies except 100 held out for epoch choice.
+    - Then 4 epochs of all-window fine-tuning: lower lr, frozen BatchNorm, weights of 3 selected epochs averaged.
+- Validation & model selection:
+  - Path 1: 4 folds grouped by normalised report hash. Gold58 is a small-sample diagnostic only.
+  - CoAtNet: 4 folds over 4,296 studies. The 58 gold studies and 53 studies whose reports mention no target finding were always in training. Gold also informed source-weight choice.
+  - Workflow: screen ideas at 224 px, confirm at 384 px with multiple folds.
+  - The public LB (about 390 studies) was used as feedback. Steps of about 0.001 are treated as within chance.
+  - The authors stress that OOF agreement against shared teacher-derived targets is not an independent test.
+- Ensemble & post-processing:
+  - Within each multi-backbone group (DINOv2-S, EfficientNetV2-S, DINOv3-distilled ConvNeXt-T, ConvNeXt-T): average folds, seeds and test views. The four groups are averaged equally.
+  - Branch weights: 70% multi-backbone, 21% CoAtNet, 9% R7.
+  - Post-processing:
+    1. Per-class percentile ranks.
+    2. Noisy-OR style transform −log(1 − r + 0.5/m), then weighted average across branches.
+    3. Re-rank and map to normal quantiles.
+    4. Subtract 0.10 × Medial OA from Lateral OA, 0.10 × Medial OA from PF OA, and 0.20 × Effusion from Synovitis.
+    5. Output percentile ranks.
+  - Using clinically unrelated partner findings in the subtraction gave no gain. Steps 2–4 gave about +0.0004 OOF over plain weighted rank averaging, positive in all 10 halves of 5 random 50/50 splits.
+- Inference / runtime:
+  - Dual T4 with workload allocation, concurrent DICOM reading, caching and limited TTA (3 angles).
+  - CoAtNet samples 56 windows per study at inference.
+  - No LLM or VLM runs at test time. The 9 h limit drove these trade-offs.
+- Ablation / gains (authors say these come from different stages and are not additive):
+  - Two-LLM blend: about +0.001.
+  - VLM/LLM blend: about +0.002–0.003 (224 px: 0.951 → 0.953; 384 px EfficientNet: 0.957 → 0.960).
+  - OAI mapping vs the original rule mapping: about +0.002–0.003. An EfficientNet branch went 0.960 → 0.962 → 0.963 with blended labels, then baseline OAI, then 7 targets.
+  - 224 px/crop160 → 320 px/crop130: 0.925 → 0.937.
+  - Attention: 0.939 → 0.943.
+  - Slice coverage about +0.001. Overlapping windows about +0.003.
+  - Geometric augmentation 0.937 → 0.942. Intensity augmentation about +0.003.
+  - EMA about +0.002. Ranking loss about +0.001.
+  - 3-angle TTA about +0.001 public and private (an earlier 9-view estimate was +0.003).
+  - 24-slice grayscale branch: 224 → 384 px went from 0.951/0.936 to 0.956/0.943.
+  - Development trajectories: 224 px ConvNeXt-T 0.938/0.926 → 0.957/0.948; 384 px EfficientNet 0.957/0.940 → 0.963/0.950.
+  - CoAtNet path:
+    - The round adding GPT-6 Astra image-only readings: +0.019 public, +0.017 private (checkpoint selection also changed that round).
+    - All label rounds together: 0.924 → 0.964 public.
+    - All-window fine-tuning: +0.0021 OOF, +0.0006 in the team ensemble.
+    - OAI with rule labels: about +0.001 twice (0.957 → 0.958; 0.962 → 0.963 in a blend with R7), called within chance.
+- What did not work:
+  - The original threshold-based OAI mapping performed poorly.
+  - In the multi-backbone branch, these did not help consistently: more OAI or follow-up data, changing targets (4 vs 7), adding teacher predictions, increasing model count.
+  - Physical sorting gave about +0.001 public with no matching private gain.
+  - One early LLM-blend branch scored 0.937/0.925, below its 0.938/0.926 baseline.
+  - The post-processing subtraction with clinically unrelated partner findings.
+- Public → private observations:
+  - Typical drops: about 0.010–0.014 for model groups, about 0.010 for the final blend.
+  - Larger at lower resolution: 0.951 → 0.936 at 224 px versus 0.956 → 0.943 at 384 px.
+  - The 70/21/9 blend was 0.001 better on private than the 50/30/20 blend, with equal public scores.
+- Key insights:
+  - Align supervision with the competition's positive definitions: keep uncertainty as soft scores, and separate "not mentioned" from negative.
+  - Blend report-only and image-aware labels rather than trust either alone.
+  - Validate what an external label means before adding more external data.
+  - Use per-label evidence aggregation at spatial, slice and sequence level.
+  - Iterative OOF distillation with image-only LLM readings gave the largest single label gain.
+  - Screen at low resolution, confirm at high resolution.
+- Code / links mentioned:
+  - Multi-backbone code and labels: "Work in progress" links. Trained weights are not released yet; the CoAtNet pipeline and final submission code are not included.
+  - OAI DOIs: 10.15154/vgnc-0x45 (NDA Collection 2343, Study S3430) and 10.15154/wfxg-g926.
+  - Raptor labels and training notebook (dreaddevelopment).
+  - R7 weights and inference (heliosli).
+  - Report-label datasets by stevenleehans, lixin73 and Pilkwang.
+  - The figure 4 data file is linked as our_224_384_milestones.json.
+
+## 13. Volodymyr, KharinTymofii, Eugene Khvedchenya (team "Advanced CV") — 13th Place Solution
+- URL: https://www.kaggle.com/competitions/rsna-knee-abnormality-detection/writeups/13th-place-solution
+- Scores stated:
+  - Final ensemble: public LB 0.966 (final private not stated in text).
+  - Label ablations on paired LB runs:
+    - hard→soft grades: 0.921→0.935 public, 0.906→0.921 private.
+    - Synovitis fix: →0.938 / 0.926.
+    - final_v1: 0.942→0.944 / 0.928→0.930.
+    - rules_oof50 on CoAtNet: 0.944→0.945 / 0.930→0.932.
+    - rules_oof50 on EffNet-B3: 0.948→0.950 / 0.932→0.936.
+    - agentic labels: 0.950→0.953 / 0.937→0.942.
+    - + OAI: 0.953→0.961 / 0.942→0.950.
+  - CoAtNet-512 SWA + last-epoch pair: LB 0.962.
+- Training labels / targets:
+  - Two tracks, merged at the end.
+  - Track A (Volodymyr / Tymofii), report text:
+    - Sonnet at low effort gives a 7-point ordinal grade plus a quote per label, mapped to soft targets: negated / not_mentioned 0, equivocal / minimal 0.3, mild 0.6, moderate 0.8, severe 1.0.
+    - Reader AUCs on gold58: regex 0.814; LLM collapsed to yes/no 0.819; Opus high effort 0.877; Sonnet low effort 0.872.
+    - Silent-report Synovitis is filled with 0.4 × that report's Effusion grade (label AUC 0.674→0.787).
+    - Three-reader plain mean "final_v1" (Sonnet + Jev 24-question LLM + public flight0234 labels), with hand exceptions and one cap: label macro 0.878→0.909. Stacking, per-label weights and NaN masks lost to the plain mean.
+    - 0.5 OOF + 0.5 text: 0.9074 on gold, but tied on the LB.
+    - "rules_oof50": a four-stage agent workflow (blind Sonnet reader, Opus analyst, Opus verifier, synthesis) over 2,594 disputes of ≥0.5 between text and OOF. It produced 51 rules; untouched cells fall back to 0.5 text + 0.5 OOF. Gold 0.939 in-sample. Analysts sided with text 65% and with the model 11%.
+  - Track B (Eugene), agentic image + report labels:
+    - GPT-6 Astra at high effort via the Codex CLI, one isolated session per study, no tools.
+    - Starts with up to 8 seed slices per series (512×512 PNG), the untranslated report and a full series inventory. It may request up to 24 more slices over ≤3 rounds, each round a stateless replayed call.
+    - Output per target: score with anchored bands, confidence, assessability flag, verbatim quotes and a disagreement flag. Quotes and image IDs are validated, and an independent audit replays every trajectory.
+    - Score → soft target; confidence → per-cell loss weight (0.43–0.99, mean 0.89).
+    - Gold58 is used only for evaluation and excluded from label generation.
+    - Gold58 results: public report-only labels 0.870–0.893; own report-only 0.894; fixed ~95 slices + report 0.928 (another model 0.918); images only 0.915; agentic report + all series 0.931.
+  - Merge:
+    - Eugene's models train on a 50/50 blend of agentic labels and Tymofii's labels (with nested-CV leak-free OOF): 0.944 label AUC.
+    - V/T production arms train on pure agentic labels with confidence weights plus OAI.
+    - Final label file: 4,333 agentic pseudo-labels + 74 gold + 2,398 OAI training knees + the enriched test studies = 6,805 rows.
+- External data & pretrained weights:
+  - OAI (NDA collection 2343), MOAKS mapped per label:
+    - ACL: intact 0, partial 0.2, complete 1, post-reconstruction NaN.
+    - Menisci: any horn grade 2–8 or a root tear = 1.
+    - OA: graded scale from full- and partial-thickness loss and BME.
+    - Effusion: grade 0 / 1 / 2–3 → 0 / 0.6 / 1.
+    - Synovitis: 0.1 / 0.3 / 0.5 / 0.8, +0.2 for Hoffa synovitis.
+    - Baker's: 0.5 if a cyst is present (MOAKS has no size).
+    - MCL, Contusion and Fracture: NaN.
+  - Cells without a MOAKS read get the ensemble pseudo-label at a lower loss weight. Cells with a read get 0.75 MOAKS + 0.25 pseudo at a higher loss weight.
+  - Eugene's track: OAI 3,959 knees (199 holdout) and fastMRI+ 595 studies (112 holdout), missing cells pseudo-labelled: +0.009 LB (0.953→0.962).
+  - Gold74 = gold58 + 16 competitor-labelled studies (riadmohamed42 "Jev Knee Labels").
+  - Weights: timm ImageNet weights (coatnet_rmlp_1_rw2_224.sw_in12k_ft_in1k, tf_efficientnet_b3.ns_jft_in1k, coatnet_rmlp_2_rw_384.sw_in12k_ft_in1k) and ConvNeXt-tiny.
+  - Base model: Dread Development's public "Raptor" notebook.
+- Inputs & preprocessing:
+  - Track A:
+    - DICOM is converted to NIfTI with a MONAI / SimpleITK pipeline.
+    - Series are classified by metadata regex plus TR/TE into five slots: SAG_FLUID, SAG_NOFLUID, COR_FLUID, COR_NOFLUID, AXIAL.
+    - Square FOV crop around the knee centroid: 140 mm for CoAtNet, 160 mm for EffNet-B3. The outer ~6% of slices on each side is excluded.
+    - Laterality normalised to left; per-slot 1–99 percentile clip.
+  - Track B: all-series 3-slice windows (any interior slice can centre a window) at 512 px.
+- Model architecture:
+  - Track A: window-series attention MIL ("WindowSeriesModel"), moving from CoAtNet-224 to EfficientNet-B3 at 512 px. Adds series dropout 0.1 (drops a whole slot) and avg+max pooling (catavgmax).
+  - Track B:
+    - Raptor CoAtNet-2 at 512 px with learned series-type and depth embeddings.
+    - ViT2.5D: ConvNeXt-tiny over overlapping slice triplets, a 4-layer study Transformer, and 12 learned pathology queries cross-attending to the tokens.
+- Training recipe:
+  - Track A:
+    - EffNet-B3: Adam without weight decay, cosine schedule with 0.1-epoch warmup (eta_min 1e-5), 35 epochs.
+    - Augmentation: MONAI gain, zoom 0.7–1.4 and Gaussian noise; CutOut (1–3 holes) only for B3, where it seemed crucial against overfitting.
+  - Track B:
+    - "MuonC" (their own Muon variant) on all Conv2d weights, AdamW elsewhere, with doubled backbone LR. Gold58: AdamW 0.925 → MuonC 0.928 → MuonC with 2× LR 0.931; AdamW with 2× LR 0.921.
+    - Augmentation mostly neutral for Raptor (only random gain kept). Strong augmentations helped ViT2.5D.
+    - Kept both the SWA-3 and the last-epoch checkpoint.
+- Validation & model selection:
+  - Gold58 / Gold74 plus folds. They report ΔVal and ΔG58 per fold count.
+  - Enriched evaluation set of 411 studies: 74 RSNA + 337 OAI extreme knees, uncertain labels in (0.25, 0.75) masked.
+  - Gold58 deltas under ~0.01 did not reliably predict LB (Spearman 0.90 over 56 experiments, 0.23 among the best nine), so paired LB submissions drove label decisions.
+- Ensemble & post-processing:
+  - Equal probability-space blend of two halves, each averaged internally:
+    - Half 1: EffNet-B3 (5 folds) + CoAtNet (3 folds) window-series models.
+    - Half 2: Eugene's four-member Raptor CoAtNet-512 + ViT2.5D ConvNeXt-512, with flip TTA.
+  - If Eugene's half falls back to a neutral probability, the other half's prediction is used.
+- Inference / runtime:
+  - A plain PyTorch FP16 run of all 12 members was projected at over 10 hours.
+  - CNN encoders are exported via ONNX to TensorRT FP16 engines, built once on a Kaggle T4 and cached as EPContext ONNX (load in 1–2.5 s). Attention heads run on CPU onnxruntime in FP32.
+  - One model at a time across two T4s; total under 9 hours.
+- Ablation / gains:
+  - Soft grades: +0.015 private.
+  - Synovitis from Effusion: +0.005 private.
+  - EffNet-B3 512 px vs CoAtNet-224: +0.0056 val, +0.0133 G58, LB 0.942→0.948.
+  - Series dropout + catavgmax: +0.0105 G58, LB unchanged.
+  - Agentic labels: +0.005 private.
+  - OAI: +0.008 private.
+  - Images in the labelling loop: +0.034 (CI +0.016 to +0.055). Dropping the report costs 0.016. Adaptive slice choice: only +0.003, not significant.
+  - OAI/fastMRI+ in Raptor: +0.009 LB.
+- What did not work:
+  - Many MIL / attention-head variants (tried before labels were good).
+  - 3D networks: too slow and hard to convert to TensorRT.
+  - SoftAUC fine-tuning on clean labels: not finalised.
+  - MedSigLIP-448: ~0.93 G58 but poor TensorRT parity.
+  - RadImageNet ResNet-50, DINOv2-S, DINOv3-S, OrthoFoundation-L: underperformed or tied the CoAtNet encoder at more runtime.
+  - 576 px: no gain.
+  - RankNet-style AUC losses: neutral at best.
+  - Augmentation in general: within noise.
+- Public → private observations: in their paired label ablations, public and private never moved in opposite directions.
+- Key insights:
+  - "Garbage in, garbage out": the biggest LB moves came from labels (soft grades, the Effusion fix, OAI); CV work was second-order.
+  - Text-only labellers plateau at 0.85–0.90 because 32 of 58 gold studies' positives are silent or negated in the report.
+  - Their models, trained only on text labels, scored 0.908 macro AUROC against MOAKS on OAI knees. They take this as evidence of transferable findings.
+  - Medial and Lateral OA leak into each other through "all compartments" report wording.
+- Code / links mentioned:
+  - Dread Development notebook "knee-mri-twelve-findings-from-a-single-model".
+  - riadmohamed42 dataset "jev-knee-labels".
+  - OAI (nda.nih.gov/oai), fastMRI+ / fastMRI papers, Muon references (arXiv 2410.21265, 2502.07529).
+  - Inference and training code: TBD.
+
+## 16. Pa3฿aJluHа (team "Pa3฿aJluHа") — 16th place: text-only LLM labels, self-training, ConvNeXt-S with grid tokens
+- URL: https://www.kaggle.com/competitions/rsna-knee-abnormality-detection/writeups/16th-place-text-only-llm-labels-self-training-c
+- Scores stated: public 0.965 (24th), private 0.955 (16th). Solo entry. Both finals: 0.965 / 0.955.
+- Training labels / targets:
+  - Five open LLMs (Kimi-K3, MiMo-V2.6-Pro-RL, Qwen3.8-Flash-Next, DeepSeek-V4.1-Flash, GLM-5.3), each reading every report twice, with strict JSON via guided decoding.
+  - The prompt pastes the organisers' rubric verbatim and asks for the probability that an expert reading the images would call the finding positive, not whether the report mentions it.
+  - Each read returns status, grade, quote and probability per finding, plus 24 auxiliary findings used as auxiliary targets.
+  - Soft target = mean over the ten reads, clipped to [0.01, 0.99]. Per-study weight drops when readers disagree or the report is truncated.
+  - Synovitis: reports are silent in 84% of studies while experts call about half of gold positive. A silent report is therefore mixed with a prior derived from effusion and OA.
+  - Calibrated on the 58 gold studies only. Label-set macro AUC vs gold: 0.90 (v1) → 0.91 (rubric v2).
+  - Self-training: target = α·LLM + (1 − α)·mean OOF of the previous generation. α = 0.3, or 0.6 for MCL, lateral meniscus and PF OA. Teachers are de-biased for their positive weights.
+  - Ten rounds (st1–st10). Image model vs text labels on gold: 0.93 vs 0.90.
+- External data & pretrained weights:
+  - ConvNeXt-S ImageNet-22k → 1k (384).
+  - The public S6-fall solution by nartaa / heliosli (Apache-2.0): used as a member and retrained on their own labels.
+  - No external data in the final submission.
+- Inputs & preprocessing:
+  - Six slots (sag/cor/ax × fluid-sensitive/other), one series each: the largest at test time, a random one in training.
+  - Fixed field of view: 110 mm centre crop for cor/sag, 150 mm for axial, at 384 px (448 px variants from a 512 cache). Intensities scaled to the 1–99 percentiles.
+  - Windows of 3 adjacent slices as RGB; 60 per study (16/12/12/8/8/4 per slot). Window position is passed in; missing slots are masked.
+  - Right knees are mirrored to a left convention. Side comes from the DICOM tag → x-coordinate of the image centre (20 mm dead zone) → study consensus. An EfficientNetV2-S side classifier (99.9% accuracy) flips the rest at inference.
+  - No horizontal flip augmentation: mirroring all studies dropped gold AUC 0.933 → 0.919.
+  - Augmentation: rotation ±10°, scale 0.9–1.1, shift ±5%, gamma/contrast/brightness, random crop 352 of 384, slot dropout 10%.
+- Model architecture:
+  - ConvNeXt-S encodes each window into an 11×11×768 map, average-pooled to a 2×2 or 3×3 grid of tokens (240 or 540 per study) with slot, position and cell embeddings.
+  - One pre-norm transformer layer (d 512, 8 heads) → QueryPool head with 12 learned queries; an auxiliary linear head predicts the 24 report findings. ≈52M parameters.
+  - Pool variants: 2×2, 3×3, 448 px, second seed, zoom 110 and 130 mm, MaxViT-S 384.
+- Training recipe:
+  - BCE on soft targets with per-finding pos-weight clip(√((1−m)/m), 1, 5), plus 0.2 × auxiliary BCE.
+  - AdamW (encoder 1e-4, head 1e-3, wd 0.02), 1 warm-up epoch then cosine.
+  - 30 epochs, or 60 for the final pool (+0.0016 OOF). Batch 8 studies = 480 windows. Drop-path 0.2, bf16, EMA 0.999.
+  - Gold-58 was never trained on in the 5-fold runs; only the gold-trained full-data S6 members at the end used it.
+- Validation & model selection:
+  - GroupKFold by scanner proxy (manufacturer + model + software + coil, plus report hash). Random folds inflate macro AUC by about 0.05.
+  - Epoch selected by OOF soft AUC. Validation always against the original LLM targets so the metric does not drift with self-training.
+  - Gold-58 AUC of an ensemble predicted public LB better than OOF; late decisions used paired bootstrap over both.
+- Ensemble & post-processing:
+  - Per-finding z-scored logit blend.
+  - Final A: P40 pool 0.5 + public S6-fall 0.1 + mean of three own S6 seeds 0.4. P40 = seven 5-fold recipes at 60 epochs on st10t labels, plus a separate run without the synovitis prior for the synovitis column.
+  - Final B: P40 0.4 + S6-fall 0.1 + two own S6 seeds 0.3 + own S6 self-trained on the public JEV labels with gold rows 0.2.
+  - Own models correlate at 0.98. Pools of 30–80 never passed 0.964 public; the different S6 pipeline was what helped.
+- Inference / runtime:
+  - Offline kernel on two T4s, one subprocess per GPU, streaming DICOM reads with 16 threads, the same canonicalisation code as the training cache.
+  - Side check in tensors, fp16, median fallback for unreadable studies, 8.3 h time guard.
+  - Final kernel: 8.5 h. Single fluid-only model: ~5 min, 0.961 / 0.949 (Efficiency candidate).
+- Ablation / gains:
+  - Self-training rounds 1–4: +0.010, +0.002, +0.002, +0.003 public; synovitis prior +0.001; later rounds flat.
+  - Grid tokens +0.008 public (biggest model gain); ConvNeXt-S over EfficientNetV2-S +0.002–0.003; 110 mm zoom +0.001–0.002.
+  - Single ConvNeXt-S 2×2: 0.962 / 0.952. ConvNeXt-T / ConvNeXt V2-B / DINOv2-S: 0.961 / 0.962 / 0.958 public, 0.950 / 0.952 / 0.949 private.
+  - p60: 0.964 / 0.953. p60 + S6-fall: 0.964 / 0.953. P40 + S6 blends: 0.965 / 0.954–0.955.
+  - Public history: 0.926 → 0.936 → 0.951 → 0.957 → 0.963 → 0.965.
+- What did not work:
+  - DINO self-supervised encoder pretraining; CoAtNet-2 (did not train); DINOv3 ConvNeXt; sex token.
+  - Flip TTA and second-series TTA.
+  - Stacking or per-finding weights fitted on gold (stacking 0.935 → 0.874); post-hoc mixes tuned on gold.
+  - A training-only site term on one to three findings.
+  - TTA via pseudo-labels or TENT; longer/shorter training; more inference windows.
+  - Blending with the public stack (0.948).
+- Public → private observations: the whole table shifted about −0.010. Within the author's submissions private followed public within ±0.001, and the two S6 blends were best on both.
+- Key insights:
+  - The competition is about labels, not architectures.
+  - The author says top-8 write-ups labelled the images with frontier VLMs (gold AUC 0.936–0.956 vs their 0.91 from text) and that the next 0.003–0.005 was in the label source.
+  - A genuinely different second pipeline beat larger pools of their own correlated models.
+- Code / links mentioned: public S6-fall solution by nartaa / heliosli (no URL given); public JEV report labels; 7th place's published labels referenced. No own code link.
+
+## 19. Ogurtsov, Pizzaboi, Ignat, shin0000, yuto083 (team "AdeptusOverfiticus strike back") — 19th Place Solution
+- URL: https://www.kaggle.com/competitions/rsna-knee-abnormality-detection/writeups/19th-place-solution
+- Scores stated:
+  - Final submission (three-model fixed blend 0.40/0.35/0.25): 0.965 public / 0.955 private.
+  - Distilled single model: 0.962 / 0.951. Its teacher ensemble: 0.961 / 0.948.
+  - MedSAM global + specialists branch: 0.964 / 0.953.
+  - BA440-C512-WS1 CoAtNet: 0.960 / 0.948 (part of the second, non-winning submission).
+- Training labels / targets:
+  - LLM-derived probability labels from the reports.
+  - Ogurtsov/Pizzaboi/Ignat labels: the average of two GPT-6 Astra (Medium) runs, one with DICOM + report and one with DICOM only. A fresh agent was used per study with a simple prompt that includes the host's finding definitions and asks for 0.00–1.00 probabilities over the full range.
+  - Sol 6.1 labels and Opus report-only labels were "substantially worse". Report-only runs with Sol 6.1 or Astra were not tried.
+  - 440 controversial Lateral OA cases were relabelled with a more elaborate prompt (the "BA440" labels); the effect could not be measured.
+  - Distillation targets: 50/50 mix of LLM labels and the teacher ensemble's out-of-fold probabilities. Each study was predicted only by models that had not seen it, so no leakage.
+- External data & pretrained weights:
+  - ImageNet-22k ConvNeXt-Tiny for the student.
+  - ImageNet ConvNeXt-Tiny for the MedSAM branch, with a frozen pretrained MedSAM used only to find a crop anchor (not fine-tuned, not used to segment lesions).
+  - CoAtNet-2 (timm `coatnet_rmlp_2_rw_384.sw_in12k_ft_in1k`).
+  - No external MRI data stated.
+- Inputs & preprocessing:
+  - Student: 140 mm field of view resized to 384 px; 8 windows per series in training, 16 at inference.
+  - MedSAM branch:
+    - 160 mm field of view as 576×576.
+    - MedSAM segments the middle slice of each sagittal/coronal series. The upper boundary of the largest bone component gives an anchor.
+    - Five fixed-offset 288×288 (~80 mm) crops: sagittal central/anterior/posterior and coronal side A/B. The same coordinates are reused for all slices in the series.
+    - Fixed fallback anchor if the mask is unstable; zero padding outside the frame.
+    - Side A/B is not assumed to be medial/lateral.
+  - BA440-C512 corpus "dread_v5_512_d96n":
+    - 96 rows per study in 5 slots: sagittal fluid 26, sagittal other 22, coronal fluid 18, coronal other 12, axial 18.
+    - Slices sorted along the slice normal and taken by linspace over 2–98% of the stack.
+    - Modality LUT, MONOCHROME1 inverted, per-series 2/98-percentile window, 140 mm centre crop at each slice's own PixelSpacing, one INTER_AREA resize to 512, stored as uint8 in a single memmap.
+    - The same builder runs in training and in the Kaggle kernel.
+- Model architecture:
+  - Student: ConvNeXt-Tiny with a slice-attention head.
+  - MedSAM branch: 6 models (1 global for all 12 findings plus 5 finding-group specialists). Each is ConvNeXt-Tiny with a residual bidirectional GRU over slices and finding-specific attention. Some specialists combine local crops with global views; the bone specialist uses global views only.
+  - BA440-C512: CoAtNet-2 at 512 px on 1-slice, 1-channel windows (first conv rebuilt by summing RGB filters). LayerNorm, then per-class attention over windows (Linear 256 → tanh → dropout 0.2 → Linear 12) with a separate pooled feature and linear output per class.
+- Training recipe:
+  - Student: 32 epochs, EMA, pairwise ranking loss added to BCE, separate backbone/head learning rates; trained once on all non-Gold studies.
+  - MedSAM branch: trained on all 4,349 non-Gold studies, 16 slices sampled per series.
+  - BA440-C512:
+    - 5 folds (3525/882), soft targets fed straight into BCEWithLogits with a prevalence pos_weight.
+    - K=12 random windows per study; 8 studies per step (2×4, gradient accumulation 2).
+    - AdamW, LR 3e-5 backbone / 1e-3 head, wd 0.02, OneCycle with 15% warm-up, 24 epochs, bf16, grad clip 3.0, gradient checkpointing, ±10% intensity gain, seed 42.
+    - SIGReg auxiliary loss (LeJEPA), weight 0.02, through a 256-d projector.
+    - Final weights = SWA of epochs 21–23. About 5.3 h per fold on an RTX 5090.
+- Validation & model selection:
+  - Gold58 held out of gradient updates but used for model selection and for tuning the MedSAM blend coefficients, so it was treated as development feedback, not independent CV.
+  - Blend weights checked by repeated two-fold splits of Gold.
+  - Final configuration chosen by "trust the public LB".
+  - BA440-C512 measured on 5-fold OOF (BA440 proxy) plus Gold58.
+- Ensemble & post-processing:
+  - Final: three models with different inductive biases. Predictions are converted to per-finding ranks and blended with fixed weights 0.40/0.35/0.25 shared by all findings (the three models are not named explicitly in the blend section).
+  - MedSAM branch: per finding, (1−w)·global + w·specialist, with w tuned on Gold for an earlier Fold0 branch and reused unchanged for full training.
+  - BA440: equal mean of the 5 fold sigmoids, no TTA.
+- Inference / runtime:
+  - Earlier teacher ensemble (ConvNeXt, CoAtNet, ResNet-GRU 5-fold families): about 7 h. The distilled student: about 0.5 h, which freed time inside the 9 h limit for heavy models such as the MedSAM branch.
+  - BA440: 2×T4, every 1-slice window (up to 96), fp16, chunks of 16, folds sharded across both GPUs.
+  - MedSAM branch: all real slices of each admitted series at inference.
+- Ablation / gains:
+  - Student vs teacher: 0.962/0.951 vs 0.961/0.948.
+  - Global only 0.960/0.951; five specialists only 0.959/0.948; finding-wise blend 0.964/0.953.
+  - Blend strategies (Gold / public / private):
+    - Fixed 0.40/0.35/0.25: 0.9496 / 0.965 / 0.955.
+    - Fixed 0.50/0.30/0.20: 0.9493 / 0.966 / 0.955.
+    - Fixed 0.30/0.35/0.35: 0.9508 / 0.965 / 0.954.
+    - Equal: 0.9508 / 0.965 / 0.954.
+    - Shrinkage k=29: 0.9533 (split-half 0.9496) / 0.964 / 0.954.
+    - Gold-optimised per finding: 0.9586 (split-half 0.9462) / 0.963 / 0.954.
+  - BA440: 384 px 3-slice RGB → 512 px 1-slice windows: proxy 0.9747 → 0.9748, Gold58 0.9283 → 0.9345 (both "not significant"), public 0.958 → 0.960.
+- What did not work:
+  - Averaging 6 or 12 students gave essentially the same as one (0.962/0.952).
+  - Per-finding weights fitted to Gold: best on Gold, worst on public. Shrinkage removed most of the overfitting but did not beat fixed weights.
+  - CoAtNet: three-branch per-plane backbones and per-plane attention gave no gain. ConvNeXt-T/S were about −0.002 on OOF and LB. K up to 32 helped small models but was neutral to slightly negative for CoAtNet. SIGReg helped ConvNeXt-T but was neutral for CoAtNet.
+  - Sol 6.1 and Opus report-only labelling were worse than Astra.
+- Public → private observations:
+  - Fixed-weight choices moved private by at most 0.001.
+  - Weighting the strongest single model more raised public but not private.
+  - A distilled student beat its teacher on both leaderboards.
+- Key insights:
+  - Distilling an OOF ensemble into one light model buys runtime for diverse heavy models.
+  - Global context plus anatomy-anchored local crops are complementary.
+  - A 58-study Gold set cannot rank blending strategies.
+- Code / links mentioned:
+  - BA440 builds on the public dreaddevelopment twelve-finding notebook and the public "Raptor" 0.949 geometry.
+  - Label definitions from discussion 733343.
+  - No own code links.
+
+## 20. Nikita Babych, Yannan Chen (team "YC & NB") — 20th Place Solution
+- URL: https://www.kaggle.com/competitions/rsna-knee-abnormality-detection/writeups/20th-place-solution
+- Scores stated:
+  - Submission 1: .967 / .955. Submission 2: .967 / .954.
+  - Parts alone: Yannan .964 / .952, Nikita .962 / .952.
+  - This post covers Yannan's half; Nikita's series-level half is in a separate post, not yet linked.
+- Training labels / targets:
+  - DeepSeek (`deepseek-v4-pro`) and Claude (Fable) output a probability per label from the report, with two prompts:
+    - "direct only": score only from what the report states about that finding.
+    - "indirect allowed": also use fixed anatomical/mechanistic links, e.g. effusion → synovitis.
+  - Blend of DeepSeek on both prompts (3 runs each) + Fable on the indirect prompt: gold58 .914, vs .893 for the best public label set.
+  - Nikita's side: Gemini parse + rules, blended with logit scores from small local LLMs.
+  - Reports disagree with image reads on about 17.5% of cells.
+  - In-sample distillation:
+    - First teacher = mean of 13 full-train legs: .7 teacher + .3 LLM.
+    - "Three-team teacher" = .8 × mean(legs, series-level models, strongest public notebook re-run on train) + .2 LLM (gold58 .951).
+  - Pseudo-label flywheel v2 → v3 → v4: per-column blends of legs, OA experts, series models/specialists, a public model, LLM labels and VLM reads.
+  - Up to .2 LLM kept per column where reports are reliable, none where they are weak.
+  - Synovitis label: .5 label + .25 DeepSeek (images + report) + .25 GPT `gpt-6.1-sol` (images only, quantile-mapped). Mosaics of U-Net-chosen slice bands, read 3–5 times with the official criteria. gold58 .855 → .895.
+- External data & pretrained weights:
+  - RadImageNet ResNet-50 and InceptionV3; timm in21k/in12k weights for EfficientNetV2-S, ConvNeXt-tiny, CoAtNet-rmlp-2; cs3darknet_l.
+  - OAI knee MRI with tissue masks from Kaggle dataset `kgaooo/oai-tissue-segmentations`, for the OA experts only.
+  - Calibrated OAI MOAKS v4 labels in one OA-expert variant.
+  - Strongest public notebook re-run on train as a teacher; a public model in the label blends.
+- Inputs & preprocessing:
+  - Slices ordered by patient-space geometry (InstanceNumber disagrees in 38% of series).
+  - Laterality from patient coordinates (missing in half of studies); left knees mirrored to right.
+  - Cached at 480 px over a 150 mm field of view with a per-series 1–99 percentile window; random 130 mm crops in training.
+  - 5 slots (sag/cor/ax fat-suppressed, sag/cor non-FS), missing slots masked, one shared backbone. I3D models see 32 slices.
+- Model architecture:
+  - I3D-inflated 2D CNNs: 2D kernels become 3D with the pretrained weights on the centre slice, so they start equivalent to 2D.
+  - q12 head: one learnable query per label cross-attends over all slot × depth × space tokens, with no global pooling.
+  - Legs: R50 (RadImageNet, I3D 3×3×3, 224), EffNetV2-S (I3D 3×3×3, 256), cs3darknet_l (I3D 3×3×3, 256), InceptionV3 (RadImageNet, I3D 3×1×1, 256), ConvNeXt-tiny (2.5D + GRU, 384), CoAtNet-rmlp-2 (2.5D + GRU, 384).
+  - OA experts: I3D EfficientNetV2-S on 8 anchor crop slots around the U-Net anchors (256 px, 16 slices), predicting the 3 OA columns, with an auxiliary segmentation loss on ~2,400 OAI knees.
+  - Nikita's side: series-level ConvNeXt/EfficientNet with one bidirectional GRU per label, plus U-Net-cut compartment/ROI specialists.
+- Training recipe:
+  - BCE on soft labels; AdamW, 10% linear warmup then cosine; separate backbone/head LRs.
+  - Final: 24 epochs, mixup .1, slot dropout .10, DropPath, rotation. Earlier: 16 epochs with lighter regularisation.
+  - Gold fine-tuning: from each leg's SWA checkpoint, fine-tune the whole net on the 58 gold studies.
+    - Constant small LR, BN frozen, the leg's own augmentation, 10–15 epochs, last epoch kept.
+    - Replay of ~350 confident pseudo-labelled studies at weight .2 (all legs except EffNet).
+    - WiSE-FT merge θ = α·θ_FT + (1 − α)·θ_base; legs α = .7, OA experts α = .5.
+- Validation & model selection:
+  - No folds: train on all 4,349 report-only studies; gold58 is the only validation set.
+  - Checkpoint: SWA over the 3 best epochs by gold58.
+  - Fine-tune recipe chosen by cross-fitting on gold58 (29/29). For α the LB was trusted over the 29-study half: cross-fit preferred .3, LB preferred .7–.9.
+  - Teachers scored with pre-fine-tuning versions to keep gold58 honest; flywheel weights set by structure, not fitted on gold58.
+- Ensemble & post-processing:
+  - Submission 1: (6 study-level legs on v4 labels + 3 OA experts) × .6 + Nikita's 18-model ensemble × .4.
+  - Submission 2: the same recipe one label round earlier.
+  - OA override: lateral OA .6 experts / .4 legs; PF OA .5 / .5.
+- Inference / runtime: not stated.
+- Ablation / gains:
+  - I3D vs 2.5D, same R50 and labels: LB .930 → .947.
+  - q12 head: gold58 +.028 on 6 focal columns vs +.003 on diffuse; lateral meniscus .770 → .888.
+  - Rotation + head dropout: +.025 gold58.
+  - In-sample teacher vs LLM labels: EffNetV2-S .944/.929 → .950/.934; ConvNeXt .940/.924 → .948/.934; CoAtNet .943/.926 → .949/.934; R50 .948/.931 → .948/.932.
+  - Longer training + stronger regularisation: EffNet gold58 .931 → .939, LB .953 → .954.
+  - Gold fine-tuning: EffNet .954 / .940 → .958 / .946; team .959 / .947 → .962 / .949.
+  - WiSE α on team LB: .3 → .962/.950, .5 → .963/.951, .7 → .964/.952, .9 → .964/.952.
+  - Flywheel 6-leg gold58 mean: .936 (three-team teacher) → .959 (v2) → .964 (v3) → .967 (v4). Best team LB: .964/.952 → .966/.954 → .967/.954 → .967/.955.
+  - OA experts: crop slots +.009 gold58 OA-3; OAI seg loss .925 → .933; lateral OA .93–.95 vs .88–.90 for the legs.
+  - Timeline: solo bests .954/.938 and .954/.943 → team-up .958/.944 → .962/.949 → .966/.953 → .967/.955.
+- What did not work:
+  - Med3D 3D-pretrained kernels in the inflated R50; native 3D ResNet-18 (Med3D) on isotropic volumes; cross-plane fusion.
+  - ViT/VLM backbones (Qwen3.5 vision tower, Qwen3.5-0.8B + LoRA).
+  - ConvNeXt-tiny / DenseNet-121 as I3D; slice transformer instead of 3D depth modelling.
+  - Other inflation styles, cross-plane attention, FiLM, ROI slots in the whole-view model.
+  - Higher resolution, bigger backbones.
+  - OOF pseudo-labels (several OOF variants did not move the LB).
+  - Dropping LLM labels entirely from the flywheel was clearly worse.
+- Public → private observations:
+  - The WiSE α choice favoured by the LB also gave the higher private.
+  - Validation and LB rose every flywheel round.
+- Key insights:
+  - Gold fine-tuning with WiSE-FT merge was the biggest single step.
+  - In-sample (full-train) teachers beat OOF teachers.
+  - Inflating 2D CNNs to I3D was the one architecture decision that really mattered.
+  - Per-label queries avoid diluting small lesions.
+  - Two differently built pipelines complement each other.
+- Code / links mentioned: Wortsman et al. CVPR 2022 (WiSE-FT); Carreira & Zisserman CVPR 2017 (I3D); Kaggle dataset `kgaooo/oai-tissue-segmentations`; Nikita's write-up "[N]" (link to come).
+
+## 31. zosamu, shun_johnny, kawauso69, frkake (team "Honda Gen-AI EXPs") — 32nd Place — Better Teachers, Better Places to Look
+- URL: https://www.kaggle.com/competitions/rsna-knee-abnormality-detection/writeups/32nd-place-better-teachers-better-places-to-look
+- Scores stated:
+  - Public 0.964 / private 0.952 (the write-up says 32nd; the final private rank given in the brief is 31).
+  - Best single model family (5 folds): 0.961 public. Both selected submissions: 0.964 / 0.952.
+- Training labels / targets:
+  - Teacher = 0.5 × report reading + 0.5 × image reading.
+  - Report reading: mean of three LLM label sets (GPT-5.5, Gemini Flash, Claude Opus).
+  - Image reading: GPT-6 assessments of the MRI, averaging normal-view and zoomed readings when both exist.
+  - Gold58 cells use the radiologists' targets inside the training labels.
+  - Reporting-habit correction: in site-associated groups where report and image labels disagreed systematically (Synovitis/Effusion in one, Lateral OA/PF OA in another), the image reading alone is used. 847 study–finding values changed. Simply raising the image weight globally was not reliably beneficial.
+  - A2 uses MOAKS-derived targets for six mapped findings on OAI knees; unmapped targets are masked.
+  - A3 keeps an earlier 50/50 report/image teacher.
+- External data & pretrained weights:
+  - ImageNet-pretrained `coatnet_rmlp_2_rw_384` and `convnext_tiny.in12k_ft_in1k`.
+  - 2,399 OAI knees with MOAKS (A2; the ConvNeXt branch pretrains on OAI MOAKS).
+  - Second submission only: 10% of nartaa's public Raptor 384 predictions.
+  - OAI is the only external MRI training set in the self-trained configuration; no other competitors' weights there.
+- Inputs & preprocessing:
+  - CoAtNet: 5 slots (sagittal FS/non-FS, two coronal, axial), 140 mm / 384 px. Three truly adjacent slices from the original DICOM series as channels. 12 windows in training, 54 at inference.
+  - Learned window-position embeddings, with sagittal order aligned medial-to-lateral, including under mirror TTA.
+  - ConvNeXt-T: 6 slots (each plane with/without FS), 180 mm / 384 px, slot and slice-position embeddings. B3 raises sampling from 16 to 24 slices per series.
+  - Zoom stage: about 2× zoomed views from the original DICOMs of the lateral compartment, or the PF region for PF OA.
+- Model architecture:
+  - CoAtNet branch: per-finding attention-MIL over 2.5D windows.
+  - ConvNeXt-T branch: hierarchical per-finding attention. B2 initialises the head from finding prevalence and series priority.
+  - Zoom model: a three-output CoAtNet for Lateral Meniscus, Lateral OA and PF OA. A1's attention picks six window groups per finding.
+- Training recipe:
+  - A1/A2: 24 epochs, SWA at epochs 18, 21, 23.
+  - ConvNeXt: OAI MOAKS pretraining, then 12 epochs on the team teacher.
+  - Evidence supervision: the VLM's cited slices are mapped to windows, and an auxiliary cross-entropy pushes per-finding attention toward them.
+    - Applied only where the VLM called the finding positive with usable evidence, and skipped if no cited window was sampled.
+    - Fixed weight set so the initial auxiliary term is about 10% of the main loss. No VLM at inference.
+- Validation & model selection:
+  - 5 folds, grouped by report hash (CoAtNet) or scanner/site metadata (ConvNeXt).
+  - The zoom selector is fold-matched: each fold's A1 selects windows for train and validation, and the zoom model trains on the training partition only.
+  - They monitored weak-label metrics and Gold58, but note Gold58 was small, repeatedly consulted and included in training labels, so neither was definitive.
+  - The leaderboard informed model selection, with a limited number of comparisons.
+- Ensemble & post-processing:
+  - Per-finding rank blends: CoAtNet blend = 0.8·r((A1+A2)/2) + 0.2·r(A3).
+  - base = 0.7·CoAtNet + 0.1 each for B1, B2, B3.
+  - For Lateral Meniscus, Lateral OA and PF OA: 0.8·r(base) + 0.2·r(zoom); other nine findings = base.
+  - Second submission: B1/B2 at 0.15 each instead of B1/B2/B3 at 0.1, plus 10% of Raptor 384 after the zoom blend.
+  - Anatomical mirror TTA.
+- Inference / runtime:
+  - Image-only, offline, 2×T4, close to the 9 h limit.
+  - Next-study loading overlapped with GPU compute, GPU inputs reused, `torch.compile`.
+  - Time guards could skip later stages and keep earlier predictions.
+- Ablation / gains (development history, not a controlled ablation; public only):
+  - Report-derived teacher with true adjacent DICOM slices: 0.943.
+  - Image-reading teacher + reporting-habit correction + evidence supervision: 0.960.
+  - Window position embeddings + stronger CoAtNet: 0.961.
+  - Blend with OAI MOAKS models: 0.962.
+  - + ConvNeXt-T branch: 0.963.
+  - + zoom on three findings: 0.964.
+  - Evidence loss alone (teacher unchanged, 5-fold): 0.957 → 0.958, although a small screen showed no gain on the report-derived proxy.
+  - A2 alone 0.960 vs A1 0.961, yet their 50/50 average improved the blend.
+  - B1 and B2 each 0.960 alone.
+  - Reporting-habit correction improved public ordering, though both versions showed 0.960.
+- What did not work:
+  - Distilling an earlier 12-family OOF ensemble into the teacher: 50% gave 0.957, 75% gave 0.956. The authors note this is specific to that teacher and does not show self-distillation cannot help.
+  - All-data retraining instead of 5-fold: 0.963.
+  - Zoom weight 30%: 0.963. Zoom added for Medial Meniscus and Synovitis: 0.962.
+  - Extra zoom seed with a shared stage for speed: several variants fell to 0.962, cause unresolved.
+  - Finding co-occurrence post-processing, extra TTA, a laterality fix.
+- Public → private observations: public improvements did not all survive at private resolution; submissions around public 0.963–0.964 all showed private 0.952.
+- Key insights:
+  - Use VLM output as two weak signals: a target and an evidence location for attention.
+  - Improving the teacher moved the score more than most model changes.
+  - Complementarity matters more than standalone score.
+  - Weak-label proxies and Gold58 can each reward the wrong change; triangulate.
+  - A valid CSV does not prove the intended ensemble ran: check loaded checkpoints, completed stages and fallbacks.
+- Code / links mentioned: nartaa public Raptor weights https://www.kaggle.com/datasets/nartaa/rsna-knee-publication-swa-weights-20261007; acknowledgement of the public MaxSpan recipe; OAI under NDA data-use terms.
+
+## 43. Matteo Vitali, Marco Ledda (team "Effusion confusion") — 45th Place Solution
+- URL: https://www.kaggle.com/competitions/rsna-knee-abnormality-detection/writeups/45th-place-solution
+- Scores stated: the authors say they finished 45th, private 0.951 / public 0.963 (the selected final). The best unselected submission was a four-way blend at public 0.964 / private 0.952. Other rows: ViT+DenseNet blend 0.962/0.951; ViT-B with two label sets 0.961/0.948; ViT-B with three label sets 0.961/0.947; ViT-L on Teacher 0.960/0.946; ViT-B on Teacher with mirror 0.960/0.945; ViT-B on OA re-read 0.957/0.945; ViT-B on Merged 0.957/0.943.
+- Training labels / targets:
+  - Only 58 of 4,407 studies have expert labels; all other targets come from multilingual reports. The 58 expert studies always train on their true labels.
+  - Three LLM readers read each report:
+    - Qwen3-32B with chain of thought;
+    - an earlier blend of open models (MedGemma-27B, Qwen);
+    - Claude Opus, prompted with the expert criteria, which returns a probability, a quote and a rationale per cell.
+  - The OOF predictions of three earlier image models act as image readers.
+  - "Merged": the mean rank per finding of five sources (2 text, 3 image), mapped onto the quantiles of an earlier self-training label set to get bimodal targets. Every later step only re-orders a column and keeps the same sorted values.
+  - "Teacher": Merged rank 50/50 with the OOF rank of a ViT trained on Merged (5 folds grouped by scanner).
+  - "OA re-read": Teacher with Lateral OA and PF OA re-ordered by Claude's reading.
+  - "Refined": inside the uncertain band 0.15–0.85, the larger of Claude's rank and the rank of an OOF ViT trained on OA re-read.
+  - "Extraction": Merged blended 70/30 with a structured report extraction (two readers, checked quotes, an arbiter). Below-threshold negatives keep their Merged value.
+- External data & pretrained weights: no external datasets. DINOv2 ViT-B/14 with registers (`vit_base_patch14_reg4_dinov2.lvd142m`) and ViT-L/14. A DenseNet appears in the blends.
+- Inputs & preprocessing:
+  - Six anatomical slots (sagittal/coronal/axial × fluid-sensitive or not), each filled by the series with the most images. Missing slots are masked. The ViTs read every slot except the non-fluid axial.
+  - All slots are centred on one 3D knee centre per study, estimated from the fluid-sensitive series. Each is resampled to a 160 mm field at 512 px, 40 slices every 3.5 mm.
+  - The dataset keeps each slot's affine and three knee-side witnesses (DICOM tag, report, geometry).
+  - Model input: a 130 mm crop at 336 px, 32 slices per slot, as 2.5D RGB. Right knees are mirrored to a left convention.
+  - The submission kernel rebuilds volumes with the same `kneelib` code used for training.
+- Model architecture:
+  - DINOv2 slice encoder with 576 patch tokens at 336 px.
+  - Inside a slice: per-finding attention (4 heads over the patches, a 3×3 blur on the logits, a query offset per slot). A zero-initialised low-rank mixer adds the result to CLS, so each finding vector starts equal to CLS.
+  - Across slices: slot embedding plus a Fourier encoding of slice position in mm. Attention pools with a learned position curve; a contrast pooling gives a whole-knee context vector g.
+  - Across slots: routing weights start at 1.5 × an anatomical prior of which slots show each finding, adjusted by a per-study gate. Self-attention then runs over the 12 finding tokens plus a token built from g.
+  - Readout: a linear head per finding, plus per-slot logit statistics and a bias per patient sex. Two extra heads exist only in training.
+  - Learned routing kept the prior with small corrections: the menisci gained the coronal fat-suppressed slot (+0.12 medial, +0.08 lateral); Baker's cyst and the MCL gained the axial slot (+0.08, +0.07).
+- Training recipe:
+  - Two phases. A linear probe with the encoder frozen: 10 epochs, LR 1e-3→2e-4; keeps raw, EMA 0.998 and their average, and the best starts the fine-tune.
+  - Then a full fine-tune: 30 epochs, LR 2e-4→3e-5, encoder LR × 0.5, layer-wise decay 0.875; keeps raw, EMA 0.999 and SWA from epoch 22.
+  - AdamW (wd 0.01), batch 16, cosine schedule with 10% warm-up, gradient clipping at 1.0.
+  - Loss: soft-target BCE averaged per finding then over the 12 findings, plus the training-only heads. Mixup (α 0.4) on half of the batches.
+  - Augmentations: one 3D jitter per study, zoom/rotation, intensity changes per slot, 15% of slices masked.
+  - Later runs add an anatomical mirror on half of the studies that swaps medial and lateral targets; MCL gets zero weight because its mirror is the unlabelled LCL. The mirror is not used on OA re-read.
+  - ViT-L members: last 16 of 24 blocks, layer decay 0.935, slice stride 2, 20 epochs. They train on all 4,407 studies with 2 seeds per label set, using the final SWA weights.
+- Validation & model selection: weights are chosen on a fixed validation fold. Folds are grouped by scanner. Blend candidates are compared on the fixed fold, and blend weights are fixed before any leaderboard feedback.
+- Ensemble & post-processing: Gaussian-rank averaging per finding. The selected final is just 2 ViT-L seeds on Refined, weighted 0.5/0.5. Blend weights are listed in the Scores row (e.g. the four-way blend uses 0.50/0.20/0.18/0.12).
+- Inference / runtime: offline on 2 T4 GPUs. Decodes the test DICOMs with the training code, no TTA. Runtime not stated.
+- Ablation / gains:
+  - Refined vs Teacher labels with the same ViT-L: private +0.005 (0.951 vs 0.946).
+  - Blends added at most +0.001 private.
+  - ViT-L on Teacher 0.946 vs ViT-B on Teacher with mirror 0.945 private.
+- What did not work: not stated explicitly. Blends gave little gain (see Ablation).
+- Public → private observations: about a 0.012 drop for the final. Blend ordering on public broadly held on private, but blends gained at most 0.001 there.
+- Key insights:
+  - They treat labels as the main problem and the model as secondary.
+  - All label sets are rank re-orderings of one fixed bimodal value distribution.
+  - Per-finding vectors are kept from the patch level to the study level, with anatomical slot-routing priors.
+  - The simplest single-family final scored as well as the blends.
+- Code / links mentioned: none, apart from the timm model name.
+
+## 127. s0chn1y (team "Boris Konstantinovskii") — 129th place (silver): LLM-rubric labels, slice-BiGRU ConvNeXt, public blend
+- URL: https://www.kaggle.com/competitions/rsna-knee-abnormality-detection/writeups/129th-place-silver-llm-rubric-labels-slice-big
+- Scores stated: private 0.946 (129 / 6 425), public 0.960. Both selected submissions scored 0.946 private, their best private score. On private, the trail reads 0.943 (D1), 0.945 (+ public models), 0.946 (B2 + R6 stack). The first full blend V57 scored 0.943 private.
+- Training labels / targets:
+  - One structured LLM call per report: Gemini 3.8 Flash via OpenRouter with a strict JSON schema. It returns mentioned / negated / not mentioned, severity grade and side for all 12 findings, following the host definitions ("moderate or large" effusion and cysts, high-grade cartilage loss for OA, host-defined synovitis).
+  - Grading against this rubric fixed most of the public LLM labels' over-calling of mild findings on gold58.
+  - Soft targets carry confidence weights, lower for mild grades and for findings the report does not mention. Synovitis falls back to an effusion-based proxy when not described. Loss: confidence-weighted soft BCE.
+  - Self-distillation: round-2 target = 0.5 · report label + 0.5 · OOF teacher.
+  - "D1" anneal: epochs 1–6 on the round-2 targets, then epochs 7–12 move linearly back to the pure report labels. This cut cross-class teacher leakage (e.g. effusion into synovitis, ACL into lateral meniscus).
+  - An older "v4" LLM label set is used only for the MCL column.
+- External data & pretrained weights:
+  - `convnext_small.dinov3_lvd1689m`; `coatnet_rmlp_2_rw_384.sw_in12k_ft_in1k`.
+  - Public models blended in: Raptor CoAtNet (nartaa / dreaddevelopment), heliosli's compact ConvNeXt R6/R7, and rostigor's R6 weights dataset.
+  - fastMRI+ boxes were tried and dropped.
+- Inputs & preprocessing:
+  - uint8 cache at 392 px with physical slice ordering (IPP · normal), per-series 0.5/99.5 percentile windowing and a 140 mm centre crop. Resized to 336/384 with INTER_AREA.
+  - Six slots (3 planes × fluid-sensitive or not), 16 evenly spaced 3-slice windows per slot. Missing slots are zero-filled and masked.
+  - Plane-aware left canonicalisation: column flip for axial/coronal, slice-order reversal for sagittal.
+  - Window centres use half-up rounding; half-even rounding had collapsed 19-slice stacks into duplicated windows.
+  - A quality-first series choice per slot (decode failures, sort method, padding, pixel spacing) replaced "first UID".
+- Model architecture:
+  - "hard336": ConvNeXt-S DINOv3 at 336 px with compartment-routed pooling. MCL, medial meniscus and medial OA read only medial halves (sagittal stack half, image half of axial/coronal); lateral findings read only lateral halves; the other 7 findings read the whole study.
+  - "B2" on top: a shared BiGRU(768→2×384) over the 16 ordered windows before slice attention, with a zero-initialised residual so step 0 equals the parent. An auxiliary "extent" head (3 neighbouring windows inside the routed mask) predicts the OA and meniscus targets at weight 0.5; it is dropped at inference.
+  - "CoAt12": CoAtNet-RMLP-2 at 384 px, triplet MIL with per-label attention over 16 windows per slot. The served member is a 50/50 mix of CoAt12 and CoAt12+B2.
+- Training recipe: 12 epochs, AdamW (head 3e-4 / encoder 3e-5), OneCycle, BF16, batch 12, gradient checkpointing, 2 seeds × 5 folds. CoAt12 trains on the round-2 targets.
+- Validation & model selection:
+  - 5-fold CV grouped by report language, scanner vendor and model, plus identical report templates (36 groups).
+  - Gold58 was never used in training of the selected models, but was used for development decisions, so it is not a clean holdout.
+  - Report-label OOF favours text definitions: D1 and B2 looked worse on OOF but did better on LB. Gold58 per-class AUC moves ±0.02–0.03.
+  - Across 10 submission pairs, no OOF endpoint predicted the LB at the 0.001–0.002 scale.
+  - Instead they used paired LB probes: one hypothesis per probe, the best blend with only the tested slot replaced, on 2 of 5 folds.
+  - Decision rule: Δ ≥ +0.002 is a signal; +0.001 counts only with a mechanism and no OOF harm; ≤ 0 means roll back.
+  - Per-class public probes: one real column with 0.5 elsewhere gives class AUC = 12 · LB − 5.5 (±0.006). For V57 the weak public classes were synovitis 0.896, lateral OA 0.920, PF OA 0.920 and lateral meniscus 0.956; the other eight were about 0.97.
+- Ensemble & post-processing:
+  - Inside their half: fold-averaged probabilities with fixed per-class weights. V85 uses the B2 hard members plus the CoAt mix. V82 routes per class between B2 (PF OA, fluids, menisci) and the D1 parent (ligaments, tibiofemoral OA, fracture).
+  - Final per finding: 0.5 · rank(ours) + 0.5 · rank(public stack).
+  - Inside the public stack, R6 vs Raptor weights: 0.8 on lateral OA, 0.65 on synovitis and Baker's, 0.5 elsewhere.
+  - Public stack contents: Raptor 384 + 224 with mirror TTA; R6 with stride-2 windows, `torch.compile` and flip TTA (V85); R7 without TTA (V82).
+- Inference / runtime:
+  - 2×T4, about 6.5 h for 1 300 studies: about 2.9 h for their 18 checkpoints plus 3.6 h for the public stages.
+  - Tricks: DICOM decode of the next chunk overlapped with GPU work, `torch.compile` + channels-last, FP16 with an FP32 retry, two independent study shards.
+  - Stride 2 + compile cut R6/R7 time by about 40% with Spearman ≥ 0.995 to stride 1.
+- Ablation / gains (public unless stated):
+  - Trail: 0.921 ConvNeXt-S 2.5D → 0.937 (+ EfficientNet, seeds, LLM rubric labels, CoAtNet triplets) → 0.944 → 0.949 round-2 students → 0.952 compartment-routed → 0.953 MCL ← v4 CoAtNet → 0.955 at 336 px → 0.956 D1 → 0.958–0.959 public blend → 0.960 B2 + R6 flip-TTA.
+  - D1 gave +0.001 twice; B2 gave +0.001 twice.
+  - B2 on gold58: PF OA +0.023, synovitis +0.012, Baker's +0.011.
+  - The CoAt/B2 mix gave gold58 +0.0035.
+- What did not work:
+  - Small negatives or zero: 4 seeds −0.001; ConvNeXt-B 0; 16 epochs 0; full-data fits −0.001; TTA flips 0/negative; snapshot/EMA/soup 0.
+  - Gold58 in training (weights 3 and 10, and a 50/50 mix): 0 across three probes.
+  - Gold examples in the LLM prompt: 0 (better text labels did not transfer to the model).
+  - An LLM reading the MRI images directly: macro 0.73 vs 0.92 for text labels on gold.
+  - fastMRI+ boxes failed the gold58 gate.
+  - In-domain DINO SSL: +0.026 on a frozen probe but −0.001 on LB.
+  - Qwen3.5-2B visual tower as a third family: 0/−0.001.
+  - Cross-pipeline distillation from R7: 0. Multi-series input: −0.001. Per-class public-model weights tuned on gold58: −0.001.
+- Public → private observations: all top teams dropped about 0.01, and public #1 (0.970) finished 7th. They dropped 0.014. Every blend from V82 on scored the same 0.946 private, so the final pair choice was not critical. The private gain over V57 came from the public models and B2.
+- Key insights:
+  - Rubric-graded LLM labels with confidence weights mattered most.
+  - Annealing from the teacher back to the report labels limits cross-class leakage.
+  - Compartment routing plus a slice-axis BiGRU helps continuity findings.
+  - Offline metrics cannot rank changes at the 0.001 scale.
+- Code / links mentioned: https://github.com/Kotstantinovskiy/rsna-knee-abnormality-detection-solution (code, about 180 experiment logs, serving runtime; no data or weights).
+
+## 207. Robson (team "Robson") — 215th Place: Public Blend + RadImageNet Encoder + Field-Strength Rank
+- URL: https://www.kaggle.com/competitions/rsna-knee-abnormality-detection/writeups/215th-place-public-blend-radimagenet-field-strengt
+- Scores stated:
+  - Public LB 0.960, private 0.944, rank 215 (solo) per the write-up title.
+  - Own models alone: 0.941 public (fine-tuned encoder), 0.940 (head ensemble).
+  - Field-strength step: 0.958→0.960 public.
+- Training labels / targets:
+  - Claude Sonnet read 4,349 non-gold reports, giving a probability per finding.
+  - Binarised agreement with gold58: 85.2% of cells (κ 0.65), vs 80.2% for the public report labels. The switch took public LB from 0.906 to 0.923 (small heads on frozen DINOv2 features).
+  - Later refined soft labels (C056, C092) mix Sonnet with cross-fitted model predictions. Their gold58 gains were partly a leak.
+  - Training uses continuous Sonnet labels plus gold labels.
+- External data & pretrained weights:
+  - ResNet-50 with RadImageNet initialisation.
+  - DINOv2 (early heads).
+  - Public notebook weights: nartaa's CoAtNet and heliosli's R6 bundle, as a private hash-pinned copy of R6 v1.
+  - stevenleehans public report labels at first.
+- Inputs & preprocessing:
+  - 9 series slots (plane × sequence) per study, up to 40 slices each at 224 px, in geometric order, with a mask.
+  - Training uses 24 contiguous slices per slot.
+- Model architecture:
+  - "C24": ResNet-50 per slice → learned slot embedding → bidirectional GRU over each slot's slices → per-slice logit → mean + std pooling over valid slices.
+  - Light heads on frozen features:
+    - Layer-4 7×7 tokens → per-fold PCA-256, used by Perceiver and latent-workspace heads.
+    - GeM (p = 3) vectors → PCA-256 as a 9 × 40 × 256 grid, used by a SED-style iterative head and a looped transformer.
+- Training recipe:
+  - End to end, 5 folds, EMA, frozen BatchNorm.
+  - Early stopping on the non-gold part of the validation fold.
+  - Heads train in minutes; seed logits are averaged per fold, then folds averaged.
+- Validation & model selection:
+  - 5-fold CV over studies, with the gold58 spread across folds and kept in training.
+  - Two scores: A = gold58 macro AUC (decides) and B = AUC against Sonnet labels on the ~4,350 non-gold studies (veto).
+  - Paired comparisons (same seed vs same seed). Paired 95% CI for A was about ±0.007, the size of most effects judged.
+- Ensemble & post-processing:
+  - Blend: rank(0.75 · public notebook + 0.25 · rank(OURS_NEW)) per finding. The public notebook (heliosli's "0.9576 in one click": Raptor CoAtNet-384/224 + R6 ConvNeXt 2.5D) runs unchanged inside, SHA-256 checked. w = 0.25 was fixed before looking at gold58.
+  - OURS_NEW = rank mean of 5 heads.
+  - Field-strength corrections by MagneticFieldStrength group (≤1.5 T, >1.5 T, tag missing):
+    - Own side: ComBat-like per-group standardisation to the global mean/SD, with parameters from non-gold training predictions, mixed at w = 0.2 in rank space.
+    - Final blend: within-group rank mapped onto the global distribution for groups with ≥20 test studies, mixed at w = 0.35. This step is transductive; an inductive version fitted on train gave the same OOF gain.
+- Inference / runtime: not stated beyond running the public notebook cells inside their own notebook.
+- Ablation / gains:
+  - 24 vs 12 contiguous slices: +0.036 A on fold 0, B flat. A 40-slice version was better on fold 0 but not finished.
+  - Field-strength submissions: b 0.958; e (+partial rank, w 0.35) 0.960; f1 (w 0.5) 0.957; h1 (e without the Sonnet-label head) 0.957; j2e final 0.960.
+  - Own-side weight 0.25 / 0.5 / 0.6: LB 0.958 / 0.956 / 0.954.
+- What did not work:
+  - Refined labels + new heads: gold58 0.950 vs 0.921, but public 0.940 vs 0.941.
+  - Higher own-side weight: worse.
+  - Per-finding blend weights fitted on gold58: +0.010 in-sample, 0.951 vs 0.955 LB.
+  - OOF-teacher labels: up to +0.0165, but a leak because the teacher had trained on other folds' gold studies; a nested teacher removed the gain.
+  - Level-2 stacking, Caruana selection, power means: ≤ +0.003.
+  - Pairwise AUC loss, report-criteria auxiliary tasks, geometric TTA: ties.
+- Public → private observations:
+  - Gains on gold58 did not transfer to public.
+  - Private 0.944 vs public 0.960; no public/private comparison across submissions given.
+- Key insights:
+  - 58 studies cannot rank many small changes.
+  - Never build labels from OOF unless the teacher is nested.
+  - Real gains came from what the encoder saw (contiguous slices, better labels), not from more heads.
+  - Everything above 0.95 came from blending public weights.
+- Code / links mentioned: credits to heliosli (notebook, R6), nartaa (CoAtNet weights), stevenleehans (labels), RadImageNet, timm. No URLs given.
+
+## 383. shepsci (team "github/shepsci/kaggle-skill") — RSNA 2026 Submission Writeup (406th / 6,425)
+- URL: https://www.kaggle.com/competitions/rsna-knee-abnormality-detection/writeups/three-experts-seven-changes-one-bronze-medal
+- Scores stated:
+  - Submission 1: 0.958 public / 0.943 private. The author states rank 406 of 6,425 (top 6.3%), bronze; the caller's list has 383.
+  - Submission 2: 0.958 / 0.942.
+  - Start point, heliosli 0.958 blend: 0.958 / 0.942.
+  - S6fall alone: 0.950 / 0.935.
+  - Raptor-384 alone: 0.949 / 0.930; Raptor-224 alone: 0.945 / 0.926.
+- Training labels / targets:
+  - No training by the author; all experts come from public weights.
+  - Raptor weights (nartaa) were trained on public LLM report labels with OAI knees as extra supervision.
+  - S6fall was trained on the Raptor label blend, using 4,263 exams without Gold58 and without OAI.
+  - Report-label sources: stevenleehans, pilkwang, riadmohamed42, lixin73.
+- External data & pretrained weights:
+  - Public weights: Raptor (nartaa SWA weights; dreaddevelopment recipe), R6 (heliosli), S6fall (nartaa, from ImageNet-22k).
+  - OAI used in Raptor training.
+  - R6 uses an SKM-TEA knee anatomy model at test time.
+  - Licences: notebook Apache 2.0, S6fall weights CC BY-NC 4.0, R6/Raptor weights "Other".
+- Inputs & preprocessing:
+  - Raptor: 96 slices from two sagittal and three coronal/axial series, giving 94 windows of 3 adjacent slices. Raptor-384 uses the central 320×320 of a 384 frame; Raptor-224 uses the central 307×307 resized to 224.
+  - R6: flips all knees to face one direction, with a side model when scan tags are unclear.
+- Model architecture:
+  - Raptor: CoAtNet scoring the windows, pooled with MIL.
+  - R6: four ConvNeXt-small models (each trained on a different 3/4 of the exams), 2.5D windows with one spatial attention map per condition, and small stacker models adjusting Effusion and Baker's cyst.
+  - S6fall: the R6 design with different training and labels.
+- Training recipe: not stated (no own training; reuses public weights).
+- Validation & model selection:
+  - Keep/reject rules were written before each submission.
+  - A new notebook was accepted only if outputs matched the previous one except for the changed step.
+  - The public leaderboard was used only to find errors: each change was expected to gain ≤0.001, while public noise is about ±0.006.
+- Ensemble & post-processing:
+  - Per condition, each expert's probability → log-odds, standardized over all test exams.
+  - Raptor = 0.65·R384 + 0.35·R224; ConvNeXt pair = 0.5·R6 + 0.5·S6fall.
+  - Final = w·Raptor + (1−w)·ConvNeXt pair. w = 0.5, except values from the public notebook: synovitis 0.8, PF OA 0.6, Baker's 0.35, lateral OA 0.2.
+  - Output = percentile rank. If one expert fails on an exam, the others are used.
+  - Seven changes on top of the heliosli notebook:
+    1. Add S6fall as a third expert.
+    2. Mirror view for Raptor-224.
+    3. Drop a duplicate Raptor-384 run (saves 26 min).
+    4. Shifted views for Raptor-384 (16 px).
+    5. Shifted views for Raptor-224 (22 px; each shift is half the network stride).
+    6. Average standardized log-odds instead of ranks.
+    7. Knee side check for S6fall.
+  - Submission 2 = changes 1–5 with rank averaging, no S6fall side check, and only the lateral OA 0.2 and Baker's 0.35 manual weights.
+- Inference / runtime:
+  - About 7 to 7.5 of the 9 hours.
+  - R6 averages the image and its mirror with medial/lateral scores swapped; S6fall scores only the original view.
+- Ablation / gains:
+  - The seven changes together: private 0.942 → 0.943 (public unchanged at 0.958).
+  - Both of their 0.943 submissions used standardized log-odds; the rank-averaged one scored 0.942. The author notes one unit in the third decimal is not proof.
+- What did not work: not stated.
+- Public → private observations:
+  - Private was about 0.016 below public for every public notebook copied from late September.
+  - Among teams at 0.90+, rank correlation between public and private order was 0.96.
+  - Of 1,638 teams at public 0.958, 1,239 scored 0.942 private and only 340 scored 0.943 or more. Only 27 of the 1,322 teams at 0.942 got bronze.
+  - Medal lines: gold 0.954, silver 0.943 (rank 321), bronze 0.942 (rank 642).
+- Key insights:
+  - When many teams use the same public notebook, small pre-registered changes can decide the medal.
+  - A strong expert trained differently makes different errors.
+  - Standardized log-odds keep each expert's confidence, which ranks throw away.
+  - Knee-side checks prevent medial/lateral swaps.
+- Code / links mentioned:
+  - heliosli blend notebook (start point).
+  - R6 datasets.
+  - nartaa Raptor SWA weights, mirror notebook and S6fall notebook/weights.
+  - dreaddevelopment training notebook.
+  - varshithakolupuri "One free flip"; goodpjw2008 CoAtNet + R6 notebook.
+  - Public LLM-label datasets (stevenleehans, pilkwang, lixin73).
+  - SKM-TEA, OAI.
+  - A literature review of past RSNA winners and knee MRI papers.
+
+## 472. Jay Gautam, Devidas Gautam (team "Jay Gautam") — 472th Place (Bronze, 0.943 Private): 4-Family Rank Ensemble & LLM Report Mining
+- URL: https://www.kaggle.com/competitions/rsna-knee-abnormality-detection/writeups/499th-place-bronze-0-943-private-4-family-rank
+- Scores stated:
+  - The text says 499 / 6,425 (Top 7.8%, Bronze), public 0.958 / private 0.943. Selected v90 and v96-a both scored 0.943 private.
+  - Variants (gold58 in-sample / public / private): v90 0.9386/0.958/0.943; v96-a 0.9438/0.958/0.943; v96-b 0.9440/0.957/0.943; v95 0.9442/0.957/0.943; v94 0.9419/0.957/0.942; v89 0.9375/0.958/0.942; v96-c 0.9446/0.955/0.941.
+  - In-house baseline: public 0.906.
+- Training labels / targets:
+  - Report mining by single-pass yes/no logit probing on Qwen3-4B, P("Yes")/(P("Yes")+P("No")) per finding question.
+  - Report-label AUC on gold58: 0.845, vs 0.629 for regex (+0.216). 61% of reports are non-English.
+  - Most of the blended models are public.
+- External data & pretrained weights: public models from nartaa, heliosli, goodpjw2008, dreaddevelopment and varshithakolupuri. Raptor CoAtNet (384 and 224), R6 compact ConvNeXt-small (4-fold), S6 ConvNeXt-small all-data (`E_prior_s42_fall.pt`). Any further external data not stated.
+- Inputs & preprocessing: Raptor-384 uses 96 slices with an SWA checkpoint; Raptor-224 uses a 0.8 anatomical crop. Otherwise not stated.
+- Model architecture: four families:
+  - Raptor CoAtNet dual-resolution;
+  - R6 ConvNeXt-small ×4 with flip TTA and stackers;
+  - a 2.5D ConvNeXt MIL reader;
+  - S6 ConvNeXt-small trained on all data.
+- Training recipe:
+  - R6 was trained on 4,344 non-gold studies (gold_in_training = 0); S6 also excludes gold (expect_holdout = 0).
+  - Report deduplication: 4,407 studies have only 4,257 unique reports (one normal boilerplate appears 37 times). CV folds are grouped by normalised report hash.
+  - Other details not stated.
+- Validation & model selection:
+  - Full inference over 104 training studies: gold58 plus 46 unlabelled studies, so percentile ranking stays in >100-row mode.
+  - Checkpoint provenance audit with gold58 macro AUC: R6 0.9366 (clean); S6 0.9314 (clean); Raptor-384 0.9228 and Raptor-224 0.9150 (checkpoint selected on gold58, so biased upward); MIL reader 0.9153 (clean).
+  - Selection rules were judged by 600 random 29/29 split-half runs: pick on half A, score on half B (`split_half_cv.py`).
+- Ensemble & post-processing:
+  - Everything is blended on percentile ranks.
+  - Raptor arm = 0.65 · pct(384) + 0.35 · pct(224).
+  - Stage 3: per-finding weight between the Raptor arm and pct(R6).
+  - Part B: the MIL reader is injected at 0.3%–3.5% per finding (3.5% Baker's, 3.0% contusion, 2.5% medial OA / ACL), giving the "v74" anchor.
+  - Part C: final = (1 − W_S6) · pct(v74) + W_S6 · pct(S6), with W_S6 = 0.20 (v90) or 0.35 (v96-a).
+  - v96-a is "R6-lean" in Stage 3: lateral OA 0.0, ACL/PF/synovitis 0.35 Raptor weight.
+- Inference / runtime:
+  - About 8.2–8.5 h on 1×T4, with per-stage wall-clock guards (8.40 h soft stop, 8.55 h hard kill).
+  - The 3-study commit run is strict (fails on any missing checkpoint or parity mismatch; parity_max_abs_dp == 0.0). The hidden run uses fallback guards per stage.
+  - Leaving `"outputs": null` on markdown cells made Kaggle's nbconvert mark a finished run as ERROR; stripping it fixed this.
+  - Four reruns of v90 gave identical scores.
+- Ablation / gains:
+  - W_S6 from 0.10 to 0.20/0.35: gold58 +0.0010 to +0.0014 (P(better) 0.76–0.87), up 87 ranks inside the 0.958 public tie, private 0.942 → 0.943.
+  - Inherited Stage 3 weights gave Raptor 85% of synovitis and 65% of PF OA, although clean R6 beat the Raptor stack by +0.035 on synovitis and +0.032 on PF OA. Reducing them gave +0.0014 held-out macro AUC (helps 83% / hurts 9% of splits).
+- What did not work (all failed the split-half test):
+  - Free 12-finding grid search: hurts 24–34% of splits.
+  - Per-finding S6 weights: −0.0006 held-out mean, hurts 65%.
+  - Label co-occurrence nudges: hurt 15–48%.
+  - Aggressive R6-max (v96-c, 0.15 Raptor weight): public 0.955 / private 0.941.
+  - Regex report labels: 0.629 AUC.
+- Public → private observations: public ties at 0.958 split into 0.942 vs 0.943 on private. The highest in-sample gold58 variant (v96-c) was worst on both LBs. Higher S6 weight helped private.
+- Key insights:
+  - Audit checkpoint provenance before tuning on gold58: Raptor was selection-biased.
+  - Judge weight-selection rules by split-half held-out runs, not in-sample gold58.
+  - LLM logit probing beats regex on multilingual reports.
+  - Group CV folds by report hash.
+- Code / links mentioned: `split_half_cv.py` (named, no link). No repository given.
+
+## 478. yu_kuo14 (team "yu_kuo14") — 478th (bronze): a variant of the public 0.958 notebook, chosen using gold-58
+- URL: https://www.kaggle.com/competitions/rsna-knee-abnormality-detection/writeups/478th-bronze-a-variant-of-the-public-0-958-note
+- Scores stated:
+  - Selected: gold-58 0.9419, public 0.957, private 0.943.
+  - Unchanged 0.958 notebook (their control): 0.9384 / 0.958 / 0.942.
+  - Rank 478th of 6,300 on the re-ranked board of 27 October (507th at the deadline).
+- Training labels / targets: their reader uses nartaa's public LLM soft labels (built from report-label tables by stevenleehans, Pilkwang Kim and riadmohamed42).
+- External data & pretrained weights: public assets used as published (goodpjw's notebook and reader, heliosli's R6, nartaa's Raptor checkpoints). The OAI acknowledgement is required for the Raptor weights.
+- Inputs & preprocessing: not stated (inherited from the public notebook).
+- Model architecture: own 2.5D reader on goodpjw's code, retrained as ConvNeXt-small at 256 px.
+- Training recipe: 4 folds × 2 seeds; other details not stated.
+- Validation & model selection:
+  - Ran the full deployed chain (every model, same ranks and blends) on gold-58 DICOMs, comparing versions with a paired study bootstrap. Their own reader never trained on the 58.
+  - Gold-58 was used only as a tiebreak among variants that all showed public 0.957. Its 0.0035 gap was treated as a direction to bet on, not as independent validation.
+- Ensemble & post-processing:
+  - Raptor weight per finding in the stage-3 blend changed to Medial OA 0.3, PF OA 0.3, Synovitis 0.5 (from 0.5 / 0.6 / 0.8).
+  - Reader mixed in per finding as rank(0.9 × rank(base) + 0.1 × rank(reader)).
+- Inference / runtime: not stated.
+- Ablation / gains: about 86% of the summed per-finding gold-58 change came from PF OA (0.887→0.905) and Synovitis (0.836→0.854), the two findings whose weights moved most.
+- What did not work: did not give a convincing ensemble gain even when standalone validation improved:
+  - distilling the reader on Raptor predictions;
+  - early stopping with SWA;
+  - a higher-resolution reader;
+  - an EfficientNetV2 reader;
+  - frozen OrthoFoundation features;
+  - per-finding reader weights.
+- Public → private observations:
+  - 1,638 teams showed public 0.958 at the deadline. On private, ranks 584–1,880 (1,297 teams) all show 0.942, the same as an unchanged copy of the 0.958 notebook.
+  - Their variant, slightly lower on public, went +0.001 on private, the same direction as gold-58.
+- Key insights: when public is tied for a widely copied notebook, a deployed-chain gold-58 check can serve as a weak directional selection signal.
+- Code / links mentioned: https://www.kaggle.com/code/yukuo14/rsna-knee-507th-bronze-variant-of-0-958-notebook (video, figures, full credits).

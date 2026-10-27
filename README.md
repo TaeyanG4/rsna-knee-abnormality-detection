@@ -19,12 +19,14 @@ Our working record for the Kaggle competition [RSNA Knee Abnormality Detection](
 
 | | Score | Rank |
 |---|---|---|
-| Final private leaderboard | **0.943** | **312 / 6,425 — silver medal** |
-| Final public leaderboard | 0.958 | about 638 / 6,390 |
-| Private medal cut-offs | gold 0.954 (rank 22), silver 0.943 (rank 321), bronze 0.942 (rank 642) | |
+| Final private leaderboard | **0.943** | **297 / 6,300 — silver medal** |
+| Final public leaderboard | 0.958 | 625 / 6,300 |
+| Private medal cut-offs | gold 0.954 (rank 22), silver 0.943 (rank 315), bronze 0.942 (rank 630) | |
 | Top 3 (private) | Team Kangaroo 0.960, MURAD 0.960, DataTech Club 0.959 | 1-3 |
 
-We finished nine places inside the silver cut-off. 311 teams scored above 0.943; 304 teams displayed exactly 0.943, and we were the first of them. On the public board 1,611 teams displayed 0.958, many of them, judging by the public notebooks at 0.958, running the public recipe. Our two final submissions are rank blends of public checkpoints (about 75-80 % of the rank weight) with our own models (20-25 %): the own ConvNeXt-S 2.5D multiple-instance trio "K1" and, in one of them, an older own bundle "O". Both finals scored 0.943 privately, as did 19 other submissions; no submission of ours scored higher. The team account holds 134 submissions between Sep 11 and Oct 22; 37 of them are untracked temporary or teammate uploads without a description and are left out of this record. Of our 97 pipeline submissions, 87 scored, 8 finished without a score and 2 errored.
+*Updated 2026-10-28: Kaggle verified the final leaderboard and removed 125 teams (6,425 → 6,300), presumably for rule violations (no reasons were published). The preliminary standing on Oct 23 was 312 / 6,425 with the silver cut-off at rank 321; our score did not change.*
+
+We finished 18 places inside the silver cut-off. 296 teams scored above 0.943; 287 teams displayed exactly 0.943, and we were the first of them. On the public board 1,591 teams displayed 0.958, many of them, judging by the public notebooks at 0.958, running the public recipe. Our two final submissions are rank blends of public checkpoints (about 75-80 % of the rank weight) with our own models (20-25 %): the own ConvNeXt-S 2.5D multiple-instance trio "K1" and, in one of them, an older own bundle "O". Both finals scored 0.943 privately, as did 19 other submissions; no submission of ours scored higher. The team account holds 134 submissions between Sep 11 and Oct 22; 37 of them are untracked temporary or teammate uploads without a description and are left out of this record. Of our 97 pipeline submissions, 87 scored, 8 finished without a score and 2 errored.
 
 ![leaderboard](docs/figures/leaderboard_final.png)
 
@@ -39,7 +41,7 @@ We finished nine places inside the silver cut-off. 311 teams scored above 0.943;
 | Competition | [RSNA Knee Abnormality Detection](https://www.kaggle.com/competitions/rsna-knee-abnormality-detection) (Kaggle Research Code Competition) |
 | Host | Radiological Society of North America (RSNA), with the RSNA Annual Meeting AI Challenge |
 | Dates | Jul 30 - Oct 22, 2026 (final submission 23:59 UTC); entry and team-merger deadline Oct 15 |
-| Participation | 6,425 teams, 7,683 participants, 161,275 submissions |
+| Participation | 6,300 teams, 7,490 participants, 156,452 submissions (final verified leaderboard; 6,425 / 7,683 / 161,275 before the removals) |
 | Prizes | $77,000: main leaderboard 1st-10th ($9,000 to $5,000) and an Efficiency Track (1st-3rd, $7,000 / $6,000 / $5,000) |
 | Data | Knee MRI studies (multi-series DICOM) for twelve abnormalities; the first RSNA AI Challenge dataset that pairs every imaging study with its original radiology report |
 | Targets | ACL, MCL, Medial Meniscus, Lateral Meniscus, Medial OA, Lateral OA, PF OA, Effusion, Synovitis, Baker's, Contusion, Fracture |
@@ -449,7 +451,7 @@ Kaggle pre-selects ("auto-selection candidates") the two submissions with the be
 | 0.956 (4) | 0.943, 0.942 x 2, 0.941 |
 | 0.955 (4) | 0.940 x 3, 0.939 |
 
-**Own models and the private board.** Our final rank was the first of the 304 teams at private 0.943, one display step above the bronze cut-off (0.942). We did not measure where the many teams that displayed public 0.958 with the public recipe landed; the evidence below is from our own submissions only. Within our own submissions, the R-family lines without the per-target weights (H-B-164/167/170/174) and the K1-free INF3 variant without R224 scored 0.942, and 9 of 11 scored K1 blends scored 0.943 (the two below contain the A5 member). These are display-rounded readings on one split, consistent with a small positive private contribution from the own members; they are not a controlled measurement.
+**Own models and the private board.** Our final rank was the first of the 287 teams at private 0.943, one display step above the bronze cut-off (0.942). We did not measure where the many teams that displayed public 0.958 with the public recipe landed; the evidence below is from our own submissions only. Within our own submissions, the R-family lines without the per-target weights (H-B-164/167/170/174) and the K1-free INF3 variant without R224 scored 0.942, and 9 of 11 scored K1 blends scored 0.943 (the two below contain the A5 member). These are display-rounded readings on one split, consistent with a small positive private contribution from the own members; they are not a controlled measurement.
 
 ## 10. Final week, failures and runtime
 
@@ -490,13 +492,20 @@ Sections 12 and 13 compare this with the top teams' published write-ups and reco
 
 ## 12. Top-team strategies
 
-Collected on Oct 24 from the 25 solution write-ups linked on the leaderboard and 8 discussion posts (private ranks 5 to 5,049; ranks 1-4 had not published yet). Full index, patterns and per-write-up summaries: [top-solutions-20261024.md](docs/reports/top-solutions-20261024.md) · [details](docs/reports/top-solutions-20261024-details.md).
+Collected on Oct 24 from the 25 solution write-ups linked on the leaderboard and 8 discussion posts (preliminary private ranks 5 to 5,049), and on Oct 28 from 16 more write-ups, including the top three, on the final verified board. Full index, patterns and per-write-up summaries: [first collection](docs/reports/top-solutions-20261024.md) · [details](docs/reports/top-solutions-20261024-details.md) · [second collection](docs/reports/top-solutions-20261028.md) · [details](docs/reports/top-solutions-20261028-details.md). Team ranks in items 1-5 are the preliminary ones.
 
 1. **Labels from the images.** Report-only LLM labels scored about 0.89-0.91 macro AUC on gold-58, image-aware reads about 0.93-0.95 (7th, 8th, 21st, 22nd, 72nd, 77th). The image weight was set per finding: high for fracture, synovitis, Baker's, effusion and contusion, low for ligaments and the OA compartments. Every team in the top 22 that used LLM labels had a model look at the MRI.
 2. **OOF self-distillation re-anchored to the fixed label.** Target = a x label + (1 - a) x OOF prediction, re-mixed with the original fused label every round (7th, 8th, 22nd, 49th, 72nd, 76th).
 3. **Site habits removed in training.** A site x finding bias term in the training loss only, dropped at test: +0.003 to +0.007 private (38th, 63rd, 72nd), +0.014 for the 33rd. Folds grouped by site or scanner.
 4. **A strong own model.** Whole-study reading, mm crops at 336-448 px, anatomy-anchored local views placed by segmentation or detectors, a per-finding readout that keeps medial and lateral apart. The best single models reached 0.957-0.958 private; ensembles added little at the top.
 5. **Rulers that can see the change.** Label and site changes were not judged on report-derived OOF but on image-label OOF, within-site AUC, external panels, sealed folds, LB pairs with outcomes fixed in advance, and per-finding LB probes. Teams that stopped at blends of the public R6/Raptor/S6 recipe, the authors of those public models included, plateaued at private 0.942-0.944.
+
+What the top three and the second collection added (final ranks):
+
+6. **The reader's view and protocol decide the label gain.** The 2nd read every slice of the exam in one call (about 277 images): gold-58 0.899 -> 0.942, after a partial-view pilot had wrongly shown no gain. The 1st ran one agent session per study with crop/zoom and cross-series tools, judged labels by log loss and confident errors as well as AUC, and let the agent write a reading guide from gold feedback (confident errors 35 -> 19). Text-only labels still reached 16th and, with a MOAKS-trained second reader, 6th.
+7. **Anatomy-gated readouts.** Agent-drawn ROI boxes and a detector feeding per-finding box pooling (1st), a keypoint knee frame with anchored tiles (6th), MedSAM-anchored crops (19th), compartment-routed pooling (127th), I3D-inflated CNNs with one query per label (20th: LB 0.930 -> 0.947).
+8. **OAI pays when the label mapping is validated per finding** (13th +0.008 private, 10th +0.002-0.003), not with threshold mappings; the 58 expert studies were also used as training data (2nd, 3rd, 10th, 31st; the 20th's gold fine-tune merged by WiSE-FT was their largest step).
+9. **Weak findings get their own track and weights stay simple.** Specialists, floors or zoom models for lateral OA, PF OA and synovitis (2nd, 3rd, 31st); hand-set ensemble weights that were never searched beat tuned ones on held-out gold by 0.002-0.007 (2nd). On private, 1,297 teams sat at 0.942, the score of an unchanged copy of the public 0.958 notebook.
 
 ## 13. Self-feedback
 
@@ -519,10 +528,12 @@ Where we could have finished (estimates on the final board; gains do not add exa
 
 | Scenario | Private | Rank |
 |---|---|---|
-| Minimal fix: image-heavy labels on our own model, blended at real weight | 0.945-0.947 | about 101-211 |
-| **Realistic, same timeline from Oct 9**: plus training-only site bias, re-anchored OOF rounds, anchored crops, blend at about 0.5 | **0.948-0.951** | **about 42-100** |
-| Strong execution, same timeline | 0.952-0.954 | about 22-41 |
-| Full window from August | 0.954-0.956 | about 11-26 (gold) |
+| Minimal fix: image-heavy labels on our own model, blended at real weight | 0.945-0.947 | about 99-203 |
+| **Realistic, same timeline from Oct 9**: plus training-only site bias, re-anchored OOF rounds, anchored crops, blend at about 0.5 | **0.948-0.951** | **about 41-98** |
+| Strong execution, same timeline | 0.952-0.954 | about 22-40 |
+| Full window from August | 0.954-0.956 | about 11-25 (gold) |
+
+Added after the second collection on Oct 28 ([feedback](docs/reports/top-solutions-20261028.md#4-feedback-against-our-record)): our image reader saw 15 central slices, so D-B-074's lever probably looked smaller than it was; we measured label sets by AUC only, never by log loss or confident errors; our one gold-training test (D-B-103/109) used ×4 duplication and a report-derived ruler, while the top teams trained on the 58 at normal weight or fine-tuned and merged; OAI needed a per-finding mapping, not a verdict on the dataset; the weak findings (lateral OA, PF OA, synovitis) needed their own track; and the 1st place used the same kind of AI agents we did, pointed at labels, ROI boxes and experiments rather than at process.
 
 Lessons we take forward: build a ruler that can see the target first, and never let rulers built from the training labels judge changes to those labels; treat a large gap to the top as structural (supervision and the core model, not blend weights); score own models standalone and apply the kill rules we write; check the labels for site and language habits on day one; keep process rules proportional; read the forum for methods; start the main line in the first two weeks. The system produced the right insights several times (D-B-074, D-B-042, the Oct 13 review); our failure was in acting on them.
 

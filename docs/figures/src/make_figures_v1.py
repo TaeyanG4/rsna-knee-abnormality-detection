@@ -1,8 +1,9 @@
-"""make_figures v1.0.2 (B, 2026-10-23): README figures for the public RSNA knee repo.
+"""make_figures v1.0.3 (B, 2026-10-28): README figures for the public RSNA knee repo.
 
 Inputs: data/submissions-raw.csv (kaggle competitions submissions --csv, our own scores only).
 Outputs (docs/figures/): score_timeline.png, public_vs_private.png, pipeline_overview.png.
 No competition data is read.
+Changelog v1.0.3: silver cut-off label uses the final verified board (rank 315, was 321).
 Changelog v1.0.2: submissions without a description (37 temporary/teammate uploads named submission.csv) are excluded (Taeyang).
 Changelog v1.0.1: separate final-pair annotation offsets; wider first pipeline box. Colours: dataviz reference palette slots 1-2 (validated, light surface).
 """
@@ -47,7 +48,7 @@ def timeline(rows):
     d = [r[0] for r in rows]
     ax.plot(d, [r[1] for r in rows], 'o', ms=5, color=BLUE, mec=SURF, mew=1, label='public LB')
     ax.plot(d, [r[2] for r in rows], 's', ms=5, color=ORANGE, mec=SURF, mew=1, label='private LB')
-    for y, name in [(0.943, 'silver cut-off 0.943 (rank 321)'), (0.954, 'gold cut-off 0.954')]:
+    for y, name in [(0.943, 'silver cut-off 0.943 (rank 315)'), (0.954, 'gold cut-off 0.954')]:
         ax.axhline(y, color=INK2, lw=0.8, ls=(0, (3, 3)), zorder=0)
         ax.text(d[0], y + 0.0008, name, color=INK2, fontsize=8, va='bottom')
     for r in rows:
@@ -125,7 +126,7 @@ def pipeline():
 
 
 if __name__ == '__main__':
-    print('make_figures v1.0.2')
+    print('make_figures v1.0.3')
     rows = load()
     print('scored submissions', len(rows))
     timeline(rows); scatter(rows); pipeline()
